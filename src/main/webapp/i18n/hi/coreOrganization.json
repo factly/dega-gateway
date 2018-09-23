@@ -1,0 +1,65 @@
+
+{
+    "gatewayApp": {
+        "coreOrganization" : {
+            "home": {
+                "title": "Organizations",
+                "createLabel": "नया Organization बनाएँ",
+                "createOrEditLabel": "Organization बनाएँ या संपादित करें",
+                "search": "Organization खोजें"
+            },
+            "delete": {
+                "question": "Organization [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Organization"
+            },
+            "name": "Name",
+            "email": "Email",
+            "phone": "Phone",
+            "siteTitle": "Site Title",
+            "tagLine": "Tag Line",
+            "description": "Description",
+            "logoURL": "Logo URL",
+            "logoURLMobile": "Logo URL Mobile",
+            "favIconURL": "Fav Icon URL",
+            "mobileIconURL": "Mobile Icon URL",
+            "baiduVerificationCode": "Baidu Verification Code",
+            "bingVerificationCode": "Bing Verification Code",
+            "googleVerificationCode": "Google Verification Code",
+            "yandexVerificationCode": "Yandex Verification Code",
+            "facebookURL": "Facebook URL",
+            "twitterURL": "Twitter URL",
+            "instagramURL": "Instagram URL",
+            "linkedInURL": "Linked In URL",
+            "pinterestURL": "Pinterest URL",
+            "youTubeURL": "You Tube URL",
+            "googlePlusURL": "Google Plus URL",
+            "githubURL": "Github URL",
+            "facebookPageAccessToken": "Facebook Page Access Token",
+            "gaTrackingCode": "Ga Tracking Code",
+            "githubClientId": "Github Client Id",
+            "githubClientSecret": "Github Client Secret",
+            "twitterClientId": "Twitter Client Id",
+            "twitterClientSecret": "Twitter Client Secret",
+            "facebookClientId": "Facebook Client Id",
+            "facebookClientSecret": "Facebook Client Secret",
+            "googleClientId": "Google Client Id",
+            "googleClientSecret": "Google Client Secret",
+            "linkedInClientId": "Linked In Client Id",
+            "linkedInClientSecret": "Linked In Client Secret",
+            "instagramClientId": "Instagram Client Id",
+            "instagramClientSecret": "Instagram Client Secret",
+            "mailchimpAPIKey": "Mailchimp API Key",
+            "siteLanguage": "Site Language",
+            "timeZone": "Time Zone"
+        }
+    },
+    "coreApp": {
+        "coreOrganization" : {
+            "created": "एक नया Organization [identifier: {{ param }}] तैयार है",
+            "updated": "एक Organization [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Organization [identifier: {{ param }}] हटा दिया है"
+        }
+    }
+}

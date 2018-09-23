@@ -1,0 +1,153 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="gatewayApp.coreOrganization.home.title">Organizations</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-organization" [routerLink]="['/organization/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreOrganization.home.createLabel">
+            Create new Organization
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreOrganization.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="organizations">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreOrganization.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="gatewayApp.coreOrganization.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="phone"><span jhiTranslate="gatewayApp.coreOrganization.phone">Phone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="siteTitle"><span jhiTranslate="gatewayApp.coreOrganization.siteTitle">Site Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tagLine"><span jhiTranslate="gatewayApp.coreOrganization.tagLine">Tag Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="gatewayApp.coreOrganization.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="logoURL"><span jhiTranslate="gatewayApp.coreOrganization.logoURL">Logo URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="logoURLMobile"><span jhiTranslate="gatewayApp.coreOrganization.logoURLMobile">Logo URL Mobile</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="favIconURL"><span jhiTranslate="gatewayApp.coreOrganization.favIconURL">Fav Icon URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mobileIconURL"><span jhiTranslate="gatewayApp.coreOrganization.mobileIconURL">Mobile Icon URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="baiduVerificationCode"><span jhiTranslate="gatewayApp.coreOrganization.baiduVerificationCode">Baidu Verification Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bingVerificationCode"><span jhiTranslate="gatewayApp.coreOrganization.bingVerificationCode">Bing Verification Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="googleVerificationCode"><span jhiTranslate="gatewayApp.coreOrganization.googleVerificationCode">Google Verification Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="yandexVerificationCode"><span jhiTranslate="gatewayApp.coreOrganization.yandexVerificationCode">Yandex Verification Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="facebookURL"><span jhiTranslate="gatewayApp.coreOrganization.facebookURL">Facebook URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="twitterURL"><span jhiTranslate="gatewayApp.coreOrganization.twitterURL">Twitter URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="instagramURL"><span jhiTranslate="gatewayApp.coreOrganization.instagramURL">Instagram URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="linkedInURL"><span jhiTranslate="gatewayApp.coreOrganization.linkedInURL">Linked In URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pinterestURL"><span jhiTranslate="gatewayApp.coreOrganization.pinterestURL">Pinterest URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="youTubeURL"><span jhiTranslate="gatewayApp.coreOrganization.youTubeURL">You Tube URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="googlePlusURL"><span jhiTranslate="gatewayApp.coreOrganization.googlePlusURL">Google Plus URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="githubURL"><span jhiTranslate="gatewayApp.coreOrganization.githubURL">Github URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="facebookPageAccessToken"><span jhiTranslate="gatewayApp.coreOrganization.facebookPageAccessToken">Facebook Page Access Token</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gaTrackingCode"><span jhiTranslate="gatewayApp.coreOrganization.gaTrackingCode">Ga Tracking Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="githubClientId"><span jhiTranslate="gatewayApp.coreOrganization.githubClientId">Github Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="githubClientSecret"><span jhiTranslate="gatewayApp.coreOrganization.githubClientSecret">Github Client Secret</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="twitterClientId"><span jhiTranslate="gatewayApp.coreOrganization.twitterClientId">Twitter Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="twitterClientSecret"><span jhiTranslate="gatewayApp.coreOrganization.twitterClientSecret">Twitter Client Secret</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="facebookClientId"><span jhiTranslate="gatewayApp.coreOrganization.facebookClientId">Facebook Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="facebookClientSecret"><span jhiTranslate="gatewayApp.coreOrganization.facebookClientSecret">Facebook Client Secret</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="googleClientId"><span jhiTranslate="gatewayApp.coreOrganization.googleClientId">Google Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="googleClientSecret"><span jhiTranslate="gatewayApp.coreOrganization.googleClientSecret">Google Client Secret</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="linkedInClientId"><span jhiTranslate="gatewayApp.coreOrganization.linkedInClientId">Linked In Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="linkedInClientSecret"><span jhiTranslate="gatewayApp.coreOrganization.linkedInClientSecret">Linked In Client Secret</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="instagramClientId"><span jhiTranslate="gatewayApp.coreOrganization.instagramClientId">Instagram Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="instagramClientSecret"><span jhiTranslate="gatewayApp.coreOrganization.instagramClientSecret">Instagram Client Secret</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mailchimpAPIKey"><span jhiTranslate="gatewayApp.coreOrganization.mailchimpAPIKey">Mailchimp API Key</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="siteLanguage"><span jhiTranslate="gatewayApp.coreOrganization.siteLanguage">Site Language</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="timeZone"><span jhiTranslate="gatewayApp.coreOrganization.timeZone">Time Zone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let organization of organizations ;trackBy: trackId">
+                <td><a [routerLink]="['/organization', organization.id, 'view' ]">{{organization.id}}</a></td>
+                <td>{{organization.name}}</td>
+                <td>{{organization.email}}</td>
+                <td>{{organization.phone}}</td>
+                <td>{{organization.siteTitle}}</td>
+                <td>{{organization.tagLine}}</td>
+                <td>{{organization.description}}</td>
+                <td>{{organization.logoURL}}</td>
+                <td>{{organization.logoURLMobile}}</td>
+                <td>{{organization.favIconURL}}</td>
+                <td>{{organization.mobileIconURL}}</td>
+                <td>{{organization.baiduVerificationCode}}</td>
+                <td>{{organization.bingVerificationCode}}</td>
+                <td>{{organization.googleVerificationCode}}</td>
+                <td>{{organization.yandexVerificationCode}}</td>
+                <td>{{organization.facebookURL}}</td>
+                <td>{{organization.twitterURL}}</td>
+                <td>{{organization.instagramURL}}</td>
+                <td>{{organization.linkedInURL}}</td>
+                <td>{{organization.pinterestURL}}</td>
+                <td>{{organization.youTubeURL}}</td>
+                <td>{{organization.googlePlusURL}}</td>
+                <td>{{organization.githubURL}}</td>
+                <td>{{organization.facebookPageAccessToken}}</td>
+                <td>{{organization.gaTrackingCode}}</td>
+                <td>{{organization.githubClientId}}</td>
+                <td>{{organization.githubClientSecret}}</td>
+                <td>{{organization.twitterClientId}}</td>
+                <td>{{organization.twitterClientSecret}}</td>
+                <td>{{organization.facebookClientId}}</td>
+                <td>{{organization.facebookClientSecret}}</td>
+                <td>{{organization.googleClientId}}</td>
+                <td>{{organization.googleClientSecret}}</td>
+                <td>{{organization.linkedInClientId}}</td>
+                <td>{{organization.linkedInClientSecret}}</td>
+                <td>{{organization.instagramClientId}}</td>
+                <td>{{organization.instagramClientSecret}}</td>
+                <td>{{organization.mailchimpAPIKey}}</td>
+                <td>{{organization.siteLanguage}}</td>
+                <td>{{organization.timeZone}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/organization', organization.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/organization', organization.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'organization/'+ organization.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="organizations && organizations.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

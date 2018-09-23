@@ -1,0 +1,179 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="organization">
+            <h2><span jhiTranslate="gatewayApp.coreOrganization.detail.title">Organization</span> {{organization.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.name">Name</span></dt>
+                <dd>
+                    <span>{{organization.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.email">Email</span></dt>
+                <dd>
+                    <span>{{organization.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.phone">Phone</span></dt>
+                <dd>
+                    <span>{{organization.phone}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.siteTitle">Site Title</span></dt>
+                <dd>
+                    <span>{{organization.siteTitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.tagLine">Tag Line</span></dt>
+                <dd>
+                    <span>{{organization.tagLine}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.description">Description</span></dt>
+                <dd>
+                    <span>{{organization.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.logoURL">Logo URL</span></dt>
+                <dd>
+                    <span>{{organization.logoURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.logoURLMobile">Logo URL Mobile</span></dt>
+                <dd>
+                    <span>{{organization.logoURLMobile}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.favIconURL">Fav Icon URL</span></dt>
+                <dd>
+                    <span>{{organization.favIconURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.mobileIconURL">Mobile Icon URL</span></dt>
+                <dd>
+                    <span>{{organization.mobileIconURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.baiduVerificationCode">Baidu Verification Code</span></dt>
+                <dd>
+                    <span>{{organization.baiduVerificationCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.bingVerificationCode">Bing Verification Code</span></dt>
+                <dd>
+                    <span>{{organization.bingVerificationCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.googleVerificationCode">Google Verification Code</span></dt>
+                <dd>
+                    <span>{{organization.googleVerificationCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.yandexVerificationCode">Yandex Verification Code</span></dt>
+                <dd>
+                    <span>{{organization.yandexVerificationCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.facebookURL">Facebook URL</span></dt>
+                <dd>
+                    <span>{{organization.facebookURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.twitterURL">Twitter URL</span></dt>
+                <dd>
+                    <span>{{organization.twitterURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.instagramURL">Instagram URL</span></dt>
+                <dd>
+                    <span>{{organization.instagramURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.linkedInURL">Linked In URL</span></dt>
+                <dd>
+                    <span>{{organization.linkedInURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.pinterestURL">Pinterest URL</span></dt>
+                <dd>
+                    <span>{{organization.pinterestURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.youTubeURL">You Tube URL</span></dt>
+                <dd>
+                    <span>{{organization.youTubeURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.googlePlusURL">Google Plus URL</span></dt>
+                <dd>
+                    <span>{{organization.googlePlusURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.githubURL">Github URL</span></dt>
+                <dd>
+                    <span>{{organization.githubURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.facebookPageAccessToken">Facebook Page Access Token</span></dt>
+                <dd>
+                    <span>{{organization.facebookPageAccessToken}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.gaTrackingCode">Ga Tracking Code</span></dt>
+                <dd>
+                    <span>{{organization.gaTrackingCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.githubClientId">Github Client Id</span></dt>
+                <dd>
+                    <span>{{organization.githubClientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.githubClientSecret">Github Client Secret</span></dt>
+                <dd>
+                    <span>{{organization.githubClientSecret}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.twitterClientId">Twitter Client Id</span></dt>
+                <dd>
+                    <span>{{organization.twitterClientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.twitterClientSecret">Twitter Client Secret</span></dt>
+                <dd>
+                    <span>{{organization.twitterClientSecret}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.facebookClientId">Facebook Client Id</span></dt>
+                <dd>
+                    <span>{{organization.facebookClientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.facebookClientSecret">Facebook Client Secret</span></dt>
+                <dd>
+                    <span>{{organization.facebookClientSecret}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.googleClientId">Google Client Id</span></dt>
+                <dd>
+                    <span>{{organization.googleClientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.googleClientSecret">Google Client Secret</span></dt>
+                <dd>
+                    <span>{{organization.googleClientSecret}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.linkedInClientId">Linked In Client Id</span></dt>
+                <dd>
+                    <span>{{organization.linkedInClientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.linkedInClientSecret">Linked In Client Secret</span></dt>
+                <dd>
+                    <span>{{organization.linkedInClientSecret}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.instagramClientId">Instagram Client Id</span></dt>
+                <dd>
+                    <span>{{organization.instagramClientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.instagramClientSecret">Instagram Client Secret</span></dt>
+                <dd>
+                    <span>{{organization.instagramClientSecret}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.mailchimpAPIKey">Mailchimp API Key</span></dt>
+                <dd>
+                    <span>{{organization.mailchimpAPIKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.siteLanguage">Site Language</span></dt>
+                <dd>
+                    <span>{{organization.siteLanguage}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.timeZone">Time Zone</span></dt>
+                <dd>
+                    <span>{{organization.timeZone}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/organization', organization.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -2,9 +2,10 @@
   "generator-jhipster": {
     "promptValues": {
       "packageName": "com.factly.dega",
-      "nativeLanguage": "en"
+      "nativeLanguage": "en",
+      "microservicePath": "../dega-core"
     },
-    "jhipsterVersion": "5.3.4",
+    "jhipsterVersion": "5.4.1",
     "applicationType": "gateway",
     "baseName": "gateway",
     "packageName": "com.factly.dega",

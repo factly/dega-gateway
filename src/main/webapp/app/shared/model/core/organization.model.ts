@@ -39,6 +39,7 @@ export interface IOrganization {
     mailchimpAPIKey?: string;
     siteLanguage?: string;
     timeZone?: string;
+    clientId?: string;
 }
 
 export class Organization implements IOrganization {
@@ -82,6 +83,7 @@ export class Organization implements IOrganization {
         public instagramClientSecret?: string,
         public mailchimpAPIKey?: string,
         public siteLanguage?: string,
-        public timeZone?: string
+        public timeZone?: string,
+        public clientId?: string
     ) {}
 }

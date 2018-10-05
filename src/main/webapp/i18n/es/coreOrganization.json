@@ -52,7 +52,8 @@
             "instagramClientSecret": "Instagram Client Secret",
             "mailchimpAPIKey": "Mailchimp API Key",
             "siteLanguage": "Site Language",
-            "timeZone": "Time Zone"
+            "timeZone": "Time Zone",
+            "clientId": "Client Id"
         }
     },
     "coreApp": {

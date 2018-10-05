@@ -69,6 +69,7 @@
             <th jhiSortBy="mailchimpAPIKey"><span jhiTranslate="gatewayApp.coreOrganization.mailchimpAPIKey">Mailchimp API Key</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="siteLanguage"><span jhiTranslate="gatewayApp.coreOrganization.siteLanguage">Site Language</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="timeZone"><span jhiTranslate="gatewayApp.coreOrganization.timeZone">Time Zone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreOrganization.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -114,6 +115,7 @@
                 <td>{{organization.mailchimpAPIKey}}</td>
                 <td>{{organization.siteLanguage}}</td>
                 <td>{{organization.timeZone}}</td>
+                <td>{{organization.clientId}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

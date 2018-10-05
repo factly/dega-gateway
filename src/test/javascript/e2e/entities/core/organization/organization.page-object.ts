@@ -65,6 +65,7 @@ export class OrganizationUpdatePage {
     mailchimpAPIKeyInput = element(by.id('field_mailchimpAPIKey'));
     siteLanguageInput = element(by.id('field_siteLanguage'));
     timeZoneInput = element(by.id('field_timeZone'));
+    clientIdInput = element(by.id('field_clientId'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -380,6 +381,14 @@ export class OrganizationUpdatePage {
 
     async getTimeZoneInput() {
         return this.timeZoneInput.getAttribute('value');
+    }
+
+    async setClientIdInput(clientId) {
+        await this.clientIdInput.sendKeys(clientId);
+    }
+
+    async getClientIdInput() {
+        return this.clientIdInput.getAttribute('value');
     }
 
     async save() {

@@ -116,6 +116,8 @@ describe('Organization e2e test', () => {
         expect(await organizationUpdatePage.getSiteLanguageInput()).to.eq('siteLanguage');
         await organizationUpdatePage.setTimeZoneInput('timeZone');
         expect(await organizationUpdatePage.getTimeZoneInput()).to.eq('timeZone');
+        await organizationUpdatePage.setClientIdInput('clientId');
+        expect(await organizationUpdatePage.getClientIdInput()).to.eq('clientId');
         await organizationUpdatePage.save();
         expect(await organizationUpdatePage.getSaveButton().isPresent()).to.be.false;
 

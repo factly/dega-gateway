@@ -25,14 +25,15 @@
     "ng-jhipster": "0.5.4",
     "ngx-cookie": "2.0.1",
     "ngx-infinite-scroll": "0.5.1",
+    "ngx-quill-editor": "^2.2.2",
     "ngx-webstorage": "2.0.1",
     "reflect-metadata": "0.1.12",
     "rxjs": "6.1.0",
     "rxjs-compat": "6.1.0",
-    "swagger-ui": "2.2.10",
     "sockjs-client": "1.1.4",
-    "webstomp-client": "1.2.0",
+    "swagger-ui": "2.2.10",
     "tslib": "1.9.3",
+    "webstomp-client": "1.2.0",
     "zone.js": "0.8.26"
   },
   "devDependencies": {

@@ -42,6 +42,8 @@ describe('Post e2e test', () => {
         expect(await postUpdatePage.getTitleInput()).to.eq('title');
         await postUpdatePage.setClientIdInput('clientId');
         expect(await postUpdatePage.getClientIdInput()).to.eq('clientId');
+        await postUpdatePage.setContentInput('content');
+        expect(await postUpdatePage.getContentInput()).to.eq('content');
         await postUpdatePage.save();
         expect(await postUpdatePage.getSaveButton().isPresent()).to.be.false;
 

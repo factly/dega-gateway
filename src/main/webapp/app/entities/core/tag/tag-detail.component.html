@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="tag">
+            <h2><span jhiTranslate="gatewayApp.coreTag.detail.title">Tag</span> {{tag.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.coreTag.name">Name</span></dt>
+                <dd>
+                    <span>{{tag.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreTag.slug">Slug</span></dt>
+                <dd>
+                    <span>{{tag.slug}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreTag.description">Description</span></dt>
+                <dd>
+                    <span>{{tag.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreTag.meta">Meta</span></dt>
+                <dd>
+                    <span>{{tag.meta}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/tag', tag.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

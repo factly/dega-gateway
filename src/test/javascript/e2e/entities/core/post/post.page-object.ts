@@ -28,6 +28,7 @@ export class PostUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     titleInput = element(by.id('field_title'));
     clientIdInput = element(by.id('field_clientId'));
+    contentInput = element(by.id('field_content'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -47,6 +48,14 @@ export class PostUpdatePage {
 
     async getClientIdInput() {
         return this.clientIdInput.getAttribute('value');
+    }
+
+    async setContentInput(content) {
+        await this.contentInput.sendKeys(content);
+    }
+
+    async getContentInput() {
+        return this.contentInput.getAttribute('value');
     }
 
     async save() {

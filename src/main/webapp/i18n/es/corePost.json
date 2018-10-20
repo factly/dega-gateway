@@ -15,7 +15,8 @@
                 "title": "Post"
             },
             "title": "Title",
-            "clientId": "Client Id"
+            "clientId": "Client Id",
+            "content": "Content"
         }
     },
     "coreApp": {

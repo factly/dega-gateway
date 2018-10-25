@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IPost } from 'app/shared/model/core/post.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'jhi-post-detail',
@@ -10,10 +11,11 @@ import { IPost } from 'app/shared/model/core/post.model';
 export class PostDetailComponent implements OnInit {
     post: IPost;
 
-    constructor(private activatedRoute: ActivatedRoute) {}
+    constructor(private activatedRoute: ActivatedRoute, private sanitizer: DomSanitizer) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ post }) => {
+            post.content = this.sanitizer.bypassSecurityTrustHtml(post.content);
             this.post = post;
         });
     }

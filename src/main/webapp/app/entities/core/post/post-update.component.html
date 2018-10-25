@@ -45,6 +45,26 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <h5 id="jhi-post-heading" jhiTranslate="gatewayApp.coreCategory.home.title">Categories</h5>
+                    <div *ngFor="let category of categories">
+                        <span>
+                            <input type='checkbox' value="{{category.id}}" name='categoryId'/>
+                        </span>
+                        <span>{{category.name}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h5 id="jhi-post-heading" jhiTranslate="gatewayApp.coreTag.home.title">Tags</h5>
+                    <div *ngFor="let tag of tags">
+                        <span>
+                            <input type='checkbox' value="{{tag.id}}" name='tagId'/>
+                        </span>
+                        <span>{{tag.name}}</span>
+                    </div>
+                </div>
+
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

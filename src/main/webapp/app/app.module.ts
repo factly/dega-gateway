@@ -28,8 +28,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         GatewaySharedModule,
         GatewayCoreModule,
         GatewayHomeModule,
-        GatewayEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
+        GatewayEntityModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [

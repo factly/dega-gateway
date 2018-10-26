@@ -726,6 +726,10 @@
         "http://localhost:9000/*"
       ],
       "webOrigins": [
+<<<<<<< HEAD:src/main/docker/realm-config/dega-realm.json
+=======
+        "http://localhost:8080/*",
+>>>>>>> jhipster_upgrade:src/main/docker/realm-config/jhipster-realm.json
         "http://localhost:8100/*",
         "http://localhost:8080",
         "http://127.0.0.1:8761/*",

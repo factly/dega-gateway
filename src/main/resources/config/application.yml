@@ -146,9 +146,6 @@ jhipster:
         license:
         license-url:
 
-logging:
-    file: build/gateway.log
-
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

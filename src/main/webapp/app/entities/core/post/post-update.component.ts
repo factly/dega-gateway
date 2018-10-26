@@ -20,6 +20,8 @@ import { TagService } from '../tag/tag.service';
 export class PostUpdateComponent implements OnInit {
     private _post: IPost;
     isSaving: boolean;
+    categories: ICategory[];
+    tags: ITag[];
 
     constructor(
         private postService: PostService,
@@ -88,10 +90,6 @@ export class PostUpdateComponent implements OnInit {
                 sort: ['asc']
             })
             .subscribe((res: HttpResponse<ITag[]>) => (this.tags = res.body), (res: HttpErrorResponse) => this.onError(res.message));
-    }
-
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
     }
 
     private onError(errorMessage: string) {

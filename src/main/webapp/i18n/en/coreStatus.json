@@ -1,0 +1,28 @@
+
+{
+    "gatewayApp": {
+        "coreStatus" : {
+            "home": {
+                "title": "Statuses",
+                "createLabel": "Create a new Status",
+                "createOrEditLabel": "Create or edit a Status",
+                "search": "Search for Status"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Status {{ id }}?"
+            },
+            "detail": {
+                "title": "Status"
+            },
+            "name": "Name",
+            "clientId": "Client Id"
+        }
+    },
+    "coreApp": {
+        "coreStatus" : {
+            "created": "A new Status is created with identifier {{ param }}",
+            "updated": "A Status is updated with identifier {{ param }}",
+            "deleted": "A Status is deleted with identifier {{ param }}"
+        }
+    }
+}

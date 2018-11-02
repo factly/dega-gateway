@@ -11,7 +11,7 @@ import { OrganizationService } from './organization.service';
     templateUrl: './organization-update.component.html'
 })
 export class OrganizationUpdateComponent implements OnInit {
-    private _organization: IOrganization;
+    organization: IOrganization;
     isSaving: boolean;
 
     constructor(private organizationService: OrganizationService, private activatedRoute: ActivatedRoute) {}
@@ -47,12 +47,5 @@ export class OrganizationUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-    get organization() {
-        return this._organization;
-    }
-
-    set organization(organization: IOrganization) {
-        this._organization = organization;
     }
 }

@@ -11,6 +11,8 @@
                 "corePost": "Post",
                 "coreCategory": "Category",
                 "coreTag": "Tag",
+                "coreFormat": "Format",
+                "coreStatus": "Status",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -37,9 +37,15 @@
                         [(ngModel)]="tag.description" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreTag.meta" for="field_meta">Meta</label>
-                    <input type="text" class="form-control" name="meta" id="field_meta"
-                        [(ngModel)]="tag.meta" />
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreTag.clientId" for="field_clientId">Client Id</label>
+                    <input type="text" class="form-control" name="clientId" id="field_clientId"
+                        [(ngModel)]="tag.clientId" required/>
+                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
 
             </div>

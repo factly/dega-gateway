@@ -15,8 +15,79 @@
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.corePost.content">Content</span></dt>
                 <dd>
-                    <!--<span>{{post.content}}</span>-->
-                    <span [innerHtml]="post.content"></span>
+                    <span>{{post.content}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.excerpt">Excerpt</span></dt>
+                <dd>
+                    <span>{{post.excerpt}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.publishedDate">Published Date</span></dt>
+                <dd>
+                    <span>{{post.publishedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.publishedDateGMT">Published Date GMT</span></dt>
+                <dd>
+                    <span>{{post.publishedDateGMT}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.lastUpdatedDate">Last Updated Date</span></dt>
+                <dd>
+                    <span>{{post.lastUpdatedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.lastUpdatedDateGMT">Last Updated Date GMT</span></dt>
+                <dd>
+                    <span>{{post.lastUpdatedDateGMT}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.featured">Featured</span></dt>
+                <dd>
+                    <span>{{post.featured}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.sticky">Sticky</span></dt>
+                <dd>
+                    <span>{{post.sticky}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.updates">Updates</span></dt>
+                <dd>
+                    <span>{{post.updates}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.slug">Slug</span></dt>
+                <dd>
+                    <span>{{post.slug}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.password">Password</span></dt>
+                <dd>
+                    <span>{{post.password}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.featuredMedia">Featured Media</span></dt>
+                <dd>
+                    <span>{{post.featuredMedia}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.subTitle">Sub Title</span></dt>
+                <dd>
+                    <span>{{post.subTitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.tag">Tag</span></dt>
+                <dd>
+                    <span *ngFor="let tag of post.tags; let last = last">
+                        <a [routerLink]="['/tag', tag?.id, 'view' ]">{{tag.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.category">Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of post.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.status">Status</span></dt>
+                <dd>
+                    <div *ngIf="post.statusId">
+                        <a [routerLink]="['/status', post.statusId, 'view']">{{post.statusName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.format">Format</span></dt>
+                <dd>
+                    <div *ngIf="post.formatId">
+                        <a [routerLink]="['/format', post.formatId, 'view']">{{post.formatName}}</a>
+                    </div>
                 </dd>
             </dl>
 

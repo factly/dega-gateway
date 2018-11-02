@@ -15,7 +15,9 @@
                 "title": "Status"
             },
             "name": "Name",
-            "clientId": "Client Id"
+            "clientId": "Client Id",
+            "isDefault": "Is Default",
+            "post": "Post"
         }
     },
     "coreApp": {

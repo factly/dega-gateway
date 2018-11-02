@@ -16,7 +16,23 @@
             },
             "title": "Title",
             "clientId": "Client Id",
-            "content": "Content"
+            "content": "Content",
+            "excerpt": "Excerpt",
+            "publishedDate": "Published Date",
+            "publishedDateGMT": "Published Date GMT",
+            "lastUpdatedDate": "Last Updated Date",
+            "lastUpdatedDateGMT": "Last Updated Date GMT",
+            "featured": "Featured",
+            "sticky": "Sticky",
+            "updates": "Updates",
+            "slug": "Slug",
+            "password": "Password",
+            "featuredMedia": "Featured Media",
+            "subTitle": "Sub Title",
+            "tag": "Tag",
+            "category": "Category",
+            "status": "Status",
+            "format": "Format"
         }
     },
     "coreApp": {

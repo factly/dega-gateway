@@ -18,7 +18,8 @@
             "description": "Description",
             "slug": "Slug",
             "parent": "Parent",
-            "meta": "Meta"
+            "clientId": "Client Id",
+            "post": "Post"
         }
     },
     "coreApp": {

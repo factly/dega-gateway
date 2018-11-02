@@ -41,6 +41,14 @@ describe('Status e2e test', () => {
         await promise.all([statusUpdatePage.setNameInput('name'), statusUpdatePage.setClientIdInput('clientId')]);
         expect(await statusUpdatePage.getNameInput()).to.eq('name');
         expect(await statusUpdatePage.getClientIdInput()).to.eq('clientId');
+        const selectedIsDefault = statusUpdatePage.getIsDefaultInput();
+        if (await selectedIsDefault.isSelected()) {
+            await statusUpdatePage.getIsDefaultInput().click();
+            expect(await statusUpdatePage.getIsDefaultInput().isSelected()).to.be.false;
+        } else {
+            await statusUpdatePage.getIsDefaultInput().click();
+            expect(await statusUpdatePage.getIsDefaultInput().isSelected()).to.be.true;
+        }
         await statusUpdatePage.save();
         expect(await statusUpdatePage.getSaveButton().isPresent()).to.be.false;
 

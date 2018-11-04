@@ -2,25 +2,41 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { JhiAlertService } from 'ng-jhipster';
 
 import { ITag } from 'app/shared/model/core/tag.model';
 import { TagService } from './tag.service';
+import { IPost } from 'app/shared/model/core/post.model';
+import { PostService } from 'app/entities/core/post';
 
 @Component({
     selector: 'jhi-tag-update',
     templateUrl: './tag-update.component.html'
 })
 export class TagUpdateComponent implements OnInit {
-    private _tag: ITag;
+    tag: ITag;
     isSaving: boolean;
 
-    constructor(private tagService: TagService, private activatedRoute: ActivatedRoute) {}
+    posts: IPost[];
+
+    constructor(
+        private jhiAlertService: JhiAlertService,
+        private tagService: TagService,
+        private postService: PostService,
+        private activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ tag }) => {
             this.tag = tag;
         });
+        this.postService.query().subscribe(
+            (res: HttpResponse<IPost[]>) => {
+                this.posts = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -48,11 +64,23 @@ export class TagUpdateComponent implements OnInit {
     private onSaveError() {
         this.isSaving = false;
     }
-    get tag() {
-        return this._tag;
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    set tag(tag: ITag) {
-        this._tag = tag;
+    trackPostById(index: number, item: IPost) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }

@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "home": {
                 "title": "Organizations",
                 "createLabel": "नया Organization बनाएँ",
@@ -57,7 +56,7 @@
         }
     },
     "coreApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "created": "एक नया Organization [identifier: {{ param }}] तैयार है",
             "updated": "एक Organization [identifier: {{ param }}] का अद्यतन हुआ है",
             "deleted": "Organization [identifier: {{ param }}] हटा दिया है"

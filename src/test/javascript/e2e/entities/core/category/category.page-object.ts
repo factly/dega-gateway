@@ -30,7 +30,7 @@ export class CategoryUpdatePage {
     descriptionInput = element(by.id('field_description'));
     slugInput = element(by.id('field_slug'));
     parentInput = element(by.id('field_parent'));
-    metaInput = element(by.id('field_meta'));
+    clientIdInput = element(by.id('field_clientId'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -68,12 +68,12 @@ export class CategoryUpdatePage {
         return this.parentInput.getAttribute('value');
     }
 
-    async setMetaInput(meta) {
-        await this.metaInput.sendKeys(meta);
+    async setClientIdInput(clientId) {
+        await this.clientIdInput.sendKeys(clientId);
     }
 
-    async getMetaInput() {
-        return this.metaInput.getAttribute('value');
+    async getClientIdInput() {
+        return this.clientIdInput.getAttribute('value');
     }
 
     async save() {

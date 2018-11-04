@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(StatusService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Status('ID', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Status('ID', 'AAAAAAA', 'AAAAAAA', false);
         });
 
         describe('Service methods', async () => {
@@ -56,7 +56,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        clientId: 'BBBBBB'
+                        clientId: 'BBBBBB',
+                        isDefault: true
                     },
                     elemDefault
                 );
@@ -74,14 +75,18 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        clientId: 'BBBBBB'
+                        clientId: 'BBBBBB',
+                        isDefault: true
                     },
                     elemDefault
                 );
                 const expected = Object.assign({}, returnedFromService);
                 service
                     .query(expected)
-                    .pipe(take(1), map(resp => resp.body))
+                    .pipe(
+                        take(1),
+                        map(resp => resp.body)
+                    )
                     .subscribe(body => expect(body).toContainEqual(expected));
                 const req = httpMock.expectOne({ method: 'GET' });
                 req.flush(JSON.stringify([returnedFromService]));

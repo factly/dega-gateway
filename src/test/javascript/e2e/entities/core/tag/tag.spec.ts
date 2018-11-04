@@ -1,5 +1,5 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec } from 'protractor';
+import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../../page-objects/jhi-page-objects';
 
 import { TagComponentsPage, TagDeleteDialog, TagUpdatePage } from './tag.page-object';
@@ -38,14 +38,16 @@ describe('Tag e2e test', () => {
         const nbButtonsBeforeCreate = await tagComponentsPage.countDeleteButtons();
 
         await tagComponentsPage.clickOnCreateButton();
-        await tagUpdatePage.setNameInput('name');
+        await promise.all([
+            tagUpdatePage.setNameInput('name'),
+            tagUpdatePage.setSlugInput('slug'),
+            tagUpdatePage.setDescriptionInput('description'),
+            tagUpdatePage.setClientIdInput('clientId')
+        ]);
         expect(await tagUpdatePage.getNameInput()).to.eq('name');
-        await tagUpdatePage.setSlugInput('slug');
         expect(await tagUpdatePage.getSlugInput()).to.eq('slug');
-        await tagUpdatePage.setDescriptionInput('description');
         expect(await tagUpdatePage.getDescriptionInput()).to.eq('description');
-        await tagUpdatePage.setMetaInput('meta');
-        expect(await tagUpdatePage.getMetaInput()).to.eq('meta');
+        expect(await tagUpdatePage.getClientIdInput()).to.eq('clientId');
         await tagUpdatePage.save();
         expect(await tagUpdatePage.getSaveButton().isPresent()).to.be.false;
 

@@ -1,0 +1,30 @@
+{
+    "gatewayApp": {
+        "coreFormat": {
+            "home": {
+                "title": "Formats",
+                "createLabel": "Create a new Format",
+                "createOrEditLabel": "Create or edit a Format",
+                "search": "Search for Format"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Format {{ id }}?"
+            },
+            "detail": {
+                "title": "Format"
+            },
+            "name": "Name",
+            "isDefault": "Is Default",
+            "clientId": "Client Id",
+            "description": "Description",
+            "post": "Post"
+        }
+    },
+    "coreApp": {
+        "coreFormat": {
+            "created": "A new Format is created with identifier {{ param }}",
+            "updated": "A Format is updated with identifier {{ param }}",
+            "deleted": "A Format is deleted with identifier {{ param }}"
+        }
+    }
+}

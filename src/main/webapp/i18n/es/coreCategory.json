@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreCategory" : {
+        "coreCategory": {
             "home": {
                 "title": "Categories",
                 "createLabel": "Crear nuevo Category",
@@ -18,11 +17,12 @@
             "description": "Description",
             "slug": "Slug",
             "parent": "Parent",
-            "meta": "Meta"
+            "clientId": "Client Id",
+            "post": "Post"
         }
     },
     "coreApp": {
-        "coreCategory" : {
+        "coreCategory": {
             "created": "Un nuevo Category ha sido creado con el identificador {{ param }}",
             "updated": "Un Category ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Category ha sido eliminado con el identificador {{ param }}"

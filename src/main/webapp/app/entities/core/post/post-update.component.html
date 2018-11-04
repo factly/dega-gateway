@@ -33,9 +33,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.content" for="field_content">Content</label>
-                   <!-- <input type="text" class="form-control" name="content" id="field_content"
+                    <!--<input type="text" class="form-control" name="content" id="field_content"
                         [(ngModel)]="post.content" required/>-->
-
                     <quill-editor [(ngModel)]="post.content" name="content" id="field_content"></quill-editor>
                     <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
                         <small class="form-text text-danger"
@@ -44,27 +43,159 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <h5 id="jhi-post-heading" jhiTranslate="gatewayApp.coreCategory.home.title">Categories</h5>
-                    <div *ngFor="let category of categories">
-                        <span>
-                            <input type='checkbox' value="{{category.id}}" name='categoryId'/>
-                        </span>
-                        <span>{{category.name}}</span>
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.excerpt" for="field_excerpt">Excerpt</label>
+                    <input type="text" class="form-control" name="excerpt" id="field_excerpt"
+                        [(ngModel)]="post.excerpt" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.publishedDate" for="field_publishedDate">Published Date</label>
+                    <div class="d-flex">
+                        <input id="field_publishedDate" type="datetime-local" class="form-control" name="publishedDate" [(ngModel)]="publishedDate"
+                        required/>
                     </div>
+                    <div [hidden]="!(editForm.controls.publishedDate?.dirty && editForm.controls.publishedDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.publishedDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.publishedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.publishedDateGMT" for="field_publishedDateGMT">Published Date GMT</label>
+                    <div class="d-flex">
+                        <input id="field_publishedDateGMT" type="datetime-local" class="form-control" name="publishedDateGMT" [(ngModel)]="publishedDateGMT"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.publishedDateGMT?.dirty && editForm.controls.publishedDateGMT?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.publishedDateGMT?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.publishedDateGMT?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
+                    <div class="d-flex">
+                        <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="lastUpdatedDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.lastUpdatedDate?.dirty && editForm.controls.lastUpdatedDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.lastUpdatedDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.lastUpdatedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.lastUpdatedDateGMT" for="field_lastUpdatedDateGMT">Last Updated Date GMT</label>
+                    <div class="d-flex">
+                        <input id="field_lastUpdatedDateGMT" type="datetime-local" class="form-control" name="lastUpdatedDateGMT" [(ngModel)]="lastUpdatedDateGMT"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.lastUpdatedDateGMT?.dirty && editForm.controls.lastUpdatedDateGMT?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.lastUpdatedDateGMT?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.lastUpdatedDateGMT?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.featured" for="field_featured">Featured</label>
+                    <input type="checkbox" class="form-control" name="featured" id="field_featured"
+                        [(ngModel)]="post.featured" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.sticky" for="field_sticky">Sticky</label>
+                    <input type="checkbox" class="form-control" name="sticky" id="field_sticky"
+                        [(ngModel)]="post.sticky" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.updates" for="field_updates">Updates</label>
+                    <input type="text" class="form-control" name="updates" id="field_updates"
+                        [(ngModel)]="post.updates" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.slug" for="field_slug">Slug</label>
+                    <input type="text" class="form-control" name="slug" id="field_slug"
+                        [(ngModel)]="post.slug" required/>
+                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.password" for="field_password">Password</label>
+                    <input type="text" class="form-control" name="password" id="field_password"
+                        [(ngModel)]="post.password" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.featuredMedia" for="field_featuredMedia">Featured Media</label>
+                    <input type="text" class="form-control" name="featuredMedia" id="field_featuredMedia"
+                        [(ngModel)]="post.featuredMedia" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.subTitle" for="field_subTitle">Sub Title</label>
+                    <input type="text" class="form-control" name="subTitle" id="field_subTitle"
+                        [(ngModel)]="post.subTitle" />
                 </div>
 
                 <div class="form-group">
-                    <h5 id="jhi-post-heading" jhiTranslate="gatewayApp.coreTag.home.title">Tags</h5>
-                    <div *ngFor="let tag of tags">
-                        <span>
-                            <input type='checkbox' value="{{tag.id}}" name='tagId'/>
-                        </span>
-                        <span>{{tag.name}}</span>
-                    </div>
+                    <label jhiTranslate="gatewayApp.corePost.tag" for="field_tag">Tag</label>
+                    <select class="form-control" id="field_tag" multiple name="tag" [(ngModel)]="post.tags">
+                        <option [ngValue]="getSelected(post.tags, tagOption)" *ngFor="let tagOption of tags; trackBy: trackTagById">{{tagOption.name}}</option>
+                    </select>
                 </div>
-
+                <div class="form-group">
+                    <label jhiTranslate="gatewayApp.corePost.category" for="field_category">Category</label>
+                    <select class="form-control" id="field_category" multiple name="category" [(ngModel)]="post.categories">
+                        <option [ngValue]="getSelected(post.categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.status" for="field_status">Status</label>
+                    <select class="form-control" id="field_status" name="status" [(ngModel)]="post.statusId"  required>
+                        <option *ngIf="!editForm.value.status" [ngValue]="null" selected></option>
+                        <option [ngValue]="statusOption.id" *ngFor="let statusOption of statuses; trackBy: trackStatusById">{{statusOption.name}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.format" for="field_format">Format</label>
+                    <select class="form-control" id="field_format" name="format" [(ngModel)]="post.formatId"  required>
+                        <option *ngIf="!editForm.value.format" [ngValue]="null" selected></option>
+                        <option [ngValue]="formatOption.id" *ngFor="let formatOption of formats; trackBy: trackFormatById">{{formatOption.name}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.format?.dirty && editForm.controls.format?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.format?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

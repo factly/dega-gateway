@@ -7,9 +7,11 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entidades",
-                "coreOrganization": "Organization",
                 "corePost": "Post",
                 "coreCategory": "Category",
+                "coreFormat": "Format",
+                "coreOrganization": "Organization",
+                "coreStatus": "Status",
                 "coreTag": "Tag",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
@@ -63,7 +65,7 @@
                 }
             },
             "error": {
-                "dontmatch" : "¡La contraseña y la confirmación de contraseña no coinciden!"
+                "dontmatch": "¡La contraseña y la confirmación de contraseña no coinciden!"
             },
             "validate": {
                 "newpassword": {
@@ -86,10 +88,10 @@
             }
         },
         "field": {
-            "id" : "ID"
+            "id": "ID"
         },
         "ribbon": {
-            "dev":"Development"
+            "dev": "Development"
         },
         "item-count": "Monstrando {{first}} - {{second}} de {{total}} artículos."
     },

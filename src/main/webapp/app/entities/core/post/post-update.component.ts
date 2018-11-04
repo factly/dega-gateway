@@ -2,42 +2,84 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
 
 import { IPost } from 'app/shared/model/core/post.model';
 import { PostService } from './post.service';
-
-import { CategoryService } from '../category/category.service';
-import { ICategory } from 'app/shared/model/core/category.model';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
-
 import { ITag } from 'app/shared/model/core/tag.model';
-import { TagService } from '../tag/tag.service';
+import { TagService } from 'app/entities/core/tag';
+import { ICategory } from 'app/shared/model/core/category.model';
+import { CategoryService } from 'app/entities/core/category';
+import { IStatus } from 'app/shared/model/core/status.model';
+import { StatusService } from 'app/entities/core/status';
+import { IFormat } from 'app/shared/model/core/format.model';
+import { FormatService } from 'app/entities/core/format';
 
 @Component({
     selector: 'jhi-post-update',
     templateUrl: './post-update.component.html'
 })
 export class PostUpdateComponent implements OnInit {
-    private _post: IPost;
+    post: IPost;
     isSaving: boolean;
-    categories: ICategory[];
+
     tags: ITag[];
 
+    categories: ICategory[];
+
+    statuses: IStatus[];
+
+    formats: IFormat[];
+    publishedDate: string;
+    publishedDateGMT: string;
+    lastUpdatedDate: string;
+    lastUpdatedDateGMT: string;
+
     constructor(
+        private jhiAlertService: JhiAlertService,
         private postService: PostService,
-        private activatedRoute: ActivatedRoute,
-        private categoryService: CategoryService,
         private tagService: TagService,
-        private jhiAlertService: JhiAlertService
+        private categoryService: CategoryService,
+        private statusService: StatusService,
+        private formatService: FormatService,
+        private activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
-        this.loadCategories();
-        this.loadTags();
         this.activatedRoute.data.subscribe(({ post }) => {
             this.post = post;
+            this.publishedDate = this.post.publishedDate != null ? this.post.publishedDate.format(DATE_TIME_FORMAT) : null;
+            this.publishedDateGMT = this.post.publishedDateGMT != null ? this.post.publishedDateGMT.format(DATE_TIME_FORMAT) : null;
+            this.lastUpdatedDate = this.post.lastUpdatedDate != null ? this.post.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
+            this.lastUpdatedDateGMT = this.post.lastUpdatedDateGMT != null ? this.post.lastUpdatedDateGMT.format(DATE_TIME_FORMAT) : null;
         });
+        this.tagService.query().subscribe(
+            (res: HttpResponse<ITag[]>) => {
+                this.tags = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.categoryService.query().subscribe(
+            (res: HttpResponse<ICategory[]>) => {
+                this.categories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.statusService.query().subscribe(
+            (res: HttpResponse<IStatus[]>) => {
+                this.statuses = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.formatService.query().subscribe(
+            (res: HttpResponse<IFormat[]>) => {
+                this.formats = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -46,6 +88,10 @@ export class PostUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.post.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
+        this.post.publishedDateGMT = this.publishedDateGMT != null ? moment(this.publishedDateGMT, DATE_TIME_FORMAT) : null;
+        this.post.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        this.post.lastUpdatedDateGMT = this.lastUpdatedDateGMT != null ? moment(this.lastUpdatedDateGMT, DATE_TIME_FORMAT) : null;
         if (this.post.id !== undefined) {
             this.subscribeToSaveResponse(this.postService.update(this.post));
         } else {
@@ -65,34 +111,35 @@ export class PostUpdateComponent implements OnInit {
     private onSaveError() {
         this.isSaving = false;
     }
-    get post() {
-        return this._post;
-    }
-
-    set post(post: IPost) {
-        this._post = post;
-    }
-
-    loadCategories() {
-        this.categoryService
-            .query({
-                sort: ['asc']
-            })
-            .subscribe(
-                (res: HttpResponse<ICategory[]>) => (this.categories = res.body),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-    }
-
-    loadTags() {
-        this.tagService
-            .query({
-                sort: ['asc']
-            })
-            .subscribe((res: HttpResponse<ITag[]>) => (this.tags = res.body), (res: HttpErrorResponse) => this.onError(res.message));
-    }
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackTagById(index: number, item: ITag) {
+        return item.id;
+    }
+
+    trackCategoryById(index: number, item: ICategory) {
+        return item.id;
+    }
+
+    trackStatusById(index: number, item: IStatus) {
+        return item.id;
+    }
+
+    trackFormatById(index: number, item: IFormat) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }

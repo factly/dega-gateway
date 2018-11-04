@@ -4,7 +4,7 @@ services:
   - docker
 language: node_js
 node_js:
-  - "8.12.0"
+  - "10.13.0"
 jdk:
   - oraclejdk8
 sudo: false
@@ -15,7 +15,7 @@ cache:
     - $HOME/.gradle
 env:
   global:
-    - NODE_VERSION=8.12.0
+    - NODE_VERSION=10.13.0
     - SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
     - SPRING_JPA_SHOW_SQL=false
 before_install:

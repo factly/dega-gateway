@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreFormat" : {
+        "coreFormat": {
             "home": {
                 "title": "Formats",
                 "createLabel": "Create a new Format",
@@ -22,7 +21,7 @@
         }
     },
     "coreApp": {
-        "coreFormat" : {
+        "coreFormat": {
             "created": "A new Format is created with identifier {{ param }}",
             "updated": "A Format is updated with identifier {{ param }}",
             "deleted": "A Format is deleted with identifier {{ param }}"

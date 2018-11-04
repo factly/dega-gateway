@@ -3,8 +3,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { Status } from 'app/shared/model/core/status.model';
 import { StatusService } from './status.service';
 import { StatusComponent } from './status.component';
@@ -17,10 +17,13 @@ import { IStatus } from 'app/shared/model/core/status.model';
 export class StatusResolve implements Resolve<IStatus> {
     constructor(private service: StatusService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Status> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((status: HttpResponse<Status>) => status.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<Status>) => response.ok),
+                map((status: HttpResponse<Status>) => status.body)
+            );
         }
         return of(new Status());
     }

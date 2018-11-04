@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreStatus" : {
+        "coreStatus": {
             "home": {
                 "title": "Statuses",
                 "createLabel": "Crear nuevo Status",
@@ -21,7 +20,7 @@
         }
     },
     "coreApp": {
-        "coreStatus" : {
+        "coreStatus": {
             "created": "Un nuevo Status ha sido creado con el identificador {{ param }}",
             "updated": "Un Status ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Status ha sido eliminado con el identificador {{ param }}"

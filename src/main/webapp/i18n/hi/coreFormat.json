@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreFormat" : {
+        "coreFormat": {
             "home": {
                 "title": "Formats",
                 "createLabel": "नया Format बनाएँ",
@@ -22,7 +21,7 @@
         }
     },
     "coreApp": {
-        "coreFormat" : {
+        "coreFormat": {
             "created": "एक नया Format [identifier: {{ param }}] तैयार है",
             "updated": "एक Format [identifier: {{ param }}] का अद्यतन हुआ है",
             "deleted": "Format [identifier: {{ param }}] हटा दिया है"

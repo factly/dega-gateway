@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "corePost" : {
+        "corePost": {
             "home": {
                 "title": "Posts",
                 "createLabel": "Create a new Post",
@@ -36,7 +35,7 @@
         }
     },
     "coreApp": {
-        "corePost" : {
+        "corePost": {
             "created": "A new Post is created with identifier {{ param }}",
             "updated": "A Post is updated with identifier {{ param }}",
             "deleted": "A Post is deleted with identifier {{ param }}"

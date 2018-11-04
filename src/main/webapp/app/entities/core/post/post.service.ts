@@ -57,7 +57,7 @@ export class PostService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
-    private convertDateFromClient(post: IPost): IPost {
+    protected convertDateFromClient(post: IPost): IPost {
         const copy: IPost = Object.assign({}, post, {
             publishedDate: post.publishedDate != null && post.publishedDate.isValid() ? post.publishedDate.toJSON() : null,
             publishedDateGMT: post.publishedDateGMT != null && post.publishedDateGMT.isValid() ? post.publishedDateGMT.toJSON() : null,
@@ -68,21 +68,25 @@ export class PostService {
         return copy;
     }
 
-    private convertDateFromServer(res: EntityResponseType): EntityResponseType {
-        res.body.publishedDate = res.body.publishedDate != null ? moment(res.body.publishedDate) : null;
-        res.body.publishedDateGMT = res.body.publishedDateGMT != null ? moment(res.body.publishedDateGMT) : null;
-        res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
-        res.body.lastUpdatedDateGMT = res.body.lastUpdatedDateGMT != null ? moment(res.body.lastUpdatedDateGMT) : null;
+    protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
+        if (res.body) {
+            res.body.publishedDate = res.body.publishedDate != null ? moment(res.body.publishedDate) : null;
+            res.body.publishedDateGMT = res.body.publishedDateGMT != null ? moment(res.body.publishedDateGMT) : null;
+            res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
+            res.body.lastUpdatedDateGMT = res.body.lastUpdatedDateGMT != null ? moment(res.body.lastUpdatedDateGMT) : null;
+        }
         return res;
     }
 
-    private convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
-        res.body.forEach((post: IPost) => {
-            post.publishedDate = post.publishedDate != null ? moment(post.publishedDate) : null;
-            post.publishedDateGMT = post.publishedDateGMT != null ? moment(post.publishedDateGMT) : null;
-            post.lastUpdatedDate = post.lastUpdatedDate != null ? moment(post.lastUpdatedDate) : null;
-            post.lastUpdatedDateGMT = post.lastUpdatedDateGMT != null ? moment(post.lastUpdatedDateGMT) : null;
-        });
+    protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+        if (res.body) {
+            res.body.forEach((post: IPost) => {
+                post.publishedDate = post.publishedDate != null ? moment(post.publishedDate) : null;
+                post.publishedDateGMT = post.publishedDateGMT != null ? moment(post.publishedDateGMT) : null;
+                post.lastUpdatedDate = post.lastUpdatedDate != null ? moment(post.lastUpdatedDate) : null;
+                post.lastUpdatedDateGMT = post.lastUpdatedDateGMT != null ? moment(post.lastUpdatedDateGMT) : null;
+            });
+        }
         return res;
     }
 }

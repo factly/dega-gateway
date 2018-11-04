@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreCategory" : {
+        "coreCategory": {
             "home": {
                 "title": "Categories",
                 "createLabel": "Create a new Category",
@@ -23,7 +22,7 @@
         }
     },
     "coreApp": {
-        "coreCategory" : {
+        "coreCategory": {
             "created": "A new Category is created with identifier {{ param }}",
             "updated": "A Category is updated with identifier {{ param }}",
             "deleted": "A Category is deleted with identifier {{ param }}"

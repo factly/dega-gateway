@@ -3,8 +3,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { Category } from 'app/shared/model/core/category.model';
 import { CategoryService } from './category.service';
 import { CategoryComponent } from './category.component';
@@ -17,10 +17,13 @@ import { ICategory } from 'app/shared/model/core/category.model';
 export class CategoryResolve implements Resolve<ICategory> {
     constructor(private service: CategoryService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Category> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((category: HttpResponse<Category>) => category.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<Category>) => response.ok),
+                map((category: HttpResponse<Category>) => category.body)
+            );
         }
         return of(new Category());
     }

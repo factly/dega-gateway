@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "home": {
                 "title": "Organizations",
                 "createLabel": "Create a new Organization",
@@ -57,7 +56,7 @@
         }
     },
     "coreApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "created": "A new Organization is created with identifier {{ param }}",
             "updated": "A Organization is updated with identifier {{ param }}",
             "deleted": "A Organization is deleted with identifier {{ param }}"

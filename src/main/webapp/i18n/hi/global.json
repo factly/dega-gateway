@@ -7,12 +7,6 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "एंटिटीज़",
-                "coreOrganization": "Organization",
-                "corePost": "Post",
-                "coreCategory": "Category",
-                "coreTag": "Tag",
-                "coreFormat": "Format",
-                "coreStatus": "Status",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -91,7 +85,7 @@
             "id": "ID"
         },
         "ribbon": {
-            "dev":"Development"
+            "dev": "Development"
         },
         "item-count": "Showing {{first}} - {{second}} of {{total}} items."
     },

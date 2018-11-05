@@ -52,7 +52,10 @@
             "mailchimpAPIKey": "Mailchimp API Key",
             "siteLanguage": "Site Language",
             "timeZone": "Time Zone",
-            "clientId": "Client Id"
+            "clientId": "Client Id",
+            "slug": "Slug",
+            "degaUser": "Dega User",
+            "degaUserDefault": "Dega User Default"
         }
     },
     "coreApp": {

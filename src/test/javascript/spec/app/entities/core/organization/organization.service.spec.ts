@@ -62,6 +62,7 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
+                'AAAAAAA',
                 'AAAAAAA'
             );
         });
@@ -136,7 +137,8 @@ describe('Service Tests', () => {
                         mailchimpAPIKey: 'BBBBBB',
                         siteLanguage: 'BBBBBB',
                         timeZone: 'BBBBBB',
-                        clientId: 'BBBBBB'
+                        clientId: 'BBBBBB',
+                        slug: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -192,7 +194,8 @@ describe('Service Tests', () => {
                         mailchimpAPIKey: 'BBBBBB',
                         siteLanguage: 'BBBBBB',
                         timeZone: 'BBBBBB',
-                        clientId: 'BBBBBB'
+                        clientId: 'BBBBBB',
+                        slug: 'BBBBBB'
                     },
                     elemDefault
                 );

@@ -51,9 +51,10 @@ describe('DegaUser e2e test', () => {
             degaUserUpdatePage.setGithubURLInput('githubURL'),
             degaUserUpdatePage.setProfilePictureInput('profilePicture'),
             degaUserUpdatePage.setDescriptionInput('description'),
-            degaUserUpdatePage.setClientIdInput('clientId'),
             degaUserUpdatePage.setSlugInput('slug'),
             degaUserUpdatePage.roleSelectLastOption(),
+            // degaUserUpdatePage.organizationSelectLastOption(),
+            degaUserUpdatePage.organizationDefaultSelectLastOption(),
         ]);
         expect(await degaUserUpdatePage.getFirstNameInput()).to.eq('firstName');
         expect(await degaUserUpdatePage.getLastNameInput()).to.eq('lastName');
@@ -67,7 +68,6 @@ describe('DegaUser e2e test', () => {
         expect(await degaUserUpdatePage.getGithubURLInput()).to.eq('githubURL');
         expect(await degaUserUpdatePage.getProfilePictureInput()).to.eq('profilePicture');
         expect(await degaUserUpdatePage.getDescriptionInput()).to.eq('description');
-        expect(await degaUserUpdatePage.getClientIdInput()).to.eq('clientId');
         const selectedIsActive = degaUserUpdatePage.getIsActiveInput();
         if (await selectedIsActive.isSelected()) {
             await degaUserUpdatePage.getIsActiveInput().click();

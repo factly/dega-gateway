@@ -35,7 +35,6 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
-                'AAAAAAA',
                 false,
                 'AAAAAAA'
             );
@@ -84,7 +83,6 @@ describe('Service Tests', () => {
                         githubURL: 'BBBBBB',
                         profilePicture: 'BBBBBB',
                         description: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         isActive: true,
                         slug: 'BBBBBB'
                     },
@@ -115,7 +113,6 @@ describe('Service Tests', () => {
                         githubURL: 'BBBBBB',
                         profilePicture: 'BBBBBB',
                         description: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         isActive: true,
                         slug: 'BBBBBB'
                     },

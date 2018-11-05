@@ -1,3 +1,5 @@
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+
 export interface IOrganization {
     id?: string;
     name?: string;
@@ -40,6 +42,9 @@ export interface IOrganization {
     siteLanguage?: string;
     timeZone?: string;
     clientId?: string;
+    slug?: string;
+    degaUsers?: IDegaUser[];
+    degaUserDefaults?: IDegaUser[];
 }
 
 export class Organization implements IOrganization {
@@ -84,6 +89,9 @@ export class Organization implements IOrganization {
         public mailchimpAPIKey?: string,
         public siteLanguage?: string,
         public timeZone?: string,
-        public clientId?: string
+        public clientId?: string,
+        public slug?: string,
+        public degaUsers?: IDegaUser[],
+        public degaUserDefaults?: IDegaUser[]
     ) {}
 }

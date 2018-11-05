@@ -15,6 +15,7 @@
             },
             "name": "Name",
             "clientId": "Client Id",
+            "isDefault": "Is Default",
             "degaUser": "Dega User"
         }
     },

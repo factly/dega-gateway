@@ -8,6 +8,8 @@ import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from './dega-user.service';
 import { IRole } from 'app/shared/model/core/role.model';
 import { RoleService } from 'app/entities/core/role';
+import { IOrganization } from 'app/shared/model/core/organization.model';
+import { OrganizationService } from 'app/entities/core/organization';
 
 @Component({
     selector: 'jhi-dega-user-update',
@@ -19,10 +21,13 @@ export class DegaUserUpdateComponent implements OnInit {
 
     roles: IRole[];
 
+    organizations: IOrganization[];
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private degaUserService: DegaUserService,
         private roleService: RoleService,
+        private organizationService: OrganizationService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -34,6 +39,12 @@ export class DegaUserUpdateComponent implements OnInit {
         this.roleService.query().subscribe(
             (res: HttpResponse<IRole[]>) => {
                 this.roles = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.organizationService.query().subscribe(
+            (res: HttpResponse<IOrganization[]>) => {
+                this.organizations = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -71,5 +82,20 @@ export class DegaUserUpdateComponent implements OnInit {
 
     trackRoleById(index: number, item: IRole) {
         return item.id;
+    }
+
+    trackOrganizationById(index: number, item: IOrganization) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }

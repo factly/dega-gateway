@@ -25,10 +25,11 @@
             "githubURL": "Github URL",
             "profilePicture": "Profile Picture",
             "description": "Description",
-            "clientId": "Client Id",
             "isActive": "Is Active",
             "slug": "Slug",
-            "role": "Role"
+            "role": "Role",
+            "organization": "Organization",
+            "organizationDefault": "Organization Default"
         }
     },
     "coreApp": {

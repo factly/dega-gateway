@@ -42,10 +42,10 @@
             <th jhiSortBy="githubURL"><span jhiTranslate="gatewayApp.coreDegaUser.githubURL">Github URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="profilePicture"><span jhiTranslate="gatewayApp.coreDegaUser.profilePicture">Profile Picture</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="gatewayApp.coreDegaUser.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreDegaUser.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="isActive"><span jhiTranslate="gatewayApp.coreDegaUser.isActive">Is Active</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreDegaUser.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="roleName"><span jhiTranslate="gatewayApp.coreDegaUser.role">Role</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="organizationDefaultName"><span jhiTranslate="gatewayApp.coreDegaUser.organizationDefault">Organization Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -64,12 +64,16 @@
                 <td>{{degaUser.githubURL}}</td>
                 <td>{{degaUser.profilePicture}}</td>
                 <td>{{degaUser.description}}</td>
-                <td>{{degaUser.clientId}}</td>
                 <td>{{degaUser.isActive}}</td>
                 <td>{{degaUser.slug}}</td>
                 <td>
                     <div *ngIf="degaUser.roleId">
                         <a [routerLink]="['../role', degaUser.roleId , 'view' ]" >{{degaUser.roleName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="degaUser.organizationDefaultId">
+                        <a [routerLink]="['../organization', degaUser.organizationDefaultId , 'view' ]" >{{degaUser.organizationDefaultName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

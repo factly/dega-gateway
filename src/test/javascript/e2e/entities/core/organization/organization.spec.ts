@@ -78,7 +78,8 @@ describe('Organization e2e test', () => {
             organizationUpdatePage.setMailchimpAPIKeyInput('mailchimpAPIKey'),
             organizationUpdatePage.setSiteLanguageInput('siteLanguage'),
             organizationUpdatePage.setTimeZoneInput('timeZone'),
-            organizationUpdatePage.setClientIdInput('clientId')
+            organizationUpdatePage.setClientIdInput('clientId'),
+            organizationUpdatePage.setSlugInput('slug')
         ]);
         expect(await organizationUpdatePage.getNameInput()).to.eq('name');
         expect(await organizationUpdatePage.getEmailInput()).to.eq('email');
@@ -120,6 +121,7 @@ describe('Organization e2e test', () => {
         expect(await organizationUpdatePage.getSiteLanguageInput()).to.eq('siteLanguage');
         expect(await organizationUpdatePage.getTimeZoneInput()).to.eq('timeZone');
         expect(await organizationUpdatePage.getClientIdInput()).to.eq('clientId');
+        expect(await organizationUpdatePage.getSlugInput()).to.eq('slug');
         await organizationUpdatePage.save();
         expect(await organizationUpdatePage.getSaveButton().isPresent()).to.be.false;
 

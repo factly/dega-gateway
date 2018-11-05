@@ -13,6 +13,9 @@
                 "coreOrganization": "Organization",
                 "coreStatus": "Status",
                 "coreTag": "Tag",
+                "coreMedia": "Media",
+                "coreDegaUser": "Dega User",
+                "coreRole": "Role",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

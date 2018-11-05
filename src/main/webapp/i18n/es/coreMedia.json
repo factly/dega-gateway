@@ -1,0 +1,40 @@
+{
+    "gatewayApp": {
+        "coreMedia": {
+            "home": {
+                "title": "Media",
+                "createLabel": "Crear nuevo Media",
+                "createOrEditLabel": "Crear o editar Media",
+                "search": "Search for Media"
+            },
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Media {{ id }}?"
+            },
+            "detail": {
+                "title": "Media"
+            },
+            "name": "Name",
+            "type": "Type",
+            "url": "Url",
+            "fileSize": "File Size",
+            "dimensions": "Dimensions",
+            "title": "Title",
+            "caption": "Caption",
+            "altText": "Alt Text",
+            "description": "Description",
+            "uploadedBy": "Uploaded By",
+            "publishedDate": "Published Date",
+            "publishedDateGMT": "Published Date GMT",
+            "lastUpdatedDate": "Last Updated Date",
+            "lastUpdatedDateGMT": "Last Updated Date GMT",
+            "slug": "Slug"
+        }
+    },
+    "coreApp": {
+        "coreMedia": {
+            "created": "Un nuevo Media ha sido creado con el identificador {{ param }}",
+            "updated": "Un Media ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Media ha sido eliminado con el identificador {{ param }}"
+        }
+    }
+}

@@ -1,3 +1,5 @@
+import { IOrganization } from 'app/shared/model/core/organization.model';
+
 export interface IDegaUser {
     id?: string;
     firstName?: string;
@@ -12,11 +14,13 @@ export interface IDegaUser {
     githubURL?: string;
     profilePicture?: string;
     description?: string;
-    clientId?: string;
     isActive?: boolean;
     slug?: string;
     roleName?: string;
     roleId?: string;
+    organizations?: IOrganization[];
+    organizationDefaultName?: string;
+    organizationDefaultId?: string;
 }
 
 export class DegaUser implements IDegaUser {
@@ -34,11 +38,13 @@ export class DegaUser implements IDegaUser {
         public githubURL?: string,
         public profilePicture?: string,
         public description?: string,
-        public clientId?: string,
         public isActive?: boolean,
         public slug?: string,
         public roleName?: string,
-        public roleId?: string
+        public roleId?: string,
+        public organizations?: IOrganization[],
+        public organizationDefaultName?: string,
+        public organizationDefaultId?: string
     ) {
         this.isActive = this.isActive || false;
     }

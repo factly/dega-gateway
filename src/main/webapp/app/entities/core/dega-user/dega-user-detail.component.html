@@ -53,10 +53,6 @@
                 <dd>
                     <span>{{degaUser.description}}</span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.coreDegaUser.clientId">Client Id</span></dt>
-                <dd>
-                    <span>{{degaUser.clientId}}</span>
-                </dd>
                 <dt><span jhiTranslate="gatewayApp.coreDegaUser.isActive">Is Active</span></dt>
                 <dd>
                     <span>{{degaUser.isActive}}</span>
@@ -69,6 +65,18 @@
                 <dd>
                     <div *ngIf="degaUser.roleId">
                         <a [routerLink]="['/role', degaUser.roleId, 'view']">{{degaUser.roleName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.organization">Organization</span></dt>
+                <dd>
+                    <span *ngFor="let organization of degaUser.organizations; let last = last">
+                        <a [routerLink]="['/organization', organization?.id, 'view' ]">{{organization.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.organizationDefault">Organization Default</span></dt>
+                <dd>
+                    <div *ngIf="degaUser.organizationDefaultId">
+                        <a [routerLink]="['/organization', degaUser.organizationDefaultId, 'view']">{{degaUser.organizationDefaultName}}</a>
                     </div>
                 </dd>
             </dl>

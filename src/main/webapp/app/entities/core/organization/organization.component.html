@@ -70,6 +70,7 @@
             <th jhiSortBy="siteLanguage"><span jhiTranslate="gatewayApp.coreOrganization.siteLanguage">Site Language</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="timeZone"><span jhiTranslate="gatewayApp.coreOrganization.timeZone">Time Zone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreOrganization.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreOrganization.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -116,6 +117,7 @@
                 <td>{{organization.siteLanguage}}</td>
                 <td>{{organization.timeZone}}</td>
                 <td>{{organization.clientId}}</td>
+                <td>{{organization.slug}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

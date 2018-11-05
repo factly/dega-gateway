@@ -82,17 +82,6 @@
                         [(ngModel)]="degaUser.description" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.clientId" for="field_clientId">Client Id</label>
-                    <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="degaUser.clientId" required/>
-                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.isActive" for="field_isActive">Is Active</label>
                     <input type="checkbox" class="form-control" name="isActive" id="field_isActive"
                         [(ngModel)]="degaUser.isActive" />
@@ -119,6 +108,31 @@
                 <div [hidden]="!(editForm.controls.role?.dirty && editForm.controls.role?.invalid)">
                     <small class="form-text text-danger"
                         [hidden]="!editForm.controls.role?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="gatewayApp.coreDegaUser.organization" for="field_organization">Organization</label>
+                    <select class="form-control" id="field_organization" multiple name="organization" [(ngModel)]="degaUser.organizations" required>
+                        <option [ngValue]="getSelected(degaUser.organizations, organizationOption)" *ngFor="let organizationOption of organizations; trackBy: trackOrganizationById">{{organizationOption.name}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.organization?.dirty && editForm.controls.organization?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.organization?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.organizationDefault" for="field_organizationDefault">Organization Default</label>
+                    <select class="form-control" id="field_organizationDefault" name="organizationDefault" [(ngModel)]="degaUser.organizationDefaultId"  required>
+                        <option *ngIf="!editForm.value.organizationDefault" [ngValue]="null" selected></option>
+                        <option [ngValue]="organizationOption.id" *ngFor="let organizationOption of organizations; trackBy: trackOrganizationById">{{organizationOption.name}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.organizationDefault?.dirty && editForm.controls.organizationDefault?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.organizationDefault?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
                 </div>

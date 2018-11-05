@@ -38,10 +38,11 @@ export class DegaUserUpdatePage {
     githubURLInput = element(by.id('field_githubURL'));
     profilePictureInput = element(by.id('field_profilePicture'));
     descriptionInput = element(by.id('field_description'));
-    clientIdInput = element(by.id('field_clientId'));
     isActiveInput = element(by.id('field_isActive'));
     slugInput = element(by.id('field_slug'));
     roleSelect = element(by.id('field_role'));
+    organizationSelect = element(by.id('field_organization'));
+    organizationDefaultSelect = element(by.id('field_organizationDefault'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -143,14 +144,6 @@ export class DegaUserUpdatePage {
         return this.descriptionInput.getAttribute('value');
     }
 
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
-    }
-
     getIsActiveInput() {
         return this.isActiveInput;
     }
@@ -179,6 +172,44 @@ export class DegaUserUpdatePage {
 
     async getRoleSelectedOption() {
         return this.roleSelect.element(by.css('option:checked')).getText();
+    }
+
+    async organizationSelectLastOption() {
+        await this.organizationSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async organizationSelectOption(option) {
+        await this.organizationSelect.sendKeys(option);
+    }
+
+    getOrganizationSelect(): ElementFinder {
+        return this.organizationSelect;
+    }
+
+    async getOrganizationSelectedOption() {
+        return this.organizationSelect.element(by.css('option:checked')).getText();
+    }
+
+    async organizationDefaultSelectLastOption() {
+        await this.organizationDefaultSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async organizationDefaultSelectOption(option) {
+        await this.organizationDefaultSelect.sendKeys(option);
+    }
+
+    getOrganizationDefaultSelect(): ElementFinder {
+        return this.organizationDefaultSelect;
+    }
+
+    async getOrganizationDefaultSelectedOption() {
+        return this.organizationDefaultSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

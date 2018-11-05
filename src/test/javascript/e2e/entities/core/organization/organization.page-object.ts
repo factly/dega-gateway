@@ -66,6 +66,7 @@ export class OrganizationUpdatePage {
     siteLanguageInput = element(by.id('field_siteLanguage'));
     timeZoneInput = element(by.id('field_timeZone'));
     clientIdInput = element(by.id('field_clientId'));
+    slugInput = element(by.id('field_slug'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -389,6 +390,14 @@ export class OrganizationUpdatePage {
 
     async getClientIdInput() {
         return this.clientIdInput.getAttribute('value');
+    }
+
+    async setSlugInput(slug) {
+        await this.slugInput.sendKeys(slug);
+    }
+
+    async getSlugInput() {
+        return this.slugInput.getAttribute('value');
     }
 
     async save() {

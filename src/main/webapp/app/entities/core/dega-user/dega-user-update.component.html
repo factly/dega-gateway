@@ -1,0 +1,136 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-dega-user-heading" jhiTranslate="gatewayApp.coreDegaUser.home.createOrEditLabel">Create or edit a Dega User</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!degaUser.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="degaUser.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.firstName" for="field_firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="field_firstName"
+                        [(ngModel)]="degaUser.firstName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.lastName" for="field_lastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                        [(ngModel)]="degaUser.lastName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.displayName" for="field_displayName">Display Name</label>
+                    <input type="text" class="form-control" name="displayName" id="field_displayName"
+                        [(ngModel)]="degaUser.displayName" required/>
+                    <div [hidden]="!(editForm.controls.displayName?.dirty && editForm.controls.displayName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.displayName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="degaUser.email" required/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.website" for="field_website">Website</label>
+                    <input type="text" class="form-control" name="website" id="field_website"
+                        [(ngModel)]="degaUser.website" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.facebookURL" for="field_facebookURL">Facebook URL</label>
+                    <input type="text" class="form-control" name="facebookURL" id="field_facebookURL"
+                        [(ngModel)]="degaUser.facebookURL" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.twitterURL" for="field_twitterURL">Twitter URL</label>
+                    <input type="text" class="form-control" name="twitterURL" id="field_twitterURL"
+                        [(ngModel)]="degaUser.twitterURL" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.instagramURL" for="field_instagramURL">Instagram URL</label>
+                    <input type="text" class="form-control" name="instagramURL" id="field_instagramURL"
+                        [(ngModel)]="degaUser.instagramURL" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.linkedinURL" for="field_linkedinURL">Linkedin URL</label>
+                    <input type="text" class="form-control" name="linkedinURL" id="field_linkedinURL"
+                        [(ngModel)]="degaUser.linkedinURL" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.githubURL" for="field_githubURL">Github URL</label>
+                    <input type="text" class="form-control" name="githubURL" id="field_githubURL"
+                        [(ngModel)]="degaUser.githubURL" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.profilePicture" for="field_profilePicture">Profile Picture</label>
+                    <input type="text" class="form-control" name="profilePicture" id="field_profilePicture"
+                        [(ngModel)]="degaUser.profilePicture" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="degaUser.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.clientId" for="field_clientId">Client Id</label>
+                    <input type="text" class="form-control" name="clientId" id="field_clientId"
+                        [(ngModel)]="degaUser.clientId" required/>
+                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.isActive" for="field_isActive">Is Active</label>
+                    <input type="checkbox" class="form-control" name="isActive" id="field_isActive"
+                        [(ngModel)]="degaUser.isActive" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.slug" for="field_slug">Slug</label>
+                    <input type="text" class="form-control" name="slug" id="field_slug"
+                        [(ngModel)]="degaUser.slug" required/>
+                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.role" for="field_role">Role</label>
+                    <select class="form-control" id="field_role" name="role" [(ngModel)]="degaUser.roleId"  required>
+                        <option *ngIf="!editForm.value.role" [ngValue]="null" selected></option>
+                        <option [ngValue]="roleOption.id" *ngFor="let roleOption of roles; trackBy: trackRoleById">{{roleOption.name}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.role?.dirty && editForm.controls.role?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.role?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

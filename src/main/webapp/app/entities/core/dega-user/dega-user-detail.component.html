@@ -1,0 +1,89 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="degaUser">
+            <h2><span jhiTranslate="gatewayApp.coreDegaUser.detail.title">Dega User</span> {{degaUser.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{degaUser.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{degaUser.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.displayName">Display Name</span></dt>
+                <dd>
+                    <span>{{degaUser.displayName}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.email">Email</span></dt>
+                <dd>
+                    <span>{{degaUser.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.website">Website</span></dt>
+                <dd>
+                    <span>{{degaUser.website}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.facebookURL">Facebook URL</span></dt>
+                <dd>
+                    <span>{{degaUser.facebookURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.twitterURL">Twitter URL</span></dt>
+                <dd>
+                    <span>{{degaUser.twitterURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.instagramURL">Instagram URL</span></dt>
+                <dd>
+                    <span>{{degaUser.instagramURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.linkedinURL">Linkedin URL</span></dt>
+                <dd>
+                    <span>{{degaUser.linkedinURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.githubURL">Github URL</span></dt>
+                <dd>
+                    <span>{{degaUser.githubURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.profilePicture">Profile Picture</span></dt>
+                <dd>
+                    <span>{{degaUser.profilePicture}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.description">Description</span></dt>
+                <dd>
+                    <span>{{degaUser.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.clientId">Client Id</span></dt>
+                <dd>
+                    <span>{{degaUser.clientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.isActive">Is Active</span></dt>
+                <dd>
+                    <span>{{degaUser.isActive}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.slug">Slug</span></dt>
+                <dd>
+                    <span>{{degaUser.slug}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.role">Role</span></dt>
+                <dd>
+                    <div *ngIf="degaUser.roleId">
+                        <a [routerLink]="['/role', degaUser.roleId, 'view']">{{degaUser.roleName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/dega-user', degaUser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

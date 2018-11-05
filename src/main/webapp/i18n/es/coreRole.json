@@ -1,0 +1,28 @@
+{
+    "gatewayApp": {
+        "coreRole": {
+            "home": {
+                "title": "Roles",
+                "createLabel": "Crear nuevo Role",
+                "createOrEditLabel": "Crear o editar Role",
+                "search": "Search for Role"
+            },
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Role {{ id }}?"
+            },
+            "detail": {
+                "title": "Role"
+            },
+            "name": "Name",
+            "clientId": "Client Id",
+            "degaUser": "Dega User"
+        }
+    },
+    "coreApp": {
+        "coreRole": {
+            "created": "Un nuevo Role ha sido creado con el identificador {{ param }}",
+            "updated": "Un Role ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Role ha sido eliminado con el identificador {{ param }}"
+        }
+    }
+}

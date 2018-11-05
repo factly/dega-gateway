@@ -32,6 +32,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreRole.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreRole.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreRole.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -40,6 +41,7 @@
                 <td><a [routerLink]="['/role', role.id, 'view' ]">{{role.id}}</a></td>
                 <td>{{role.name}}</td>
                 <td>{{role.clientId}}</td>
+                <td>{{role.isDefault}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

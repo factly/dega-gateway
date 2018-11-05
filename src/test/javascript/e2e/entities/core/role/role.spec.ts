@@ -41,6 +41,14 @@ describe('Role e2e test', () => {
         await promise.all([roleUpdatePage.setNameInput('name'), roleUpdatePage.setClientIdInput('clientId')]);
         expect(await roleUpdatePage.getNameInput()).to.eq('name');
         expect(await roleUpdatePage.getClientIdInput()).to.eq('clientId');
+        const selectedIsDefault = roleUpdatePage.getIsDefaultInput();
+        if (await selectedIsDefault.isSelected()) {
+            await roleUpdatePage.getIsDefaultInput().click();
+            expect(await roleUpdatePage.getIsDefaultInput().isSelected()).to.be.false;
+        } else {
+            await roleUpdatePage.getIsDefaultInput().click();
+            expect(await roleUpdatePage.getIsDefaultInput().isSelected()).to.be.true;
+        }
         await roleUpdatePage.save();
         expect(await roleUpdatePage.getSaveButton().isPresent()).to.be.false;
 

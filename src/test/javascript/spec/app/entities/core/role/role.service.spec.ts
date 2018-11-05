@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(RoleService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Role('ID', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Role('ID', 'AAAAAAA', 'AAAAAAA', false);
         });
 
         describe('Service methods', async () => {
@@ -56,7 +56,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        clientId: 'BBBBBB'
+                        clientId: 'BBBBBB',
+                        isDefault: true
                     },
                     elemDefault
                 );
@@ -74,7 +75,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        clientId: 'BBBBBB'
+                        clientId: 'BBBBBB',
+                        isDefault: true
                     },
                     elemDefault
                 );

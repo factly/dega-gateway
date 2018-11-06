@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "corePost" : {
+        "corePost": {
             "home": {
                 "title": "Posts",
                 "createLabel": "Crear nuevo Post",
@@ -16,11 +15,27 @@
             },
             "title": "Title",
             "clientId": "Client Id",
-            "content": "Content"
+            "content": "Content",
+            "excerpt": "Excerpt",
+            "publishedDate": "Published Date",
+            "publishedDateGMT": "Published Date GMT",
+            "lastUpdatedDate": "Last Updated Date",
+            "lastUpdatedDateGMT": "Last Updated Date GMT",
+            "featured": "Featured",
+            "sticky": "Sticky",
+            "updates": "Updates",
+            "slug": "Slug",
+            "password": "Password",
+            "featuredMedia": "Featured Media",
+            "subTitle": "Sub Title",
+            "tag": "Tag",
+            "category": "Category",
+            "status": "Status",
+            "format": "Format"
         }
     },
     "coreApp": {
-        "corePost" : {
+        "corePost": {
             "created": "Un nuevo Post ha sido creado con el identificador {{ param }}",
             "updated": "Un Post ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Post ha sido eliminado con el identificador {{ param }}"

@@ -28,6 +28,7 @@ export class StatusUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
     clientIdInput = element(by.id('field_clientId'));
+    isDefaultInput = element(by.id('field_isDefault'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -47,6 +48,10 @@ export class StatusUpdatePage {
 
     async getClientIdInput() {
         return this.clientIdInput.getAttribute('value');
+    }
+
+    getIsDefaultInput() {
+        return this.isDefaultInput;
     }
 
     async save() {

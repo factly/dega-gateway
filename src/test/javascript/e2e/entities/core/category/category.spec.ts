@@ -1,5 +1,5 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec } from 'protractor';
+import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../../page-objects/jhi-page-objects';
 
 import { CategoryComponentsPage, CategoryDeleteDialog, CategoryUpdatePage } from './category.page-object';
@@ -38,16 +38,18 @@ describe('Category e2e test', () => {
         const nbButtonsBeforeCreate = await categoryComponentsPage.countDeleteButtons();
 
         await categoryComponentsPage.clickOnCreateButton();
-        await categoryUpdatePage.setNameInput('name');
+        await promise.all([
+            categoryUpdatePage.setNameInput('name'),
+            categoryUpdatePage.setDescriptionInput('description'),
+            categoryUpdatePage.setSlugInput('slug'),
+            categoryUpdatePage.setParentInput('parent'),
+            categoryUpdatePage.setClientIdInput('clientId')
+        ]);
         expect(await categoryUpdatePage.getNameInput()).to.eq('name');
-        await categoryUpdatePage.setDescriptionInput('description');
         expect(await categoryUpdatePage.getDescriptionInput()).to.eq('description');
-        await categoryUpdatePage.setSlugInput('slug');
         expect(await categoryUpdatePage.getSlugInput()).to.eq('slug');
-        await categoryUpdatePage.setParentInput('parent');
         expect(await categoryUpdatePage.getParentInput()).to.eq('parent');
-        await categoryUpdatePage.setMetaInput('meta');
-        expect(await categoryUpdatePage.getMetaInput()).to.eq('meta');
+        expect(await categoryUpdatePage.getClientIdInput()).to.eq('clientId');
         await categoryUpdatePage.save();
         expect(await categoryUpdatePage.getSaveButton().isPresent()).to.be.false;
 

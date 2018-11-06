@@ -29,7 +29,7 @@ export class TagUpdatePage {
     nameInput = element(by.id('field_name'));
     slugInput = element(by.id('field_slug'));
     descriptionInput = element(by.id('field_description'));
-    metaInput = element(by.id('field_meta'));
+    clientIdInput = element(by.id('field_clientId'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -59,12 +59,12 @@ export class TagUpdatePage {
         return this.descriptionInput.getAttribute('value');
     }
 
-    async setMetaInput(meta) {
-        await this.metaInput.sendKeys(meta);
+    async setClientIdInput(clientId) {
+        await this.clientIdInput.sendKeys(clientId);
     }
 
-    async getMetaInput() {
-        return this.metaInput.getAttribute('value');
+    async getClientIdInput() {
+        return this.clientIdInput.getAttribute('value');
     }
 
     async save() {

@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreTag" : {
+        "coreTag": {
             "home": {
                 "title": "Tags",
                 "createLabel": "नया Tag बनाएँ",
@@ -17,11 +16,12 @@
             "name": "Name",
             "slug": "Slug",
             "description": "Description",
-            "meta": "Meta"
+            "clientId": "Client Id",
+            "post": "Post"
         }
     },
     "coreApp": {
-        "coreTag" : {
+        "coreTag": {
             "created": "एक नया Tag [identifier: {{ param }}] तैयार है",
             "updated": "एक Tag [identifier: {{ param }}] का अद्यतन हुआ है",
             "deleted": "Tag [identifier: {{ param }}] हटा दिया है"

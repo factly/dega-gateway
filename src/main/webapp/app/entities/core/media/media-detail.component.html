@@ -1,0 +1,83 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="media">
+            <h2><span jhiTranslate="gatewayApp.coreMedia.detail.title">Media</span> {{media.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.coreMedia.name">Name</span></dt>
+                <dd>
+                    <span>{{media.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.type">Type</span></dt>
+                <dd>
+                    <span>{{media.type}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.url">Url</span></dt>
+                <dd>
+                    <span>{{media.url}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.fileSize">File Size</span></dt>
+                <dd>
+                    <span>{{media.fileSize}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.dimensions">Dimensions</span></dt>
+                <dd>
+                    <span>{{media.dimensions}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.title">Title</span></dt>
+                <dd>
+                    <span>{{media.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.caption">Caption</span></dt>
+                <dd>
+                    <span>{{media.caption}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.altText">Alt Text</span></dt>
+                <dd>
+                    <span>{{media.altText}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.description">Description</span></dt>
+                <dd>
+                    <span>{{media.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.uploadedBy">Uploaded By</span></dt>
+                <dd>
+                    <span>{{media.uploadedBy}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.publishedDate">Published Date</span></dt>
+                <dd>
+                    <span>{{media.publishedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.publishedDateGMT">Published Date GMT</span></dt>
+                <dd>
+                    <span>{{media.publishedDateGMT}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.lastUpdatedDate">Last Updated Date</span></dt>
+                <dd>
+                    <span>{{media.lastUpdatedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.lastUpdatedDateGMT">Last Updated Date GMT</span></dt>
+                <dd>
+                    <span>{{media.lastUpdatedDateGMT}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreMedia.slug">Slug</span></dt>
+                <dd>
+                    <span>{{media.slug}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/media', media.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

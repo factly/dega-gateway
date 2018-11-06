@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "home": {
                 "title": "Organizations",
                 "createLabel": "Crear nuevo Organization",
@@ -53,11 +52,14 @@
             "mailchimpAPIKey": "Mailchimp API Key",
             "siteLanguage": "Site Language",
             "timeZone": "Time Zone",
-            "clientId": "Client Id"
+            "clientId": "Client Id",
+            "slug": "Slug",
+            "degaUser": "Dega User",
+            "degaUserDefault": "Dega User Default"
         }
     },
     "coreApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "created": "Un nuevo Organization ha sido creado con el identificador {{ param }}",
             "updated": "Un Organization ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Organization ha sido eliminado con el identificador {{ param }}"

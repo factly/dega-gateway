@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreTag" : {
+        "coreTag": {
             "home": {
                 "title": "Tags",
                 "createLabel": "Crear nuevo Tag",
@@ -17,11 +16,12 @@
             "name": "Name",
             "slug": "Slug",
             "description": "Description",
-            "meta": "Meta"
+            "clientId": "Client Id",
+            "post": "Post"
         }
     },
     "coreApp": {
-        "coreTag" : {
+        "coreTag": {
             "created": "Un nuevo Tag ha sido creado con el identificador {{ param }}",
             "updated": "Un Tag ha sido actualizado con el identificador {{ param }}",
             "deleted": "Un Tag ha sido eliminado con el identificador {{ param }}"

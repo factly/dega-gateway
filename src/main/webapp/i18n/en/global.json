@@ -7,10 +7,15 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
-                "coreOrganization": "Organization",
                 "corePost": "Post",
                 "coreCategory": "Category",
+                "coreFormat": "Format",
+                "coreOrganization": "Organization",
+                "coreStatus": "Status",
                 "coreTag": "Tag",
+                "coreMedia": "Media",
+                "coreDegaUser": "Dega User",
+                "coreRole": "Role",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -89,7 +94,7 @@
             "id": "ID"
         },
         "ribbon": {
-            "dev":"Development"
+            "dev": "Development"
         },
         "item-count": "Showing {{first}} - {{second}} of {{total}} items."
     },

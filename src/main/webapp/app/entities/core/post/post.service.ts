@@ -89,4 +89,8 @@ export class PostService {
         }
         return res;
     }
+
+    findByClientIdAndSlug(clientId: string, slug: string): Observable<EntityResponseType> {
+        return this.http.get<IPost>(`${this.resourceUrl}/${clientId}/${slug}`, { observe: 'response' });
+    }
 }

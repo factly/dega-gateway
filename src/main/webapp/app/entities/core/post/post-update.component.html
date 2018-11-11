@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.title" for="field_title">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title"
-                        [(ngModel)]="post.title" required/>
+                        [(ngModel)]="post.title" (change)="bindSlog($event)" required/>
                     <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="post.clientId" required/>
+                        [(ngModel)]="post.clientId" (change)="bindClientId($event)" required/>
                     <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
@@ -134,7 +134,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.slug" for="field_slug">Slug</label>
                     <input type="text" class="form-control" name="slug" id="field_slug"
-                        [(ngModel)]="post.slug" required/>
+                        [(ngModel)]="post.slug" disabled required/>
                     <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">

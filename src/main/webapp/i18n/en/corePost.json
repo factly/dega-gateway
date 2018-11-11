@@ -31,7 +31,8 @@
             "tag": "Tag",
             "category": "Category",
             "status": "Status",
-            "format": "Format"
+            "format": "Format",
+            "degaUser": "Dega User"
         }
     },
     "coreApp": {

@@ -45,6 +45,7 @@ export class PostUpdatePage {
     categorySelect = element(by.id('field_category'));
     statusSelect = element(by.id('field_status'));
     formatSelect = element(by.id('field_format'));
+    degaUserSelect = element(by.id('field_degaUser'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -234,6 +235,25 @@ export class PostUpdatePage {
 
     async getFormatSelectedOption() {
         return this.formatSelect.element(by.css('option:checked')).getText();
+    }
+
+    async degaUserSelectLastOption() {
+        await this.degaUserSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async degaUserSelectOption(option) {
+        await this.degaUserSelect.sendKeys(option);
+    }
+
+    getDegaUserSelect(): ElementFinder {
+        return this.degaUserSelect;
+    }
+
+    async getDegaUserSelectedOption() {
+        return this.degaUserSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

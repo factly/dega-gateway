@@ -56,6 +56,7 @@ describe('Post e2e test', () => {
             // postUpdatePage.categorySelectLastOption(),
             postUpdatePage.statusSelectLastOption(),
             postUpdatePage.formatSelectLastOption(),
+            // postUpdatePage.degaUserSelectLastOption(),
         ]);
         expect(await postUpdatePage.getTitleInput()).to.eq('title');
         expect(await postUpdatePage.getClientIdInput()).to.eq('clientId');

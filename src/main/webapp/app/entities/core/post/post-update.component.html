@@ -33,9 +33,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.content" for="field_content">Content</label>
-                    <!--<input type="text" class="form-control" name="content" id="field_content"
-                        [(ngModel)]="post.content" required/>-->
-                    <quill-editor [(ngModel)]="post.content" name="content" id="field_content"></quill-editor>
+                    <input type="text" class="form-control" name="content" id="field_content"
+                        [(ngModel)]="post.content" required/>
                     <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.content?.errors?.required" jhiTranslate="entity.validation.required">
@@ -193,6 +192,18 @@
                 <div [hidden]="!(editForm.controls.format?.dirty && editForm.controls.format?.invalid)">
                     <small class="form-text text-danger"
                         [hidden]="!editForm.controls.format?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="gatewayApp.corePost.degaUser" for="field_degaUser">Dega User</label>
+                    <select class="form-control" id="field_degaUser" multiple name="degaUser" [(ngModel)]="post.degaUsers" required>
+                        <option [ngValue]="getSelected(post.degaUsers, degaUserOption)" *ngFor="let degaUserOption of degausers; trackBy: trackDegaUserById">{{degaUserOption.displayName}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.degaUser?.dirty && editForm.controls.degaUser?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.degaUser?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
                 </div>

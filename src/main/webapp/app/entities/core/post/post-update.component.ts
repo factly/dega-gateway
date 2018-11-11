@@ -16,6 +16,8 @@ import { IStatus } from 'app/shared/model/core/status.model';
 import { StatusService } from 'app/entities/core/status';
 import { IFormat } from 'app/shared/model/core/format.model';
 import { FormatService } from 'app/entities/core/format';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { DegaUserService } from 'app/entities/core/dega-user';
 
 @Component({
     selector: 'jhi-post-update',
@@ -32,6 +34,8 @@ export class PostUpdateComponent implements OnInit {
     statuses: IStatus[];
 
     formats: IFormat[];
+
+    degausers: IDegaUser[];
     publishedDate: string;
     publishedDateGMT: string;
     lastUpdatedDate: string;
@@ -44,6 +48,7 @@ export class PostUpdateComponent implements OnInit {
         private categoryService: CategoryService,
         private statusService: StatusService,
         private formatService: FormatService,
+        private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -77,6 +82,12 @@ export class PostUpdateComponent implements OnInit {
         this.formatService.query().subscribe(
             (res: HttpResponse<IFormat[]>) => {
                 this.formats = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.degaUserService.query().subscribe(
+            (res: HttpResponse<IDegaUser[]>) => {
+                this.degausers = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -129,6 +140,10 @@ export class PostUpdateComponent implements OnInit {
     }
 
     trackFormatById(index: number, item: IFormat) {
+        return item.id;
+    }
+
+    trackDegaUserById(index: number, item: IDegaUser) {
         return item.id;
     }
 

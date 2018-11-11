@@ -16,7 +16,6 @@
             "firstName": "First Name",
             "lastName": "Last Name",
             "displayName": "Display Name",
-            "email": "Email",
             "website": "Website",
             "facebookURL": "Facebook URL",
             "twitterURL": "Twitter URL",
@@ -25,11 +24,15 @@
             "githubURL": "Github URL",
             "profilePicture": "Profile Picture",
             "description": "Description",
-            "isActive": "Is Active",
             "slug": "Slug",
+            "enabled": "Enabled",
+            "emailVerified": "Email Verified",
+            "email": "Email",
             "role": "Role",
             "organization": "Organization",
-            "organizationDefault": "Organization Default"
+            "organizationDefault": "Organization Default",
+            "organizationCurrent": "Organization Current",
+            "post": "Post"
         }
     },
     "coreApp": {

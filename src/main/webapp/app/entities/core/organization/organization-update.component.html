@@ -21,17 +21,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.email" for="field_email">Email</label>
-                    <input type="text" class="form-control" name="email" id="field_email"
-                        [(ngModel)]="organization.email" required/>
-                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.phone" for="field_phone">Phone</label>
                     <input type="text" class="form-control" name="phone" id="field_phone"
                         [(ngModel)]="organization.phone" />
@@ -241,6 +230,21 @@
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="organization.email" required pattern="'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,30}$'"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.email?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'Email' }">
+                            This field should follow pattern for "Email".
                         </small>
                     </div>
                 </div>

@@ -27,7 +27,6 @@ export class OrganizationUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
-    emailInput = element(by.id('field_email'));
     phoneInput = element(by.id('field_phone'));
     siteTitleInput = element(by.id('field_siteTitle'));
     tagLineInput = element(by.id('field_tagLine'));
@@ -67,6 +66,7 @@ export class OrganizationUpdatePage {
     timeZoneInput = element(by.id('field_timeZone'));
     clientIdInput = element(by.id('field_clientId'));
     slugInput = element(by.id('field_slug'));
+    emailInput = element(by.id('field_email'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -78,14 +78,6 @@ export class OrganizationUpdatePage {
 
     async getNameInput() {
         return this.nameInput.getAttribute('value');
-    }
-
-    async setEmailInput(email) {
-        await this.emailInput.sendKeys(email);
-    }
-
-    async getEmailInput() {
-        return this.emailInput.getAttribute('value');
     }
 
     async setPhoneInput(phone) {
@@ -398,6 +390,14 @@ export class OrganizationUpdatePage {
 
     async getSlugInput() {
         return this.slugInput.getAttribute('value');
+    }
+
+    async setEmailInput(email) {
+        await this.emailInput.sendKeys(email);
+    }
+
+    async getEmailInput() {
+        return this.emailInput.getAttribute('value');
     }
 
     async save() {

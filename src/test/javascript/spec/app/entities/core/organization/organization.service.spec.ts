@@ -99,7 +99,6 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        email: 'BBBBBB',
                         phone: 'BBBBBB',
                         siteTitle: 'BBBBBB',
                         tagLine: 'BBBBBB',
@@ -138,7 +137,8 @@ describe('Service Tests', () => {
                         siteLanguage: 'BBBBBB',
                         timeZone: 'BBBBBB',
                         clientId: 'BBBBBB',
-                        slug: 'BBBBBB'
+                        slug: 'BBBBBB',
+                        email: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -156,7 +156,6 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        email: 'BBBBBB',
                         phone: 'BBBBBB',
                         siteTitle: 'BBBBBB',
                         tagLine: 'BBBBBB',
@@ -195,7 +194,8 @@ describe('Service Tests', () => {
                         siteLanguage: 'BBBBBB',
                         timeZone: 'BBBBBB',
                         clientId: 'BBBBBB',
-                        slug: 'BBBBBB'
+                        slug: 'BBBBBB',
+                        email: 'BBBBBB'
                     },
                     elemDefault
                 );

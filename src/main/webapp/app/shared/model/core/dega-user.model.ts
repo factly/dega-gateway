@@ -1,11 +1,11 @@
 import { IOrganization } from 'app/shared/model/core/organization.model';
+import { IPost } from 'app/shared/model/core/post.model';
 
 export interface IDegaUser {
     id?: string;
     firstName?: string;
     lastName?: string;
     displayName?: string;
-    email?: string;
     website?: string;
     facebookURL?: string;
     twitterURL?: string;
@@ -14,13 +14,18 @@ export interface IDegaUser {
     githubURL?: string;
     profilePicture?: string;
     description?: string;
-    isActive?: boolean;
     slug?: string;
+    enabled?: boolean;
+    emailVerified?: boolean;
+    email?: string;
     roleName?: string;
     roleId?: string;
     organizations?: IOrganization[];
     organizationDefaultName?: string;
     organizationDefaultId?: string;
+    organizationCurrentName?: string;
+    organizationCurrentId?: string;
+    posts?: IPost[];
 }
 
 export class DegaUser implements IDegaUser {
@@ -29,7 +34,6 @@ export class DegaUser implements IDegaUser {
         public firstName?: string,
         public lastName?: string,
         public displayName?: string,
-        public email?: string,
         public website?: string,
         public facebookURL?: string,
         public twitterURL?: string,
@@ -38,14 +42,20 @@ export class DegaUser implements IDegaUser {
         public githubURL?: string,
         public profilePicture?: string,
         public description?: string,
-        public isActive?: boolean,
         public slug?: string,
+        public enabled?: boolean,
+        public emailVerified?: boolean,
+        public email?: string,
         public roleName?: string,
         public roleId?: string,
         public organizations?: IOrganization[],
         public organizationDefaultName?: string,
-        public organizationDefaultId?: string
+        public organizationDefaultId?: string,
+        public organizationCurrentName?: string,
+        public organizationCurrentId?: string,
+        public posts?: IPost[]
     ) {
-        this.isActive = this.isActive || false;
+        this.enabled = this.enabled || false;
+        this.emailVerified = this.emailVerified || false;
     }
 }

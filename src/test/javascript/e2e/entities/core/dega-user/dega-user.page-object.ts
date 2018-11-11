@@ -29,7 +29,6 @@ export class DegaUserUpdatePage {
     firstNameInput = element(by.id('field_firstName'));
     lastNameInput = element(by.id('field_lastName'));
     displayNameInput = element(by.id('field_displayName'));
-    emailInput = element(by.id('field_email'));
     websiteInput = element(by.id('field_website'));
     facebookURLInput = element(by.id('field_facebookURL'));
     twitterURLInput = element(by.id('field_twitterURL'));
@@ -38,11 +37,14 @@ export class DegaUserUpdatePage {
     githubURLInput = element(by.id('field_githubURL'));
     profilePictureInput = element(by.id('field_profilePicture'));
     descriptionInput = element(by.id('field_description'));
-    isActiveInput = element(by.id('field_isActive'));
     slugInput = element(by.id('field_slug'));
+    enabledInput = element(by.id('field_enabled'));
+    emailVerifiedInput = element(by.id('field_emailVerified'));
+    emailInput = element(by.id('field_email'));
     roleSelect = element(by.id('field_role'));
     organizationSelect = element(by.id('field_organization'));
     organizationDefaultSelect = element(by.id('field_organizationDefault'));
+    organizationCurrentSelect = element(by.id('field_organizationCurrent'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -70,14 +72,6 @@ export class DegaUserUpdatePage {
 
     async getDisplayNameInput() {
         return this.displayNameInput.getAttribute('value');
-    }
-
-    async setEmailInput(email) {
-        await this.emailInput.sendKeys(email);
-    }
-
-    async getEmailInput() {
-        return this.emailInput.getAttribute('value');
     }
 
     async setWebsiteInput(website) {
@@ -144,15 +138,26 @@ export class DegaUserUpdatePage {
         return this.descriptionInput.getAttribute('value');
     }
 
-    getIsActiveInput() {
-        return this.isActiveInput;
-    }
     async setSlugInput(slug) {
         await this.slugInput.sendKeys(slug);
     }
 
     async getSlugInput() {
         return this.slugInput.getAttribute('value');
+    }
+
+    getEnabledInput() {
+        return this.enabledInput;
+    }
+    getEmailVerifiedInput() {
+        return this.emailVerifiedInput;
+    }
+    async setEmailInput(email) {
+        await this.emailInput.sendKeys(email);
+    }
+
+    async getEmailInput() {
+        return this.emailInput.getAttribute('value');
     }
 
     async roleSelectLastOption() {
@@ -210,6 +215,25 @@ export class DegaUserUpdatePage {
 
     async getOrganizationDefaultSelectedOption() {
         return this.organizationDefaultSelect.element(by.css('option:checked')).getText();
+    }
+
+    async organizationCurrentSelectLastOption() {
+        await this.organizationCurrentSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async organizationCurrentSelectOption(option) {
+        await this.organizationCurrentSelect.sendKeys(option);
+    }
+
+    getOrganizationCurrentSelect(): ElementFinder {
+        return this.organizationCurrentSelect;
+    }
+
+    async getOrganizationCurrentSelectedOption() {
+        return this.organizationCurrentSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

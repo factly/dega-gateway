@@ -9,6 +9,9 @@ import { GatewayTagModule as CoreTagModule } from './core/tag/tag.module';
 import { GatewayMediaModule as CoreMediaModule } from './core/media/media.module';
 import { GatewayDegaUserModule as CoreDegaUserModule } from './core/dega-user/dega-user.module';
 import { GatewayRoleModule as CoreRoleModule } from './core/role/role.module';
+import { GatewayRatingModule as FactcheckRatingModule } from './factcheck/rating/rating.module';
+import { GatewayClaimModule as FactcheckClaimModule } from './factcheck/claim/claim.module';
+import { GatewayClaimantModule as FactcheckClaimantModule } from './factcheck/claimant/claimant.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -23,6 +26,9 @@ import { GatewayRoleModule as CoreRoleModule } from './core/role/role.module';
         CoreMediaModule,
         CoreDegaUserModule,
         CoreRoleModule,
+        FactcheckRatingModule,
+        FactcheckClaimModule,
+        FactcheckClaimantModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

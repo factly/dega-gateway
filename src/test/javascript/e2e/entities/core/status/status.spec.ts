@@ -38,7 +38,11 @@ describe('Status e2e test', () => {
         const nbButtonsBeforeCreate = await statusComponentsPage.countDeleteButtons();
 
         await statusComponentsPage.clickOnCreateButton();
-        await promise.all([statusUpdatePage.setNameInput('name'), statusUpdatePage.setClientIdInput('clientId')]);
+        await promise.all([
+            statusUpdatePage.setNameInput('name'),
+            statusUpdatePage.setClientIdInput('clientId'),
+            statusUpdatePage.setSlugInput('slug')
+        ]);
         expect(await statusUpdatePage.getNameInput()).to.eq('name');
         expect(await statusUpdatePage.getClientIdInput()).to.eq('clientId');
         const selectedIsDefault = statusUpdatePage.getIsDefaultInput();
@@ -49,6 +53,7 @@ describe('Status e2e test', () => {
             await statusUpdatePage.getIsDefaultInput().click();
             expect(await statusUpdatePage.getIsDefaultInput().isSelected()).to.be.true;
         }
+        expect(await statusUpdatePage.getSlugInput()).to.eq('slug');
         await statusUpdatePage.save();
         expect(await statusUpdatePage.getSaveButton().isPresent()).to.be.false;
 

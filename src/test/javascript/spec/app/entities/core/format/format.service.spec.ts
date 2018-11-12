@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(FormatService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Format('ID', 'AAAAAAA', false, 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Format('ID', 'AAAAAAA', false, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -58,7 +58,8 @@ describe('Service Tests', () => {
                         name: 'BBBBBB',
                         isDefault: true,
                         clientId: 'BBBBBB',
-                        description: 'BBBBBB'
+                        description: 'BBBBBB',
+                        slug: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -78,7 +79,8 @@ describe('Service Tests', () => {
                         name: 'BBBBBB',
                         isDefault: true,
                         clientId: 'BBBBBB',
-                        description: 'BBBBBB'
+                        description: 'BBBBBB',
+                        slug: 'BBBBBB'
                     },
                     elemDefault
                 );

@@ -35,8 +35,9 @@ export class ClaimUpdatePage {
     reviewInput = element(by.id('field_review'));
     reviewTagLineInput = element(by.id('field_reviewTagLine'));
     clientIdInput = element(by.id('field_clientId'));
-    claimantSelect = element(by.id('field_claimant'));
+    slugInput = element(by.id('field_slug'));
     ratingSelect = element(by.id('field_rating'));
+    claimantSelect = element(by.id('field_claimant'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -114,23 +115,12 @@ export class ClaimUpdatePage {
         return this.clientIdInput.getAttribute('value');
     }
 
-    async claimantSelectLastOption() {
-        await this.claimantSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
+    async setSlugInput(slug) {
+        await this.slugInput.sendKeys(slug);
     }
 
-    async claimantSelectOption(option) {
-        await this.claimantSelect.sendKeys(option);
-    }
-
-    getClaimantSelect(): ElementFinder {
-        return this.claimantSelect;
-    }
-
-    async getClaimantSelectedOption() {
-        return this.claimantSelect.element(by.css('option:checked')).getText();
+    async getSlugInput() {
+        return this.slugInput.getAttribute('value');
     }
 
     async ratingSelectLastOption() {
@@ -150,6 +140,25 @@ export class ClaimUpdatePage {
 
     async getRatingSelectedOption() {
         return this.ratingSelect.element(by.css('option:checked')).getText();
+    }
+
+    async claimantSelectLastOption() {
+        await this.claimantSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async claimantSelectOption(option) {
+        await this.claimantSelect.sendKeys(option);
+    }
+
+    getClaimantSelect(): ElementFinder {
+        return this.claimantSelect;
+    }
+
+    async getClaimantSelectedOption() {
+        return this.claimantSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

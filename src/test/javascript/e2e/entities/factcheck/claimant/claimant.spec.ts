@@ -43,13 +43,15 @@ describe('Claimant e2e test', () => {
             claimantUpdatePage.setTagLineInput('tagLine'),
             claimantUpdatePage.setDescriptionInput('description'),
             claimantUpdatePage.setImageURLInput('imageURL'),
-            claimantUpdatePage.setClientIdInput('clientId')
+            claimantUpdatePage.setClientIdInput('clientId'),
+            claimantUpdatePage.setSlugInput('slug')
         ]);
         expect(await claimantUpdatePage.getNameInput()).to.eq('name');
         expect(await claimantUpdatePage.getTagLineInput()).to.eq('tagLine');
         expect(await claimantUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await claimantUpdatePage.getImageURLInput()).to.eq('imageURL');
         expect(await claimantUpdatePage.getClientIdInput()).to.eq('clientId');
+        expect(await claimantUpdatePage.getSlugInput()).to.eq('slug');
         await claimantUpdatePage.save();
         expect(await claimantUpdatePage.getSaveButton().isPresent()).to.be.false;
 

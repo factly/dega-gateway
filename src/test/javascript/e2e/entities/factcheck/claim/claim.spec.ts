@@ -48,8 +48,9 @@ describe('Claim e2e test', () => {
             claimUpdatePage.setReviewInput('review'),
             claimUpdatePage.setReviewTagLineInput('reviewTagLine'),
             claimUpdatePage.setClientIdInput('clientId'),
-            claimUpdatePage.claimantSelectLastOption(),
+            claimUpdatePage.setSlugInput('slug'),
             claimUpdatePage.ratingSelectLastOption(),
+            claimUpdatePage.claimantSelectLastOption(),
         ]);
         expect(await claimUpdatePage.getClaimInput()).to.eq('claim');
         expect(await claimUpdatePage.getDescriptionInput()).to.eq('description');
@@ -60,6 +61,7 @@ describe('Claim e2e test', () => {
         expect(await claimUpdatePage.getReviewInput()).to.eq('review');
         expect(await claimUpdatePage.getReviewTagLineInput()).to.eq('reviewTagLine');
         expect(await claimUpdatePage.getClientIdInput()).to.eq('clientId');
+        expect(await claimUpdatePage.getSlugInput()).to.eq('slug');
         await claimUpdatePage.save();
         expect(await claimUpdatePage.getSaveButton().isPresent()).to.be.false;
 

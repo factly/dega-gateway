@@ -22,8 +22,9 @@
             "review": "Review",
             "reviewTagLine": "Review Tag Line",
             "clientId": "Client Id",
-            "claimant": "Claimant",
-            "rating": "Rating"
+            "slug": "Slug",
+            "rating": "Rating",
+            "claimant": "Claimant"
         }
     },
     "factcheckApp": {

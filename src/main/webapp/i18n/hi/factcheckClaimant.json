@@ -18,6 +18,7 @@
             "description": "Description",
             "imageURL": "Image URL",
             "clientId": "Client Id",
+            "slug": "Slug",
             "claim": "Claim"
         }
     },

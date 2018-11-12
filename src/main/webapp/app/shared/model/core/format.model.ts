@@ -6,6 +6,7 @@ export interface IFormat {
     isDefault?: boolean;
     clientId?: string;
     description?: string;
+    slug?: string;
     posts?: IPost[];
 }
 
@@ -16,6 +17,7 @@ export class Format implements IFormat {
         public isDefault?: boolean,
         public clientId?: string,
         public description?: string,
+        public slug?: string,
         public posts?: IPost[]
     ) {
         this.isDefault = this.isDefault || false;

@@ -42,7 +42,8 @@ describe('Rating e2e test', () => {
             ratingUpdatePage.setNameInput('name'),
             ratingUpdatePage.setNumericValueInput('5'),
             ratingUpdatePage.setIconURLInput('iconURL'),
-            ratingUpdatePage.setClientIdInput('clientId')
+            ratingUpdatePage.setClientIdInput('clientId'),
+            ratingUpdatePage.setSlugInput('slug')
         ]);
         expect(await ratingUpdatePage.getNameInput()).to.eq('name');
         expect(await ratingUpdatePage.getNumericValueInput()).to.eq('5');
@@ -56,6 +57,7 @@ describe('Rating e2e test', () => {
             expect(await ratingUpdatePage.getIsDefaultInput().isSelected()).to.be.true;
         }
         expect(await ratingUpdatePage.getClientIdInput()).to.eq('clientId');
+        expect(await ratingUpdatePage.getSlugInput()).to.eq('slug');
         await ratingUpdatePage.save();
         expect(await ratingUpdatePage.getSaveButton().isPresent()).to.be.false;
 

@@ -34,6 +34,7 @@
             <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreFormat.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreFormat.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="gatewayApp.coreFormat.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreFormat.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -44,6 +45,7 @@
                 <td>{{format.isDefault}}</td>
                 <td>{{format.clientId}}</td>
                 <td>{{format.description}}</td>
+                <td>{{format.slug}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

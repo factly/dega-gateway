@@ -35,6 +35,7 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
+                'AAAAAAA',
                 'AAAAAAA'
             );
         });
@@ -92,7 +93,8 @@ describe('Service Tests', () => {
                         reviewSources: 'BBBBBB',
                         review: 'BBBBBB',
                         reviewTagLine: 'BBBBBB',
-                        clientId: 'BBBBBB'
+                        clientId: 'BBBBBB',
+                        slug: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -123,7 +125,8 @@ describe('Service Tests', () => {
                         reviewSources: 'BBBBBB',
                         review: 'BBBBBB',
                         reviewTagLine: 'BBBBBB',
-                        clientId: 'BBBBBB'
+                        clientId: 'BBBBBB',
+                        slug: 'BBBBBB'
                     },
                     elemDefault
                 );

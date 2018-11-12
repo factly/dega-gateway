@@ -38,7 +38,11 @@ describe('Role e2e test', () => {
         const nbButtonsBeforeCreate = await roleComponentsPage.countDeleteButtons();
 
         await roleComponentsPage.clickOnCreateButton();
-        await promise.all([roleUpdatePage.setNameInput('name'), roleUpdatePage.setClientIdInput('clientId')]);
+        await promise.all([
+            roleUpdatePage.setNameInput('name'),
+            roleUpdatePage.setClientIdInput('clientId'),
+            roleUpdatePage.setSlugInput('slug')
+        ]);
         expect(await roleUpdatePage.getNameInput()).to.eq('name');
         expect(await roleUpdatePage.getClientIdInput()).to.eq('clientId');
         const selectedIsDefault = roleUpdatePage.getIsDefaultInput();
@@ -49,6 +53,7 @@ describe('Role e2e test', () => {
             await roleUpdatePage.getIsDefaultInput().click();
             expect(await roleUpdatePage.getIsDefaultInput().isSelected()).to.be.true;
         }
+        expect(await roleUpdatePage.getSlugInput()).to.eq('slug');
         await roleUpdatePage.save();
         expect(await roleUpdatePage.getSaveButton().isPresent()).to.be.false;
 

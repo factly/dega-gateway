@@ -31,6 +31,7 @@ export class ClaimantUpdatePage {
     descriptionInput = element(by.id('field_description'));
     imageURLInput = element(by.id('field_imageURL'));
     clientIdInput = element(by.id('field_clientId'));
+    slugInput = element(by.id('field_slug'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -74,6 +75,14 @@ export class ClaimantUpdatePage {
 
     async getClientIdInput() {
         return this.clientIdInput.getAttribute('value');
+    }
+
+    async setSlugInput(slug) {
+        await this.slugInput.sendKeys(slug);
+    }
+
+    async getSlugInput() {
+        return this.slugInput.getAttribute('value');
     }
 
     async save() {

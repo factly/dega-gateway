@@ -31,6 +31,7 @@ export class RatingUpdatePage {
     iconURLInput = element(by.id('field_iconURL'));
     isDefaultInput = element(by.id('field_isDefault'));
     clientIdInput = element(by.id('field_clientId'));
+    slugInput = element(by.id('field_slug'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -69,6 +70,14 @@ export class RatingUpdatePage {
 
     async getClientIdInput() {
         return this.clientIdInput.getAttribute('value');
+    }
+
+    async setSlugInput(slug) {
+        await this.slugInput.sendKeys(slug);
+    }
+
+    async getSlugInput() {
+        return this.slugInput.getAttribute('value');
     }
 
     async save() {

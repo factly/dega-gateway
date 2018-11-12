@@ -11,10 +11,11 @@ export interface IClaim {
     review?: string;
     reviewTagLine?: string;
     clientId?: string;
-    claimantName?: string;
-    claimantId?: string;
+    slug?: string;
     ratingName?: string;
     ratingId?: string;
+    claimantName?: string;
+    claimantId?: string;
 }
 
 export class Claim implements IClaim {
@@ -29,9 +30,10 @@ export class Claim implements IClaim {
         public review?: string,
         public reviewTagLine?: string,
         public clientId?: string,
-        public claimantName?: string,
-        public claimantId?: string,
+        public slug?: string,
         public ratingName?: string,
-        public ratingId?: string
+        public ratingId?: string,
+        public claimantName?: string,
+        public claimantId?: string
     ) {}
 }

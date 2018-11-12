@@ -41,16 +41,20 @@
                 <dd>
                     <span>{{claim.clientId}}</span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckClaim.claimant">Claimant</span></dt>
+                <dt><span jhiTranslate="gatewayApp.factcheckClaim.slug">Slug</span></dt>
                 <dd>
-                    <div *ngIf="claim.claimantId">
-                        <a [routerLink]="['/claimant', claim.claimantId, 'view']">{{claim.claimantName}}</a>
-                    </div>
+                    <span>{{claim.slug}}</span>
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.factcheckClaim.rating">Rating</span></dt>
                 <dd>
                     <div *ngIf="claim.ratingId">
                         <a [routerLink]="['/rating', claim.ratingId, 'view']">{{claim.ratingName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckClaim.claimant">Claimant</span></dt>
+                <dd>
+                    <div *ngIf="claim.claimantId">
+                        <a [routerLink]="['/claimant', claim.claimantId, 'view']">{{claim.claimantName}}</a>
                     </div>
                 </dd>
             </dl>

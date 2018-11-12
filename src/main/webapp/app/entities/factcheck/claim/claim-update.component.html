@@ -106,20 +106,18 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claimant" for="field_claimant">Claimant</label>
-                    <select class="form-control" id="field_claimant" name="claimant" [(ngModel)]="claim.claimantId"  required>
-                        <option *ngIf="!editForm.value.claimant" [ngValue]="null" selected></option>
-                        <option [ngValue]="claimantOption.id" *ngFor="let claimantOption of claimants; trackBy: trackClaimantById">{{claimantOption.name}}</option>
-                    </select>
-                </div>
-                <div [hidden]="!(editForm.controls.claimant?.dirty && editForm.controls.claimant?.invalid)">
-                    <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.claimant?.errors?.required" jhiTranslate="entity.validation.required">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.slug" for="field_slug">Slug</label>
+                    <input type="text" class="form-control" name="slug" id="field_slug"
+                        [(ngModel)]="claim.slug" required/>
+                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
-                    </small>
+                        </small>
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.rating" for="field_rating">Rating</label>
                     <select class="form-control" id="field_rating" name="rating" [(ngModel)]="claim.ratingId"  required>
@@ -130,6 +128,19 @@
                 <div [hidden]="!(editForm.controls.rating?.dirty && editForm.controls.rating?.invalid)">
                     <small class="form-text text-danger"
                         [hidden]="!editForm.controls.rating?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claimant" for="field_claimant">Claimant</label>
+                    <select class="form-control" id="field_claimant" name="claimant" [(ngModel)]="claim.claimantId"  required>
+                        <option *ngIf="!editForm.value.claimant" [ngValue]="null" selected></option>
+                        <option [ngValue]="claimantOption.id" *ngFor="let claimantOption of claimants; trackBy: trackClaimantById">{{claimantOption.name}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.claimant?.dirty && editForm.controls.claimant?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.claimant?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
                 </div>

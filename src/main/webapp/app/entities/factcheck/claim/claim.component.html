@@ -39,8 +39,9 @@
             <th jhiSortBy="review"><span jhiTranslate="gatewayApp.factcheckClaim.review">Review</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="reviewTagLine"><span jhiTranslate="gatewayApp.factcheckClaim.reviewTagLine">Review Tag Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckClaim.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="claimantName"><span jhiTranslate="gatewayApp.factcheckClaim.claimant">Claimant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.factcheckClaim.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="ratingName"><span jhiTranslate="gatewayApp.factcheckClaim.rating">Rating</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="claimantName"><span jhiTranslate="gatewayApp.factcheckClaim.claimant">Claimant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -56,14 +57,15 @@
                 <td>{{claim.review}}</td>
                 <td>{{claim.reviewTagLine}}</td>
                 <td>{{claim.clientId}}</td>
-                <td>
-                    <div *ngIf="claim.claimantId">
-                        <a [routerLink]="['../claimant', claim.claimantId , 'view' ]" >{{claim.claimantName}}</a>
-                    </div>
-                </td>
+                <td>{{claim.slug}}</td>
                 <td>
                     <div *ngIf="claim.ratingId">
                         <a [routerLink]="['../rating', claim.ratingId , 'view' ]" >{{claim.ratingName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="claim.claimantId">
+                        <a [routerLink]="['../claimant', claim.claimantId , 'view' ]" >{{claim.claimantName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

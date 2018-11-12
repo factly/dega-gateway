@@ -7,10 +7,10 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
 import { ClaimService } from './claim.service';
-import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
-import { ClaimantService } from 'app/entities/factcheck/claimant';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 import { RatingService } from 'app/entities/factcheck/rating';
+import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
+import { ClaimantService } from 'app/entities/factcheck/claimant';
 
 @Component({
     selector: 'jhi-claim-update',
@@ -20,17 +20,17 @@ export class ClaimUpdateComponent implements OnInit {
     claim: IClaim;
     isSaving: boolean;
 
-    claimants: IClaimant[];
-
     ratings: IRating[];
+
+    claimants: IClaimant[];
     claimDateDp: any;
     checkedDateDp: any;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private claimService: ClaimService,
-        private claimantService: ClaimantService,
         private ratingService: RatingService,
+        private claimantService: ClaimantService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -39,15 +39,15 @@ export class ClaimUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ claim }) => {
             this.claim = claim;
         });
-        this.claimantService.query().subscribe(
-            (res: HttpResponse<IClaimant[]>) => {
-                this.claimants = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
         this.ratingService.query().subscribe(
             (res: HttpResponse<IRating[]>) => {
                 this.ratings = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.claimantService.query().subscribe(
+            (res: HttpResponse<IClaimant[]>) => {
+                this.claimants = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -83,11 +83,11 @@ export class ClaimUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackClaimantById(index: number, item: IClaimant) {
+    trackRatingById(index: number, item: IRating) {
         return item.id;
     }
 
-    trackRatingById(index: number, item: IRating) {
+    trackClaimantById(index: number, item: IClaimant) {
         return item.id;
     }
 }

@@ -33,6 +33,7 @@
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreRole.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreRole.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreRole.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreRole.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -42,6 +43,7 @@
                 <td>{{role.name}}</td>
                 <td>{{role.clientId}}</td>
                 <td>{{role.isDefault}}</td>
+                <td>{{role.slug}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

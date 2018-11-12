@@ -17,10 +17,6 @@
                 <dd>
                     <span>{{degaUser.displayName}}</span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.coreDegaUser.email">Email</span></dt>
-                <dd>
-                    <span>{{degaUser.email}}</span>
-                </dd>
                 <dt><span jhiTranslate="gatewayApp.coreDegaUser.website">Website</span></dt>
                 <dd>
                     <span>{{degaUser.website}}</span>
@@ -53,13 +49,21 @@
                 <dd>
                     <span>{{degaUser.description}}</span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.coreDegaUser.isActive">Is Active</span></dt>
-                <dd>
-                    <span>{{degaUser.isActive}}</span>
-                </dd>
                 <dt><span jhiTranslate="gatewayApp.coreDegaUser.slug">Slug</span></dt>
                 <dd>
                     <span>{{degaUser.slug}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.enabled">Enabled</span></dt>
+                <dd>
+                    <span>{{degaUser.enabled}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.emailVerified">Email Verified</span></dt>
+                <dd>
+                    <span>{{degaUser.emailVerified}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.email">Email</span></dt>
+                <dd>
+                    <span>{{degaUser.email}}</span>
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.coreDegaUser.role">Role</span></dt>
                 <dd>
@@ -77,6 +81,12 @@
                 <dd>
                     <div *ngIf="degaUser.organizationDefaultId">
                         <a [routerLink]="['/organization', degaUser.organizationDefaultId, 'view']">{{degaUser.organizationDefaultName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.organizationCurrent">Organization Current</span></dt>
+                <dd>
+                    <div *ngIf="degaUser.organizationCurrentId">
+                        <a [routerLink]="['/organization', degaUser.organizationCurrentId, 'view']">{{degaUser.organizationCurrentName}}</a>
                     </div>
                 </dd>
             </dl>

@@ -17,6 +17,7 @@
             "isDefault": "Is Default",
             "clientId": "Client Id",
             "description": "Description",
+            "slug": "Slug",
             "post": "Post"
         }
     },

@@ -41,7 +41,8 @@ describe('Format e2e test', () => {
         await promise.all([
             formatUpdatePage.setNameInput('name'),
             formatUpdatePage.setClientIdInput('clientId'),
-            formatUpdatePage.setDescriptionInput('description')
+            formatUpdatePage.setDescriptionInput('description'),
+            formatUpdatePage.setSlugInput('slug')
         ]);
         expect(await formatUpdatePage.getNameInput()).to.eq('name');
         const selectedIsDefault = formatUpdatePage.getIsDefaultInput();
@@ -54,6 +55,7 @@ describe('Format e2e test', () => {
         }
         expect(await formatUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await formatUpdatePage.getDescriptionInput()).to.eq('description');
+        expect(await formatUpdatePage.getSlugInput()).to.eq('slug');
         await formatUpdatePage.save();
         expect(await formatUpdatePage.getSaveButton().isPresent()).to.be.false;
 

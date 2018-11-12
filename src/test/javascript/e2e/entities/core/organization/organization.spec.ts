@@ -40,7 +40,6 @@ describe('Organization e2e test', () => {
         await organizationComponentsPage.clickOnCreateButton();
         await promise.all([
             organizationUpdatePage.setNameInput('name'),
-            organizationUpdatePage.setEmailInput('email'),
             organizationUpdatePage.setPhoneInput('phone'),
             organizationUpdatePage.setSiteTitleInput('siteTitle'),
             organizationUpdatePage.setTagLineInput('tagLine'),
@@ -79,10 +78,10 @@ describe('Organization e2e test', () => {
             organizationUpdatePage.setSiteLanguageInput('siteLanguage'),
             organizationUpdatePage.setTimeZoneInput('timeZone'),
             organizationUpdatePage.setClientIdInput('clientId'),
-            organizationUpdatePage.setSlugInput('slug')
+            organizationUpdatePage.setSlugInput('slug'),
+            organizationUpdatePage.setEmailInput('email')
         ]);
         expect(await organizationUpdatePage.getNameInput()).to.eq('name');
-        expect(await organizationUpdatePage.getEmailInput()).to.eq('email');
         expect(await organizationUpdatePage.getPhoneInput()).to.eq('phone');
         expect(await organizationUpdatePage.getSiteTitleInput()).to.eq('siteTitle');
         expect(await organizationUpdatePage.getTagLineInput()).to.eq('tagLine');
@@ -122,6 +121,7 @@ describe('Organization e2e test', () => {
         expect(await organizationUpdatePage.getTimeZoneInput()).to.eq('timeZone');
         expect(await organizationUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await organizationUpdatePage.getSlugInput()).to.eq('slug');
+        expect(await organizationUpdatePage.getEmailInput()).to.eq('email');
         await organizationUpdatePage.save();
         expect(await organizationUpdatePage.getSaveButton().isPresent()).to.be.false;
 

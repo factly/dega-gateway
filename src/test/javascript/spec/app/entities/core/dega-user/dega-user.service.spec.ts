@@ -36,6 +36,7 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 'AAAAAAA',
                 false,
+                false,
                 'AAAAAAA'
             );
         });
@@ -74,7 +75,6 @@ describe('Service Tests', () => {
                         firstName: 'BBBBBB',
                         lastName: 'BBBBBB',
                         displayName: 'BBBBBB',
-                        email: 'BBBBBB',
                         website: 'BBBBBB',
                         facebookURL: 'BBBBBB',
                         twitterURL: 'BBBBBB',
@@ -83,8 +83,10 @@ describe('Service Tests', () => {
                         githubURL: 'BBBBBB',
                         profilePicture: 'BBBBBB',
                         description: 'BBBBBB',
-                        isActive: true,
-                        slug: 'BBBBBB'
+                        slug: 'BBBBBB',
+                        enabled: true,
+                        emailVerified: true,
+                        email: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -104,7 +106,6 @@ describe('Service Tests', () => {
                         firstName: 'BBBBBB',
                         lastName: 'BBBBBB',
                         displayName: 'BBBBBB',
-                        email: 'BBBBBB',
                         website: 'BBBBBB',
                         facebookURL: 'BBBBBB',
                         twitterURL: 'BBBBBB',
@@ -113,8 +114,10 @@ describe('Service Tests', () => {
                         githubURL: 'BBBBBB',
                         profilePicture: 'BBBBBB',
                         description: 'BBBBBB',
-                        isActive: true,
-                        slug: 'BBBBBB'
+                        slug: 'BBBBBB',
+                        enabled: true,
+                        emailVerified: true,
+                        email: 'BBBBBB'
                     },
                     elemDefault
                 );

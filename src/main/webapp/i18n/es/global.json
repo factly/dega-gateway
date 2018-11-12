@@ -16,6 +16,9 @@
                 "coreMedia": "Media",
                 "coreDegaUser": "Dega User",
                 "coreRole": "Role",
+                "factcheckRating": "Rating",
+                "factcheckClaim": "Claim",
+                "factcheckClaimant": "Claimant",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

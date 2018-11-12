@@ -42,7 +42,6 @@ describe('DegaUser e2e test', () => {
             degaUserUpdatePage.setFirstNameInput('firstName'),
             degaUserUpdatePage.setLastNameInput('lastName'),
             degaUserUpdatePage.setDisplayNameInput('displayName'),
-            degaUserUpdatePage.setEmailInput('email'),
             degaUserUpdatePage.setWebsiteInput('website'),
             degaUserUpdatePage.setFacebookURLInput('facebookURL'),
             degaUserUpdatePage.setTwitterURLInput('twitterURL'),
@@ -52,14 +51,15 @@ describe('DegaUser e2e test', () => {
             degaUserUpdatePage.setProfilePictureInput('profilePicture'),
             degaUserUpdatePage.setDescriptionInput('description'),
             degaUserUpdatePage.setSlugInput('slug'),
+            degaUserUpdatePage.setEmailInput('email'),
             degaUserUpdatePage.roleSelectLastOption(),
             // degaUserUpdatePage.organizationSelectLastOption(),
             degaUserUpdatePage.organizationDefaultSelectLastOption(),
+            degaUserUpdatePage.organizationCurrentSelectLastOption(),
         ]);
         expect(await degaUserUpdatePage.getFirstNameInput()).to.eq('firstName');
         expect(await degaUserUpdatePage.getLastNameInput()).to.eq('lastName');
         expect(await degaUserUpdatePage.getDisplayNameInput()).to.eq('displayName');
-        expect(await degaUserUpdatePage.getEmailInput()).to.eq('email');
         expect(await degaUserUpdatePage.getWebsiteInput()).to.eq('website');
         expect(await degaUserUpdatePage.getFacebookURLInput()).to.eq('facebookURL');
         expect(await degaUserUpdatePage.getTwitterURLInput()).to.eq('twitterURL');
@@ -68,15 +68,24 @@ describe('DegaUser e2e test', () => {
         expect(await degaUserUpdatePage.getGithubURLInput()).to.eq('githubURL');
         expect(await degaUserUpdatePage.getProfilePictureInput()).to.eq('profilePicture');
         expect(await degaUserUpdatePage.getDescriptionInput()).to.eq('description');
-        const selectedIsActive = degaUserUpdatePage.getIsActiveInput();
-        if (await selectedIsActive.isSelected()) {
-            await degaUserUpdatePage.getIsActiveInput().click();
-            expect(await degaUserUpdatePage.getIsActiveInput().isSelected()).to.be.false;
-        } else {
-            await degaUserUpdatePage.getIsActiveInput().click();
-            expect(await degaUserUpdatePage.getIsActiveInput().isSelected()).to.be.true;
-        }
         expect(await degaUserUpdatePage.getSlugInput()).to.eq('slug');
+        const selectedEnabled = degaUserUpdatePage.getEnabledInput();
+        if (await selectedEnabled.isSelected()) {
+            await degaUserUpdatePage.getEnabledInput().click();
+            expect(await degaUserUpdatePage.getEnabledInput().isSelected()).to.be.false;
+        } else {
+            await degaUserUpdatePage.getEnabledInput().click();
+            expect(await degaUserUpdatePage.getEnabledInput().isSelected()).to.be.true;
+        }
+        const selectedEmailVerified = degaUserUpdatePage.getEmailVerifiedInput();
+        if (await selectedEmailVerified.isSelected()) {
+            await degaUserUpdatePage.getEmailVerifiedInput().click();
+            expect(await degaUserUpdatePage.getEmailVerifiedInput().isSelected()).to.be.false;
+        } else {
+            await degaUserUpdatePage.getEmailVerifiedInput().click();
+            expect(await degaUserUpdatePage.getEmailVerifiedInput().isSelected()).to.be.true;
+        }
+        expect(await degaUserUpdatePage.getEmailInput()).to.eq('email');
         await degaUserUpdatePage.save();
         expect(await degaUserUpdatePage.getSaveButton().isPresent()).to.be.false;
 

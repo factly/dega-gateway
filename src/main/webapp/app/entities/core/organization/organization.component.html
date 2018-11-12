@@ -31,7 +31,6 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreOrganization.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="email"><span jhiTranslate="gatewayApp.coreOrganization.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="phone"><span jhiTranslate="gatewayApp.coreOrganization.phone">Phone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="siteTitle"><span jhiTranslate="gatewayApp.coreOrganization.siteTitle">Site Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="tagLine"><span jhiTranslate="gatewayApp.coreOrganization.tagLine">Tag Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -71,6 +70,7 @@
             <th jhiSortBy="timeZone"><span jhiTranslate="gatewayApp.coreOrganization.timeZone">Time Zone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreOrganization.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreOrganization.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="gatewayApp.coreOrganization.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -78,7 +78,6 @@
             <tr *ngFor="let organization of organizations ;trackBy: trackId">
                 <td><a [routerLink]="['/organization', organization.id, 'view' ]">{{organization.id}}</a></td>
                 <td>{{organization.name}}</td>
-                <td>{{organization.email}}</td>
                 <td>{{organization.phone}}</td>
                 <td>{{organization.siteTitle}}</td>
                 <td>{{organization.tagLine}}</td>
@@ -118,6 +117,7 @@
                 <td>{{organization.timeZone}}</td>
                 <td>{{organization.clientId}}</td>
                 <td>{{organization.slug}}</td>
+                <td>{{organization.email}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

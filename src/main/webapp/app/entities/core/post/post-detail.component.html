@@ -15,8 +15,7 @@
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.corePost.content">Content</span></dt>
                 <dd>
-                    <!--<span>{{post.content}}</span>-->
-                    <span [innerHtml]="post.content"></span>
+                    <span>{{post.content}}</span>
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.corePost.excerpt">Excerpt</span></dt>
                 <dd>
@@ -89,6 +88,12 @@
                     <div *ngIf="post.formatId">
                         <a [routerLink]="['/format', post.formatId, 'view']">{{post.formatName}}</a>
                     </div>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.degaUser">Dega User</span></dt>
+                <dd>
+                    <span *ngFor="let degaUser of post.degaUsers; let last = last">
+                        <a [routerLink]="['/dega-user', degaUser?.id, 'view' ]">{{degaUser.displayName}}</a>{{last ? '' : ', '}}
+                    </span>
                 </dd>
             </dl>
 

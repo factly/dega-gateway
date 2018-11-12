@@ -10,6 +10,8 @@ import { IRole } from 'app/shared/model/core/role.model';
 import { RoleService } from 'app/entities/core/role';
 import { IOrganization } from 'app/shared/model/core/organization.model';
 import { OrganizationService } from 'app/entities/core/organization';
+import { IPost } from 'app/shared/model/core/post.model';
+import { PostService } from 'app/entities/core/post';
 
 @Component({
     selector: 'jhi-dega-user-update',
@@ -23,11 +25,14 @@ export class DegaUserUpdateComponent implements OnInit {
 
     organizations: IOrganization[];
 
+    posts: IPost[];
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private degaUserService: DegaUserService,
         private roleService: RoleService,
         private organizationService: OrganizationService,
+        private postService: PostService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -45,6 +50,12 @@ export class DegaUserUpdateComponent implements OnInit {
         this.organizationService.query().subscribe(
             (res: HttpResponse<IOrganization[]>) => {
                 this.organizations = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.postService.query().subscribe(
+            (res: HttpResponse<IPost[]>) => {
+                this.posts = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -85,6 +96,10 @@ export class DegaUserUpdateComponent implements OnInit {
     }
 
     trackOrganizationById(index: number, item: IOrganization) {
+        return item.id;
+    }
+
+    trackPostById(index: number, item: IPost) {
         return item.id;
     }
 

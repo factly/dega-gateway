@@ -29,6 +29,7 @@ export class StatusUpdatePage {
     nameInput = element(by.id('field_name'));
     clientIdInput = element(by.id('field_clientId'));
     isDefaultInput = element(by.id('field_isDefault'));
+    slugInput = element(by.id('field_slug'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -52,6 +53,13 @@ export class StatusUpdatePage {
 
     getIsDefaultInput() {
         return this.isDefaultInput;
+    }
+    async setSlugInput(slug) {
+        await this.slugInput.sendKeys(slug);
+    }
+
+    async getSlugInput() {
+        return this.slugInput.getAttribute('value');
     }
 
     async save() {

@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { ITag } from 'app/shared/model/core/tag.model';
 import { ICategory } from 'app/shared/model/core/category.model';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 
 export interface IPost {
     id?: string;
@@ -25,6 +26,7 @@ export interface IPost {
     statusId?: string;
     formatName?: string;
     formatId?: string;
+    degaUsers?: IDegaUser[];
 }
 
 export class Post implements IPost {
@@ -50,7 +52,8 @@ export class Post implements IPost {
         public statusName?: string,
         public statusId?: string,
         public formatName?: string,
-        public formatId?: string
+        public formatId?: string,
+        public degaUsers?: IDegaUser[]
     ) {
         this.featured = this.featured || false;
         this.sticky = this.sticky || false;

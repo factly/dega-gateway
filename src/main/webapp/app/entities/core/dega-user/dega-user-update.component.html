@@ -31,17 +31,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.email" for="field_email">Email</label>
-                    <input type="text" class="form-control" name="email" id="field_email"
-                        [(ngModel)]="degaUser.email" required/>
-                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.website" for="field_website">Website</label>
                     <input type="text" class="form-control" name="website" id="field_website"
                         [(ngModel)]="degaUser.website" />
@@ -82,11 +71,6 @@
                         [(ngModel)]="degaUser.description" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.isActive" for="field_isActive">Is Active</label>
-                    <input type="checkbox" class="form-control" name="isActive" id="field_isActive"
-                        [(ngModel)]="degaUser.isActive" />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.slug" for="field_slug">Slug</label>
                     <input type="text" class="form-control" name="slug" id="field_slug"
                         [(ngModel)]="degaUser.slug" required/>
@@ -94,6 +78,37 @@
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.enabled" for="field_enabled">Enabled</label>
+                    <input type="checkbox" class="form-control" name="enabled" id="field_enabled"
+                        [(ngModel)]="degaUser.enabled" />
+                    <div [hidden]="!(editForm.controls.enabled?.dirty && editForm.controls.enabled?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.enabled?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.emailVerified" for="field_emailVerified">Email Verified</label>
+                    <input type="checkbox" class="form-control" name="emailVerified" id="field_emailVerified"
+                        [(ngModel)]="degaUser.emailVerified" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="degaUser.email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.email?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'Email' }">
+                            This field should follow pattern for "Email".
                         </small>
                     </div>
                 </div>
@@ -133,6 +148,19 @@
                 <div [hidden]="!(editForm.controls.organizationDefault?.dirty && editForm.controls.organizationDefault?.invalid)">
                     <small class="form-text text-danger"
                         [hidden]="!editForm.controls.organizationDefault?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.organizationCurrent" for="field_organizationCurrent">Organization Current</label>
+                    <select class="form-control" id="field_organizationCurrent" name="organizationCurrent" [(ngModel)]="degaUser.organizationCurrentId"  required>
+                        <option *ngIf="!editForm.value.organizationCurrent" [ngValue]="null" selected></option>
+                        <option [ngValue]="organizationOption.id" *ngFor="let organizationOption of organizations; trackBy: trackOrganizationById">{{organizationOption.name}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.organizationCurrent?.dirty && editForm.controls.organizationCurrent?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.organizationCurrent?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
                 </div>

@@ -30,6 +30,7 @@ export class FormatUpdatePage {
     isDefaultInput = element(by.id('field_isDefault'));
     clientIdInput = element(by.id('field_clientId'));
     descriptionInput = element(by.id('field_description'));
+    slugInput = element(by.id('field_slug'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -60,6 +61,14 @@ export class FormatUpdatePage {
 
     async getDescriptionInput() {
         return this.descriptionInput.getAttribute('value');
+    }
+
+    async setSlugInput(slug) {
+        await this.slugInput.sendKeys(slug);
+    }
+
+    async getSlugInput() {
+        return this.slugInput.getAttribute('value');
     }
 
     async save() {

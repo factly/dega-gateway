@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(RoleService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Role('ID', 'AAAAAAA', 'AAAAAAA', false);
+            elemDefault = new Role('ID', 'AAAAAAA', 'AAAAAAA', false, 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -57,7 +57,8 @@ describe('Service Tests', () => {
                     {
                         name: 'BBBBBB',
                         clientId: 'BBBBBB',
-                        isDefault: true
+                        isDefault: true,
+                        slug: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -76,7 +77,8 @@ describe('Service Tests', () => {
                     {
                         name: 'BBBBBB',
                         clientId: 'BBBBBB',
-                        isDefault: true
+                        isDefault: true,
+                        slug: 'BBBBBB'
                     },
                     elemDefault
                 );

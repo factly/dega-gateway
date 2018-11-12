@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.factly.dega",
       "nativeLanguage": "en",
-      "microservicePath": "../dega-core"
+      "microservicePath": "../dega-factcheck"
     },
     "jhipsterVersion": "5.6.0",
     "applicationType": "gateway",

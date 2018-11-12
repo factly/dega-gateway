@@ -1,0 +1,42 @@
+{
+    "gatewayApp": {
+        "factcheckFactCheck": {
+            "home": {
+                "title": "Fact Checks",
+                "createLabel": "Crear nuevo Fact Check",
+                "createOrEditLabel": "Crear o editar Fact Check",
+                "search": "Search for Fact Check"
+            },
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Fact Check {{ id }}?"
+            },
+            "detail": {
+                "title": "Fact Check"
+            },
+            "title": "Title",
+            "clientId": "Client Id",
+            "introduction": "Introduction",
+            "summary": "Summary",
+            "excerpt": "Excerpt",
+            "publishedDate": "Published Date",
+            "publishedDateGMT": "Published Date GMT",
+            "lastUpdatedDate": "Last Updated Date",
+            "lastUpdatedDateGMT": "Last Updated Date GMT",
+            "featured": "Featured",
+            "sticky": "Sticky",
+            "updates": "Updates",
+            "slug": "Slug",
+            "password": "Password",
+            "featuredMedia": "Featured Media",
+            "subTitle": "Sub Title",
+            "claim": "Claim"
+        }
+    },
+    "factcheckApp": {
+        "factcheckFactCheck": {
+            "created": "Un nuevo Fact Check ha sido creado con el identificador {{ param }}",
+            "updated": "Un Fact Check ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Fact Check ha sido eliminado con el identificador {{ param }}"
+        }
+    }
+}

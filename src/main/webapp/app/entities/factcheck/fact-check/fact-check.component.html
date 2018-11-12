@@ -1,0 +1,107 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="gatewayApp.factcheckFactCheck.home.title">Fact Checks</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-fact-check" [routerLink]="['/fact-check/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckFactCheck.home.createLabel">
+            Create new Fact Check
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckFactCheck.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="factChecks">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="gatewayApp.factcheckFactCheck.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckFactCheck.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="introduction"><span jhiTranslate="gatewayApp.factcheckFactCheck.introduction">Introduction</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="summary"><span jhiTranslate="gatewayApp.factcheckFactCheck.summary">Summary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="excerpt"><span jhiTranslate="gatewayApp.factcheckFactCheck.excerpt">Excerpt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="publishedDate"><span jhiTranslate="gatewayApp.factcheckFactCheck.publishedDate">Published Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="publishedDateGMT"><span jhiTranslate="gatewayApp.factcheckFactCheck.publishedDateGMT">Published Date GMT</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.factcheckFactCheck.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastUpdatedDateGMT"><span jhiTranslate="gatewayApp.factcheckFactCheck.lastUpdatedDateGMT">Last Updated Date GMT</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="featured"><span jhiTranslate="gatewayApp.factcheckFactCheck.featured">Featured</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sticky"><span jhiTranslate="gatewayApp.factcheckFactCheck.sticky">Sticky</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="updates"><span jhiTranslate="gatewayApp.factcheckFactCheck.updates">Updates</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.factcheckFactCheck.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="password"><span jhiTranslate="gatewayApp.factcheckFactCheck.password">Password</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="featuredMedia"><span jhiTranslate="gatewayApp.factcheckFactCheck.featuredMedia">Featured Media</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="subTitle"><span jhiTranslate="gatewayApp.factcheckFactCheck.subTitle">Sub Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let factCheck of factChecks ;trackBy: trackId">
+                <td><a [routerLink]="['/fact-check', factCheck.id, 'view' ]">{{factCheck.id}}</a></td>
+                <td>{{factCheck.title}}</td>
+                <td>{{factCheck.clientId}}</td>
+                <td>{{factCheck.introduction}}</td>
+                <td>{{factCheck.summary}}</td>
+                <td>{{factCheck.excerpt}}</td>
+                <td>{{factCheck.publishedDate | date:'medium'}}</td>
+                <td>{{factCheck.publishedDateGMT | date:'medium'}}</td>
+                <td>{{factCheck.lastUpdatedDate | date:'medium'}}</td>
+                <td>{{factCheck.lastUpdatedDateGMT | date:'medium'}}</td>
+                <td>{{factCheck.featured}}</td>
+                <td>{{factCheck.sticky}}</td>
+                <td>{{factCheck.updates}}</td>
+                <td>{{factCheck.slug}}</td>
+                <td>{{factCheck.password}}</td>
+                <td>{{factCheck.featuredMedia}}</td>
+                <td>{{factCheck.subTitle}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/fact-check', factCheck.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/fact-check', factCheck.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'fact-check/'+ factCheck.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="factChecks && factChecks.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

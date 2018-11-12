@@ -12,6 +12,7 @@ import { GatewayRoleModule as CoreRoleModule } from './core/role/role.module';
 import { GatewayRatingModule as FactcheckRatingModule } from './factcheck/rating/rating.module';
 import { GatewayClaimModule as FactcheckClaimModule } from './factcheck/claim/claim.module';
 import { GatewayClaimantModule as FactcheckClaimantModule } from './factcheck/claimant/claimant.module';
+import { GatewayFactCheckModule as FactcheckFactCheckModule } from './factcheck/fact-check/fact-check.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -29,6 +30,7 @@ import { GatewayClaimantModule as FactcheckClaimantModule } from './factcheck/cl
         FactcheckRatingModule,
         FactcheckClaimModule,
         FactcheckClaimantModule,
+        FactcheckFactCheckModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

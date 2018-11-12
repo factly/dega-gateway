@@ -1,0 +1,42 @@
+{
+    "gatewayApp": {
+        "factcheckFactCheck": {
+            "home": {
+                "title": "Fact Checks",
+                "createLabel": "Create a new Fact Check",
+                "createOrEditLabel": "Create or edit a Fact Check",
+                "search": "Search for Fact Check"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Fact Check {{ id }}?"
+            },
+            "detail": {
+                "title": "Fact Check"
+            },
+            "title": "Title",
+            "clientId": "Client Id",
+            "introduction": "Introduction",
+            "summary": "Summary",
+            "excerpt": "Excerpt",
+            "publishedDate": "Published Date",
+            "publishedDateGMT": "Published Date GMT",
+            "lastUpdatedDate": "Last Updated Date",
+            "lastUpdatedDateGMT": "Last Updated Date GMT",
+            "featured": "Featured",
+            "sticky": "Sticky",
+            "updates": "Updates",
+            "slug": "Slug",
+            "password": "Password",
+            "featuredMedia": "Featured Media",
+            "subTitle": "Sub Title",
+            "claim": "Claim"
+        }
+    },
+    "factcheckApp": {
+        "factcheckFactCheck": {
+            "created": "A new Fact Check is created with identifier {{ param }}",
+            "updated": "A Fact Check is updated with identifier {{ param }}",
+            "deleted": "A Fact Check is deleted with identifier {{ param }}"
+        }
+    }
+}

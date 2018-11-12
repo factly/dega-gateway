@@ -101,6 +101,12 @@
                             <span jhiTranslate="global.menu.entities.factcheckClaimant">Claimant</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="fact-check" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.factcheckFactCheck">Fact Check</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

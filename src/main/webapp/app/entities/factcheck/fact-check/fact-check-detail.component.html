@@ -1,0 +1,93 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="factCheck">
+            <h2><span jhiTranslate="gatewayApp.factcheckFactCheck.detail.title">Fact Check</span> {{factCheck.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.title">Title</span></dt>
+                <dd>
+                    <span>{{factCheck.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.clientId">Client Id</span></dt>
+                <dd>
+                    <span>{{factCheck.clientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.introduction">Introduction</span></dt>
+                <dd>
+                    <span>{{factCheck.introduction}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.summary">Summary</span></dt>
+                <dd>
+                    <span>{{factCheck.summary}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.excerpt">Excerpt</span></dt>
+                <dd>
+                    <span>{{factCheck.excerpt}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.publishedDate">Published Date</span></dt>
+                <dd>
+                    <span>{{factCheck.publishedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.publishedDateGMT">Published Date GMT</span></dt>
+                <dd>
+                    <span>{{factCheck.publishedDateGMT}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.lastUpdatedDate">Last Updated Date</span></dt>
+                <dd>
+                    <span>{{factCheck.lastUpdatedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.lastUpdatedDateGMT">Last Updated Date GMT</span></dt>
+                <dd>
+                    <span>{{factCheck.lastUpdatedDateGMT}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.featured">Featured</span></dt>
+                <dd>
+                    <span>{{factCheck.featured}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.sticky">Sticky</span></dt>
+                <dd>
+                    <span>{{factCheck.sticky}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.updates">Updates</span></dt>
+                <dd>
+                    <span>{{factCheck.updates}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.slug">Slug</span></dt>
+                <dd>
+                    <span>{{factCheck.slug}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.password">Password</span></dt>
+                <dd>
+                    <span>{{factCheck.password}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.featuredMedia">Featured Media</span></dt>
+                <dd>
+                    <span>{{factCheck.featuredMedia}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.subTitle">Sub Title</span></dt>
+                <dd>
+                    <span>{{factCheck.subTitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckFactCheck.claim">Claim</span></dt>
+                <dd>
+                    <span *ngFor="let claim of factCheck.claims; let last = last">
+                        <a [routerLink]="['/claim', claim?.id, 'view' ]">{{claim.claim}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fact-check', factCheck.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

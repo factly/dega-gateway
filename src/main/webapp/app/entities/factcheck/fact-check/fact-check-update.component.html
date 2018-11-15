@@ -21,20 +21,20 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactCheck.clientId" for="field_clientId">Client Id</label>
-                    <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="factCheck.clientId" required/>
-                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
+                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactCheck.subTitle" for="field_subTitle">Sub Title</label>
+                    <input type="text" class="form-control" name="subTitle" id="field_subTitle"
+                           [(ngModel)]="factCheck.subTitle" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactCheck.introduction" for="field_introduction">Introduction</label>
                     <input type="text" class="form-control" name="introduction" id="field_introduction"
                         [(ngModel)]="factCheck.introduction" />
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="gatewayApp.factcheckFactCheck.claim" for="field_claim">Claim</label>
+                    <select class="form-control" id="field_claim" multiple name="claim" [(ngModel)]="factCheck.claims" required>
+                        <option [ngValue]="getSelected(factCheck.claims, claimOption)" *ngFor="let claimOption of claims; trackBy: trackClaimById">{{claimOption.claim}}</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactCheck.summary" for="field_summary">Summary</label>
@@ -157,17 +157,17 @@
                         [(ngModel)]="factCheck.featuredMedia" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactCheck.subTitle" for="field_subTitle">Sub Title</label>
-                    <input type="text" class="form-control" name="subTitle" id="field_subTitle"
-                        [(ngModel)]="factCheck.subTitle" />
+                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactCheck.clientId" for="field_clientId">Client Id</label>
+                    <input type="text" class="form-control" name="clientId" id="field_clientId"
+                           [(ngModel)]="factCheck.clientId" required/>
+                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label jhiTranslate="gatewayApp.factcheckFactCheck.claim" for="field_claim">Claim</label>
-                    <select class="form-control" id="field_claim" multiple name="claim" [(ngModel)]="factCheck.claims" required>
-                        <option [ngValue]="getSelected(factCheck.claims, claimOption)" *ngFor="let claimOption of claims; trackBy: trackClaimById">{{claimOption.claim}}</option>
-                    </select>
-                </div>
                 <div [hidden]="!(editForm.controls.claim?.dirty && editForm.controls.claim?.invalid)">
                     <small class="form-text text-danger"
                         [hidden]="!editForm.controls.claim?.errors?.required" jhiTranslate="entity.validation.required">

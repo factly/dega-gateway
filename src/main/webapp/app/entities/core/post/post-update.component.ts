@@ -196,14 +196,9 @@ export class PostUpdateComponent implements OnInit {
         this.createSlug();
     }
 
-    bindClientId(event: any) {
-        this.clientId = event.target.value;
-        this.createSlug();
-    }
-
     createSlug() {
-        if (this.clientId && this.slug) {
-            this.postService.findByClientIdAndSlug(this.clientId, this.slug).subscribe((res: HttpResponse<IPost>) => {
+        if (this.slug) {
+            this.postService.findByClientIdAndSlug(this.slug).subscribe((res: HttpResponse<IPost>) => {
                 if (res.body) {
                     this.slugExtention += 1;
                     this.slug = this.tempSlug + this.slugExtention;

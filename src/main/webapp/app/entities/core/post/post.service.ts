@@ -15,6 +15,7 @@ type EntityArrayResponseType = HttpResponse<IPost[]>;
 @Injectable({ providedIn: 'root' })
 export class PostService {
     public resourceUrl = SERVER_API_URL + 'core/api/posts';
+    public resourceUrlForSlug = SERVER_API_URL + 'core/api/postsslug';
     public resourceUrlForPublish = SERVER_API_URL + 'core/api/publish';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/posts';
 
@@ -98,7 +99,7 @@ export class PostService {
         return res;
     }
 
-    findByClientIdAndSlug(clientId: string, slug: string): Observable<EntityResponseType> {
-        return this.http.get<IPost>(`${this.resourceUrl}/${clientId}/${slug}`, { observe: 'response' });
+    findByClientIdAndSlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IPost>(`${this.resourceUrlForSlug}/${slug}`, { observe: 'response' });
     }
 }

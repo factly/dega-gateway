@@ -21,15 +21,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.clientId" for="field_clientId">Client Id</label>
-                    <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="post.clientId" (change)="bindClientId($event)" required/>
-                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
+                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.subTitle" for="field_subTitle">Sub Title</label>
+                    <input type="text" class="form-control" name="subTitle" id="field_subTitle"
+                        [(ngModel)]="post.subTitle" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.content" for="field_content">Content</label>
@@ -62,32 +56,10 @@
                         [(ngModel)]="post.updates" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.slug" for="field_slug">Slug</label>
-                    <input type="text" class="form-control" name="slug" id="field_slug"
-                        [(ngModel)]="post.slug" disabled required/>
-                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.password" for="field_password">Password</label>
-                    <input type="text" class="form-control" name="password" id="field_password"
-                        [(ngModel)]="post.password" />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.featuredMedia" for="field_featuredMedia">Featured Media</label>
                     <input type="text" class="form-control" name="featuredMedia" id="field_featuredMedia"
                         [(ngModel)]="post.featuredMedia" />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.subTitle" for="field_subTitle">Sub Title</label>
-                    <input type="text" class="form-control" name="subTitle" id="field_subTitle"
-                        [(ngModel)]="post.subTitle" />
-                </div>
-
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.tag" for="field_tag">Tag</label>
                     <select class="form-control" id="field_tag" multiple name="tag" [(ngModel)]="post.tags">
@@ -99,19 +71,6 @@
                     <select class="form-control" id="field_category" multiple name="category" [(ngModel)]="post.categories">
                         <option [ngValue]="getSelected(post.categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.name}}</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.status" for="field_status">Status</label>
-                    <select class="form-control" id="field_status" name="status" [(ngModel)]="post.statusId"  required>
-                        <option *ngIf="!editForm.value.status" [ngValue]="null" selected></option>
-                        <option [ngValue]="statusOption.id" *ngFor="let statusOption of statuses; trackBy: trackStatusById">{{statusOption.name}}</option>
-                    </select>
-                </div>
-                <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
-                    <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.format" for="field_format">Format</label>
@@ -127,7 +86,7 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label jhiTranslate="gatewayApp.corePost.degaUser" for="field_degaUser">Dega User</label>
+                    <label jhiTranslate="gatewayApp.corePost.degaUser" for="field_degaUser">Author</label>
                     <select class="form-control" id="field_degaUser" multiple name="degaUser" [(ngModel)]="post.degaUsers" required>
                         <option [ngValue]="getSelected(post.degaUsers, degaUserOption)" *ngFor="let degaUserOption of degausers; trackBy: trackDegaUserById">{{degaUserOption.displayName}}</option>
                     </select>

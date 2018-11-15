@@ -29,24 +29,24 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.factcheckRating.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="numericValue"><span jhiTranslate="gatewayApp.factcheckRating.numericValue">Numeric Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="iconURL"><span jhiTranslate="gatewayApp.factcheckRating.iconURL">Icon URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.factcheckRating.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckRating.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.factcheckRating.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckRating.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.factcheckRating.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let rating of ratings ;trackBy: trackId">
-                <td><a [routerLink]="['/rating', rating.id, 'view' ]">{{rating.id}}</a></td>
+                <!--<td><a [routerLink]="['/rating', rating.id, 'view' ]">{{rating.id}}</a></td>-->
                 <td>{{rating.name}}</td>
                 <td>{{rating.numericValue}}</td>
                 <td>{{rating.iconURL}}</td>
-                <td>{{rating.isDefault}}</td>
-                <td>{{rating.clientId}}</td>
+                <!--<td>{{rating.isDefault}}</td>
+                <td>{{rating.clientId}}</td>-->
                 <td>{{rating.slug}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

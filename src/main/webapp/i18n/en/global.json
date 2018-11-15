@@ -111,7 +111,8 @@
             "delete": "Delete",
             "edit": "Edit",
             "open": "Open",
-            "save": "Save",
+            "publish": "Publish",
+            "save": "Save Draft",
             "view": "View"
         },
         "detail": {

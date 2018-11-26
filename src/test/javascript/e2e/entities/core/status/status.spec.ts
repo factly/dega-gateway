@@ -1,5 +1,5 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../../page-objects/jhi-page-objects';
 
 import { StatusComponentsPage, StatusDeleteDialog, StatusUpdatePage } from './status.page-object';
@@ -41,7 +41,8 @@ describe('Status e2e test', () => {
         await promise.all([
             statusUpdatePage.setNameInput('name'),
             statusUpdatePage.setClientIdInput('clientId'),
-            statusUpdatePage.setSlugInput('slug')
+            statusUpdatePage.setSlugInput('slug'),
+            statusUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await statusUpdatePage.getNameInput()).to.eq('name');
         expect(await statusUpdatePage.getClientIdInput()).to.eq('clientId');
@@ -54,6 +55,7 @@ describe('Status e2e test', () => {
             expect(await statusUpdatePage.getIsDefaultInput().isSelected()).to.be.true;
         }
         expect(await statusUpdatePage.getSlugInput()).to.eq('slug');
+        expect(await statusUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         await statusUpdatePage.save();
         expect(await statusUpdatePage.getSaveButton().isPresent()).to.be.false;
 

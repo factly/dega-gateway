@@ -15,7 +15,7 @@
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.corePost.content">Content</span></dt>
                 <dd>
-                    <span [innerHtml]="post.content"></span>
+                    <span>{{post.content}}</span>
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.corePost.excerpt">Excerpt</span></dt>
                 <dd>
@@ -25,17 +25,9 @@
                 <dd>
                     <span>{{post.publishedDate}}</span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.publishedDateGMT">Published Date GMT</span></dt>
-                <dd>
-                    <span>{{post.publishedDateGMT}}</span>
-                </dd>
                 <dt><span jhiTranslate="gatewayApp.corePost.lastUpdatedDate">Last Updated Date</span></dt>
                 <dd>
                     <span>{{post.lastUpdatedDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.lastUpdatedDateGMT">Last Updated Date GMT</span></dt>
-                <dd>
-                    <span>{{post.lastUpdatedDateGMT}}</span>
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.corePost.featured">Featured</span></dt>
                 <dd>
@@ -64,6 +56,10 @@
                 <dt><span jhiTranslate="gatewayApp.corePost.subTitle">Sub Title</span></dt>
                 <dd>
                     <span>{{post.subTitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{post.createdDate}}</span>
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.corePost.tag">Tag</span></dt>
                 <dd>

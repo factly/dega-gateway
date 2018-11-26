@@ -31,9 +31,7 @@ export class PostUpdatePage {
     contentInput = element(by.id('field_content'));
     excerptInput = element(by.id('field_excerpt'));
     publishedDateInput = element(by.id('field_publishedDate'));
-    publishedDateGMTInput = element(by.id('field_publishedDateGMT'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
-    lastUpdatedDateGMTInput = element(by.id('field_lastUpdatedDateGMT'));
     featuredInput = element(by.id('field_featured'));
     stickyInput = element(by.id('field_sticky'));
     updatesInput = element(by.id('field_updates'));
@@ -41,6 +39,7 @@ export class PostUpdatePage {
     passwordInput = element(by.id('field_password'));
     featuredMediaInput = element(by.id('field_featuredMedia'));
     subTitleInput = element(by.id('field_subTitle'));
+    createdDateInput = element(by.id('field_createdDate'));
     tagSelect = element(by.id('field_tag'));
     categorySelect = element(by.id('field_category'));
     statusSelect = element(by.id('field_status'));
@@ -91,28 +90,12 @@ export class PostUpdatePage {
         return this.publishedDateInput.getAttribute('value');
     }
 
-    async setPublishedDateGMTInput(publishedDateGMT) {
-        await this.publishedDateGMTInput.sendKeys(publishedDateGMT);
-    }
-
-    async getPublishedDateGMTInput() {
-        return this.publishedDateGMTInput.getAttribute('value');
-    }
-
     async setLastUpdatedDateInput(lastUpdatedDate) {
         await this.lastUpdatedDateInput.sendKeys(lastUpdatedDate);
     }
 
     async getLastUpdatedDateInput() {
         return this.lastUpdatedDateInput.getAttribute('value');
-    }
-
-    async setLastUpdatedDateGMTInput(lastUpdatedDateGMT) {
-        await this.lastUpdatedDateGMTInput.sendKeys(lastUpdatedDateGMT);
-    }
-
-    async getLastUpdatedDateGMTInput() {
-        return this.lastUpdatedDateGMTInput.getAttribute('value');
     }
 
     getFeaturedInput() {
@@ -159,6 +142,14 @@ export class PostUpdatePage {
 
     async getSubTitleInput() {
         return this.subTitleInput.getAttribute('value');
+    }
+
+    async setCreatedDateInput(createdDate) {
+        await this.createdDateInput.sendKeys(createdDate);
+    }
+
+    async getCreatedDateInput() {
+        return this.createdDateInput.getAttribute('value');
     }
 
     async tagSelectLastOption() {

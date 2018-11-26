@@ -33,15 +33,14 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 currentDate,
                 currentDate,
-                currentDate,
-                currentDate,
                 false,
                 false,
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
-                'AAAAAAA'
+                'AAAAAAA',
+                currentDate
             );
         });
 
@@ -50,9 +49,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
-                        publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT)
+                        createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
                 );
@@ -70,18 +68,16 @@ describe('Service Tests', () => {
                     {
                         id: 'ID',
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
-                        publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT)
+                        createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
                 );
                 const expected = Object.assign(
                     {
                         publishedDate: currentDate,
-                        publishedDateGMT: currentDate,
                         lastUpdatedDate: currentDate,
-                        lastUpdatedDateGMT: currentDate
+                        createdDate: currentDate
                     },
                     returnedFromService
                 );
@@ -101,16 +97,15 @@ describe('Service Tests', () => {
                         content: 'BBBBBB',
                         excerpt: 'BBBBBB',
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
-                        publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         featured: true,
                         sticky: true,
                         updates: 'BBBBBB',
                         slug: 'BBBBBB',
                         password: 'BBBBBB',
                         featuredMedia: 'BBBBBB',
-                        subTitle: 'BBBBBB'
+                        subTitle: 'BBBBBB',
+                        createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
                 );
@@ -118,9 +113,8 @@ describe('Service Tests', () => {
                 const expected = Object.assign(
                     {
                         publishedDate: currentDate,
-                        publishedDateGMT: currentDate,
                         lastUpdatedDate: currentDate,
-                        lastUpdatedDateGMT: currentDate
+                        createdDate: currentDate
                     },
                     returnedFromService
                 );
@@ -140,25 +134,23 @@ describe('Service Tests', () => {
                         content: 'BBBBBB',
                         excerpt: 'BBBBBB',
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
-                        publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         featured: true,
                         sticky: true,
                         updates: 'BBBBBB',
                         slug: 'BBBBBB',
                         password: 'BBBBBB',
                         featuredMedia: 'BBBBBB',
-                        subTitle: 'BBBBBB'
+                        subTitle: 'BBBBBB',
+                        createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
                 );
                 const expected = Object.assign(
                     {
                         publishedDate: currentDate,
-                        publishedDateGMT: currentDate,
                         lastUpdatedDate: currentDate,
-                        lastUpdatedDateGMT: currentDate
+                        createdDate: currentDate
                     },
                     returnedFromService
                 );

@@ -10,9 +10,7 @@ export interface IPost {
     content?: string;
     excerpt?: string;
     publishedDate?: Moment;
-    publishedDateGMT?: Moment;
     lastUpdatedDate?: Moment;
-    lastUpdatedDateGMT?: Moment;
     featured?: boolean;
     sticky?: boolean;
     updates?: string;
@@ -20,6 +18,7 @@ export interface IPost {
     password?: string;
     featuredMedia?: string;
     subTitle?: string;
+    createdDate?: Moment;
     tags?: ITag[];
     categories?: ICategory[];
     statusName?: string;
@@ -37,9 +36,7 @@ export class Post implements IPost {
         public content?: string,
         public excerpt?: string,
         public publishedDate?: Moment,
-        public publishedDateGMT?: Moment,
         public lastUpdatedDate?: Moment,
-        public lastUpdatedDateGMT?: Moment,
         public featured?: boolean,
         public sticky?: boolean,
         public updates?: string,
@@ -47,6 +44,7 @@ export class Post implements IPost {
         public password?: string,
         public featuredMedia?: string,
         public subTitle?: string,
+        public createdDate?: Moment,
         public tags?: ITag[],
         public categories?: ICategory[],
         public statusName?: string,

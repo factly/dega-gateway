@@ -44,14 +44,13 @@ describe('Post e2e test', () => {
             postUpdatePage.setContentInput('content'),
             postUpdatePage.setExcerptInput('excerpt'),
             postUpdatePage.setPublishedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-            postUpdatePage.setPublishedDateGMTInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             postUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-            postUpdatePage.setLastUpdatedDateGMTInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             postUpdatePage.setUpdatesInput('updates'),
             postUpdatePage.setSlugInput('slug'),
             postUpdatePage.setPasswordInput('password'),
             postUpdatePage.setFeaturedMediaInput('featuredMedia'),
             postUpdatePage.setSubTitleInput('subTitle'),
+            postUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             // postUpdatePage.tagSelectLastOption(),
             // postUpdatePage.categorySelectLastOption(),
             postUpdatePage.statusSelectLastOption(),
@@ -63,9 +62,7 @@ describe('Post e2e test', () => {
         expect(await postUpdatePage.getContentInput()).to.eq('content');
         expect(await postUpdatePage.getExcerptInput()).to.eq('excerpt');
         expect(await postUpdatePage.getPublishedDateInput()).to.contain('2001-01-01T02:30');
-        expect(await postUpdatePage.getPublishedDateGMTInput()).to.contain('2001-01-01T02:30');
         expect(await postUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');
-        expect(await postUpdatePage.getLastUpdatedDateGMTInput()).to.contain('2001-01-01T02:30');
         const selectedFeatured = postUpdatePage.getFeaturedInput();
         if (await selectedFeatured.isSelected()) {
             await postUpdatePage.getFeaturedInput().click();
@@ -87,6 +84,7 @@ describe('Post e2e test', () => {
         expect(await postUpdatePage.getPasswordInput()).to.eq('password');
         expect(await postUpdatePage.getFeaturedMediaInput()).to.eq('featuredMedia');
         expect(await postUpdatePage.getSubTitleInput()).to.eq('subTitle');
+        expect(await postUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         await postUpdatePage.save();
         expect(await postUpdatePage.getSaveButton().isPresent()).to.be.false;
 

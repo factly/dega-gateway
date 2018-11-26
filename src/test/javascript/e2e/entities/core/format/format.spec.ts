@@ -1,5 +1,5 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../../page-objects/jhi-page-objects';
 
 import { FormatComponentsPage, FormatDeleteDialog, FormatUpdatePage } from './format.page-object';
@@ -42,7 +42,8 @@ describe('Format e2e test', () => {
             formatUpdatePage.setNameInput('name'),
             formatUpdatePage.setClientIdInput('clientId'),
             formatUpdatePage.setDescriptionInput('description'),
-            formatUpdatePage.setSlugInput('slug')
+            formatUpdatePage.setSlugInput('slug'),
+            formatUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await formatUpdatePage.getNameInput()).to.eq('name');
         const selectedIsDefault = formatUpdatePage.getIsDefaultInput();
@@ -56,6 +57,7 @@ describe('Format e2e test', () => {
         expect(await formatUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await formatUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await formatUpdatePage.getSlugInput()).to.eq('slug');
+        expect(await formatUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         await formatUpdatePage.save();
         expect(await formatUpdatePage.getSaveButton().isPresent()).to.be.false;
 

@@ -36,6 +36,7 @@ export class ClaimUpdatePage {
     reviewTagLineInput = element(by.id('field_reviewTagLine'));
     clientIdInput = element(by.id('field_clientId'));
     slugInput = element(by.id('field_slug'));
+    createdDateInput = element(by.id('field_createdDate'));
     ratingSelect = element(by.id('field_rating'));
     claimantSelect = element(by.id('field_claimant'));
 
@@ -121,6 +122,14 @@ export class ClaimUpdatePage {
 
     async getSlugInput() {
         return this.slugInput.getAttribute('value');
+    }
+
+    async setCreatedDateInput(createdDate) {
+        await this.createdDateInput.sendKeys(createdDate);
+    }
+
+    async getCreatedDateInput() {
+        return this.createdDateInput.getAttribute('value');
     }
 
     async ratingSelectLastOption() {

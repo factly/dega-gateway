@@ -29,17 +29,18 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="claim"><span jhiTranslate="gatewayApp.factcheckClaim.claim">Claim</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="gatewayApp.factcheckClaim.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="claimDate"><span jhiTranslate="gatewayApp.factcheckClaim.claimDate">Claim Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="claimSource"><span jhiTranslate="gatewayApp.factcheckClaim.claimSource">Claim Source</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="claimDate"><span jhiTranslate="gatewayApp.factcheckClaim.claimDate">Claim Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="claimSource"><span jhiTranslate="gatewayApp.factcheckClaim.claimSource">Claim Source</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="checkedDate"><span jhiTranslate="gatewayApp.factcheckClaim.checkedDate">Checked Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="reviewSources"><span jhiTranslate="gatewayApp.factcheckClaim.reviewSources">Review Sources</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="reviewSources"><span jhiTranslate="gatewayApp.factcheckClaim.reviewSources">Review Sources</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="review"><span jhiTranslate="gatewayApp.factcheckClaim.review">Review</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="reviewTagLine"><span jhiTranslate="gatewayApp.factcheckClaim.reviewTagLine">Review Tag Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckClaim.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.factcheckClaim.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.factcheckClaim.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.factcheckClaim.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="ratingName"><span jhiTranslate="gatewayApp.factcheckClaim.rating">Rating</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="claimantName"><span jhiTranslate="gatewayApp.factcheckClaim.claimant">Claimant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -47,17 +48,18 @@
             </thead>
             <tbody>
             <tr *ngFor="let claim of claims ;trackBy: trackId">
-                <!--<td><a [routerLink]="['/claim', claim.id, 'view' ]">{{claim.id}}</a></td>-->
+                <td><a [routerLink]="['/claim', claim.id, 'view' ]">{{claim.id}}</a></td>
                 <td>{{claim.claim}}</td>
                 <td>{{claim.description}}</td>
-                <!--<td>{{claim.claimDate | date:'mediumDate'}}</td>
-                <td>{{claim.claimSource}}</td>-->
+                <td>{{claim.claimDate | date:'mediumDate'}}</td>
+                <td>{{claim.claimSource}}</td>
                 <td>{{claim.checkedDate | date:'mediumDate'}}</td>
-                <!--<td>{{claim.reviewSources}}</td>
+                <td>{{claim.reviewSources}}</td>
                 <td>{{claim.review}}</td>
                 <td>{{claim.reviewTagLine}}</td>
                 <td>{{claim.clientId}}</td>
-                <td>{{claim.slug}}</td>-->
+                <td>{{claim.slug}}</td>
+                <td>{{claim.createdDate | date:'medium'}}</td>
                 <td>
                     <div *ngIf="claim.ratingId">
                         <a [routerLink]="['../rating', claim.ratingId , 'view' ]" >{{claim.ratingName}}</a>

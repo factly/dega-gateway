@@ -54,6 +54,7 @@
             "clientId": "Client Id",
             "slug": "Slug",
             "email": "Email",
+            "createdDate": "Created Date",
             "degaUser": "Dega User",
             "degaUserDefault": "Dega User Default",
             "degaUserCurrent": "Dega User Current"

@@ -1,5 +1,5 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../../page-objects/jhi-page-objects';
 
 import { TagComponentsPage, TagDeleteDialog, TagUpdatePage } from './tag.page-object';
@@ -42,12 +42,14 @@ describe('Tag e2e test', () => {
             tagUpdatePage.setNameInput('name'),
             tagUpdatePage.setSlugInput('slug'),
             tagUpdatePage.setDescriptionInput('description'),
-            tagUpdatePage.setClientIdInput('clientId')
+            tagUpdatePage.setClientIdInput('clientId'),
+            tagUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await tagUpdatePage.getNameInput()).to.eq('name');
         expect(await tagUpdatePage.getSlugInput()).to.eq('slug');
         expect(await tagUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await tagUpdatePage.getClientIdInput()).to.eq('clientId');
+        expect(await tagUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         await tagUpdatePage.save();
         expect(await tagUpdatePage.getSaveButton().isPresent()).to.be.false;
 

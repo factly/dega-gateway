@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { ITag } from 'app/shared/model/core/tag.model';
@@ -18,6 +20,7 @@ export class TagUpdateComponent implements OnInit {
     isSaving: boolean;
 
     posts: IPost[];
+    createdDate: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -30,6 +33,7 @@ export class TagUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ tag }) => {
             this.tag = tag;
+            this.createdDate = this.tag.createdDate != null ? this.tag.createdDate.format(DATE_TIME_FORMAT) : null;
         });
         this.postService.query().subscribe(
             (res: HttpResponse<IPost[]>) => {
@@ -45,6 +49,7 @@ export class TagUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.tag.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         if (this.tag.id !== undefined) {
             this.subscribeToSaveResponse(this.tagService.update(this.tag));
         } else {

@@ -1,5 +1,5 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../../page-objects/jhi-page-objects';
 
 import { DegaUserComponentsPage, DegaUserDeleteDialog, DegaUserUpdatePage } from './dega-user.page-object';
@@ -52,6 +52,7 @@ describe('DegaUser e2e test', () => {
             degaUserUpdatePage.setDescriptionInput('description'),
             degaUserUpdatePage.setSlugInput('slug'),
             degaUserUpdatePage.setEmailInput('email'),
+            degaUserUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             degaUserUpdatePage.roleSelectLastOption(),
             // degaUserUpdatePage.organizationSelectLastOption(),
             degaUserUpdatePage.organizationDefaultSelectLastOption(),
@@ -86,6 +87,7 @@ describe('DegaUser e2e test', () => {
             expect(await degaUserUpdatePage.getEmailVerifiedInput().isSelected()).to.be.true;
         }
         expect(await degaUserUpdatePage.getEmailInput()).to.eq('email');
+        expect(await degaUserUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         await degaUserUpdatePage.save();
         expect(await degaUserUpdatePage.getSaveButton().isPresent()).to.be.false;
 

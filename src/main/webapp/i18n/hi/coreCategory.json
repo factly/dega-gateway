@@ -18,6 +18,7 @@
             "slug": "Slug",
             "parent": "Parent",
             "clientId": "Client Id",
+            "createdDate": "Created Date",
             "post": "Post"
         }
     },

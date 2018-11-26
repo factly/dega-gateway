@@ -1,17 +1,17 @@
 {
     "gatewayApp": {
-        "factcheckFactCheck": {
+        "factcheckFactcheck": {
             "home": {
-                "title": "Fact Checks",
-                "createLabel": "Crear nuevo Fact Check",
-                "createOrEditLabel": "Crear o editar Fact Check",
-                "search": "Search for Fact Check"
+                "title": "Factchecks",
+                "createLabel": "Crear nuevo Factcheck",
+                "createOrEditLabel": "Crear o editar Factcheck",
+                "search": "Search for Factcheck"
             },
             "delete": {
-                "question": "¿Seguro que quiere eliminar Fact Check {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Factcheck {{ id }}?"
             },
             "detail": {
-                "title": "Fact Check"
+                "title": "Factcheck"
             },
             "title": "Title",
             "clientId": "Client Id",
@@ -19,9 +19,7 @@
             "summary": "Summary",
             "excerpt": "Excerpt",
             "publishedDate": "Published Date",
-            "publishedDateGMT": "Published Date GMT",
             "lastUpdatedDate": "Last Updated Date",
-            "lastUpdatedDateGMT": "Last Updated Date GMT",
             "featured": "Featured",
             "sticky": "Sticky",
             "updates": "Updates",
@@ -29,14 +27,15 @@
             "password": "Password",
             "featuredMedia": "Featured Media",
             "subTitle": "Sub Title",
+            "createdDate": "Created Date",
             "claim": "Claim"
         }
     },
     "factcheckApp": {
-        "factcheckFactCheck": {
-            "created": "Un nuevo Fact Check ha sido creado con el identificador {{ param }}",
-            "updated": "Un Fact Check ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Fact Check ha sido eliminado con el identificador {{ param }}"
+        "factcheckFactcheck": {
+            "created": "Un nuevo Factcheck ha sido creado con el identificador {{ param }}",
+            "updated": "Un Factcheck ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Factcheck ha sido eliminado con el identificador {{ param }}"
         }
     }
 }

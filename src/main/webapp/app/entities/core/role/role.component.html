@@ -29,21 +29,23 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreRole.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreRole.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreRole.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreRole.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreRole.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreRole.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreRole.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let role of roles ;trackBy: trackId">
-                <!--<td><a [routerLink]="['/role', role.id, 'view' ]">{{role.id}}</a></td>-->
+                <td><a [routerLink]="['/role', role.id, 'view' ]">{{role.id}}</a></td>
                 <td>{{role.name}}</td>
-                <!--<td>{{role.clientId}}</td>
-                <td>{{role.isDefault}}</td>-->
+                <td>{{role.clientId}}</td>
+                <td>{{role.isDefault}}</td>
                 <td>{{role.slug}}</td>
+                <td>{{role.createdDate | date:'medium'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

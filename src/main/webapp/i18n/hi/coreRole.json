@@ -17,6 +17,7 @@
             "clientId": "Client Id",
             "isDefault": "Is Default",
             "slug": "Slug",
+            "createdDate": "Created Date",
             "degaUser": "Dega User"
         }
     },

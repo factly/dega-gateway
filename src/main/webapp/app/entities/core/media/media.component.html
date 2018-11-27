@@ -45,6 +45,8 @@
             <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreMedia.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="lastUpdatedDateGMT"><span jhiTranslate="gatewayApp.coreMedia.lastUpdatedDateGMT">Last Updated Date GMT</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreMedia.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreMedia.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreMedia.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -66,6 +68,8 @@
                 <td>{{media.lastUpdatedDate | date:'medium'}}</td>
                 <td>{{media.lastUpdatedDateGMT | date:'medium'}}</td>
                 <td>{{media.slug}}</td>
+                <td>{{media.clientId}}</td>
+                <td>{{media.createdDate | date:'medium'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

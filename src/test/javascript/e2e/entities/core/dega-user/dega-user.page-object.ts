@@ -41,6 +41,7 @@ export class DegaUserUpdatePage {
     enabledInput = element(by.id('field_enabled'));
     emailVerifiedInput = element(by.id('field_emailVerified'));
     emailInput = element(by.id('field_email'));
+    createdDateInput = element(by.id('field_createdDate'));
     roleSelect = element(by.id('field_role'));
     organizationSelect = element(by.id('field_organization'));
     organizationDefaultSelect = element(by.id('field_organizationDefault'));
@@ -158,6 +159,14 @@ export class DegaUserUpdatePage {
 
     async getEmailInput() {
         return this.emailInput.getAttribute('value');
+    }
+
+    async setCreatedDateInput(createdDate) {
+        await this.createdDateInput.sendKeys(createdDate);
+    }
+
+    async getCreatedDateInput() {
+        return this.createdDateInput.getAttribute('value');
     }
 
     async roleSelectLastOption() {

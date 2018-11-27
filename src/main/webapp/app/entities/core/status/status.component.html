@@ -34,6 +34,7 @@
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreStatus.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreStatus.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreStatus.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreStatus.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -44,6 +45,7 @@
                 <td>{{status.clientId}}</td>
                 <td>{{status.isDefault}}</td>
                 <td>{{status.slug}}</td>
+                <td>{{status.createdDate | date:'medium'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

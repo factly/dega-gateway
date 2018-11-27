@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { ICategory } from 'app/shared/model/core/category.model';
@@ -18,6 +20,7 @@ export class CategoryUpdateComponent implements OnInit {
     isSaving: boolean;
 
     posts: IPost[];
+    createdDate: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -30,6 +33,7 @@ export class CategoryUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ category }) => {
             this.category = category;
+            this.createdDate = this.category.createdDate != null ? this.category.createdDate.format(DATE_TIME_FORMAT) : null;
         });
         this.postService.query().subscribe(
             (res: HttpResponse<IPost[]>) => {
@@ -45,6 +49,7 @@ export class CategoryUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.category.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         if (this.category.id !== undefined) {
             this.subscribeToSaveResponse(this.categoryService.update(this.category));
         } else {

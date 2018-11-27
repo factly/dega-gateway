@@ -15,8 +15,6 @@ type EntityArrayResponseType = HttpResponse<IPost[]>;
 @Injectable({ providedIn: 'root' })
 export class PostService {
     public resourceUrl = SERVER_API_URL + 'core/api/posts';
-    public resourceUrlForSlug = SERVER_API_URL + 'core/api/postsslug';
-    public resourceUrlForPublish = SERVER_API_URL + 'core/api/publish';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/posts';
 
     constructor(private http: HttpClient) {}
@@ -25,13 +23,6 @@ export class PostService {
         const copy = this.convertDateFromClient(post);
         return this.http
             .post<IPost>(this.resourceUrl, copy, { observe: 'response' })
-            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
-    }
-
-    publish(post: IPost): Observable<EntityResponseType> {
-        const copy = this.convertDateFromClient(post);
-        return this.http
-            .post<IPost>(this.resourceUrlForPublish, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
@@ -69,10 +60,8 @@ export class PostService {
     protected convertDateFromClient(post: IPost): IPost {
         const copy: IPost = Object.assign({}, post, {
             publishedDate: post.publishedDate != null && post.publishedDate.isValid() ? post.publishedDate.toJSON() : null,
-            publishedDateGMT: post.publishedDateGMT != null && post.publishedDateGMT.isValid() ? post.publishedDateGMT.toJSON() : null,
             lastUpdatedDate: post.lastUpdatedDate != null && post.lastUpdatedDate.isValid() ? post.lastUpdatedDate.toJSON() : null,
-            lastUpdatedDateGMT:
-                post.lastUpdatedDateGMT != null && post.lastUpdatedDateGMT.isValid() ? post.lastUpdatedDateGMT.toJSON() : null
+            createdDate: post.createdDate != null && post.createdDate.isValid() ? post.createdDate.toJSON() : null
         });
         return copy;
     }
@@ -80,9 +69,8 @@ export class PostService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.publishedDate = res.body.publishedDate != null ? moment(res.body.publishedDate) : null;
-            res.body.publishedDateGMT = res.body.publishedDateGMT != null ? moment(res.body.publishedDateGMT) : null;
             res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
-            res.body.lastUpdatedDateGMT = res.body.lastUpdatedDateGMT != null ? moment(res.body.lastUpdatedDateGMT) : null;
+            res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
         }
         return res;
     }
@@ -91,15 +79,10 @@ export class PostService {
         if (res.body) {
             res.body.forEach((post: IPost) => {
                 post.publishedDate = post.publishedDate != null ? moment(post.publishedDate) : null;
-                post.publishedDateGMT = post.publishedDateGMT != null ? moment(post.publishedDateGMT).utc() : null;
                 post.lastUpdatedDate = post.lastUpdatedDate != null ? moment(post.lastUpdatedDate) : null;
-                post.lastUpdatedDateGMT = post.lastUpdatedDateGMT != null ? moment(post.lastUpdatedDateGMT).utc() : null;
+                post.createdDate = post.createdDate != null ? moment(post.createdDate) : null;
             });
         }
         return res;
-    }
-
-    findByClientIdAndSlug(slug: string): Observable<EntityResponseType> {
-        return this.http.get<IPost>(`${this.resourceUrlForSlug}/${slug}`, { observe: 'response' });
     }
 }

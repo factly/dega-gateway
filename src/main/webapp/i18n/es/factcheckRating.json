@@ -19,6 +19,7 @@
             "isDefault": "Is Default",
             "clientId": "Client Id",
             "slug": "Slug",
+            "createdDate": "Created Date",
             "claim": "Claim"
         }
     },

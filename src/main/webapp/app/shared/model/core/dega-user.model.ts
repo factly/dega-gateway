@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import { IOrganization } from 'app/shared/model/core/organization.model';
 import { IPost } from 'app/shared/model/core/post.model';
 
@@ -18,6 +19,7 @@ export interface IDegaUser {
     enabled?: boolean;
     emailVerified?: boolean;
     email?: string;
+    createdDate?: Moment;
     roleName?: string;
     roleId?: string;
     organizations?: IOrganization[];
@@ -46,6 +48,7 @@ export class DegaUser implements IDegaUser {
         public enabled?: boolean,
         public emailVerified?: boolean,
         public email?: string,
+        public createdDate?: Moment,
         public roleName?: string,
         public roleId?: string,
         public organizations?: IOrganization[],

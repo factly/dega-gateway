@@ -1,17 +1,17 @@
 {
     "gatewayApp": {
-        "factcheckFactCheck": {
+        "factcheckFactcheck": {
             "home": {
-                "title": "FactChecks",
-                "createLabel": "नया Fact Check बनाएँ",
-                "createOrEditLabel": "Fact Check बनाएँ या संपादित करें",
-                "search": "Fact Check खोजें"
+                "title": "Factchecks",
+                "createLabel": "नया Factcheck बनाएँ",
+                "createOrEditLabel": "Factcheck बनाएँ या संपादित करें",
+                "search": "Factcheck खोजें"
             },
             "delete": {
-                "question": "Fact Check [id: {{ id }}] हटाने की पुष्टि करें"
+                "question": "Factcheck [id: {{ id }}] हटाने की पुष्टि करें"
             },
             "detail": {
-                "title": "Fact Check"
+                "title": "Factcheck"
             },
             "title": "Title",
             "clientId": "Client Id",
@@ -19,9 +19,7 @@
             "summary": "Summary",
             "excerpt": "Excerpt",
             "publishedDate": "Published Date",
-            "publishedDateGMT": "Published Date GMT",
             "lastUpdatedDate": "Last Updated Date",
-            "lastUpdatedDateGMT": "Last Updated Date GMT",
             "featured": "Featured",
             "sticky": "Sticky",
             "updates": "Updates",
@@ -29,14 +27,15 @@
             "password": "Password",
             "featuredMedia": "Featured Media",
             "subTitle": "Sub Title",
+            "createdDate": "Created Date",
             "claim": "Claim"
         }
     },
     "factcheckApp": {
-        "factcheckFactCheck": {
-            "created": "एक नया Fact Check [identifier: {{ param }}] तैयार है",
-            "updated": "एक Fact Check [identifier: {{ param }}] का अद्यतन हुआ है",
-            "deleted": "Fact Check [identifier: {{ param }}] हटा दिया है"
+        "factcheckFactcheck": {
+            "created": "एक नया Factcheck [identifier: {{ param }}] तैयार है",
+            "updated": "एक Factcheck [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Factcheck [identifier: {{ param }}] हटा दिया है"
         }
     }
 }

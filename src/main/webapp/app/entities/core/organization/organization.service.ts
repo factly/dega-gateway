@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
@@ -17,20 +20,30 @@ export class OrganizationService {
     constructor(private http: HttpClient) {}
 
     create(organization: IOrganization): Observable<EntityResponseType> {
-        return this.http.post<IOrganization>(this.resourceUrl, organization, { observe: 'response' });
+        const copy = this.convertDateFromClient(organization);
+        return this.http
+            .post<IOrganization>(this.resourceUrl, copy, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     update(organization: IOrganization): Observable<EntityResponseType> {
-        return this.http.put<IOrganization>(this.resourceUrl, organization, { observe: 'response' });
+        const copy = this.convertDateFromClient(organization);
+        return this.http
+            .put<IOrganization>(this.resourceUrl, copy, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     find(id: string): Observable<EntityResponseType> {
-        return this.http.get<IOrganization>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+        return this.http
+            .get<IOrganization>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
-        return this.http.get<IOrganization[]>(this.resourceUrl, { params: options, observe: 'response' });
+        return this.http
+            .get<IOrganization[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
     delete(id: string): Observable<HttpResponse<any>> {
@@ -39,6 +52,31 @@ export class OrganizationService {
 
     search(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
-        return this.http.get<IOrganization[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
+        return this.http
+            .get<IOrganization[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    protected convertDateFromClient(organization: IOrganization): IOrganization {
+        const copy: IOrganization = Object.assign({}, organization, {
+            createdDate: organization.createdDate != null && organization.createdDate.isValid() ? organization.createdDate.toJSON() : null
+        });
+        return copy;
+    }
+
+    protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
+        if (res.body) {
+            res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
+        }
+        return res;
+    }
+
+    protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+        if (res.body) {
+            res.body.forEach((organization: IOrganization) => {
+                organization.createdDate = organization.createdDate != null ? moment(organization.createdDate) : null;
+            });
+        }
+        return res;
     }
 }

@@ -35,6 +35,7 @@
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreCategory.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="parent"><span jhiTranslate="gatewayApp.coreCategory.parent">Parent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreCategory.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreCategory.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -46,6 +47,7 @@
                 <td>{{category.slug}}</td>
                 <td>{{category.parent}}</td>
                 <td>{{category.clientId}}</td>
+                <td>{{category.createdDate | date:'medium'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

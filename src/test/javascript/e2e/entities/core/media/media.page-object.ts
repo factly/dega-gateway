@@ -41,6 +41,8 @@ export class MediaUpdatePage {
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
     lastUpdatedDateGMTInput = element(by.id('field_lastUpdatedDateGMT'));
     slugInput = element(by.id('field_slug'));
+    clientIdInput = element(by.id('field_clientId'));
+    createdDateInput = element(by.id('field_createdDate'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -164,6 +166,22 @@ export class MediaUpdatePage {
 
     async getSlugInput() {
         return this.slugInput.getAttribute('value');
+    }
+
+    async setClientIdInput(clientId) {
+        await this.clientIdInput.sendKeys(clientId);
+    }
+
+    async getClientIdInput() {
+        return this.clientIdInput.getAttribute('value');
+    }
+
+    async setCreatedDateInput(createdDate) {
+        await this.createdDateInput.sendKeys(createdDate);
+    }
+
+    async getCreatedDateInput() {
+        return this.createdDateInput.getAttribute('value');
     }
 
     async save() {

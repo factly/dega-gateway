@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import { IPost } from 'app/shared/model/core/post.model';
 
 export interface IStatus {
@@ -6,6 +7,7 @@ export interface IStatus {
     clientId?: string;
     isDefault?: boolean;
     slug?: string;
+    createdDate?: Moment;
     posts?: IPost[];
 }
 
@@ -16,6 +18,7 @@ export class Status implements IStatus {
         public clientId?: string,
         public isDefault?: boolean,
         public slug?: string,
+        public createdDate?: Moment,
         public posts?: IPost[]
     ) {
         this.isDefault = this.isDefault || false;

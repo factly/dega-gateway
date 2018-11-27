@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 
 export interface IRole {
@@ -6,6 +7,7 @@ export interface IRole {
     clientId?: string;
     isDefault?: boolean;
     slug?: string;
+    createdDate?: Moment;
     degaUsers?: IDegaUser[];
 }
 
@@ -16,6 +18,7 @@ export class Role implements IRole {
         public clientId?: string,
         public isDefault?: boolean,
         public slug?: string,
+        public createdDate?: Moment,
         public degaUsers?: IDegaUser[]
     ) {
         this.isDefault = this.isDefault || false;

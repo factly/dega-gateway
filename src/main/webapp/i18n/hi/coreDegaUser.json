@@ -28,6 +28,7 @@
             "enabled": "Enabled",
             "emailVerified": "Email Verified",
             "email": "Email",
+            "createdDate": "Created Date",
             "role": "Role",
             "organization": "Organization",
             "organizationDefault": "Organization Default",

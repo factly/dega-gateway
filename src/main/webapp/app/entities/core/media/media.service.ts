@@ -63,7 +63,8 @@ export class MediaService {
             publishedDateGMT: media.publishedDateGMT != null && media.publishedDateGMT.isValid() ? media.publishedDateGMT.toJSON() : null,
             lastUpdatedDate: media.lastUpdatedDate != null && media.lastUpdatedDate.isValid() ? media.lastUpdatedDate.toJSON() : null,
             lastUpdatedDateGMT:
-                media.lastUpdatedDateGMT != null && media.lastUpdatedDateGMT.isValid() ? media.lastUpdatedDateGMT.toJSON() : null
+                media.lastUpdatedDateGMT != null && media.lastUpdatedDateGMT.isValid() ? media.lastUpdatedDateGMT.toJSON() : null,
+            createdDate: media.createdDate != null && media.createdDate.isValid() ? media.createdDate.toJSON() : null
         });
         return copy;
     }
@@ -74,6 +75,7 @@ export class MediaService {
             res.body.publishedDateGMT = res.body.publishedDateGMT != null ? moment(res.body.publishedDateGMT) : null;
             res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
             res.body.lastUpdatedDateGMT = res.body.lastUpdatedDateGMT != null ? moment(res.body.lastUpdatedDateGMT) : null;
+            res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
         }
         return res;
     }
@@ -85,6 +87,7 @@ export class MediaService {
                 media.publishedDateGMT = media.publishedDateGMT != null ? moment(media.publishedDateGMT) : null;
                 media.lastUpdatedDate = media.lastUpdatedDate != null ? moment(media.lastUpdatedDate) : null;
                 media.lastUpdatedDateGMT = media.lastUpdatedDateGMT != null ? moment(media.lastUpdatedDateGMT) : null;
+                media.createdDate = media.createdDate != null ? moment(media.createdDate) : null;
             });
         }
         return res;

@@ -67,6 +67,7 @@ export class OrganizationUpdatePage {
     clientIdInput = element(by.id('field_clientId'));
     slugInput = element(by.id('field_slug'));
     emailInput = element(by.id('field_email'));
+    createdDateInput = element(by.id('field_createdDate'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -398,6 +399,14 @@ export class OrganizationUpdatePage {
 
     async getEmailInput() {
         return this.emailInput.getAttribute('value');
+    }
+
+    async setCreatedDateInput(createdDate) {
+        await this.createdDateInput.sendKeys(createdDate);
+    }
+
+    async getCreatedDateInput() {
+        return this.createdDateInput.getAttribute('value');
     }
 
     async save() {

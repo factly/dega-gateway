@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import { IPost } from 'app/shared/model/core/post.model';
 
 export interface ICategory {
@@ -7,6 +8,7 @@ export interface ICategory {
     slug?: string;
     parent?: string;
     clientId?: string;
+    createdDate?: Moment;
     posts?: IPost[];
 }
 
@@ -18,6 +20,7 @@ export class Category implements ICategory {
         public slug?: string,
         public parent?: string,
         public clientId?: string,
+        public createdDate?: Moment,
         public posts?: IPost[]
     ) {}
 }

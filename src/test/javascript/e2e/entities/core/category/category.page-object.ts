@@ -31,6 +31,7 @@ export class CategoryUpdatePage {
     slugInput = element(by.id('field_slug'));
     parentInput = element(by.id('field_parent'));
     clientIdInput = element(by.id('field_clientId'));
+    createdDateInput = element(by.id('field_createdDate'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -74,6 +75,14 @@ export class CategoryUpdatePage {
 
     async getClientIdInput() {
         return this.clientIdInput.getAttribute('value');
+    }
+
+    async setCreatedDateInput(createdDate) {
+        await this.createdDateInput.sendKeys(createdDate);
+    }
+
+    async getCreatedDateInput() {
+        return this.createdDateInput.getAttribute('value');
     }
 
     async save() {

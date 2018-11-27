@@ -1,5 +1,5 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../../page-objects/jhi-page-objects';
 
 import { ClaimComponentsPage, ClaimDeleteDialog, ClaimUpdatePage } from './claim.page-object';
@@ -49,6 +49,7 @@ describe('Claim e2e test', () => {
             claimUpdatePage.setReviewTagLineInput('reviewTagLine'),
             claimUpdatePage.setClientIdInput('clientId'),
             claimUpdatePage.setSlugInput('slug'),
+            claimUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             claimUpdatePage.ratingSelectLastOption(),
             claimUpdatePage.claimantSelectLastOption(),
         ]);
@@ -62,6 +63,7 @@ describe('Claim e2e test', () => {
         expect(await claimUpdatePage.getReviewTagLineInput()).to.eq('reviewTagLine');
         expect(await claimUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await claimUpdatePage.getSlugInput()).to.eq('slug');
+        expect(await claimUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         await claimUpdatePage.save();
         expect(await claimUpdatePage.getSaveButton().isPresent()).to.be.false;
 

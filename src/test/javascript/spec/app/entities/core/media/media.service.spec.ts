@@ -41,7 +41,9 @@ describe('Service Tests', () => {
                 currentDate,
                 currentDate,
                 currentDate,
-                'AAAAAAA'
+                'AAAAAAA',
+                'AAAAAAA',
+                currentDate
             );
         });
 
@@ -52,7 +54,8 @@ describe('Service Tests', () => {
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
                         publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT)
+                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
+                        createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
                 );
@@ -72,7 +75,8 @@ describe('Service Tests', () => {
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
                         publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT)
+                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
+                        createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
                 );
@@ -81,7 +85,8 @@ describe('Service Tests', () => {
                         publishedDate: currentDate,
                         publishedDateGMT: currentDate,
                         lastUpdatedDate: currentDate,
-                        lastUpdatedDateGMT: currentDate
+                        lastUpdatedDateGMT: currentDate,
+                        createdDate: currentDate
                     },
                     returnedFromService
                 );
@@ -110,7 +115,9 @@ describe('Service Tests', () => {
                         publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
-                        slug: 'BBBBBB'
+                        slug: 'BBBBBB',
+                        clientId: 'BBBBBB',
+                        createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
                 );
@@ -120,7 +127,8 @@ describe('Service Tests', () => {
                         publishedDate: currentDate,
                         publishedDateGMT: currentDate,
                         lastUpdatedDate: currentDate,
-                        lastUpdatedDateGMT: currentDate
+                        lastUpdatedDateGMT: currentDate,
+                        createdDate: currentDate
                     },
                     returnedFromService
                 );
@@ -149,7 +157,9 @@ describe('Service Tests', () => {
                         publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
-                        slug: 'BBBBBB'
+                        slug: 'BBBBBB',
+                        clientId: 'BBBBBB',
+                        createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
                 );
@@ -158,7 +168,8 @@ describe('Service Tests', () => {
                         publishedDate: currentDate,
                         publishedDateGMT: currentDate,
                         lastUpdatedDate: currentDate,
-                        lastUpdatedDateGMT: currentDate
+                        lastUpdatedDateGMT: currentDate,
+                        createdDate: currentDate
                     },
                     returnedFromService
                 );

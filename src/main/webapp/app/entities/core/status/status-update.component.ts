@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IStatus } from 'app/shared/model/core/status.model';
 import { StatusService } from './status.service';
@@ -13,6 +15,7 @@ import { StatusService } from './status.service';
 export class StatusUpdateComponent implements OnInit {
     status: IStatus;
     isSaving: boolean;
+    createdDate: string;
 
     constructor(private statusService: StatusService, private activatedRoute: ActivatedRoute) {}
 
@@ -20,6 +23,7 @@ export class StatusUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ status }) => {
             this.status = status;
+            this.createdDate = this.status.createdDate != null ? this.status.createdDate.format(DATE_TIME_FORMAT) : null;
         });
     }
 
@@ -29,6 +33,7 @@ export class StatusUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.status.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         if (this.status.id !== undefined) {
             this.subscribeToSaveResponse(this.statusService.update(this.status));
         } else {

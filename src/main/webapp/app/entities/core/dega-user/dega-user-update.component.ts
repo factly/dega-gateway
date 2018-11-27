@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
@@ -26,6 +28,7 @@ export class DegaUserUpdateComponent implements OnInit {
     organizations: IOrganization[];
 
     posts: IPost[];
+    createdDate: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -40,6 +43,7 @@ export class DegaUserUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ degaUser }) => {
             this.degaUser = degaUser;
+            this.createdDate = this.degaUser.createdDate != null ? this.degaUser.createdDate.format(DATE_TIME_FORMAT) : null;
         });
         this.roleService.query().subscribe(
             (res: HttpResponse<IRole[]>) => {
@@ -67,6 +71,7 @@ export class DegaUserUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.degaUser.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         if (this.degaUser.id !== undefined) {
             this.subscribeToSaveResponse(this.degaUserService.update(this.degaUser));
         } else {

@@ -1,17 +1,17 @@
 {
     "gatewayApp": {
-        "factcheckFactCheck": {
+        "factcheckFactcheck": {
             "home": {
-                "title": "Fact Checks",
-                "createLabel": "Create a new Fact Check",
-                "createOrEditLabel": "Create or edit a Fact Check",
-                "search": "Search for Fact Check"
+                "title": "Factchecks",
+                "createLabel": "Create a new Factcheck",
+                "createOrEditLabel": "Create or edit a Factcheck",
+                "search": "Search for Factcheck"
             },
             "delete": {
-                "question": "Are you sure you want to delete Fact Check {{ id }}?"
+                "question": "Are you sure you want to delete Factcheck {{ id }}?"
             },
             "detail": {
-                "title": "Fact Check"
+                "title": "Factcheck"
             },
             "title": "Title",
             "clientId": "Client Id",
@@ -19,9 +19,7 @@
             "summary": "Summary",
             "excerpt": "Excerpt",
             "publishedDate": "Published Date",
-            "publishedDateGMT": "Published Date GMT",
             "lastUpdatedDate": "Last Updated Date",
-            "lastUpdatedDateGMT": "Last Updated Date GMT",
             "featured": "Featured",
             "sticky": "Sticky",
             "updates": "Updates",
@@ -29,14 +27,15 @@
             "password": "Password",
             "featuredMedia": "Featured Media",
             "subTitle": "Sub Title",
+            "createdDate": "Created Date",
             "claim": "Claim"
         }
     },
     "factcheckApp": {
-        "factcheckFactCheck": {
-            "created": "A new Fact Check is created with identifier {{ param }}",
-            "updated": "A Fact Check is updated with identifier {{ param }}",
-            "deleted": "A Fact Check is deleted with identifier {{ param }}"
+        "factcheckFactcheck": {
+            "created": "A new Factcheck is created with identifier {{ param }}",
+            "updated": "A Factcheck is updated with identifier {{ param }}",
+            "deleted": "A Factcheck is deleted with identifier {{ param }}"
         }
     }
 }

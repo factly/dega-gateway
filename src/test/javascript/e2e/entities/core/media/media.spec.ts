@@ -53,7 +53,9 @@ describe('Media e2e test', () => {
             mediaUpdatePage.setPublishedDateGMTInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             mediaUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             mediaUpdatePage.setLastUpdatedDateGMTInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-            mediaUpdatePage.setSlugInput('slug')
+            mediaUpdatePage.setSlugInput('slug'),
+            mediaUpdatePage.setClientIdInput('clientId'),
+            mediaUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await mediaUpdatePage.getNameInput()).to.eq('name');
         expect(await mediaUpdatePage.getTypeInput()).to.eq('type');
@@ -70,6 +72,8 @@ describe('Media e2e test', () => {
         expect(await mediaUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');
         expect(await mediaUpdatePage.getLastUpdatedDateGMTInput()).to.contain('2001-01-01T02:30');
         expect(await mediaUpdatePage.getSlugInput()).to.eq('slug');
+        expect(await mediaUpdatePage.getClientIdInput()).to.eq('clientId');
+        expect(await mediaUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         await mediaUpdatePage.save();
         expect(await mediaUpdatePage.getSaveButton().isPresent()).to.be.false;
 

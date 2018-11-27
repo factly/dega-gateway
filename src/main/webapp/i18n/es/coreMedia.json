@@ -27,7 +27,9 @@
             "publishedDateGMT": "Published Date GMT",
             "lastUpdatedDate": "Last Updated Date",
             "lastUpdatedDateGMT": "Last Updated Date GMT",
-            "slug": "Slug"
+            "slug": "Slug",
+            "clientId": "Client Id",
+            "createdDate": "Created Date"
         }
     },
     "coreApp": {

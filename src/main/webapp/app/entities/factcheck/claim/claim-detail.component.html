@@ -45,6 +45,10 @@
                 <dd>
                     <span>{{claim.slug}}</span>
                 </dd>
+                <dt><span jhiTranslate="gatewayApp.factcheckClaim.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{claim.createdDate}}</span>
+                </dd>
                 <dt><span jhiTranslate="gatewayApp.factcheckClaim.rating">Rating</span></dt>
                 <dd>
                     <div *ngIf="claim.ratingId">

@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 
 export interface IOrganization {
@@ -43,6 +44,7 @@ export interface IOrganization {
     clientId?: string;
     slug?: string;
     email?: string;
+    createdDate?: Moment;
     degaUsers?: IDegaUser[];
     degaUserDefaults?: IDegaUser[];
     degaUserCurrents?: IDegaUser[];
@@ -92,6 +94,7 @@ export class Organization implements IOrganization {
         public clientId?: string,
         public slug?: string,
         public email?: string,
+        public createdDate?: Moment,
         public degaUsers?: IDegaUser[],
         public degaUserDefaults?: IDegaUser[],
         public degaUserCurrents?: IDegaUser[]

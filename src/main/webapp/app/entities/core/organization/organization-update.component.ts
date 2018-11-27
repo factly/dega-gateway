@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IOrganization } from 'app/shared/model/core/organization.model';
@@ -18,6 +20,7 @@ export class OrganizationUpdateComponent implements OnInit {
     isSaving: boolean;
 
     degausers: IDegaUser[];
+    createdDate: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -30,6 +33,7 @@ export class OrganizationUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ organization }) => {
             this.organization = organization;
+            this.createdDate = this.organization.createdDate != null ? this.organization.createdDate.format(DATE_TIME_FORMAT) : null;
         });
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
@@ -45,6 +49,7 @@ export class OrganizationUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.organization.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         if (this.organization.id !== undefined) {
             this.subscribeToSaveResponse(this.organizationService.update(this.organization));
         } else {

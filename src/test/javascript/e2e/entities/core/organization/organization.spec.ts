@@ -1,5 +1,5 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../../page-objects/jhi-page-objects';
 
 import { OrganizationComponentsPage, OrganizationDeleteDialog, OrganizationUpdatePage } from './organization.page-object';
@@ -79,7 +79,8 @@ describe('Organization e2e test', () => {
             organizationUpdatePage.setTimeZoneInput('timeZone'),
             organizationUpdatePage.setClientIdInput('clientId'),
             organizationUpdatePage.setSlugInput('slug'),
-            organizationUpdatePage.setEmailInput('email')
+            organizationUpdatePage.setEmailInput('email'),
+            organizationUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await organizationUpdatePage.getNameInput()).to.eq('name');
         expect(await organizationUpdatePage.getPhoneInput()).to.eq('phone');
@@ -122,6 +123,7 @@ describe('Organization e2e test', () => {
         expect(await organizationUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await organizationUpdatePage.getSlugInput()).to.eq('slug');
         expect(await organizationUpdatePage.getEmailInput()).to.eq('email');
+        expect(await organizationUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         await organizationUpdatePage.save();
         expect(await organizationUpdatePage.getSaveButton().isPresent()).to.be.false;
 

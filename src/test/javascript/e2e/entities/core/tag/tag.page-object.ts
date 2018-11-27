@@ -30,6 +30,7 @@ export class TagUpdatePage {
     slugInput = element(by.id('field_slug'));
     descriptionInput = element(by.id('field_description'));
     clientIdInput = element(by.id('field_clientId'));
+    createdDateInput = element(by.id('field_createdDate'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -65,6 +66,14 @@ export class TagUpdatePage {
 
     async getClientIdInput() {
         return this.clientIdInput.getAttribute('value');
+    }
+
+    async setCreatedDateInput(createdDate) {
+        await this.createdDateInput.sendKeys(createdDate);
+    }
+
+    async getCreatedDateInput() {
+        return this.createdDateInput.getAttribute('value');
     }
 
     async save() {

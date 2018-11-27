@@ -18,6 +18,7 @@
             "clientId": "Client Id",
             "description": "Description",
             "slug": "Slug",
+            "createdDate": "Created Date",
             "post": "Post"
         }
     },

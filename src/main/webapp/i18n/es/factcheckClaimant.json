@@ -19,6 +19,7 @@
             "imageURL": "Image URL",
             "clientId": "Client Id",
             "slug": "Slug",
+            "createdDate": "Created Date",
             "claim": "Claim"
         }
     },

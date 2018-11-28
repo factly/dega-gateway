@@ -17,6 +17,7 @@ export class PostService {
     public resourceUrl = SERVER_API_URL + 'core/api/posts';
     public resourceUrlForPublish = SERVER_API_URL + 'core/api/publish';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/posts';
+    public resourceUrlForPostBySlug = SERVER_API_URL + 'core/api/postbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -63,6 +64,10 @@ export class PostService {
         return this.http
             .get<IPost[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    getPostBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IPost>(`${this.resourceUrlForPostBySlug}/${slug}`, { observe: 'response' });
     }
 
     protected convertDateFromClient(post: IPost): IPost {

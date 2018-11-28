@@ -43,6 +43,9 @@ export class PostUpdateComponent implements OnInit {
     createdDate: string;
     showSave: boolean;
     showPublish: boolean;
+    slug: string;
+    slugExtention: number;
+    tempSlug: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -178,5 +181,25 @@ export class PostUpdateComponent implements OnInit {
             }
         }
         return option;
+    }
+
+    bindSlug(event: any) {
+        this.slugExtention = 0;
+        this.slug = event.target.value.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-');
+        this.tempSlug = this.slug;
+        this.createSlug();
+    }
+
+    createSlug() {
+        if (this.slug) {
+            this.postService.getPostBySlug(this.slug).subscribe((res: HttpResponse<IPost>) => {
+                if (res.body) {
+                    this.slugExtention += 1;
+                    this.slug = this.tempSlug + this.slugExtention;
+                    this.createSlug();
+                }
+                this.post.slug = this.slug;
+            });
+        }
     }
 }

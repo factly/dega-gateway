@@ -19,7 +19,6 @@
                 "factcheckRating": "Rating",
                 "factcheckClaim": "Claim",
                 "factcheckClaimant": "Claimant",
-                "factcheckFactCheck": "Fact Check",
                 "factcheckFactcheck": "Factcheck",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },

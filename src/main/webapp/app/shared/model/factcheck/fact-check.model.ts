@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
 
-export interface IFactCheck {
+export interface IFactcheck {
     id?: string;
     title?: string;
     clientId?: string;
@@ -22,7 +22,7 @@ export interface IFactCheck {
     claims?: IClaim[];
 }
 
-export class FactCheck implements IFactCheck {
+export class Factcheck implements IFactcheck {
     constructor(
         public id?: string,
         public title?: string,

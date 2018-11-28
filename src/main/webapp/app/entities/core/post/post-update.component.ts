@@ -4,6 +4,8 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
+import { AUTHOR_ROLE } from 'app/shared/constants/role.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IPost } from 'app/shared/model/core/post.model';
@@ -39,6 +41,8 @@ export class PostUpdateComponent implements OnInit {
     publishedDate: string;
     lastUpdatedDate: string;
     createdDate: string;
+    showSave: boolean;
+    showPublish: boolean;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -86,6 +90,8 @@ export class PostUpdateComponent implements OnInit {
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
+                this.showSave = this.showSaveButton(this.degausers[0].roleName);
+                this.showPublish = this.showPublishButton(this.degausers[0].roleName);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -105,6 +111,25 @@ export class PostUpdateComponent implements OnInit {
         } else {
             this.subscribeToSaveResponse(this.postService.create(this.post));
         }
+    }
+
+    publish() {
+        this.isSaving = true;
+        this.post.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
+        this.post.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        if (this.post.id !== undefined) {
+            this.subscribeToSaveResponse(this.postService.update(this.post));
+        } else {
+            this.subscribeToSaveResponse(this.postService.publish(this.post));
+        }
+    }
+
+    showSaveButton(degausersRole: String): boolean {
+        return AUTHOR_ROLE.includes(degausersRole);
+    }
+
+    showPublishButton(degausersRole: String): boolean {
+        return PUBLISHER_ROLE.includes(degausersRole);
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IPost>>) {

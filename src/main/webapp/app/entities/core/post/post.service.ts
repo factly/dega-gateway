@@ -15,6 +15,7 @@ type EntityArrayResponseType = HttpResponse<IPost[]>;
 @Injectable({ providedIn: 'root' })
 export class PostService {
     public resourceUrl = SERVER_API_URL + 'core/api/posts';
+    public resourceUrlForPublish = SERVER_API_URL + 'core/api/publish';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/posts';
 
     constructor(private http: HttpClient) {}
@@ -23,6 +24,13 @@ export class PostService {
         const copy = this.convertDateFromClient(post);
         return this.http
             .post<IPost>(this.resourceUrl, copy, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    publish(post: IPost): Observable<EntityResponseType> {
+        const copy = this.convertDateFromClient(post);
+        return this.http
+            .post<IPost>(this.resourceUrlForPublish, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 

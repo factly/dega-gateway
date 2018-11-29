@@ -38,7 +38,7 @@ export const postRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
+            defaultSort: 'created_date,desc',
             pageTitle: 'gatewayApp.corePost.home.title'
         },
         canActivate: [UserRouteAccessService]

@@ -8,6 +8,7 @@ export interface ITag {
     description?: string;
     clientId?: string;
     createdDate?: Moment;
+    lastUpdatedDate?: Moment;
     posts?: IPost[];
 }
 
@@ -19,6 +20,7 @@ export class Tag implements ITag {
         public description?: string,
         public clientId?: string,
         public createdDate?: Moment,
+        public lastUpdatedDate?: Moment,
         public posts?: IPost[]
     ) {}
 }

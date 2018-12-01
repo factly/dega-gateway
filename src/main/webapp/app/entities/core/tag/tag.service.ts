@@ -59,7 +59,8 @@ export class TagService {
 
     protected convertDateFromClient(tag: ITag): ITag {
         const copy: ITag = Object.assign({}, tag, {
-            createdDate: tag.createdDate != null && tag.createdDate.isValid() ? tag.createdDate.toJSON() : null
+            createdDate: tag.createdDate != null && tag.createdDate.isValid() ? tag.createdDate.toJSON() : null,
+            lastUpdatedDate: tag.lastUpdatedDate != null && tag.lastUpdatedDate.isValid() ? tag.lastUpdatedDate.toJSON() : null
         });
         return copy;
     }
@@ -67,6 +68,7 @@ export class TagService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
+            res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
         }
         return res;
     }
@@ -75,6 +77,7 @@ export class TagService {
         if (res.body) {
             res.body.forEach((tag: ITag) => {
                 tag.createdDate = tag.createdDate != null ? moment(tag.createdDate) : null;
+                tag.lastUpdatedDate = tag.lastUpdatedDate != null ? moment(tag.lastUpdatedDate) : null;
             });
         }
         return res;

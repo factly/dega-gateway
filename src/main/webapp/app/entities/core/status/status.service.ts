@@ -59,7 +59,8 @@ export class StatusService {
 
     protected convertDateFromClient(status: IStatus): IStatus {
         const copy: IStatus = Object.assign({}, status, {
-            createdDate: status.createdDate != null && status.createdDate.isValid() ? status.createdDate.toJSON() : null
+            createdDate: status.createdDate != null && status.createdDate.isValid() ? status.createdDate.toJSON() : null,
+            lastUpdatedDate: status.lastUpdatedDate != null && status.lastUpdatedDate.isValid() ? status.lastUpdatedDate.toJSON() : null
         });
         return copy;
     }
@@ -67,6 +68,7 @@ export class StatusService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
+            res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
         }
         return res;
     }
@@ -75,6 +77,7 @@ export class StatusService {
         if (res.body) {
             res.body.forEach((status: IStatus) => {
                 status.createdDate = status.createdDate != null ? moment(status.createdDate) : null;
+                status.lastUpdatedDate = status.lastUpdatedDate != null ? moment(status.lastUpdatedDate) : null;
             });
         }
         return res;

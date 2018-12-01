@@ -16,6 +16,7 @@ export class StatusUpdateComponent implements OnInit {
     status: IStatus;
     isSaving: boolean;
     createdDate: string;
+    lastUpdatedDate: string;
 
     constructor(private statusService: StatusService, private activatedRoute: ActivatedRoute) {}
 
@@ -24,6 +25,7 @@ export class StatusUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ status }) => {
             this.status = status;
             this.createdDate = this.status.createdDate != null ? this.status.createdDate.format(DATE_TIME_FORMAT) : null;
+            this.lastUpdatedDate = this.status.lastUpdatedDate != null ? this.status.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
     }
 
@@ -34,6 +36,7 @@ export class StatusUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.status.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.status.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.status.id !== undefined) {
             this.subscribeToSaveResponse(this.statusService.update(this.status));
         } else {

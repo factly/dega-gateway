@@ -44,7 +44,8 @@ describe('Category e2e test', () => {
             categoryUpdatePage.setSlugInput('slug'),
             categoryUpdatePage.setParentInput('parent'),
             categoryUpdatePage.setClientIdInput('clientId'),
-            categoryUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
+            categoryUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            categoryUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await categoryUpdatePage.getNameInput()).to.eq('name');
         expect(await categoryUpdatePage.getDescriptionInput()).to.eq('description');
@@ -52,6 +53,7 @@ describe('Category e2e test', () => {
         expect(await categoryUpdatePage.getParentInput()).to.eq('parent');
         expect(await categoryUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await categoryUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
+        expect(await categoryUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');
         await categoryUpdatePage.save();
         expect(await categoryUpdatePage.getSaveButton().isPresent()).to.be.false;
 

@@ -21,6 +21,7 @@ export class CategoryUpdateComponent implements OnInit {
 
     posts: IPost[];
     createdDate: string;
+    lastUpdatedDate: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -34,6 +35,7 @@ export class CategoryUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ category }) => {
             this.category = category;
             this.createdDate = this.category.createdDate != null ? this.category.createdDate.format(DATE_TIME_FORMAT) : null;
+            this.lastUpdatedDate = this.category.lastUpdatedDate != null ? this.category.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
         this.postService.query().subscribe(
             (res: HttpResponse<IPost[]>) => {
@@ -50,6 +52,7 @@ export class CategoryUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.category.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.category.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.category.id !== undefined) {
             this.subscribeToSaveResponse(this.categoryService.update(this.category));
         } else {

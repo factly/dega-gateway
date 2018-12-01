@@ -21,6 +21,7 @@ export class OrganizationUpdateComponent implements OnInit {
 
     degausers: IDegaUser[];
     createdDate: string;
+    lastUpdatedDate: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -34,6 +35,8 @@ export class OrganizationUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ organization }) => {
             this.organization = organization;
             this.createdDate = this.organization.createdDate != null ? this.organization.createdDate.format(DATE_TIME_FORMAT) : null;
+            this.lastUpdatedDate =
+                this.organization.lastUpdatedDate != null ? this.organization.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
@@ -50,6 +53,7 @@ export class OrganizationUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.organization.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.organization.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.organization.id !== undefined) {
             this.subscribeToSaveResponse(this.organizationService.update(this.organization));
         } else {

@@ -59,7 +59,11 @@ export class OrganizationService {
 
     protected convertDateFromClient(organization: IOrganization): IOrganization {
         const copy: IOrganization = Object.assign({}, organization, {
-            createdDate: organization.createdDate != null && organization.createdDate.isValid() ? organization.createdDate.toJSON() : null
+            createdDate: organization.createdDate != null && organization.createdDate.isValid() ? organization.createdDate.toJSON() : null,
+            lastUpdatedDate:
+                organization.lastUpdatedDate != null && organization.lastUpdatedDate.isValid()
+                    ? organization.lastUpdatedDate.toJSON()
+                    : null
         });
         return copy;
     }
@@ -67,6 +71,7 @@ export class OrganizationService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
+            res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
         }
         return res;
     }
@@ -75,6 +80,7 @@ export class OrganizationService {
         if (res.body) {
             res.body.forEach((organization: IOrganization) => {
                 organization.createdDate = organization.createdDate != null ? moment(organization.createdDate) : null;
+                organization.lastUpdatedDate = organization.lastUpdatedDate != null ? moment(organization.lastUpdatedDate) : null;
             });
         }
         return res;

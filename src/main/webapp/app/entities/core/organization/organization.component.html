@@ -72,6 +72,7 @@
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreOrganization.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="email"><span jhiTranslate="gatewayApp.coreOrganization.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreOrganization.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreOrganization.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -120,6 +121,7 @@
                 <td>{{organization.slug}}</td>
                 <td>{{organization.email}}</td>
                 <td>{{organization.createdDate | date:'medium'}}</td>
+                <td>{{organization.lastUpdatedDate | date:'medium'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

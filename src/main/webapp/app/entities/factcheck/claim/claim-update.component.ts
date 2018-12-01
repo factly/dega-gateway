@@ -31,6 +31,7 @@ export class ClaimUpdateComponent implements OnInit {
     claimDateDp: any;
     checkedDateDp: any;
     createdDate: string;
+    lastUpdatedDate: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -46,6 +47,7 @@ export class ClaimUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ claim }) => {
             this.claim = claim;
             this.createdDate = this.claim.createdDate != null ? this.claim.createdDate.format(DATE_TIME_FORMAT) : null;
+            this.lastUpdatedDate = this.claim.lastUpdatedDate != null ? this.claim.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
         this.ratingService.query().subscribe(
             (res: HttpResponse<IRating[]>) => {
@@ -74,6 +76,7 @@ export class ClaimUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.claim.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.claim.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.claim.id !== undefined) {
             this.subscribeToSaveResponse(this.claimService.update(this.claim));
         } else {

@@ -42,7 +42,8 @@ describe('Role e2e test', () => {
             roleUpdatePage.setNameInput('name'),
             roleUpdatePage.setClientIdInput('clientId'),
             roleUpdatePage.setSlugInput('slug'),
-            roleUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
+            roleUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            roleUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await roleUpdatePage.getNameInput()).to.eq('name');
         expect(await roleUpdatePage.getClientIdInput()).to.eq('clientId');
@@ -56,6 +57,7 @@ describe('Role e2e test', () => {
         }
         expect(await roleUpdatePage.getSlugInput()).to.eq('slug');
         expect(await roleUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
+        expect(await roleUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');
         await roleUpdatePage.save();
         expect(await roleUpdatePage.getSaveButton().isPresent()).to.be.false;
 

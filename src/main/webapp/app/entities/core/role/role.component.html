@@ -35,6 +35,7 @@
             <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreRole.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreRole.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreRole.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreRole.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -46,6 +47,7 @@
                 <td>{{role.isDefault}}</td>
                 <td>{{role.slug}}</td>
                 <td>{{role.createdDate | date:'medium'}}</td>
+                <td>{{role.lastUpdatedDate | date:'medium'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

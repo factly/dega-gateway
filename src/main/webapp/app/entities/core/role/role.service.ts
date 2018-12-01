@@ -59,7 +59,8 @@ export class RoleService {
 
     protected convertDateFromClient(role: IRole): IRole {
         const copy: IRole = Object.assign({}, role, {
-            createdDate: role.createdDate != null && role.createdDate.isValid() ? role.createdDate.toJSON() : null
+            createdDate: role.createdDate != null && role.createdDate.isValid() ? role.createdDate.toJSON() : null,
+            lastUpdatedDate: role.lastUpdatedDate != null && role.lastUpdatedDate.isValid() ? role.lastUpdatedDate.toJSON() : null
         });
         return copy;
     }
@@ -67,6 +68,7 @@ export class RoleService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
+            res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
         }
         return res;
     }
@@ -75,6 +77,7 @@ export class RoleService {
         if (res.body) {
             res.body.forEach((role: IRole) => {
                 role.createdDate = role.createdDate != null ? moment(role.createdDate) : null;
+                role.lastUpdatedDate = role.lastUpdatedDate != null ? moment(role.lastUpdatedDate) : null;
             });
         }
         return res;

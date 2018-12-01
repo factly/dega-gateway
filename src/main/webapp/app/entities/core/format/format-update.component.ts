@@ -16,6 +16,7 @@ export class FormatUpdateComponent implements OnInit {
     format: IFormat;
     isSaving: boolean;
     createdDate: string;
+    lastUpdatedDate: string;
 
     constructor(private formatService: FormatService, private activatedRoute: ActivatedRoute) {}
 
@@ -24,6 +25,7 @@ export class FormatUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ format }) => {
             this.format = format;
             this.createdDate = this.format.createdDate != null ? this.format.createdDate.format(DATE_TIME_FORMAT) : null;
+            this.lastUpdatedDate = this.format.lastUpdatedDate != null ? this.format.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
     }
 
@@ -34,6 +36,7 @@ export class FormatUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.format.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.format.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.format.id !== undefined) {
             this.subscribeToSaveResponse(this.formatService.update(this.format));
         } else {

@@ -32,6 +32,7 @@ export class FormatUpdatePage {
     descriptionInput = element(by.id('field_description'));
     slugInput = element(by.id('field_slug'));
     createdDateInput = element(by.id('field_createdDate'));
+    lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -78,6 +79,14 @@ export class FormatUpdatePage {
 
     async getCreatedDateInput() {
         return this.createdDateInput.getAttribute('value');
+    }
+
+    async setLastUpdatedDateInput(lastUpdatedDate) {
+        await this.lastUpdatedDateInput.sendKeys(lastUpdatedDate);
+    }
+
+    async getLastUpdatedDateInput() {
+        return this.lastUpdatedDateInput.getAttribute('value');
     }
 
     async save() {

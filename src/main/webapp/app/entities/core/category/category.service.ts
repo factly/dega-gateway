@@ -59,7 +59,9 @@ export class CategoryService {
 
     protected convertDateFromClient(category: ICategory): ICategory {
         const copy: ICategory = Object.assign({}, category, {
-            createdDate: category.createdDate != null && category.createdDate.isValid() ? category.createdDate.toJSON() : null
+            createdDate: category.createdDate != null && category.createdDate.isValid() ? category.createdDate.toJSON() : null,
+            lastUpdatedDate:
+                category.lastUpdatedDate != null && category.lastUpdatedDate.isValid() ? category.lastUpdatedDate.toJSON() : null
         });
         return copy;
     }
@@ -67,6 +69,7 @@ export class CategoryService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
+            res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
         }
         return res;
     }
@@ -75,6 +78,7 @@ export class CategoryService {
         if (res.body) {
             res.body.forEach((category: ICategory) => {
                 category.createdDate = category.createdDate != null ? moment(category.createdDate) : null;
+                category.lastUpdatedDate = category.lastUpdatedDate != null ? moment(category.lastUpdatedDate) : null;
             });
         }
         return res;

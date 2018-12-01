@@ -9,6 +9,7 @@ export interface IFormat {
     description?: string;
     slug?: string;
     createdDate?: Moment;
+    lastUpdatedDate?: Moment;
     posts?: IPost[];
 }
 
@@ -21,6 +22,7 @@ export class Format implements IFormat {
         public description?: string,
         public slug?: string,
         public createdDate?: Moment,
+        public lastUpdatedDate?: Moment,
         public posts?: IPost[]
     ) {
         this.isDefault = this.isDefault || false;

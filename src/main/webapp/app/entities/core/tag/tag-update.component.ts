@@ -21,6 +21,7 @@ export class TagUpdateComponent implements OnInit {
 
     posts: IPost[];
     createdDate: string;
+    lastUpdatedDate: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -34,6 +35,7 @@ export class TagUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ tag }) => {
             this.tag = tag;
             this.createdDate = this.tag.createdDate != null ? this.tag.createdDate.format(DATE_TIME_FORMAT) : null;
+            this.lastUpdatedDate = this.tag.lastUpdatedDate != null ? this.tag.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
         this.postService.query().subscribe(
             (res: HttpResponse<IPost[]>) => {
@@ -50,6 +52,7 @@ export class TagUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.tag.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.tag.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.tag.id !== undefined) {
             this.subscribeToSaveResponse(this.tagService.update(this.tag));
         } else {

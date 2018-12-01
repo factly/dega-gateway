@@ -8,6 +8,7 @@ export interface IRole {
     isDefault?: boolean;
     slug?: string;
     createdDate?: Moment;
+    lastUpdatedDate?: Moment;
     degaUsers?: IDegaUser[];
 }
 
@@ -19,6 +20,7 @@ export class Role implements IRole {
         public isDefault?: boolean,
         public slug?: string,
         public createdDate?: Moment,
+        public lastUpdatedDate?: Moment,
         public degaUsers?: IDegaUser[]
     ) {
         this.isDefault = this.isDefault || false;

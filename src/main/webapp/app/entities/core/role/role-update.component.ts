@@ -16,6 +16,7 @@ export class RoleUpdateComponent implements OnInit {
     role: IRole;
     isSaving: boolean;
     createdDate: string;
+    lastUpdatedDate: string;
 
     constructor(private roleService: RoleService, private activatedRoute: ActivatedRoute) {}
 
@@ -24,6 +25,7 @@ export class RoleUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ role }) => {
             this.role = role;
             this.createdDate = this.role.createdDate != null ? this.role.createdDate.format(DATE_TIME_FORMAT) : null;
+            this.lastUpdatedDate = this.role.lastUpdatedDate != null ? this.role.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
     }
 
@@ -34,6 +36,7 @@ export class RoleUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.role.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.role.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.role.id !== undefined) {
             this.subscribeToSaveResponse(this.roleService.update(this.role));
         } else {

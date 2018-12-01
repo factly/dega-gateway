@@ -14,6 +14,7 @@ export interface IClaim {
     clientId?: string;
     slug?: string;
     createdDate?: Moment;
+    lastUpdatedDate?: Moment;
     ratingName?: string;
     ratingId?: string;
     claimantName?: string;
@@ -35,6 +36,7 @@ export class Claim implements IClaim {
         public clientId?: string,
         public slug?: string,
         public createdDate?: Moment,
+        public lastUpdatedDate?: Moment,
         public ratingName?: string,
         public ratingId?: string,
         public claimantName?: string,

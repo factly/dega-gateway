@@ -45,6 +45,7 @@ export interface IOrganization {
     slug?: string;
     email?: string;
     createdDate?: Moment;
+    lastUpdatedDate?: Moment;
     degaUsers?: IDegaUser[];
     degaUserDefaults?: IDegaUser[];
     degaUserCurrents?: IDegaUser[];
@@ -95,6 +96,7 @@ export class Organization implements IOrganization {
         public slug?: string,
         public email?: string,
         public createdDate?: Moment,
+        public lastUpdatedDate?: Moment,
         public degaUsers?: IDegaUser[],
         public degaUserDefaults?: IDegaUser[],
         public degaUserCurrents?: IDegaUser[]

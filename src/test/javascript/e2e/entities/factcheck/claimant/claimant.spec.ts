@@ -45,7 +45,8 @@ describe('Claimant e2e test', () => {
             claimantUpdatePage.setImageURLInput('imageURL'),
             claimantUpdatePage.setClientIdInput('clientId'),
             claimantUpdatePage.setSlugInput('slug'),
-            claimantUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
+            claimantUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            claimantUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await claimantUpdatePage.getNameInput()).to.eq('name');
         expect(await claimantUpdatePage.getTagLineInput()).to.eq('tagLine');
@@ -54,6 +55,7 @@ describe('Claimant e2e test', () => {
         expect(await claimantUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await claimantUpdatePage.getSlugInput()).to.eq('slug');
         expect(await claimantUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
+        expect(await claimantUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');
         await claimantUpdatePage.save();
         expect(await claimantUpdatePage.getSaveButton().isPresent()).to.be.false;
 

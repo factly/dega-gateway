@@ -16,9 +16,7 @@ export class MediaUpdateComponent implements OnInit {
     media: IMedia;
     isSaving: boolean;
     publishedDate: string;
-    publishedDateGMT: string;
     lastUpdatedDate: string;
-    lastUpdatedDateGMT: string;
     createdDate: string;
 
     constructor(private mediaService: MediaService, private activatedRoute: ActivatedRoute) {}
@@ -28,9 +26,7 @@ export class MediaUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ media }) => {
             this.media = media;
             this.publishedDate = this.media.publishedDate != null ? this.media.publishedDate.format(DATE_TIME_FORMAT) : null;
-            this.publishedDateGMT = this.media.publishedDateGMT != null ? this.media.publishedDateGMT.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.media.lastUpdatedDate != null ? this.media.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
-            this.lastUpdatedDateGMT = this.media.lastUpdatedDateGMT != null ? this.media.lastUpdatedDateGMT.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.media.createdDate != null ? this.media.createdDate.format(DATE_TIME_FORMAT) : null;
         });
     }
@@ -42,9 +38,7 @@ export class MediaUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         this.media.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
-        this.media.publishedDateGMT = this.publishedDateGMT != null ? moment(this.publishedDateGMT, DATE_TIME_FORMAT) : null;
         this.media.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
-        this.media.lastUpdatedDateGMT = this.lastUpdatedDateGMT != null ? moment(this.lastUpdatedDateGMT, DATE_TIME_FORMAT) : null;
         this.media.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         if (this.media.id !== undefined) {
             this.subscribeToSaveResponse(this.mediaService.update(this.media));

@@ -31,6 +31,7 @@ export class TagUpdatePage {
     descriptionInput = element(by.id('field_description'));
     clientIdInput = element(by.id('field_clientId'));
     createdDateInput = element(by.id('field_createdDate'));
+    lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -74,6 +75,14 @@ export class TagUpdatePage {
 
     async getCreatedDateInput() {
         return this.createdDateInput.getAttribute('value');
+    }
+
+    async setLastUpdatedDateInput(lastUpdatedDate) {
+        await this.lastUpdatedDateInput.sendKeys(lastUpdatedDate);
+    }
+
+    async getLastUpdatedDateInput() {
+        return this.lastUpdatedDateInput.getAttribute('value');
     }
 
     async save() {

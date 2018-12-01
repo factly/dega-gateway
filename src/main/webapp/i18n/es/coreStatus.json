@@ -18,6 +18,7 @@
             "isDefault": "Is Default",
             "slug": "Slug",
             "createdDate": "Created Date",
+            "lastUpdatedDate": "Last Updated Date",
             "post": "Post"
         }
     },

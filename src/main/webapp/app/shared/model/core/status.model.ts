@@ -8,6 +8,7 @@ export interface IStatus {
     isDefault?: boolean;
     slug?: string;
     createdDate?: Moment;
+    lastUpdatedDate?: Moment;
     posts?: IPost[];
 }
 
@@ -19,6 +20,7 @@ export class Status implements IStatus {
         public isDefault?: boolean,
         public slug?: string,
         public createdDate?: Moment,
+        public lastUpdatedDate?: Moment,
         public posts?: IPost[]
     ) {
         this.isDefault = this.isDefault || false;

@@ -19,6 +19,7 @@
             "parent": "Parent",
             "clientId": "Client Id",
             "createdDate": "Created Date",
+            "lastUpdatedDate": "Last Updated Date",
             "post": "Post"
         }
     },

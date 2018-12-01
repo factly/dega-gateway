@@ -13,9 +13,7 @@ export interface IMedia {
     description?: string;
     uploadedBy?: string;
     publishedDate?: Moment;
-    publishedDateGMT?: Moment;
     lastUpdatedDate?: Moment;
-    lastUpdatedDateGMT?: Moment;
     slug?: string;
     clientId?: string;
     createdDate?: Moment;
@@ -35,9 +33,7 @@ export class Media implements IMedia {
         public description?: string,
         public uploadedBy?: string,
         public publishedDate?: Moment,
-        public publishedDateGMT?: Moment,
         public lastUpdatedDate?: Moment,
-        public lastUpdatedDateGMT?: Moment,
         public slug?: string,
         public clientId?: string,
         public createdDate?: Moment

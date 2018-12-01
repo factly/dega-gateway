@@ -59,7 +59,8 @@ export class FormatService {
 
     protected convertDateFromClient(format: IFormat): IFormat {
         const copy: IFormat = Object.assign({}, format, {
-            createdDate: format.createdDate != null && format.createdDate.isValid() ? format.createdDate.toJSON() : null
+            createdDate: format.createdDate != null && format.createdDate.isValid() ? format.createdDate.toJSON() : null,
+            lastUpdatedDate: format.lastUpdatedDate != null && format.lastUpdatedDate.isValid() ? format.lastUpdatedDate.toJSON() : null
         });
         return copy;
     }
@@ -67,6 +68,7 @@ export class FormatService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
+            res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
         }
         return res;
     }
@@ -75,6 +77,7 @@ export class FormatService {
         if (res.body) {
             res.body.forEach((format: IFormat) => {
                 format.createdDate = format.createdDate != null ? moment(format.createdDate) : null;
+                format.lastUpdatedDate = format.lastUpdatedDate != null ? moment(format.lastUpdatedDate) : null;
             });
         }
         return res;

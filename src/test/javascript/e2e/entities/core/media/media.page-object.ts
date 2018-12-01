@@ -37,9 +37,7 @@ export class MediaUpdatePage {
     descriptionInput = element(by.id('field_description'));
     uploadedByInput = element(by.id('field_uploadedBy'));
     publishedDateInput = element(by.id('field_publishedDate'));
-    publishedDateGMTInput = element(by.id('field_publishedDateGMT'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
-    lastUpdatedDateGMTInput = element(by.id('field_lastUpdatedDateGMT'));
     slugInput = element(by.id('field_slug'));
     clientIdInput = element(by.id('field_clientId'));
     createdDateInput = element(by.id('field_createdDate'));
@@ -136,28 +134,12 @@ export class MediaUpdatePage {
         return this.publishedDateInput.getAttribute('value');
     }
 
-    async setPublishedDateGMTInput(publishedDateGMT) {
-        await this.publishedDateGMTInput.sendKeys(publishedDateGMT);
-    }
-
-    async getPublishedDateGMTInput() {
-        return this.publishedDateGMTInput.getAttribute('value');
-    }
-
     async setLastUpdatedDateInput(lastUpdatedDate) {
         await this.lastUpdatedDateInput.sendKeys(lastUpdatedDate);
     }
 
     async getLastUpdatedDateInput() {
         return this.lastUpdatedDateInput.getAttribute('value');
-    }
-
-    async setLastUpdatedDateGMTInput(lastUpdatedDateGMT) {
-        await this.lastUpdatedDateGMTInput.sendKeys(lastUpdatedDateGMT);
-    }
-
-    async getLastUpdatedDateGMTInput() {
-        return this.lastUpdatedDateGMTInput.getAttribute('value');
     }
 
     async setSlugInput(slug) {

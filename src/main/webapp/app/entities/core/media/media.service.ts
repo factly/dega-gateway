@@ -60,10 +60,7 @@ export class MediaService {
     protected convertDateFromClient(media: IMedia): IMedia {
         const copy: IMedia = Object.assign({}, media, {
             publishedDate: media.publishedDate != null && media.publishedDate.isValid() ? media.publishedDate.toJSON() : null,
-            publishedDateGMT: media.publishedDateGMT != null && media.publishedDateGMT.isValid() ? media.publishedDateGMT.toJSON() : null,
             lastUpdatedDate: media.lastUpdatedDate != null && media.lastUpdatedDate.isValid() ? media.lastUpdatedDate.toJSON() : null,
-            lastUpdatedDateGMT:
-                media.lastUpdatedDateGMT != null && media.lastUpdatedDateGMT.isValid() ? media.lastUpdatedDateGMT.toJSON() : null,
             createdDate: media.createdDate != null && media.createdDate.isValid() ? media.createdDate.toJSON() : null
         });
         return copy;
@@ -72,9 +69,7 @@ export class MediaService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.publishedDate = res.body.publishedDate != null ? moment(res.body.publishedDate) : null;
-            res.body.publishedDateGMT = res.body.publishedDateGMT != null ? moment(res.body.publishedDateGMT) : null;
             res.body.lastUpdatedDate = res.body.lastUpdatedDate != null ? moment(res.body.lastUpdatedDate) : null;
-            res.body.lastUpdatedDateGMT = res.body.lastUpdatedDateGMT != null ? moment(res.body.lastUpdatedDateGMT) : null;
             res.body.createdDate = res.body.createdDate != null ? moment(res.body.createdDate) : null;
         }
         return res;
@@ -84,9 +79,7 @@ export class MediaService {
         if (res.body) {
             res.body.forEach((media: IMedia) => {
                 media.publishedDate = media.publishedDate != null ? moment(media.publishedDate) : null;
-                media.publishedDateGMT = media.publishedDateGMT != null ? moment(media.publishedDateGMT) : null;
                 media.lastUpdatedDate = media.lastUpdatedDate != null ? moment(media.lastUpdatedDate) : null;
-                media.lastUpdatedDateGMT = media.lastUpdatedDateGMT != null ? moment(media.lastUpdatedDateGMT) : null;
                 media.createdDate = media.createdDate != null ? moment(media.createdDate) : null;
             });
         }

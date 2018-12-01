@@ -50,9 +50,7 @@ describe('Media e2e test', () => {
             mediaUpdatePage.setDescriptionInput('description'),
             mediaUpdatePage.setUploadedByInput('uploadedBy'),
             mediaUpdatePage.setPublishedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-            mediaUpdatePage.setPublishedDateGMTInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             mediaUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-            mediaUpdatePage.setLastUpdatedDateGMTInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             mediaUpdatePage.setSlugInput('slug'),
             mediaUpdatePage.setClientIdInput('clientId'),
             mediaUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
@@ -68,9 +66,7 @@ describe('Media e2e test', () => {
         expect(await mediaUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await mediaUpdatePage.getUploadedByInput()).to.eq('uploadedBy');
         expect(await mediaUpdatePage.getPublishedDateInput()).to.contain('2001-01-01T02:30');
-        expect(await mediaUpdatePage.getPublishedDateGMTInput()).to.contain('2001-01-01T02:30');
         expect(await mediaUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');
-        expect(await mediaUpdatePage.getLastUpdatedDateGMTInput()).to.contain('2001-01-01T02:30');
         expect(await mediaUpdatePage.getSlugInput()).to.eq('slug');
         expect(await mediaUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await mediaUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');

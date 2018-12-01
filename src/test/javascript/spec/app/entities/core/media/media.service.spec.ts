@@ -39,8 +39,6 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 currentDate,
                 currentDate,
-                currentDate,
-                currentDate,
                 'AAAAAAA',
                 'AAAAAAA',
                 currentDate
@@ -52,9 +50,7 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
-                        publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
@@ -73,9 +69,7 @@ describe('Service Tests', () => {
                     {
                         id: 'ID',
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
-                        publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
@@ -83,9 +77,7 @@ describe('Service Tests', () => {
                 const expected = Object.assign(
                     {
                         publishedDate: currentDate,
-                        publishedDateGMT: currentDate,
                         lastUpdatedDate: currentDate,
-                        lastUpdatedDateGMT: currentDate,
                         createdDate: currentDate
                     },
                     returnedFromService
@@ -112,9 +104,7 @@ describe('Service Tests', () => {
                         description: 'BBBBBB',
                         uploadedBy: 'BBBBBB',
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
-                        publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         slug: 'BBBBBB',
                         clientId: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT)
@@ -125,9 +115,7 @@ describe('Service Tests', () => {
                 const expected = Object.assign(
                     {
                         publishedDate: currentDate,
-                        publishedDateGMT: currentDate,
                         lastUpdatedDate: currentDate,
-                        lastUpdatedDateGMT: currentDate,
                         createdDate: currentDate
                     },
                     returnedFromService
@@ -154,9 +142,7 @@ describe('Service Tests', () => {
                         description: 'BBBBBB',
                         uploadedBy: 'BBBBBB',
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
-                        publishedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDateGMT: currentDate.format(DATE_TIME_FORMAT),
                         slug: 'BBBBBB',
                         clientId: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT)
@@ -166,9 +152,7 @@ describe('Service Tests', () => {
                 const expected = Object.assign(
                     {
                         publishedDate: currentDate,
-                        publishedDateGMT: currentDate,
                         lastUpdatedDate: currentDate,
-                        lastUpdatedDateGMT: currentDate,
                         createdDate: currentDate
                     },
                     returnedFromService

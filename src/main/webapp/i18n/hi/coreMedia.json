@@ -24,9 +24,7 @@
             "description": "Description",
             "uploadedBy": "Uploaded By",
             "publishedDate": "Published Date",
-            "publishedDateGMT": "Published Date GMT",
             "lastUpdatedDate": "Last Updated Date",
-            "lastUpdatedDateGMT": "Last Updated Date GMT",
             "slug": "Slug",
             "clientId": "Client Id",
             "createdDate": "Created Date"

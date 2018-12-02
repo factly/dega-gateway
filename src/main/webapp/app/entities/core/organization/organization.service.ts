@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IOrganization[]>;
 export class OrganizationService {
     public resourceUrl = SERVER_API_URL + 'core/api/organizations';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/organizations';
+    public resourceUrlForOrganizationBySlug = SERVER_API_URL + 'core/api/organizationbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -84,5 +85,9 @@ export class OrganizationService {
             });
         }
         return res;
+    }
+
+    getOrganizationBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IOrganization>(`${this.resourceUrlForOrganizationBySlug}/${slug}`, { observe: 'response' });
     }
 }

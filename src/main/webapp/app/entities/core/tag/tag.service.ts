@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<ITag[]>;
 export class TagService {
     public resourceUrl = SERVER_API_URL + 'core/api/tags';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/tags';
+    public resourceUrlForTagBySlug = SERVER_API_URL + 'core/api/tagbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -81,5 +82,9 @@ export class TagService {
             });
         }
         return res;
+    }
+
+    getTagBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<ITag>(`${this.resourceUrlForTagBySlug}/${slug}`, { observe: 'response' });
     }
 }

@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IFormat[]>;
 export class FormatService {
     public resourceUrl = SERVER_API_URL + 'core/api/formats';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/formats';
+    public resourceUrlForFormatBySlug = SERVER_API_URL + 'core/api/formatbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -81,5 +82,9 @@ export class FormatService {
             });
         }
         return res;
+    }
+
+    getFormatBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IFormat>(`${this.resourceUrlForFormatBySlug}/${slug}`, { observe: 'response' });
     }
 }

@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IRole[]>;
 export class RoleService {
     public resourceUrl = SERVER_API_URL + 'core/api/roles';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/roles';
+    public resourceUrlForRoleBySlug = SERVER_API_URL + 'core/api/rolebyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -81,5 +82,9 @@ export class RoleService {
             });
         }
         return res;
+    }
+
+    getRoleBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IRole>(`${this.resourceUrlForRoleBySlug}/${slug}`, { observe: 'response' });
     }
 }

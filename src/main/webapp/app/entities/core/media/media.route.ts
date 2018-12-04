@@ -38,7 +38,7 @@ export const mediaRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
+            defaultSort: 'created_date,desc',
             pageTitle: 'gatewayApp.coreMedia.home.title'
         },
         canActivate: [UserRouteAccessService]

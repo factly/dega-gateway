@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<ICategory[]>;
 export class CategoryService {
     public resourceUrl = SERVER_API_URL + 'core/api/categories';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/categories';
+    public resourceUrlForCategoryBySlug = SERVER_API_URL + 'core/api/categorybyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -82,5 +83,9 @@ export class CategoryService {
             });
         }
         return res;
+    }
+
+    getCategoryBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<ICategory>(`${this.resourceUrlForCategoryBySlug}/${slug}`, { observe: 'response' });
     }
 }

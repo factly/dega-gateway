@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IStatus[]>;
 export class StatusService {
     public resourceUrl = SERVER_API_URL + 'core/api/statuses';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/statuses';
+    public resourceUrlForStatusBySlug = SERVER_API_URL + 'core/api/statusbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -81,5 +82,9 @@ export class StatusService {
             });
         }
         return res;
+    }
+
+    getStatusBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IStatus>(`${this.resourceUrlForStatusBySlug}/${slug}`, { observe: 'response' });
     }
 }

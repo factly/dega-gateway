@@ -22,6 +22,9 @@ export class TagUpdateComponent implements OnInit {
     posts: IPost[];
     createdDate: string;
     lastUpdatedDate: string;
+    slug: string;
+    slugExtention: number;
+    tempSlug: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -90,5 +93,24 @@ export class TagUpdateComponent implements OnInit {
             }
         }
         return option;
+    }
+
+    bindSlug(event: any) {
+        this.slugExtention = 0;
+        this.slug = event.target.value.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-');
+        this.tempSlug = this.slug;
+        this.createSlug();
+    }
+    createSlug() {
+        if (this.slug) {
+            this.tagService.getTagBySlug(this.slug).subscribe((res: HttpResponse<ITag>) => {
+                if (res.body) {
+                    this.slugExtention += 1;
+                    this.slug = this.tempSlug + this.slugExtention;
+                    this.createSlug();
+                }
+                this.tag.slug = this.slug;
+            });
+        }
     }
 }

@@ -38,7 +38,7 @@ export const formatRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
+            defaultSort: 'created_date,desc',
             pageTitle: 'gatewayApp.coreFormat.home.title'
         },
         canActivate: [UserRouteAccessService]

@@ -38,7 +38,7 @@ export const factcheckRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
+            defaultSort: 'created_date,desc',
             pageTitle: 'gatewayApp.factcheckFactcheck.home.title'
         },
         canActivate: [UserRouteAccessService]

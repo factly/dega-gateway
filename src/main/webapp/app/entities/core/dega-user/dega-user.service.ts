@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IDegaUser[]>;
 export class DegaUserService {
     public resourceUrl = SERVER_API_URL + 'core/api/dega-users';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/dega-users';
+    public resourceUrlForDegaUserBySlug = SERVER_API_URL + 'core/api/degauserbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -78,5 +79,9 @@ export class DegaUserService {
             });
         }
         return res;
+    }
+
+    getDegaUserBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IDegaUser>(`${this.resourceUrlForDegaUserBySlug}/${slug}`, { observe: 'response' });
     }
 }

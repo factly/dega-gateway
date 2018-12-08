@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IClaimant[]>;
 export class ClaimantService {
     public resourceUrl = SERVER_API_URL + 'factcheck/api/claimants';
     public resourceSearchUrl = SERVER_API_URL + 'factcheck/api/_search/claimants';
+    public resourceUrlForClaimantBySlug = SERVER_API_URL + 'factcheck/api/claimantbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -82,5 +83,9 @@ export class ClaimantService {
             });
         }
         return res;
+    }
+
+    getClaimantBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IClaimant>(`${this.resourceUrlForClaimantBySlug}/${slug}`, { observe: 'response' });
     }
 }

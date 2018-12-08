@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.title" for="field_title">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title"
-                        [(ngModel)]="factcheck.title" required/>
+                        [(ngModel)]="factcheck.title" (change)="bindSlug($event)" required/>
                     <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
@@ -20,7 +20,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
                         [(ngModel)]="factcheck.clientId" required/>
@@ -30,7 +30,7 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.introduction" for="field_introduction">Introduction</label>
                     <input type="text" class="form-control" name="introduction" id="field_introduction"
@@ -69,7 +69,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
                     <div class="d-flex">
                         <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="lastUpdatedDate"
@@ -85,7 +85,7 @@
                             This field should be a date and time.
                         </small>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.featured" for="field_featured">Featured</label>
                     <input type="checkbox" class="form-control" name="featured" id="field_featured"
@@ -101,7 +101,7 @@
                     <input type="text" class="form-control" name="updates" id="field_updates"
                         [(ngModel)]="factcheck.updates" />
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.slug" for="field_slug">Slug</label>
                     <input type="text" class="form-control" name="slug" id="field_slug"
                         [(ngModel)]="factcheck.slug" required/>
@@ -111,7 +111,7 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.password" for="field_password">Password</label>
                     <input type="text" class="form-control" name="password" id="field_password"
@@ -127,7 +127,7 @@
                     <input type="text" class="form-control" name="subTitle" id="field_subTitle"
                         [(ngModel)]="factcheck.subTitle" />
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.createdDate" for="field_createdDate">Created Date</label>
                     <div class="d-flex">
                         <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
@@ -143,7 +143,7 @@
                             This field should be a date and time.
                         </small>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.factcheckFactcheck.claim" for="field_claim">Claim</label>

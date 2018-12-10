@@ -1,0 +1,15 @@
+version: '2'
+
+volumes:
+    postgres_data:
+        driver: local
+
+services:
+    postgres:
+        image: postgres:9.6
+        volumes:
+        - ~/volumes/dega/keycloak/postgresql/:/var/lib/postgresql/data/
+        environment:
+            POSTGRES_DB: keycloak
+            POSTGRES_USER: keycloak
+            POSTGRES_PASSWORD: password

@@ -2,8 +2,8 @@ version: '2'
 services:
     gateway-elasticsearch:
         image: elasticsearch:5.6.5
-        # volumes:
-        #     - ~/volumes/jhipster/gateway/elasticsearch/:/usr/share/elasticsearch/data/
+        volumes:
+            - ~/volumes/dega/elasticsearch/:/usr/share/elasticsearch/data/
         ports:
             - 9200:9200
             - 9300:9300

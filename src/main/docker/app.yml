@@ -1,5 +1,9 @@
 version: '2'
 services:
+    postgres:
+        extends:
+            file: postgresql.yml
+            service: postgres
     gateway-app:
         image: gateway
         environment:

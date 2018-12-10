@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IRating[]>;
 export class RatingService {
     public resourceUrl = SERVER_API_URL + 'factcheck/api/ratings';
     public resourceSearchUrl = SERVER_API_URL + 'factcheck/api/_search/ratings';
+    public resourceUrlForRatingBySlug = SERVER_API_URL + 'factcheck/api/ratingbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -81,5 +82,9 @@ export class RatingService {
             });
         }
         return res;
+    }
+
+    getRatingBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IRating>(`${this.resourceUrlForRatingBySlug}/${slug}`, { observe: 'response' });
     }
 }

@@ -34,6 +34,7 @@ export class RatingUpdatePage {
     slugInput = element(by.id('field_slug'));
     createdDateInput = element(by.id('field_createdDate'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
+    descriptionInput = element(by.id('field_description'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -96,6 +97,14 @@ export class RatingUpdatePage {
 
     async getLastUpdatedDateInput() {
         return this.lastUpdatedDateInput.getAttribute('value');
+    }
+
+    async setDescriptionInput(description) {
+        await this.descriptionInput.sendKeys(description);
+    }
+
+    async getDescriptionInput() {
+        return this.descriptionInput.getAttribute('value');
     }
 
     async save() {

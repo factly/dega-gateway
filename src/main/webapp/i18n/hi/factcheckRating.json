@@ -21,6 +21,7 @@
             "slug": "Slug",
             "createdDate": "Created Date",
             "lastUpdatedDate": "Last Updated Date",
+            "description": "Description",
             "claim": "Claim"
         }
     },

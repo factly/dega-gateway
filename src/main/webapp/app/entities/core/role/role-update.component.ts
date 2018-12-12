@@ -17,6 +17,9 @@ export class RoleUpdateComponent implements OnInit {
     isSaving: boolean;
     createdDate: string;
     lastUpdatedDate: string;
+    slug: string;
+    slugExtention: number;
+    tempSlug: string;
 
     constructor(private roleService: RoleService, private activatedRoute: ActivatedRoute) {}
 
@@ -55,5 +58,24 @@ export class RoleUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    bindSlug(event: any) {
+        this.slugExtention = 0;
+        this.slug = event.target.value.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-');
+        this.tempSlug = this.slug;
+        this.createSlug();
+    }
+    createSlug() {
+        if (this.slug) {
+            this.roleService.getRoleBySlug(this.slug).subscribe((res: HttpResponse<IRole>) => {
+                if (res.body) {
+                    this.slugExtention += 1;
+                    this.slug = this.tempSlug + this.slugExtention;
+                    this.createSlug();
+                }
+                this.role.slug = this.slug;
+            });
+        }
     }
 }

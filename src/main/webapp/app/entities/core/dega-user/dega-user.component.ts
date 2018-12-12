@@ -151,8 +151,8 @@ export class DegaUserComponent implements OnInit, OnDestroy {
 
     sort() {
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
+        if (this.predicate !== 'created_date') {
+            result.push('created_date');
         }
         return result;
     }

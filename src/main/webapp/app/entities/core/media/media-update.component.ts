@@ -18,6 +18,9 @@ export class MediaUpdateComponent implements OnInit {
     publishedDate: string;
     lastUpdatedDate: string;
     createdDate: string;
+    slug: string;
+    slugExtention: number;
+    tempSlug: string;
 
     constructor(private mediaService: MediaService, private activatedRoute: ActivatedRoute) {}
 
@@ -58,5 +61,25 @@ export class MediaUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    bindSlug(event: any) {
+        this.slugExtention = 0;
+        this.slug = event.target.value.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-');
+        this.tempSlug = this.slug;
+        this.createSlug();
+    }
+
+    createSlug() {
+        if (this.slug) {
+            this.mediaService.getMediaBySlug(this.slug).subscribe((res: HttpResponse<IMedia>) => {
+                if (res.body) {
+                    this.slugExtention += 1;
+                    this.slug = this.tempSlug + this.slugExtention;
+                    this.createSlug();
+                }
+                this.media.slug = this.slug;
+            });
+        }
     }
 }

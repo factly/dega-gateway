@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="rating.name" required/>
+                        [(ngModel)]="rating.name" (change)="bindSlug($event)" required/>
                     <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
@@ -49,7 +49,7 @@
                     <input type="checkbox" class="form-control" name="isDefault" id="field_isDefault"
                         [(ngModel)]="rating.isDefault" />
                 </div>
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
                         [(ngModel)]="rating.clientId" required/>
@@ -104,7 +104,7 @@
                             This field should be a date and time.
                         </small>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.description" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
@@ -116,7 +116,6 @@
                         </small>
                     </div>
                 </div>
-
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

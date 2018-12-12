@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreTag.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="tag.name" required/>
+                        [(ngModel)]="tag.name" (change)="bindSlug($event)" required/>
                     <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
@@ -20,7 +20,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreTag.slug" for="field_slug">Slug</label>
                     <input type="text" class="form-control" name="slug" id="field_slug"
                         [(ngModel)]="tag.slug" required/>
@@ -30,13 +30,13 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreTag.description" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
                         [(ngModel)]="tag.description" />
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreTag.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
                         [(ngModel)]="tag.clientId" required/>
@@ -81,7 +81,7 @@
                         </small>
                     </div>
                 </div>
-
+-->
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

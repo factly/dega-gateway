@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IFactcheck[]>;
 export class FactcheckService {
     public resourceUrl = SERVER_API_URL + 'factcheck/api/factchecks';
     public resourceSearchUrl = SERVER_API_URL + 'factcheck/api/_search/factchecks';
+    public resourceUrlForFactcheckBySlug = SERVER_API_URL + 'factcheck/api/factcheckbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -85,5 +86,9 @@ export class FactcheckService {
             });
         }
         return res;
+    }
+
+    getFactcheckBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IFactcheck>(`${this.resourceUrlForFactcheckBySlug}/${slug}`, { observe: 'response' });
     }
 }

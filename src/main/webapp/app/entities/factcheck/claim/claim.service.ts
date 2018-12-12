@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IClaim[]>;
 export class ClaimService {
     public resourceUrl = SERVER_API_URL + 'factcheck/api/claims';
     public resourceSearchUrl = SERVER_API_URL + 'factcheck/api/_search/claims';
+    public resourceUrlForClaimBySlug = SERVER_API_URL + 'factcheck/api/claimbyslug';
 
     constructor(private http: HttpClient) {}
 
@@ -87,5 +88,9 @@ export class ClaimService {
             });
         }
         return res;
+    }
+
+    getClaimBySlug(slug: string): Observable<EntityResponseType> {
+        return this.http.get<IClaim>(`${this.resourceUrlForClaimBySlug}/${slug}`, { observe: 'response' });
     }
 }

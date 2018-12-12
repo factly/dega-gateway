@@ -22,6 +22,9 @@ export class OrganizationUpdateComponent implements OnInit {
     degausers: IDegaUser[];
     createdDate: string;
     lastUpdatedDate: string;
+    slug: string;
+    slugExtention: number;
+    tempSlug: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -91,5 +94,24 @@ export class OrganizationUpdateComponent implements OnInit {
             }
         }
         return option;
+    }
+
+    bindSlug(event: any) {
+        this.slugExtention = 0;
+        this.slug = event.target.value.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-');
+        this.tempSlug = this.slug;
+        this.createSlug();
+    }
+    createSlug() {
+        if (this.slug) {
+            this.organizationService.getOrganizationBySlug(this.slug).subscribe((res: HttpResponse<IOrganization>) => {
+                if (res.body) {
+                    this.slugExtention += 1;
+                    this.slug = this.tempSlug + this.slugExtention;
+                    this.createSlug();
+                }
+                this.organization.slug = this.slug;
+            });
+        }
     }
 }

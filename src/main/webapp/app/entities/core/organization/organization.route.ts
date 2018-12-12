@@ -38,7 +38,7 @@ export const organizationRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
+            defaultSort: 'created_date,desc',
             pageTitle: 'gatewayApp.coreOrganization.home.title'
         },
         canActivate: [UserRouteAccessService]

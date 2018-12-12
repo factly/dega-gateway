@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreCategory.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="category.name" required/>
+                        [(ngModel)]="category.name" (change)="bindSlug($event)" required/>
                     <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
@@ -25,7 +25,7 @@
                     <input type="text" class="form-control" name="description" id="field_description"
                         [(ngModel)]="category.description" />
                 </div>
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreCategory.slug" for="field_slug">Slug</label>
                     <input type="text" class="form-control" name="slug" id="field_slug"
                         [(ngModel)]="category.slug" required/>
@@ -35,13 +35,13 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreCategory.parent" for="field_parent">Parent</label>
                     <input type="text" class="form-control" name="parent" id="field_parent"
                         [(ngModel)]="category.parent" />
                 </div>
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreCategory.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
                         [(ngModel)]="category.clientId" required/>
@@ -51,8 +51,8 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
-                <div class="form-group">
+                </div>-->
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreCategory.createdDate" for="field_createdDate">Created Date</label>
                     <div class="d-flex">
                         <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div>-->
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

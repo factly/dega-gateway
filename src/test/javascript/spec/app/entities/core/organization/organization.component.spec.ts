@@ -27,7 +27,7 @@ describe('Component Tests', () => {
                                 subscribe: (fn: (value: Data) => void) =>
                                     fn({
                                         pagingParams: {
-                                            predicate: 'id',
+                                            predicate: 'created_date',
                                             reverse: false,
                                             page: 0
                                         }
@@ -116,12 +116,12 @@ describe('Component Tests', () => {
             expect(service.query).toHaveBeenCalledTimes(2);
             expect(comp.organizations[0]).toEqual(jasmine.objectContaining({ id: '123' }));
         });
-        it('should calculate the sort attribute for an id', () => {
+        it('should calculate the sort attribute for a created_date', () => {
             // WHEN
             const result = comp.sort();
 
             // THEN
-            expect(result).toEqual(['id,desc']);
+            expect(result).toEqual(['created_date,desc']);
         });
 
         it('should calculate the sort attribute for a non-id attribute', () => {
@@ -132,7 +132,7 @@ describe('Component Tests', () => {
             const result = comp.sort();
 
             // THEN
-            expect(result).toEqual(['name,desc', 'id']);
+            expect(result).toEqual(['name,desc', 'created_date']);
         });
     });
 });

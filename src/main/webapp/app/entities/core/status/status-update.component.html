@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="status.name" required/>
+                        [(ngModel)]="status.name" (change)="bindSlug($event)" required/>
                     <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
@@ -20,7 +20,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
                         [(ngModel)]="status.clientId" required/>
@@ -30,13 +30,13 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.isDefault" for="field_isDefault">Is Default</label>
                     <input type="checkbox" class="form-control" name="isDefault" id="field_isDefault"
                         [(ngModel)]="status.isDefault" />
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.slug" for="field_slug">Slug</label>
                     <input type="text" class="form-control" name="slug" id="field_slug"
                         [(ngModel)]="status.slug" required/>
@@ -47,7 +47,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+               <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.createdDate" for="field_createdDate">Created Date</label>
                     <div class="d-flex">
                         <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
@@ -80,7 +80,7 @@
                             This field should be a date and time.
                         </small>
                     </div>
-                </div>
+                </div>-->
 
             </div>
             <div>

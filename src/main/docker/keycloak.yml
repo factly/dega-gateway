@@ -3,9 +3,17 @@ version: '2'
 services:
     keycloak:
         image: jboss/keycloak:4.5.0.Final
+
+        ## comment the following lines if keycloak is to run in the mode to export realm and users
         command: ["-b", "0.0.0.0", "-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=dir", "-Dkeycloak.migration.dir=/opt/jboss/keycloak/realm-config", "-Dkeycloak.migration.strategy=IGNORE_EXISTING", "-Djboss.socket.binding.port-offset=1000"]
         volumes:
         - ./realm-config:/opt/jboss/keycloak/realm-config
+
+        ## uncomment the following command if keycloak is run in the mode to export realm and users. real and users are exported to ~/keycloak directory
+        # command: ["-b", "0.0.0.0", "-Dkeycloak.migration.action=export", "-Dkeycloak.migration.provider=dir", "-Dkeycloak.migration.dir=/opt/jboss/keycloak/realm-config", "-Djboss.socket.binding.port-offset=1000"]
+        # volumes:
+        #- ~/keycloak:/opt/jboss/keycloak/realm-config
+
         environment:
             DB_VENDOR: POSTGRES
             DB_ADDR: postgres
@@ -18,4 +26,3 @@ services:
             #JDBC_PARAMS: "ssl=true"
         ports:
         - 9080:9080
-

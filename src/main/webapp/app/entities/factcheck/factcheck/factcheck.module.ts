@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { GatewaySharedModule } from 'app/shared';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
     FactcheckComponent,
     FactcheckDetailComponent,
@@ -15,7 +16,7 @@ import {
 const ENTITY_STATES = [...factcheckRoute, ...factcheckPopupRoute];
 
 @NgModule({
-    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         FactcheckComponent,
         FactcheckDetailComponent,

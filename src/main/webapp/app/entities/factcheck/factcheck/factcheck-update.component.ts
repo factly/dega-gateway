@@ -10,6 +10,11 @@ import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
 import { FactcheckService } from './factcheck.service';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
 import { ClaimService } from 'app/entities/factcheck/claim';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { ClaimantService } from 'app/entities/factcheck/claimant';
+import { RatingService } from 'app/entities/factcheck/rating';
+import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
+import { IRating } from 'app/shared/model/factcheck/rating.model';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -26,12 +31,18 @@ export class FactcheckUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
+    formGroup: FormGroup;
+    claimants: IClaimant[];
+    ratings: IRating[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private factcheckService: FactcheckService,
         private claimService: ClaimService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private formBuilder: FormBuilder,
+        private claimantService: ClaimantService,
+        private ratingService: RatingService
     ) {}
 
     ngOnInit() {
@@ -48,6 +59,37 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.formGroup = this.formBuilder.group({
+            claims: this.formBuilder.array([])
+        });
+        this.claimantService.query().subscribe(
+            (res: HttpResponse<IClaimant[]>) => {
+                this.claimants = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.ratingService.query().subscribe(
+            (res: HttpResponse<IRating[]>) => {
+                this.ratings = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    addClaimGroup(): FormGroup {
+        return this.formBuilder.group({
+            claim: ['', Validators.required],
+            description: [],
+            claimDate: [],
+            claimSource: [],
+            checkedDate: [],
+            reviewSources: [],
+            review: [],
+            reviewTagLine: [],
+            ratingId: [],
+            claimantId: [],
+            slug: []
+        });
     }
 
     previousState() {
@@ -59,6 +101,17 @@ export class FactcheckUpdateComponent implements OnInit {
         this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
         this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         this.factcheck.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+
+        for (const key in this.formGroup.value.claims) {
+            if (key) {
+                if (this.factcheck.claims && this.factcheck.claims.length > 0) {
+                    this.factcheck.claims.push(this.formGroup.value.claims[key]);
+                } else {
+                    this.factcheck.claims = this.formGroup.value.claims[key];
+                }
+            }
+        }
+
         if (this.factcheck.id !== undefined) {
             this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
         } else {
@@ -104,6 +157,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.tempSlug = this.slug;
         this.createSlug();
     }
+
     createSlug() {
         if (this.slug) {
             this.factcheckService.getFactcheckBySlug(this.slug).subscribe((res: HttpResponse<IFactcheck>) => {
@@ -115,5 +169,21 @@ export class FactcheckUpdateComponent implements OnInit {
                 this.factcheck.slug = this.slug;
             });
         }
+    }
+
+    get claimsArray() {
+        return <FormArray>this.formGroup.get('claims');
+    }
+
+    addClaim() {
+        this.claimsArray.push(this.addClaimGroup());
+    }
+
+    removeClaim(index) {
+        this.claimsArray.removeAt(index);
+    }
+
+    submitHandler() {
+        this.claims = this.formGroup.value;
     }
 }

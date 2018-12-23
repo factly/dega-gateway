@@ -111,6 +111,7 @@ export class OrganizationUpdateComponent implements OnInit {
                     this.createSlug();
                 }
                 this.organization.slug = this.slug;
+                this.organization.clientId = this.slug;
             });
         }
     }

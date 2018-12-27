@@ -17,6 +17,7 @@ export class MediaService {
     public resourceUrl = SERVER_API_URL + 'core/api/media';
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/media';
     public resourceUrlForMediaBySlug = SERVER_API_URL + 'core/api/mediabyslug';
+    public uploadImageUrl = SERVER_API_URL + 'core/api/media/upload';
 
     constructor(private http: HttpClient) {}
 
@@ -89,5 +90,11 @@ export class MediaService {
 
     getMediaBySlug(slug: string): Observable<EntityResponseType> {
         return this.http.get<IMedia>(`${this.resourceUrlForMediaBySlug}/${slug}`, { observe: 'response' });
+    }
+
+    uploadImage(selectedFile: File): Observable<EntityResponseType> {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        return this.http.post<IMedia>(this.uploadImageUrl, formData, { observe: 'response' });
     }
 }

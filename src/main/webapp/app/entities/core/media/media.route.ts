@@ -11,6 +11,7 @@ import { MediaComponent } from './media.component';
 import { MediaDetailComponent } from './media-detail.component';
 import { MediaUpdateComponent } from './media-update.component';
 import { MediaDeletePopupComponent } from './media-delete-dialog.component';
+import { MediaUploadPopupComponent } from './media-upload-dialog.component';
 import { IMedia } from 'app/shared/model/core/media.model';
 
 @Injectable({ providedIn: 'root' })
@@ -85,6 +86,19 @@ export const mediaPopupRoute: Routes = [
     {
         path: 'media/:id/delete',
         component: MediaDeletePopupComponent,
+        resolve: {
+            media: MediaResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gatewayApp.coreMedia.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'media/upload',
+        component: MediaUploadPopupComponent,
         resolve: {
             media: MediaResolve
         },

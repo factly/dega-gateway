@@ -44,7 +44,8 @@ Generic styles
     border-left: 5px solid green;
 }
 
-.ng-invalid:not(form) {
+input.ng-invalid:not(form),
+select.ng-invalid:not(form) {
     border-left: 5px solid red;
 }
 

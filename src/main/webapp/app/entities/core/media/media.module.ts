@@ -11,13 +11,31 @@ import {
     mediaRoute,
     mediaPopupRoute
 } from './';
+import { MediaUploadPopupComponent } from './media-upload-dialog.component';
+import { MediaUploadDialogComponent } from './media-upload-dialog.component';
 
 const ENTITY_STATES = [...mediaRoute, ...mediaPopupRoute];
 
 @NgModule({
     imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [MediaComponent, MediaDetailComponent, MediaUpdateComponent, MediaDeleteDialogComponent, MediaDeletePopupComponent],
-    entryComponents: [MediaComponent, MediaUpdateComponent, MediaDeleteDialogComponent, MediaDeletePopupComponent],
+    declarations: [
+        MediaComponent,
+        MediaDetailComponent,
+        MediaUpdateComponent,
+        MediaDeleteDialogComponent,
+        MediaDeletePopupComponent,
+        MediaUploadDialogComponent,
+        MediaUploadPopupComponent
+    ],
+    entryComponents: [
+        MediaComponent,
+        MediaUpdateComponent,
+        MediaDeleteDialogComponent,
+        MediaDeletePopupComponent,
+        MediaDeletePopupComponent,
+        MediaUploadDialogComponent,
+        MediaUploadPopupComponent
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayMediaModule {}

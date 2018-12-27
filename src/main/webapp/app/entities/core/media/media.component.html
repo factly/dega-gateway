@@ -1,7 +1,9 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="gatewayApp.coreMedia.home.title">Media</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-media" [routerLink]="['/media/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-media"
+                [routerLink]="['/', { outlets: { popup: 'media/upload'} }]"
+                replaceUrl="true">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.createLabel">
             Create new Media
@@ -29,10 +31,11 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="thumbnail"><span jhiTranslate="gatewayApp.coreMedia.thumbnail">Thumbnail</span></th>
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreMedia.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="type"><span jhiTranslate="gatewayApp.coreMedia.type">Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="url"><span jhiTranslate="gatewayApp.coreMedia.url">Url</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="url"><span jhiTranslate="gatewayApp.coreMedia.url">Url</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="fileSize"><span jhiTranslate="gatewayApp.coreMedia.fileSize">File Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dimensions"><span jhiTranslate="gatewayApp.coreMedia.dimensions">Dimensions</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="gatewayApp.coreMedia.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -50,10 +53,11 @@
             </thead>
             <tbody>
             <tr *ngFor="let media of media ;trackBy: trackId">
-                <td><a [routerLink]="['/media', media.id, 'view' ]">{{media.id}}</a></td>
+                <!--<td><a [routerLink]="['/media', media.id, 'view' ]">{{media.id}}</a></td>-->
+                <td><img src={{media.url}} alt="Image" width="100" height="100"></td>
                 <td>{{media.name}}</td>
                 <td>{{media.type}}</td>
-                <td>{{media.url}}</td>
+                <!--<td>{{media.url}}</td>-->
                 <td>{{media.fileSize}}</td>
                 <td>{{media.dimensions}}</td>
                 <td>{{media.title}}</td>

@@ -27,7 +27,8 @@
             "lastUpdatedDate": "Last Updated Date",
             "slug": "Slug",
             "clientId": "Client Id",
-            "createdDate": "Created Date"
+            "createdDate": "Created Date",
+            "thumbnail": "Thumbnail"
         }
     },
     "coreApp": {

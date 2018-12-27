@@ -113,7 +113,8 @@
             "open": "Open",
             "publish": "Publish",
             "save": "Save Draft",
-            "view": "View"
+            "view": "View",
+            "upload": "Upload"
         },
         "detail": {
             "field": "Field",

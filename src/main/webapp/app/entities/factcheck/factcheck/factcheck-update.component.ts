@@ -140,6 +140,14 @@ export class FactcheckUpdateComponent implements OnInit {
         return item.id;
     }
 
+    trackRatingById(index: number, item: IRating) {
+        return item.id;
+    }
+
+    trackClaimantById(index: number, item: IClaimant) {
+        return item.id;
+    }
+
     getSelected(selectedVals: Array<any>, option: any) {
         if (selectedVals) {
             for (let i = 0; i < selectedVals.length; i++) {

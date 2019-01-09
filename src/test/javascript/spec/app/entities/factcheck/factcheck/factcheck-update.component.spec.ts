@@ -7,6 +7,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { FactcheckUpdateComponent } from 'app/entities/factcheck/factcheck/factcheck-update.component';
 import { FactcheckService } from 'app/entities/factcheck/factcheck/factcheck.service';
 import { Factcheck } from 'app/shared/model/factcheck/factcheck.model';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('Component Tests', () => {
     describe('Factcheck Management Update Component', () => {
@@ -16,8 +17,9 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GatewayTestModule],
-                declarations: [FactcheckUpdateComponent]
+                imports: [GatewayTestModule, FormsModule, ReactiveFormsModule],
+                declarations: [FactcheckUpdateComponent],
+                providers: [FormBuilder]
             })
                 .overrideTemplate(FactcheckUpdateComponent, '')
                 .compileComponents();

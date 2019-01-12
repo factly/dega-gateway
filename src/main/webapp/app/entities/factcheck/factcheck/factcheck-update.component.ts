@@ -102,16 +102,17 @@ export class FactcheckUpdateComponent implements OnInit {
         this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         this.factcheck.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
 
-        for (const key in this.formGroup.value.claims) {
-            if (key) {
-                if (this.factcheck.claims && this.factcheck.claims.length > 0) {
-                    this.factcheck.claims.push(this.formGroup.value.claims[key]);
-                } else {
-                    this.factcheck.claims = this.formGroup.value.claims[key];
+        if (this.formGroup) {
+            for (const key in this.formGroup.value.claims) {
+                if (key) {
+                    if (this.factcheck.claims && this.factcheck.claims.length > 0) {
+                        this.factcheck.claims.push(this.formGroup.value.claims[key]);
+                    } else {
+                        this.factcheck.claims = this.formGroup.value.claims[key];
+                    }
                 }
             }
         }
-
         if (this.factcheck.id !== undefined) {
             this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
         } else {
@@ -137,6 +138,14 @@ export class FactcheckUpdateComponent implements OnInit {
     }
 
     trackClaimById(index: number, item: IClaim) {
+        return item.id;
+    }
+
+    trackRatingById(index: number, item: IRating) {
+        return item.id;
+    }
+
+    trackClaimantById(index: number, item: IClaimant) {
         return item.id;
     }
 

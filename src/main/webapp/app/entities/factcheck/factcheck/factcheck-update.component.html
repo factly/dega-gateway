@@ -167,21 +167,11 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" formControlName="claim" name="claim" id="field_claim1" required/>
                                 </div>
-                                <div [hidden]="!(claim?.dirty &&claim?.invalid)">
-                                    <small class="form-text text-danger" jhiTranslate="entity.validation.required">
-                                        This field is required.
-                                    </small>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.description" for="field_description">Description</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" formControlName="description" name="description" id="field_description" required/>
-                                </div>
-                                    <div [hidden]="!(description?.dirty && description?.invalid)">
-                                    <small class="form-text text-danger" jhiTranslate="entity.validation.required">
-                                        This field is required.
-                                    </small>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -197,12 +187,6 @@
                                 <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claimSource" for="field_claimSource">Claim Source</label>
                                 <input type="text" class="form-control" formControlName="claimSource" name="claimSource" id="field_claimSource"
                                        required/>
-                                <div [hidden]="!(claimSource?.dirty && claimSource?.invalid)">
-                                    <small class="form-text text-danger"
-                                           [hidden]="!claimSource?.errors?.required" jhiTranslate="entity.validation.required">
-                                        This field is required.
-                                    </small>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.checkedDate" for="field_checkedDate">Checked Date</label>
@@ -213,33 +197,15 @@
                                         <button type="button" class="btn btn-secondary" (click)="checkedDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                                     </span>
                                 </div>
-                                <div [hidden]="!(checkedDatecheckedDate?.dirty && editForm.controls.checkedDate?.invalid)">
-                                    <small class="form-text text-danger"
-                                           [hidden]="!checkedDate?.errors?.required" jhiTranslate="entity.validation.required">
-                                        This field is required.
-                                    </small>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.reviewSources" for="field_reviewSources">Review Sources</label>
                                 <input type="text" class="form-control" formControlName="reviewSources" name="reviewSources" id="field_reviewSources"
                                       required/>
-                                <div [hidden]="!(reviewSources?.dirty && reviewSources?.invalid)">
-                                    <small class="form-text text-danger"
-                                           [hidden]="!reviewSources?.errors?.required" jhiTranslate="entity.validation.required">
-                                        This field is required.
-                                    </small>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.review" for="field_review">Review</label>
                                 <input type="text" class="form-control" formControlName="review" name="review" id="field_review" required/>
-                                <div [hidden]="!(review?.dirty && review?.invalid)">
-                                    <small class="form-text text-danger"
-                                           [hidden]="!editForm.controls.review?.errors?.required" jhiTranslate="entity.validation.required">
-                                        This field is required.
-                                    </small>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.reviewTagLine" for="field_reviewTagLine">Review Tag Line</label>
@@ -252,24 +218,12 @@
                                     <option [ngValue]="ratingOption.id" *ngFor="let ratingOption of ratings; trackBy: trackRatingById">{{ratingOption.name}}</option>
                                 </select>
                             </div>
-                            <div [hidden]="!(editForm.controls.rating?.dirty && editForm.controls.rating?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.rating?.errors?.required" jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                            </div>
                             <div class="form-group">
                                 <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claimant" for="field_claimant">Claimant</label>
                                 <select class="form-control" id="field_claimant" formControlName="claimantId" name="claimantId" required>
                                     <option *ngIf="!editForm.value.claimant" [ngValue]="null" selected></option>
                                     <option [ngValue]="claimantOption.id" *ngFor="let claimantOption of claimants; trackBy: trackClaimantById">{{claimantOption.name}}</option>
                                 </select>
-                            </div>
-                            <div [hidden]="!(editForm.controls.claimant?.dirty && editForm.controls.claimant?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.claimant?.errors?.required" jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
                             </div>
                             <button type="button" id="remove-claim" class="btn btn-danger"  (click)="removeClaim(i)">Remove</button>
                         </div>
@@ -279,7 +233,7 @@
                     <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                         <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                     </button>
-                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || formGroup.invalid || isSaving" class="btn btn-primary">
                         <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                     </button>
                 </div>

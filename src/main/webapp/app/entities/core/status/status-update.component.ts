@@ -61,13 +61,15 @@ export class StatusUpdateComponent implements OnInit {
     }
 
     bindSlug(event: any) {
-        this.slugExtention = 0;
-        this.slug = event.target.value
-            .replace(/[^\w\s]/gi, '')
-            .replace(/\s+/g, '-')
-            .toLowerCase();
-        this.tempSlug = this.slug;
-        this.createSlug();
+        if (this.status.id === undefined) {
+            this.slugExtention = 0;
+            this.slug = event.target.value
+                .replace(/[^\w\s]/gi, '')
+                .replace(/\s+/g, '-')
+                .toLowerCase();
+            this.tempSlug = this.slug;
+            this.createSlug();
+        }
     }
     createSlug() {
         if (this.slug) {

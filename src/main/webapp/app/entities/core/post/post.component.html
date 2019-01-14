@@ -32,7 +32,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="gatewayApp.corePost.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.corePost.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="content"><span jhiTranslate="gatewayApp.corePost.content">Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="content"><span jhiTranslate="gatewayApp.corePost.content">Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="excerpt"><span jhiTranslate="gatewayApp.corePost.excerpt">Excerpt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="publishedDate"><span jhiTranslate="gatewayApp.corePost.publishedDate">Published Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.corePost.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -54,7 +54,7 @@
                 <td><a [routerLink]="['/post', post.id, 'view' ]">{{post.id}}</a></td>
                 <td>{{post.title}}</td>
                 <td>{{post.clientId}}</td>
-                <td>{{post.content}}</td>
+                <!--<td>{{post.content}}</td>-->
                 <td>{{post.excerpt}}</td>
                 <td>{{post.publishedDate | date:'medium'}}</td>
                 <td>{{post.lastUpdatedDate | date:'medium'}}</td>

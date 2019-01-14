@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { GatewaySharedModule } from 'app/shared';
 import { ReactiveFormsModule } from '@angular/forms';
+import { QuillModule } from 'ngx-quill';
 import {
     FactcheckComponent,
     FactcheckDetailComponent,
@@ -16,7 +17,7 @@ import {
 const ENTITY_STATES = [...factcheckRoute, ...factcheckPopupRoute];
 
 @NgModule({
-    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
+    imports: [GatewaySharedModule, QuillModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
     declarations: [
         FactcheckComponent,
         FactcheckDetailComponent,

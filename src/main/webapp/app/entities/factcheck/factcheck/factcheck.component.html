@@ -32,7 +32,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="gatewayApp.factcheckFactcheck.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckFactcheck.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="introduction"><span jhiTranslate="gatewayApp.factcheckFactcheck.introduction">Introduction</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="introduction"><span jhiTranslate="gatewayApp.factcheckFactcheck.introduction">Introduction</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="summary"><span jhiTranslate="gatewayApp.factcheckFactcheck.summary">Summary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="excerpt"><span jhiTranslate="gatewayApp.factcheckFactcheck.excerpt">Excerpt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="publishedDate"><span jhiTranslate="gatewayApp.factcheckFactcheck.publishedDate">Published Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -53,7 +53,7 @@
                 <td><a [routerLink]="['/factcheck', factcheck.id, 'view' ]">{{factcheck.id}}</a></td>
                 <td>{{factcheck.title}}</td>
                 <td>{{factcheck.clientId}}</td>
-                <td>{{factcheck.introduction}}</td>
+                <!--<td>{{factcheck.introduction}}</td>-->
                 <td>{{factcheck.summary}}</td>
                 <td>{{factcheck.excerpt}}</td>
                 <td>{{factcheck.publishedDate | date:'medium'}}</td>

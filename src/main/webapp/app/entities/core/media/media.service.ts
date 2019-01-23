@@ -18,6 +18,7 @@ export class MediaService {
     public resourceSearchUrl = SERVER_API_URL + 'core/api/_search/media';
     public resourceUrlForMediaBySlug = SERVER_API_URL + 'core/api/mediabyslug';
     public uploadImageUrl = SERVER_API_URL + 'core/api/media/upload';
+    private imageSrcUrl: string;
 
     constructor(private http: HttpClient) {}
 
@@ -96,5 +97,13 @@ export class MediaService {
         const formData = new FormData();
         formData.append('file', selectedFile);
         return this.http.post<IMedia>(this.uploadImageUrl, formData, { observe: 'response' });
+    }
+
+    setImageSrcUrl(imageUrl: string) {
+        this.imageSrcUrl = imageUrl;
+    }
+
+    getImageSrcUrl() {
+        return this.imageSrcUrl;
     }
 }

@@ -173,7 +173,6 @@
                 </div>
                 <form name="claimForm" [formGroup]="formGroup" novalidate #claimForm="ngForm" >
                     <div formArrayName="claims" id="claimsArray" class="ng-valid">
-                        <button type="button" id="add-claim" class="btn btn-success" (click)="addClaim()">Add a Claim</button>
                         <div *ngFor="let group of claimsArray.controls; let i = index;" [formGroupName]="i">
                             <h2 id="jhi-claim-heading"> Claim{{ i+1 }} </h2>
                             <div class="form-group">
@@ -239,6 +238,9 @@
                                 </select>
                             </div>
                             <button type="button" id="remove-claim" class="btn btn-danger"  (click)="removeClaim(i)">Remove</button>
+                        </div>
+                        <div class="pad-up-bottom">
+                            <button type="button" id="add-claim" class="btn btn-success" (click)="addClaim()">Add a Claim</button>
                         </div>
                     </div>
                 </form>

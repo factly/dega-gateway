@@ -12,8 +12,8 @@ import {
     postRoute,
     postPopupRoute
 } from './';
-import { FeaturedMediaUploadPopupComponent } from './featured-media-upload-dialog.component';
-import { FeaturedMediaUploadDialogComponent } from './featured-media-upload-dialog.component';
+import { FeaturedMediaUploadPopupComponent } from '../media/featured-media/featured-media-upload-dialog.component';
+import { FeaturedMediaUploadDialogComponent } from '../media/featured-media/featured-media-upload-dialog.component';
 
 const ENTITY_STATES = [...postRoute, ...postPopupRoute];
 

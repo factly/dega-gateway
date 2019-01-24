@@ -13,6 +13,7 @@ import { MediaUpdateComponent } from './media-update.component';
 import { MediaDeletePopupComponent } from './media-delete-dialog.component';
 import { MediaUploadPopupComponent } from './media-upload-dialog.component';
 import { IMedia } from 'app/shared/model/core/media.model';
+import { FeaturedMediaUploadPopupComponent } from './featured-media/featured-media-upload-dialog.component';
 
 @Injectable({ providedIn: 'root' })
 export class MediaResolve implements Resolve<IMedia> {
@@ -105,6 +106,20 @@ export const mediaPopupRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'gatewayApp.coreMedia.home.title'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'featured-media/upload',
+        component: FeaturedMediaUploadPopupComponent,
+        resolve: {
+            post: MediaResolve,
+            pagingParams: JhiResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gatewayApp.corePost.featuredMedia'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

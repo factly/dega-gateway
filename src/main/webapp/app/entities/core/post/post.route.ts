@@ -12,7 +12,6 @@ import { PostDetailComponent } from './post-detail.component';
 import { PostUpdateComponent } from './post-update.component';
 import { PostDeletePopupComponent } from './post-delete-dialog.component';
 import { IPost } from 'app/shared/model/core/post.model';
-import { FeaturedMediaUploadPopupComponent } from './featured-media-upload-dialog.component';
 
 @Injectable({ providedIn: 'root' })
 export class PostResolve implements Resolve<IPost> {
@@ -92,20 +91,6 @@ export const postPopupRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'gatewayApp.corePost.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    },
-    {
-        path: 'featured-media/upload',
-        component: FeaturedMediaUploadPopupComponent,
-        resolve: {
-            post: PostResolve,
-            pagingParams: JhiResolvePagingParams
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gatewayApp.corePost.featuredMedia'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

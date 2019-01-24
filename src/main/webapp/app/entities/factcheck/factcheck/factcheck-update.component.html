@@ -117,10 +117,25 @@
                     <input type="text" class="form-control" name="password" id="field_password"
                            [(ngModel)]="factcheck.password" />
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia" for="field_featuredMedia">Featured Media</label>
                     <input type="text" class="form-control" name="featuredMedia" id="field_featuredMedia"
                            [(ngModel)]="factcheck.featuredMedia" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia" for="field_featuredMedia">Featured Media</label>
+                    <button id="field_featuredMedia" class="btn btn-primary jh-create-entity create-media"
+                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            replaceUrl="true" type="button">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
+                            Upload Media
+                        </span>
+                    </button>
+                    {{ factcheck.featuredMedia }}
+                    <div *ngIf="getImageSrcUrl()">
+                        <span [(ngModel)]="factcheck.featuredMedia" name="featuredMedia" ngDefaultControl></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.subTitle" for="field_subTitle">Sub Title</label>

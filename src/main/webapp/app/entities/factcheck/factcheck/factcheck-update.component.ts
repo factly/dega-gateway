@@ -15,6 +15,7 @@ import { ClaimantService } from 'app/entities/factcheck/claimant';
 import { RatingService } from 'app/entities/factcheck/rating';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
+import { MediaService } from '../../core/media/media.service';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -42,7 +43,8 @@ export class FactcheckUpdateComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private formBuilder: FormBuilder,
         private claimantService: ClaimantService,
-        private ratingService: RatingService
+        private ratingService: RatingService,
+        private mediaService: MediaService
     ) {}
 
     ngOnInit() {
@@ -74,6 +76,9 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        if (this.factcheck.id === undefined) {
+            this.mediaService.setImageSrcUrl(null);
+        }
     }
 
     addClaimGroup(): FormGroup {
@@ -199,5 +204,9 @@ export class FactcheckUpdateComponent implements OnInit {
 
     submitHandler() {
         this.claims = this.formGroup.value;
+    }
+
+    getImageSrcUrl() {
+        this.factcheck.featuredMedia = this.mediaService.getImageSrcUrl();
     }
 }

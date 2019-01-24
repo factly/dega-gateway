@@ -8,7 +8,7 @@ import { IMedia } from 'app/shared/model/core/media.model';
 import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { MediaService } from '../media/media.service';
+import { MediaService } from '../media.service';
 
 @Component({
     selector: 'jhi-featured-media-upload-dialog',

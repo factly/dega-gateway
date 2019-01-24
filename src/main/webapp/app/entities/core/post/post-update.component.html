@@ -57,11 +57,9 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.featuredMedia" for="field_featuredMedia">Featured Media</label>
-                   <!-- <input type="text" class="form-control" name="featuredMedia" id="field_featuredMedia"
-                        [(ngModel)]="post.featuredMedia" />-->
                     <button id="field_featuredMedia" class="btn btn-primary jh-create-entity create-media"
                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                            replaceUrl="true" >
+                            replaceUrl="true" type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
                             Upload Media
@@ -69,8 +67,8 @@
                     </button>
                     {{ post.featuredMedia }}
                     <div *ngIf="getImageSrcUrl()">
-                    <span [(ngModel)]="post.featuredMedia" name="featuredMedia" ngDefaultControl></span>
-                </div>
+                        <span [(ngModel)]="post.featuredMedia" name="featuredMedia" ngDefaultControl></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.tag" for="field_tag">Tag</label>

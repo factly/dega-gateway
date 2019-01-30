@@ -80,6 +80,10 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
+
+    trackId(index: number, item: IMedia) {
+        return item.id;
+    }
 }
 
 @Component({

@@ -16,6 +16,13 @@ import { RatingService } from 'app/entities/factcheck/rating';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 import { MediaService } from '../../core/media/media.service';
+import { AUTHOR_ROLE } from 'app/shared/constants/role.constants';
+import { ITag } from 'app/shared/model/core/tag.model';
+import { TagService } from 'app/entities/core/tag';
+import { ICategory } from 'app/shared/model/core/category.model';
+import { CategoryService } from 'app/entities/core/category';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { DegaUserService } from 'app/entities/core/dega-user';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -35,6 +42,9 @@ export class FactcheckUpdateComponent implements OnInit {
     formGroup: FormGroup;
     claimants: IClaimant[];
     ratings: IRating[];
+    tags: ITag[];
+    categories: ICategory[];
+    degausers: IDegaUser[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -44,7 +54,10 @@ export class FactcheckUpdateComponent implements OnInit {
         private formBuilder: FormBuilder,
         private claimantService: ClaimantService,
         private ratingService: RatingService,
-        private mediaService: MediaService
+        private mediaService: MediaService,
+        private tagService: TagService,
+        private categoryService: CategoryService,
+        private degaUserService: DegaUserService
     ) {}
 
     ngOnInit() {
@@ -73,6 +86,24 @@ export class FactcheckUpdateComponent implements OnInit {
         this.ratingService.query().subscribe(
             (res: HttpResponse<IRating[]>) => {
                 this.ratings = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.tagService.query().subscribe(
+            (res: HttpResponse<ITag[]>) => {
+                this.tags = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.categoryService.query().subscribe(
+            (res: HttpResponse<ICategory[]>) => {
+                this.categories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.degaUserService.query().subscribe(
+            (res: HttpResponse<IDegaUser[]>) => {
+                this.degausers = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -208,5 +239,17 @@ export class FactcheckUpdateComponent implements OnInit {
 
     getImageSrcUrl() {
         this.factcheck.featuredMedia = this.mediaService.getImageSrcUrl();
+    }
+
+    trackTagById(index: number, item: ITag) {
+        return item.id;
+    }
+
+    trackCategoryById(index: number, item: ICategory) {
+        return item.id;
+    }
+
+    trackDegaUserById(index: number, item: IDegaUser) {
+        return item.id;
     }
 }

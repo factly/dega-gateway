@@ -65,6 +65,24 @@
                 <dd>
                     <span>{{factcheck.createdDate}}</span>
                 </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.tag">Tag</span></dt>
+                <dd>
+                    <span *ngFor="let tag of factcheck.tags; let last = last">
+                        <a [routerLink]="['/tag', tag?.id, 'view' ]">{{tag.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.category">Category</span></dt>
+                <dd>
+                    <span *ngFor="let category of factcheck.categories; let last = last">
+                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.corePost.degaUser">Dega User</span></dt>
+                <dd>
+                    <span *ngFor="let degaUser of factcheck.degaUsers; let last = last">
+                        <a [routerLink]="['/dega-user', degaUser?.id, 'view' ]">{{degaUser.displayName}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
                 <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.claim">Claim</span></dt>
                 <dd>
                     <span *ngFor="let claim of factcheck.claims; let last = last">

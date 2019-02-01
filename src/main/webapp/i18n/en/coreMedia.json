@@ -5,7 +5,8 @@
                 "title": "Media",
                 "createLabel": "Create a new Media",
                 "createOrEditLabel": "Create or edit a Media",
-                "search": "Search for Media"
+                "search": "Search for Media",
+                "uploadMediaLabel": "Upload Media"
             },
             "delete": {
                 "question": "Are you sure you want to delete Media {{ id }}?"

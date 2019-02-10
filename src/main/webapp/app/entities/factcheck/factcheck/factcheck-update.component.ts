@@ -4,6 +4,8 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
+import { AUTHOR_ROLE } from 'app/shared/constants/role.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
@@ -15,6 +17,14 @@ import { ClaimantService } from 'app/entities/factcheck/claimant';
 import { RatingService } from 'app/entities/factcheck/rating';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
+
+import { MediaService } from '../../core/media/media.service';
+import { ITag } from 'app/shared/model/core/tag.model';
+import { TagService } from 'app/entities/core/tag';
+import { ICategory } from 'app/shared/model/core/category.model';
+import { CategoryService } from 'app/entities/core/category';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { DegaUserService } from 'app/entities/core/dega-user';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -34,6 +44,11 @@ export class FactcheckUpdateComponent implements OnInit {
     formGroup: FormGroup;
     claimants: IClaimant[];
     ratings: IRating[];
+    tags: ITag[];
+    categories: ICategory[];
+    degausers: IDegaUser[];
+    showSave: boolean;
+    showPublish: boolean;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -74,6 +89,30 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+
+        this.tagService.query().subscribe(
+            (res: HttpResponse<ITag[]>) => {
+                this.tags = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.categoryService.query().subscribe(
+            (res: HttpResponse<ICategory[]>) => {
+                this.categories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.degaUserService.query().subscribe(
+            (res: HttpResponse<IDegaUser[]>) => {
+                this.degausers = res.body;
+                this.showSave = this.showSaveButton(this.degausers[0].roleName);
+                this.showPublish = this.showPublishButton(this.degausers[0].roleName);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        if (this.factcheck.id === undefined) {
+            this.mediaService.setImageSrcUrl(null);
+        }
     }
 
     addClaimGroup(): FormGroup {
@@ -118,6 +157,25 @@ export class FactcheckUpdateComponent implements OnInit {
         } else {
             this.subscribeToSaveResponse(this.factcheckService.create(this.factcheck));
         }
+    }
+
+    publish() {
+        this.isSaving = true;
+        this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
+        this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        if (this.factcheck.id !== undefined) {
+            this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
+        } else {
+            this.subscribeToSaveResponse(this.factcheckService.publish(this.factcheck));
+        }
+    }
+
+    showSaveButton(degausersRole: String): boolean {
+        return AUTHOR_ROLE.includes(degausersRole);
+    }
+
+    showPublishButton(degausersRole: String): boolean {
+        return PUBLISHER_ROLE.includes(degausersRole);
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IFactcheck>>) {

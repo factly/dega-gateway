@@ -26,14 +26,6 @@ import { CategoryService } from 'app/entities/core/category';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 
-import { MediaService } from '../../core/media/media.service';
-import { ITag } from 'app/shared/model/core/tag.model';
-import { TagService } from 'app/entities/core/tag';
-import { ICategory } from 'app/shared/model/core/category.model';
-import { CategoryService } from 'app/entities/core/category';
-import { IDegaUser } from 'app/shared/model/core/dega-user.model';
-import { DegaUserService } from 'app/entities/core/dega-user';
-
 @Component({
     selector: 'jhi-factcheck-update',
     templateUrl: './factcheck-update.component.html'

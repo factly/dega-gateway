@@ -31,9 +31,22 @@
                         [(ngModel)]="claimant.description" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.imageURL" for="field_imageURL">Image URL</label>
+                    <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.imageURL" for="field_imageURL">Image URL</label>
                     <input type="text" class="form-control" name="imageURL" id="field_imageURL"
-                        [(ngModel)]="claimant.imageURL" />
+                        [(ngModel)]="claimant.imageURL" />-->
+                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.imageURL" for="field_imageURL">Image URL</label>
+                    <button id="field_imageURL" class="btn btn-primary jh-create-entity create-media"
+                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            replaceUrl="true" type="button">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
+                            Upload Media
+                        </span>
+                    </button>
+                    <img src={{claimant.imageURL}} alt="" width="100" height="100">
+                    <div *ngIf="getImageSrcUrl()">
+                        <span [(ngModel)]="claimant.imageURL" name="featuredMedia" ngDefaultControl></span>
+                    </div>
                 </div>
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.clientId" for="field_clientId">Client Id</label>

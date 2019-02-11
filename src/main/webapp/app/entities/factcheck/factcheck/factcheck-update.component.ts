@@ -18,7 +18,6 @@ import { RatingService } from 'app/entities/factcheck/rating';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 import { MediaService } from '../../core/media/media.service';
-import { AUTHOR_ROLE } from 'app/shared/constants/role.constants';
 import { ITag } from 'app/shared/model/core/tag.model';
 import { TagService } from 'app/entities/core/tag';
 import { ICategory } from 'app/shared/model/core/category.model';

@@ -17,6 +17,14 @@ import { ClaimantService } from 'app/entities/factcheck/claimant';
 import { RatingService } from 'app/entities/factcheck/rating';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
+import { MediaService } from '../../core/media/media.service';
+import { AUTHOR_ROLE } from 'app/shared/constants/role.constants';
+import { ITag } from 'app/shared/model/core/tag.model';
+import { TagService } from 'app/entities/core/tag';
+import { ICategory } from 'app/shared/model/core/category.model';
+import { CategoryService } from 'app/entities/core/category';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { DegaUserService } from 'app/entities/core/dega-user';
 
 import { MediaService } from '../../core/media/media.service';
 import { ITag } from 'app/shared/model/core/tag.model';
@@ -57,7 +65,11 @@ export class FactcheckUpdateComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private formBuilder: FormBuilder,
         private claimantService: ClaimantService,
-        private ratingService: RatingService
+        private ratingService: RatingService,
+        private mediaService: MediaService,
+        private tagService: TagService,
+        private categoryService: CategoryService,
+        private degaUserService: DegaUserService
     ) {}
 
     ngOnInit() {
@@ -257,5 +269,21 @@ export class FactcheckUpdateComponent implements OnInit {
 
     submitHandler() {
         this.claims = this.formGroup.value;
+    }
+
+    getImageSrcUrl() {
+        this.factcheck.featuredMedia = this.mediaService.getImageSrcUrl();
+    }
+
+    trackTagById(index: number, item: ITag) {
+        return item.id;
+    }
+
+    trackCategoryById(index: number, item: ICategory) {
+        return item.id;
+    }
+
+    trackDegaUserById(index: number, item: IDegaUser) {
+        return item.id;
     }
 }

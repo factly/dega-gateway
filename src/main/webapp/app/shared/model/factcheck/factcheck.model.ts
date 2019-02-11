@@ -1,5 +1,8 @@
 import { Moment } from 'moment';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
+import { ITag } from 'app/shared/model/core/tag.model';
+import { ICategory } from 'app/shared/model/core/category.model';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 
 export interface IFactcheck {
     id?: string;
@@ -19,6 +22,9 @@ export interface IFactcheck {
     subTitle?: string;
     createdDate?: Moment;
     claims?: IClaim[];
+    tags?: ITag[];
+    categories?: ICategory[];
+    degaUsers?: IDegaUser[];
 }
 
 export class Factcheck implements IFactcheck {

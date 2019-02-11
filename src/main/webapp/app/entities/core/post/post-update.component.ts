@@ -20,6 +20,7 @@ import { IFormat } from 'app/shared/model/core/format.model';
 import { FormatService } from 'app/entities/core/format';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
+import { MediaService } from '../media/media.service';
 
 @Component({
     selector: 'jhi-post-update',
@@ -55,7 +56,8 @@ export class PostUpdateComponent implements OnInit {
         private statusService: StatusService,
         private formatService: FormatService,
         private degaUserService: DegaUserService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private mediaService: MediaService
     ) {}
 
     ngOnInit() {
@@ -98,6 +100,9 @@ export class PostUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        if (this.post.id === undefined) {
+            this.mediaService.setImageSrcUrl(null);
+        }
     }
 
     previousState() {
@@ -206,5 +211,9 @@ export class PostUpdateComponent implements OnInit {
                 this.post.slug = this.slug;
             });
         }
+    }
+
+    getImageSrcUrl() {
+        this.post.featuredMedia = this.mediaService.getImageSrcUrl();
     }
 }

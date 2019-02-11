@@ -51,7 +51,7 @@
                     <input type="text" class="form-control" name="excerpt" id="field_excerpt"
                            [(ngModel)]="factcheck.excerpt" />
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.publishedDate" for="field_publishedDate">Published Date</label>
                     <div class="d-flex">
                         <input id="field_publishedDate" type="datetime-local" class="form-control" name="publishedDate" [(ngModel)]="publishedDate"
@@ -67,7 +67,7 @@
                             This field should be a date and time.
                         </small>
                     </div>
-                </div>
+                </div>-->
                 <!-- <div class="form-group">
                      <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
                      <div class="d-flex">
@@ -273,8 +273,11 @@
                     <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                         <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                     </button>
-                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || formGroup.invalid || isSaving" class="btn btn-primary">
-                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary" *ngIf="showSave">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save Draft</span>
+                    </button>
+                    <button type="button" id="publish-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary" *ngIf="showPublish" (click)="publish()">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.publish">Publish</span>
                     </button>
                 </div>
             </div>

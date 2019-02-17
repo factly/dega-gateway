@@ -38,7 +38,7 @@ export const categoryRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'created_date,desc',
+            defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.coreCategory.home.title'
         },
         canActivate: [UserRouteAccessService]

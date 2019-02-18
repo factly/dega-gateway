@@ -45,7 +45,10 @@ public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/i18n/**")
             .antMatchers("/content/**")
             .antMatchers("/swagger-ui/index.html")
-            .antMatchers("/test/**");
+            .antMatchers("/test/**")
+            .antMatchers(HttpMethod.GET, "/**")
+            .antMatchers("/dega-content/**")
+        ;
     }
 
     @Override

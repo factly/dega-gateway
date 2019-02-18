@@ -27,7 +27,7 @@ describe('Component Tests', () => {
                                 subscribe: (fn: (value: Data) => void) =>
                                     fn({
                                         pagingParams: {
-                                            predicate: 'created_date',
+                                            predicate: 'createdDate',
                                             reverse: false,
                                             page: 0
                                         }
@@ -116,12 +116,12 @@ describe('Component Tests', () => {
             expect(service.query).toHaveBeenCalledTimes(2);
             expect(comp.degaUsers[0]).toEqual(jasmine.objectContaining({ id: '123' }));
         });
-        it('should calculate the sort attribute for a created_date', () => {
+        it('should calculate the sort attribute for a createdDate', () => {
             // WHEN
             const result = comp.sort();
 
             // THEN
-            expect(result).toEqual(['created_date,desc']);
+            expect(result).toEqual(['createdDate,desc']);
         });
 
         it('should calculate the sort attribute for a non-id attribute', () => {
@@ -132,7 +132,7 @@ describe('Component Tests', () => {
             const result = comp.sort();
 
             // THEN
-            expect(result).toEqual(['name,desc', 'created_date']);
+            expect(result).toEqual(['name,desc', 'createdDate']);
         });
     });
 });

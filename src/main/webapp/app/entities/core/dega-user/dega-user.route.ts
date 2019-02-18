@@ -38,7 +38,7 @@ export const degaUserRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'created_date,desc',
+            defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.coreDegaUser.home.title'
         },
         canActivate: [UserRouteAccessService]

@@ -23,6 +23,7 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
     routeData: any;
     itemsPerPage: any;
     page: any;
+    currentSearch: string;
     @Output()
     messageEvent = new EventEmitter<String>();
 
@@ -41,6 +42,7 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.currentSearch = '';
         this.loadAll();
     }
 
@@ -57,7 +59,7 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
         this.mediaService
             .query({
                 page: 0,
-                size: 100
+                size: -1
             })
             .subscribe(
                 (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
@@ -83,6 +85,28 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
 
     trackId(index: number, item: IMedia) {
         return item.id;
+    }
+
+    clearSearch() {
+        this.currentSearch = '';
+        this.loadAll();
+    }
+    search(query) {
+        if (!query) {
+            return this.clear();
+        }
+        this.page = 0;
+        this.currentSearch = query;
+        this.mediaService
+            .search({
+                query: this.currentSearch,
+                page: this.page - 1,
+                size: -1
+            })
+            .subscribe(
+                (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 }
 

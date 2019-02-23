@@ -7,6 +7,7 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 import { RatingService } from './rating.service';
+import { MediaService } from '../../core/media/media.service';
 
 @Component({
     selector: 'jhi-rating-update',
@@ -21,7 +22,7 @@ export class RatingUpdateComponent implements OnInit {
     slugExtention: number;
     tempSlug: string;
 
-    constructor(private ratingService: RatingService, private activatedRoute: ActivatedRoute) {}
+    constructor(private ratingService: RatingService, private activatedRoute: ActivatedRoute, private mediaService: MediaService) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -30,6 +31,9 @@ export class RatingUpdateComponent implements OnInit {
             this.createdDate = this.rating.createdDate != null ? this.rating.createdDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.rating.lastUpdatedDate != null ? this.rating.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
+        if (this.rating.id === undefined) {
+            this.mediaService.setImageSrcUrl(null);
+        }
     }
 
     previousState() {
@@ -82,5 +86,8 @@ export class RatingUpdateComponent implements OnInit {
                 this.rating.slug = this.slug;
             });
         }
+    }
+    getImageSrcUrl() {
+        this.rating.iconURL = this.mediaService.getImageSrcUrl();
     }
 }

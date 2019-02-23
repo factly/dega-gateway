@@ -7,6 +7,7 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { ClaimantService } from './claimant.service';
+import { MediaService } from '../../core/media/media.service';
 
 @Component({
     selector: 'jhi-claimant-update',
@@ -21,7 +22,7 @@ export class ClaimantUpdateComponent implements OnInit {
     slugExtention: number;
     tempSlug: string;
 
-    constructor(private claimantService: ClaimantService, private activatedRoute: ActivatedRoute) {}
+    constructor(private claimantService: ClaimantService, private activatedRoute: ActivatedRoute, private mediaService: MediaService) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -30,6 +31,9 @@ export class ClaimantUpdateComponent implements OnInit {
             this.createdDate = this.claimant.createdDate != null ? this.claimant.createdDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.claimant.lastUpdatedDate != null ? this.claimant.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
+        if (this.claimant.id === undefined) {
+            this.mediaService.setImageSrcUrl(null);
+        }
     }
 
     previousState() {
@@ -83,5 +87,8 @@ export class ClaimantUpdateComponent implements OnInit {
                 this.claimant.slug = this.slug;
             });
         }
+    }
+    getImageSrcUrl() {
+        this.claimant.imageURL = this.mediaService.getImageSrcUrl();
     }
 }

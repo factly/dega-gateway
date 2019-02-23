@@ -151,8 +151,8 @@ export class ClaimComponent implements OnInit, OnDestroy {
 
     sort() {
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'created_date') {
-            result.push('created_date');
+        if (this.predicate !== 'createdDate') {
+            result.push('createdDate');
         }
         return result;
     }

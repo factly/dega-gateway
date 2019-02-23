@@ -38,7 +38,7 @@ export const tagRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'created_date,desc',
+            defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.coreTag.home.title'
         },
         canActivate: [UserRouteAccessService]

@@ -38,7 +38,7 @@ export const claimRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'created_date,desc',
+            defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.factcheckClaim.home.title'
         },
         canActivate: [UserRouteAccessService]

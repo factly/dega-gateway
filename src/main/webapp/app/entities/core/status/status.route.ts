@@ -38,7 +38,7 @@ export const statusRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            defaultSort: 'created_date,desc',
+            defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.coreStatus.home.title'
         },
         canActivate: [UserRouteAccessService]

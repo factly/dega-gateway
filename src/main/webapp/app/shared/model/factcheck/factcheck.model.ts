@@ -25,6 +25,7 @@ export interface IFactcheck {
     tags?: ITag[];
     categories?: ICategory[];
     degaUsers?: IDegaUser[];
+    statusName?: string;
 }
 
 export class Factcheck implements IFactcheck {
@@ -45,7 +46,8 @@ export class Factcheck implements IFactcheck {
         public featuredMedia?: string,
         public subTitle?: string,
         public createdDate?: Moment,
-        public claims?: IClaim[]
+        public claims?: IClaim[],
+        public statusName?: string
     ) {
         this.featured = this.featured || false;
         this.sticky = this.sticky || false;

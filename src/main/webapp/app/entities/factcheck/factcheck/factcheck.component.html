@@ -29,43 +29,43 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="featuredMedia"><span jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia">Featured Media</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="gatewayApp.factcheckFactcheck.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckFactcheck.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckFactcheck.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <!--<th jhiSortBy="introduction"><span jhiTranslate="gatewayApp.factcheckFactcheck.introduction">Introduction</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="summary"><span jhiTranslate="gatewayApp.factcheckFactcheck.summary">Summary</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="summary"><span jhiTranslate="gatewayApp.factcheckFactcheck.summary">Summary</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="excerpt"><span jhiTranslate="gatewayApp.factcheckFactcheck.excerpt">Excerpt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="publishedDate"><span jhiTranslate="gatewayApp.factcheckFactcheck.publishedDate">Published Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="publishedDate"><span jhiTranslate="gatewayApp.factcheckFactcheck.publishedDate">Published Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.factcheckFactcheck.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="featured"><span jhiTranslate="gatewayApp.factcheckFactcheck.featured">Featured</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="sticky"><span jhiTranslate="gatewayApp.factcheckFactcheck.sticky">Sticky</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="updates"><span jhiTranslate="gatewayApp.factcheckFactcheck.updates">Updates</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.factcheckFactcheck.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="password"><span jhiTranslate="gatewayApp.factcheckFactcheck.password">Password</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="featuredMedia"><span jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia">Featured Media</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="subTitle"><span jhiTranslate="gatewayApp.factcheckFactcheck.subTitle">Sub Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="password"><span jhiTranslate="gatewayApp.factcheckFactcheck.password">Password</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="subTitle"><span jhiTranslate="gatewayApp.factcheckFactcheck.subTitle">Sub Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.factcheckFactcheck.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="statusName"><span jhiTranslate="gatewayApp.corePost.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="statusName"><span jhiTranslate="gatewayApp.corePost.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let factcheck of factchecks ;trackBy: trackId">
-                <td><a [routerLink]="['/factcheck', factcheck.id, 'view' ]">{{factcheck.id}}</a></td>
+                <!--<td><a [routerLink]="['/factcheck', factcheck.id, 'view' ]">{{factcheck.id}}</a></td>-->
+                <td><img src={{factcheck.featuredMedia}} alt="" width="100" height="100"></td>
                 <td>{{factcheck.title}}</td>
-                <td>{{factcheck.clientId}}</td>
+                <!--<td>{{factcheck.clientId}}</td>-->
                 <!--<td>{{factcheck.introduction}}</td>-->
-                <td>{{factcheck.summary}}</td>
+                <!--<td>{{factcheck.summary}}</td>-->
                 <td>{{factcheck.excerpt}}</td>
-                <td>{{factcheck.publishedDate | date:'medium'}}</td>
+                <!--<td>{{factcheck.publishedDate | date:'medium'}}</td>
                 <td>{{factcheck.lastUpdatedDate | date:'medium'}}</td>
                 <td>{{factcheck.featured}}</td>
                 <td>{{factcheck.sticky}}</td>
                 <td>{{factcheck.updates}}</td>
                 <td>{{factcheck.slug}}</td>
-                <td>{{factcheck.password}}</td>
-                <td><img src={{factcheck.featuredMedia}} alt="" width="100" height="100"></td>
-                <td>{{factcheck.subTitle}}</td>
+                <td>{{factcheck.password}}</td>-->
+                <!--<td>{{factcheck.subTitle}}</td>-->
                 <td>{{factcheck.createdDate | date:'medium'}}</td>
                 <td>{{factcheck.statusName}}</td>
                 <td class="text-right">

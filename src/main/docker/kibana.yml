@@ -1,0 +1,10 @@
+version: '2'
+services:
+    kibana:
+        image: docker.elastic.co/kibana/kibana:5.6.5
+        container_name: kibana
+        environment:
+            SERVER_NAME: localhost
+            ELASTICSEARCH_URL: http://gateway-elasticsearch:9200/
+        ports:
+            - 5601:5601

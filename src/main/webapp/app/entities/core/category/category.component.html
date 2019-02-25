@@ -29,27 +29,27 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreCategory.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="gatewayApp.coreCategory.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreCategory.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="parent"><span jhiTranslate="gatewayApp.coreCategory.parent">Parent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreCategory.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreCategory.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreCategory.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreCategory.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreCategory.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let category of categories ;trackBy: trackId">
-                <td><a [routerLink]="['/category', category.id, 'view' ]">{{category.id}}</a></td>
+                <!--<td><a [routerLink]="['/category', category.id, 'view' ]">{{category.id}}</a></td>-->
                 <td>{{category.name}}</td>
                 <td>{{category.description}}</td>
                 <td>{{category.slug}}</td>
                 <td>{{category.parent}}</td>
-                <td>{{category.clientId}}</td>
+                <!--<td>{{category.clientId}}</td>-->
                 <td>{{category.createdDate | date:'medium'}}</td>
-                <td>{{category.lastUpdatedDate | date:'medium'}}</td>
+                <!--<td>{{category.lastUpdatedDate | date:'medium'}}</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

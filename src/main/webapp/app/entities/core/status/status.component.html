@@ -29,25 +29,25 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreStatus.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreStatus.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreStatus.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreStatus.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreStatus.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreStatus.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreStatus.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreStatus.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let status of statuses ;trackBy: trackId">
-                <td><a [routerLink]="['/status', status.id, 'view' ]">{{status.id}}</a></td>
+                <!--<td><a [routerLink]="['/status', status.id, 'view' ]">{{status.id}}</a></td>-->
                 <td>{{status.name}}</td>
-                <td>{{status.clientId}}</td>
+                <!--<td>{{status.clientId}}</td>-->
                 <td>{{status.isDefault}}</td>
                 <td>{{status.slug}}</td>
                 <td>{{status.createdDate | date:'medium'}}</td>
-                <td>{{status.lastUpdatedDate | date:'medium'}}</td>
+                <!--<td>{{status.lastUpdatedDate | date:'medium'}}</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

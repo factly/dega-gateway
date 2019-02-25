@@ -29,27 +29,27 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreFormat.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreFormat.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreFormat.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreFormat.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="description"><span jhiTranslate="gatewayApp.coreFormat.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreFormat.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreFormat.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreFormat.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreFormat.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let format of formats ;trackBy: trackId">
-                <td><a [routerLink]="['/format', format.id, 'view' ]">{{format.id}}</a></td>
+                <!--<td><a [routerLink]="['/format', format.id, 'view' ]">{{format.id}}</a></td>-->
                 <td>{{format.name}}</td>
                 <td>{{format.isDefault}}</td>
-                <td>{{format.clientId}}</td>
+                <!--<td>{{format.clientId}}</td>-->
                 <td>{{format.description}}</td>
                 <td>{{format.slug}}</td>
                 <td>{{format.createdDate | date:'medium'}}</td>
-                <td>{{format.lastUpdatedDate | date:'medium'}}</td>
+                <!--<td>{{format.lastUpdatedDate | date:'medium'}}</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

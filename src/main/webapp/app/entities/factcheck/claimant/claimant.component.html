@@ -29,29 +29,29 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="name"><span jhiTranslate="gatewayApp.factcheckClaimant.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="tagLine"><span jhiTranslate="gatewayApp.factcheckClaimant.tagLine">Tag Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="description"><span jhiTranslate="gatewayApp.factcheckClaimant.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="imageURL"><span jhiTranslate="gatewayApp.factcheckClaimant.imageURL">Image URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckClaimant.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.factcheckClaimant.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="name"><span jhiTranslate="gatewayApp.factcheckClaimant.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="tagLine"><span jhiTranslate="gatewayApp.factcheckClaimant.tagLine">Tag Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="description"><span jhiTranslate="gatewayApp.factcheckClaimant.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.factcheckClaimant.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.factcheckClaimant.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.factcheckClaimant.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.factcheckClaimant.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.factcheckClaimant.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let claimant of claimants ;trackBy: trackId">
-                <td><a [routerLink]="['/claimant', claimant.id, 'view' ]">{{claimant.id}}</a></td>
-                <td>{{claimant.name}}</td>
-                <td>{{claimant.tagLine}}</td>
-                <td>{{claimant.description}}</td>
+                <!--<td><a [routerLink]="['/claimant', claimant.id, 'view' ]">{{claimant.id}}</a></td>-->
                 <td>{{claimant.imageURL}}</td>
-                <td>{{claimant.clientId}}</td>
-                <td>{{claimant.slug}}</td>
+                <td>{{claimant.name}}</td>
+                <!--<td>{{claimant.tagLine}}</td>-->
+                <td>{{claimant.description}}</td>
+                <!--<td>{{claimant.clientId}}</td>
+                <td>{{claimant.slug}}</td>-->
                 <td>{{claimant.createdDate | date:'medium'}}</td>
-                <td>{{claimant.lastUpdatedDate | date:'medium'}}</td>
+                <!--<td>{{claimant.lastUpdatedDate | date:'medium'}}</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

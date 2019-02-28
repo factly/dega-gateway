@@ -53,6 +53,13 @@ spring:
         locator:
             discovery:
                 enabled: true
+    #cors:
+    #    allowed-origins: "*"
+    #    allowed-methods: "*"
+    #    allowed-headers: "*"
+    #    exposed-headers: "Authorization,Link,X-Total-Count"
+    #    allow-credentials: true
+    #    max-age: 1800
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
@@ -132,3 +139,4 @@ jhipster:
 # ===================================================================
 
 # application:
+

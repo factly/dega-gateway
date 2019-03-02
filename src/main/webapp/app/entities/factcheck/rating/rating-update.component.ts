@@ -8,6 +8,10 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 import { RatingService } from './rating.service';
 import { MediaService } from '../../core/media/media.service';
+import { ADMIN_ROLE } from 'app/shared/constants/role.constants';
+import { DegaUserService } from 'app/entities/core/dega-user';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-rating-update',
@@ -15,14 +19,22 @@ import { MediaService } from '../../core/media/media.service';
 })
 export class RatingUpdateComponent implements OnInit {
     rating: IRating;
+    degausers: IDegaUser[];
     isSaving: boolean;
     createdDate: string;
     lastUpdatedDate: string;
     slug: string;
     slugExtention: number;
     tempSlug: string;
+    showClientId: boolean;
 
-    constructor(private ratingService: RatingService, private activatedRoute: ActivatedRoute, private mediaService: MediaService) {}
+    constructor(
+        private jhiAlertService: JhiAlertService,
+        private ratingService: RatingService,
+        private activatedRoute: ActivatedRoute,
+        private degaUserService: DegaUserService,
+        private mediaService: MediaService
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -31,6 +43,13 @@ export class RatingUpdateComponent implements OnInit {
             this.createdDate = this.rating.createdDate != null ? this.rating.createdDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.rating.lastUpdatedDate != null ? this.rating.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.degaUserService.query().subscribe(
+            (res: HttpResponse<IDegaUser[]>) => {
+                this.degausers = res.body;
+                this.showClientId = this.showClientIdField(this.degausers[0].roleName);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         if (this.rating.id === undefined) {
             this.mediaService.setImageSrcUrl(null);
         }
@@ -89,5 +108,13 @@ export class RatingUpdateComponent implements OnInit {
     }
     getImageSrcUrl() {
         this.rating.iconURL = this.mediaService.getImageSrcUrl();
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    showClientIdField(degausersRole: String): boolean {
+        return ADMIN_ROLE.includes(degausersRole);
     }
 }

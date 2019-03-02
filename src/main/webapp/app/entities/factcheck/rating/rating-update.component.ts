@@ -12,6 +12,7 @@ import { ADMIN_ROLE } from 'app/shared/constants/role.constants';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { JhiAlertService } from 'ng-jhipster';
+import { Principal, Account } from 'app/core';
 
 @Component({
     selector: 'jhi-rating-update',
@@ -27,13 +28,16 @@ export class RatingUpdateComponent implements OnInit {
     slugExtention: number;
     tempSlug: string;
     showClientId: boolean;
+    currentUser: IDegaUser;
+    account: Account;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private ratingService: RatingService,
         private activatedRoute: ActivatedRoute,
         private degaUserService: DegaUserService,
-        private mediaService: MediaService
+        private mediaService: MediaService,
+        private principal: Principal
     ) {}
 
     ngOnInit() {
@@ -43,10 +47,14 @@ export class RatingUpdateComponent implements OnInit {
             this.createdDate = this.rating.createdDate != null ? this.rating.createdDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.rating.lastUpdatedDate != null ? this.rating.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.principal.identity().then(account => {
+            this.account = account;
+        });
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
-                this.showClientId = this.showClientIdField(this.degausers[0].roleName);
+                this.currentUser = this.degausers.filter(u => u.email === this.account.email).shift();
+                this.showClientId = this.showClientIdField(this.currentUser.roleName);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

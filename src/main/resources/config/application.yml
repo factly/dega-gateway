@@ -15,23 +15,9 @@
 # ===================================================================
 
 # See http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html
-zuul: # those values must be configured depending on the application specific needs
-    sensitive-headers: Cookie,Set-Cookie #see https://github.com/spring-cloud/spring-cloud-netflix/issues/3126
-    host:
-        max-total-connections: 1000
-        max-per-route-connections: 100
-    semaphore:
-        max-semaphores: 500
-    ignoredServices: 'consul,gateway' # Prevent Consul and the "gateway" app itself from having a Zuul route automatically created for them
-
 # See https://github.com/Netflix/Hystrix/wiki/Configuration
-hystrix:
-    command:
-        default:
-            execution:
-                isolation:
-                    thread:
-                        timeoutInMilliseconds: 10000
+
+
 
 management:
     endpoints:
@@ -159,3 +145,25 @@ jhipster:
 # ===================================================================
 
 # application:
+
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 30000
+ribbon:
+    ReadTimeout: 60000
+    connection-timeout: 3000
+    eureka:
+        enabled: true
+zuul:
+    sensitive-headers: Cookie,Set-Cookie #see https://github.com/spring-cloud/spring-cloud-netflix/issues/3126
+    host:
+        connect-timeout-millis: 5000
+        max-per-route-connections: 10000
+        max-total-connections: 5000
+        socket-timeout-millis: 60000
+    semaphore:
+        max-semaphores: 500

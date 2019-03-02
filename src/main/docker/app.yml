@@ -55,7 +55,7 @@ services:
             - SPRING_DATA_JEST_URI=http://gateway-elasticsearch:9200
         ports:
             - 8080:8080
-    #kibana:
-    #    extends:
-    #        file: kibana.yml
-    #        service: kibana
+#    kibana:
+#        extends:
+#            file: kibana.yml
+#            service: kibana

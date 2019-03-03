@@ -7,6 +7,11 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IStatus } from 'app/shared/model/core/status.model';
 import { StatusService } from './status.service';
+import { Principal, Account } from 'app/core';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { DegaUserService } from 'app/entities/core/dega-user';
+import { JhiAlertService } from 'ng-jhipster';
+import { ADMIN_ROLE } from 'app/shared/constants/role.constants';
 
 @Component({
     selector: 'jhi-status-update',
@@ -20,8 +25,18 @@ export class StatusUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
+    degausers: IDegaUser[];
+    show: boolean;
+    currentUser: IDegaUser;
+    account: Account;
 
-    constructor(private statusService: StatusService, private activatedRoute: ActivatedRoute) {}
+    constructor(
+        private jhiAlertService: JhiAlertService,
+        private statusService: StatusService,
+        private activatedRoute: ActivatedRoute,
+        private degaUserService: DegaUserService,
+        private principal: Principal
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -30,6 +45,17 @@ export class StatusUpdateComponent implements OnInit {
             this.createdDate = this.status.createdDate != null ? this.status.createdDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.status.lastUpdatedDate != null ? this.status.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.principal.identity().then(account => {
+            this.account = account;
+        });
+        this.degaUserService.query().subscribe(
+            (res: HttpResponse<IDegaUser[]>) => {
+                this.degausers = res.body;
+                this.currentUser = this.degausers.filter(u => u.email === this.account.email).shift();
+                this.show = this.showField(this.currentUser.roleName);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -82,5 +108,13 @@ export class StatusUpdateComponent implements OnInit {
                 this.status.slug = this.slug;
             });
         }
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    showField(degausersRole: String): boolean {
+        return ADMIN_ROLE.includes(degausersRole);
     }
 }

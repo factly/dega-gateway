@@ -20,16 +20,22 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="show">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreFormat.isDefault" for="field_isDefault">Is Default</label>
                     <input type="checkbox" class="form-control" name="isDefault" id="field_isDefault"
                         [(ngModel)]="format.isDefault" />
                 </div>
-               <!-- <div class="form-group">
+                <div class="form-group" *ngIf="show">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreFormat.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="format.clientId" />
-                </div>-->
+                        [(ngModel)]="format.clientId" required/>
+                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>    
+                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreFormat.description" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"

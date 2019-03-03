@@ -24,6 +24,7 @@ import { ICategory } from 'app/shared/model/core/category.model';
 import { CategoryService } from 'app/entities/core/category';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
+import { Principal, Account } from 'app/core';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -46,8 +47,10 @@ export class FactcheckUpdateComponent implements OnInit {
     tags: ITag[];
     categories: ICategory[];
     degausers: IDegaUser[];
+    currentUser: IDegaUser;
     showSave: boolean;
     showPublish: boolean;
+    account: Account;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -60,7 +63,8 @@ export class FactcheckUpdateComponent implements OnInit {
         private mediaService: MediaService,
         private tagService: TagService,
         private categoryService: CategoryService,
-        private degaUserService: DegaUserService
+        private degaUserService: DegaUserService,
+        private principal: Principal
     ) {}
 
     ngOnInit() {
@@ -105,11 +109,15 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.principal.identity().then(account => {
+            this.account = account;
+        });
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
-                this.showSave = this.showSaveButton(this.degausers[0].roleName);
-                this.showPublish = this.showPublishButton(this.degausers[0].roleName);
+                this.currentUser = this.degausers.filter(u => u.email === this.account.email).shift();
+                this.showSave = this.showSaveButton(this.currentUser.roleName);
+                this.showPublish = this.showPublishButton(this.currentUser.roleName);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

@@ -21,6 +21,7 @@ import { FormatService } from 'app/entities/core/format';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { MediaService } from '../media/media.service';
+import { Principal, Account } from 'app/core';
 
 @Component({
     selector: 'jhi-post-update',
@@ -39,6 +40,7 @@ export class PostUpdateComponent implements OnInit {
     formats: IFormat[];
 
     degausers: IDegaUser[];
+    currentUser: IDegaUser;
     publishedDate: string;
     lastUpdatedDate: string;
     createdDate: string;
@@ -47,6 +49,7 @@ export class PostUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
+    account: Account;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -57,7 +60,8 @@ export class PostUpdateComponent implements OnInit {
         private formatService: FormatService,
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
-        private mediaService: MediaService
+        private mediaService: MediaService,
+        private principal: Principal
     ) {}
 
     ngOnInit() {
@@ -92,11 +96,20 @@ export class PostUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.principal.identity().then(account => {
+            this.account = account;
+        });
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
-                this.showSave = this.showSaveButton(this.degausers[0].roleName);
-                this.showPublish = this.showPublishButton(this.degausers[0].roleName);
+                this.currentUser = this.degausers
+                    .filter(u => {
+                        const found = u.email === this.account.email;
+                        return found;
+                    })
+                    .shift();
+                this.showSave = this.showSaveButton(this.currentUser.roleName);
+                this.showPublish = this.showPublishButton(this.currentUser.roleName);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

@@ -20,7 +20,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="show">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
                         [(ngModel)]="status.clientId" required/>
@@ -31,7 +31,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="show">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.isDefault" for="field_isDefault">Is Default</label>
                     <input type="checkbox" class="form-control" name="isDefault" id="field_isDefault"
                         [(ngModel)]="status.isDefault" />

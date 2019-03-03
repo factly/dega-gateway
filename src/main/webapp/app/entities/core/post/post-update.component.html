@@ -85,8 +85,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.format" for="field_format">Format</label>
                     <select class="form-control" id="field_format" name="format" [(ngModel)]="post.formatId"  required>
-                        <option *ngIf="!editForm.value.format" [ngValue]="null" selected></option>
-                        <option [ngValue]="formatOption.id" *ngFor="let formatOption of formats; trackBy: trackFormatById">{{formatOption.name}}</option>
+                        <option [ngValue]="formatOption.id" *ngFor="let formatOption of formats | orderBy:'name'; trackBy: trackFormatById">{{formatOption.name}}</option>
                     </select>
                 </div>
                 <div [hidden]="!(editForm.controls.format?.dirty && editForm.controls.format?.invalid)">

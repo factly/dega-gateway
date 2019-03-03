@@ -93,6 +93,9 @@ export class PostUpdateComponent implements OnInit {
         this.formatService.query().subscribe(
             (res: HttpResponse<IFormat[]>) => {
                 this.formats = res.body;
+                if (this.post.id === undefined) {
+                    this.post.formatId = this.formats.find(format => format.name === 'Standard').id;
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

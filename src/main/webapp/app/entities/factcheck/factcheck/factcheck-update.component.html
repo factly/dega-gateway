@@ -20,6 +20,11 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.subTitle" for="field_subTitle">Sub Title</label>
+                    <input type="text" class="form-control" name="subTitle" id="field_subTitle"
+                           [(ngModel)]="factcheck.subTitle" />
+                </div>
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
@@ -36,6 +41,11 @@
                     <quill-editor [(ngModel)]="factcheck.introduction" name="introduction" id="field_introduction" required></quill-editor>
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.excerpt" for="field_excerpt">Excerpt</label>
+                    <input type="text" class="form-control" name="excerpt" id="field_excerpt"
+                           [(ngModel)]="factcheck.excerpt" />
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.summary" for="field_summary">Summary</label>
                     <input type="text" class="form-control" name="summary" id="field_summary"
                            [(ngModel)]="factcheck.summary" required/>
@@ -45,11 +55,6 @@
                             This field is required.
                         </small>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.excerpt" for="field_excerpt">Excerpt</label>
-                    <input type="text" class="form-control" name="excerpt" id="field_excerpt"
-                           [(ngModel)]="factcheck.excerpt" />
                 </div>
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.publishedDate" for="field_publishedDate">Published Date</label>
@@ -112,11 +117,11 @@
                         </small>
                     </div>
                 </div>-->
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.password" for="field_password">Password</label>
                     <input type="text" class="form-control" name="password" id="field_password"
                            [(ngModel)]="factcheck.password" />
-                </div>
+                </div>-->
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia" for="field_featuredMedia">Featured Media</label>
                     <input type="text" class="form-control" name="featuredMedia" id="field_featuredMedia"
@@ -136,11 +141,6 @@
                     <div *ngIf="getImageSrcUrl()">
                         <span [(ngModel)]="factcheck.featuredMedia" name="featuredMedia" ngDefaultControl></span>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.subTitle" for="field_subTitle">Sub Title</label>
-                    <input type="text" class="form-control" name="subTitle" id="field_subTitle"
-                           [(ngModel)]="factcheck.subTitle" />
                 </div>
                 <!--<div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.createdDate" for="field_createdDate">Created Date</label>

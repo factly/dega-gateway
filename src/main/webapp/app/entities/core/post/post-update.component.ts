@@ -128,6 +128,7 @@ export class PostUpdateComponent implements OnInit {
         this.post.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         this.post.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         if (this.post.id !== undefined) {
+            this.post.statusName = 'Draft';
             this.subscribeToSaveResponse(this.postService.update(this.post));
         } else {
             this.subscribeToSaveResponse(this.postService.create(this.post));
@@ -139,6 +140,7 @@ export class PostUpdateComponent implements OnInit {
         this.post.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
         this.post.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.post.id !== undefined) {
+            this.post.statusName = 'Publish';
             this.subscribeToSaveResponse(this.postService.update(this.post));
         } else {
             this.subscribeToSaveResponse(this.postService.publish(this.post));

@@ -7,6 +7,11 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IRole } from 'app/shared/model/core/role.model';
 import { RoleService } from './role.service';
+import { Principal, Account } from 'app/core';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { DegaUserService } from 'app/entities/core/dega-user';
+import { JhiAlertService } from 'ng-jhipster';
+import { ADMIN_ROLE } from 'app/shared/constants/role.constants';
 
 @Component({
     selector: 'jhi-role-update',
@@ -20,8 +25,18 @@ export class RoleUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
+    degausers: IDegaUser[];
+    show: boolean;
+    currentUser: IDegaUser;
+    account: Account;
 
-    constructor(private roleService: RoleService, private activatedRoute: ActivatedRoute) {}
+    constructor(
+        private roleService: RoleService,
+        private activatedRoute: ActivatedRoute,
+        private jhiAlertService: JhiAlertService,
+        private degaUserService: DegaUserService,
+        private principal: Principal
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -30,6 +45,17 @@ export class RoleUpdateComponent implements OnInit {
             this.createdDate = this.role.createdDate != null ? this.role.createdDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.role.lastUpdatedDate != null ? this.role.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.principal.identity().then(account => {
+            this.account = account;
+        });
+        this.degaUserService.query().subscribe(
+            (res: HttpResponse<IDegaUser[]>) => {
+                this.degausers = res.body;
+                this.currentUser = this.degausers.filter(u => u.email === this.account.email).shift();
+                this.show = this.showField(this.currentUser.roleName);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -82,5 +108,12 @@ export class RoleUpdateComponent implements OnInit {
                 this.role.slug = this.slug;
             });
         }
+    }
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    showField(degausersRole: String): boolean {
+        return ADMIN_ROLE.includes(degausersRole);
     }
 }

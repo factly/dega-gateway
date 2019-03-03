@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.description" for="field_description">Description</label>
-                    <quill-editor [(ngModel)]="claim.description" name="description" id="field_description" ></quill-editor>
+                    <quill-editor [(ngModel)]="claim.description" name="description" id="field_description" [style]="{height: '200px'}"></quill-editor>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">

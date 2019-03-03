@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.content" for="field_content">Content</label>
-                    <quill-editor [(ngModel)]="post.content" name="content" id="field_content" required></quill-editor>
+                    <quill-editor [(ngModel)]="post.content" name="content" id="field_content" [style]="{height: '200px'}" required></quill-editor>
                     <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.content?.errors?.required" jhiTranslate="entity.validation.required">

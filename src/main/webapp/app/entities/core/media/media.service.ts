@@ -106,4 +106,8 @@ export class MediaService {
     getImageSrcUrl() {
         return this.imageSrcUrl;
     }
+
+    emptyImageSrcUrl() {
+        this.imageSrcUrl = null;
+    }
 }

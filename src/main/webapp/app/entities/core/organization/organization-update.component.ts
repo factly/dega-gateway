@@ -10,6 +10,7 @@ import { IOrganization } from 'app/shared/model/core/organization.model';
 import { OrganizationService } from './organization.service';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
+import { MediaService } from '../media/media.service';
 
 @Component({
     selector: 'jhi-organization-update',
@@ -30,7 +31,8 @@ export class OrganizationUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private organizationService: OrganizationService,
         private degaUserService: DegaUserService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private mediaService: MediaService
     ) {}
 
     ngOnInit() {
@@ -47,6 +49,9 @@ export class OrganizationUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        if (this.organization.logoURL === undefined) {
+            this.mediaService.setImageSrcUrl(null);
+        }
     }
 
     previousState() {
@@ -118,6 +123,43 @@ export class OrganizationUpdateComponent implements OnInit {
                 this.organization.slug = this.slug;
                 this.organization.clientId = this.slug;
             });
+        }
+    }
+
+    getLogoURL() {
+        if (!this.organization.logoURL) {
+            this.organization.logoURL = this.mediaService.getImageSrcUrl();
+            this.mediaService.emptyImageSrcUrl();
+        }
+    }
+    getLogoURLMobile() {
+        if (!this.organization.logoURLMobile) {
+            this.organization.logoURLMobile = this.mediaService.getImageSrcUrl();
+            this.mediaService.emptyImageSrcUrl();
+        }
+    }
+    getFavIconURL() {
+        if (!this.organization.favIconURL) {
+            this.organization.favIconURL = this.mediaService.getImageSrcUrl();
+            this.mediaService.emptyImageSrcUrl();
+        }
+    }
+    getMobileIconURLMobile() {
+        if (!this.organization.mobileIconURL) {
+            this.organization.mobileIconURL = this.mediaService.getImageSrcUrl();
+            this.mediaService.emptyImageSrcUrl();
+        }
+    }
+
+    removeImage(imageUrl) {
+        if (imageUrl === 'logoURL') {
+            this.organization.logoURL = '';
+        } else if (imageUrl === 'logoURLMobile') {
+            this.organization.logoURLMobile = '';
+        } else if (imageUrl === 'favIconURL') {
+            this.organization.favIconURL = '';
+        } else {
+            this.organization.mobileIconURL = '';
         }
     }
 }

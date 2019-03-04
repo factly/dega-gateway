@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.content" for="field_content">Content</label>
-                    <quill-editor [(ngModel)]="post.content" name="content" id="field_content" required></quill-editor>
+                    <quill-editor [(ngModel)]="post.content" name="content" id="field_content" [style]="{height: '200px'}" required></quill-editor>
                     <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.content?.errors?.required" jhiTranslate="entity.validation.required">
@@ -37,8 +37,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.excerpt" for="field_excerpt">Excerpt</label>
-                    <input type="text" class="form-control" name="excerpt" id="field_excerpt"
-                        [(ngModel)]="post.excerpt" />
+                    <textarea rows="5" type="text" class="form-control" name="excerpt" id="field_excerpt"
+                              [(ngModel)]="post.excerpt" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.featured" for="field_featured">Featured</label>
@@ -85,8 +85,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.format" for="field_format">Format</label>
                     <select class="form-control" id="field_format" name="format" [(ngModel)]="post.formatId"  required>
-                        <option *ngIf="!editForm.value.format" [ngValue]="null" selected></option>
-                        <option [ngValue]="formatOption.id" *ngFor="let formatOption of formats; trackBy: trackFormatById">{{formatOption.name}}</option>
+                        <option [ngValue]="formatOption.id" *ngFor="let formatOption of formats | orderBy:'name'; trackBy: trackFormatById">{{formatOption.name}}</option>
                     </select>
                 </div>
                 <div [hidden]="!(editForm.controls.format?.dirty && editForm.controls.format?.invalid)">

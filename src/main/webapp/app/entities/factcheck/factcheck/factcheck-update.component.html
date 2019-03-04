@@ -42,8 +42,10 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.excerpt" for="field_excerpt">Excerpt</label>
-                    <input type="text" class="form-control" name="excerpt" id="field_excerpt"
-                           [(ngModel)]="factcheck.excerpt" />
+                    <!--<input type="text" class="form-control" name="excerpt" id="field_excerpt"
+                           [(ngModel)]="factcheck.excerpt" />-->
+                    <textarea rows="5" class="form-control" name="excerpt" id="field_excerpt"
+                              [(ngModel)]="factcheck.excerpt" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.summary" for="field_summary">Summary</label>

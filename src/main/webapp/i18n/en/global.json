@@ -112,9 +112,10 @@
             "edit": "Edit",
             "open": "Open",
             "publish": "Publish",
-            "save": "Save Draft",
+            "save": "Save",
             "view": "View",
-            "upload": "Upload"
+            "upload": "Upload",
+            "savedraft": "Save Draft"
         },
         "detail": {
             "field": "Field",

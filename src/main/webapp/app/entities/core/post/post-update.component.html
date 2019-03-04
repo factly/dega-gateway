@@ -112,7 +112,7 @@
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary" *ngIf="showSave">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save Draft</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.savedraft">Save Draft</span>
                 </button>
                 <button type="button" id="publish-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary" *ngIf="showPublish" (click)="publish()">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.publish">Publish</span>

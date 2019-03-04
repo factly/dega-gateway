@@ -164,6 +164,7 @@ export class FactcheckUpdateComponent implements OnInit {
             }
         }
         if (this.factcheck.id !== undefined) {
+            this.factcheck.statusName = 'Draft';
             this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
         } else {
             this.subscribeToSaveResponse(this.factcheckService.create(this.factcheck));
@@ -175,6 +176,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
         this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.factcheck.id !== undefined) {
+            this.factcheck.statusName = 'Publish';
             this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
         } else {
             this.subscribeToSaveResponse(this.factcheckService.publish(this.factcheck));

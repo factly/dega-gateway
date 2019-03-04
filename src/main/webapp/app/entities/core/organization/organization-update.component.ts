@@ -150,4 +150,16 @@ export class OrganizationUpdateComponent implements OnInit {
             this.mediaService.emptyImageSrcUrl();
         }
     }
+
+    removeImage(imageUrl) {
+        if (imageUrl === 'logoURL') {
+            this.organization.logoURL = '';
+        } else if (imageUrl === 'logoURLMobile') {
+            this.organization.logoURLMobile = '';
+        } else if (imageUrl === 'favIconURL') {
+            this.organization.favIconURL = '';
+        } else {
+            this.organization.mobileIconURL = '';
+        }
+    }
 }

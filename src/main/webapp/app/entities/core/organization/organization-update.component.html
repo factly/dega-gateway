@@ -59,6 +59,9 @@
                         </span>
                     </button>
                     <img src={{organization.logoURL}} alt="" width="100" height="100">
+                    <button class="btn btn-danger" *ngIf="organization.logoURL" (click)="removeImage('logoURL')">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
                     <div *ngIf="getLogoURL()">
                         <span [(ngModel)]="organization.logoURL" name="featuredMedia" ngDefaultControl></span>
                     </div>
@@ -76,6 +79,9 @@
                         </span>
                     </button>
                     <img src={{organization.logoURLMobile}} alt="" width="100" height="100">
+                    <button class="btn btn-danger" *ngIf="organization.logoURLMobile" (click)="removeImage('logoURLMobile')">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
                     <div *ngIf="getLogoURLMobile()">
                         <span [(ngModel)]="organization.logoURLMobile" name="featuredMedia" ngDefaultControl></span>
                     </div>
@@ -93,6 +99,9 @@
                         </span>
                     </button>
                     <img src={{organization.favIconURL}} alt="" width="100" height="100">
+                    <button class="btn btn-danger" *ngIf="organization.favIconURL" (click)="removeImage('favIconURL')">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
                     <div *ngIf="getFavIconURL()">
                         <span [(ngModel)]="organization.favIconURL" name="featuredMedia" ngDefaultControl></span>
                     </div>
@@ -110,6 +119,9 @@
                         </span>
                     </button>
                     <img src={{organization.mobileIconURL}} alt="" width="100" height="100">
+                    <button class="btn btn-danger" *ngIf="organization.mobileIconURL" (click)="removeImage('mobileIconURL')">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
                     <div *ngIf="getMobileIconURLMobile()">
                         <span [(ngModel)]="organization.mobileIconURL" name="featuredMedia" ngDefaultControl></span>
                     </div>

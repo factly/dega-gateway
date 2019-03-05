@@ -15,7 +15,7 @@
             },
             "name": "Name",
             "numericValue": "Numeric Value",
-            "iconURL": "Icon URL",
+            "iconURL": "Icon",
             "isDefault": "Is Default",
             "clientId": "Client Id",
             "slug": "Slug",

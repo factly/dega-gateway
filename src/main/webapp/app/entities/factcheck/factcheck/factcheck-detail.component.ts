@@ -16,6 +16,7 @@ export class FactcheckDetailComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ factcheck }) => {
             factcheck.introduction = this.sanitizer.bypassSecurityTrustHtml(factcheck.introduction);
+            factcheck.summary = this.sanitizer.bypassSecurityTrustHtml(factcheck.summary);
             this.factcheck = factcheck;
         });
     }

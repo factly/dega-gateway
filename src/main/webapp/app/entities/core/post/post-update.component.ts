@@ -116,8 +116,10 @@ export class PostUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.post.id === undefined) {
+        if (this.post.id === undefined || this.post.featuredMedia === undefined) {
             this.mediaService.setImageSrcUrl(null);
+        } else {
+            this.mediaService.setImageSrcUrl(this.post.featuredMedia);
         }
     }
 

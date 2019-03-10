@@ -14,6 +14,7 @@ import { IOrganization } from 'app/shared/model/core/organization.model';
 import { OrganizationService } from 'app/entities/core/organization';
 import { IPost } from 'app/shared/model/core/post.model';
 import { PostService } from 'app/entities/core/post';
+import { MediaService } from '../media/media.service';
 
 @Component({
     selector: 'jhi-dega-user-update',
@@ -39,7 +40,8 @@ export class DegaUserUpdateComponent implements OnInit {
         private roleService: RoleService,
         private organizationService: OrganizationService,
         private postService: PostService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private mediaService: MediaService
     ) {}
 
     ngOnInit() {
@@ -66,6 +68,11 @@ export class DegaUserUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        if (this.degaUser.id === undefined || this.degaUser.profilePicture === undefined) {
+            this.mediaService.setImageSrcUrl(null);
+        } else {
+            this.mediaService.setImageSrcUrl(this.degaUser.profilePicture);
+        }
     }
 
     previousState() {
@@ -144,5 +151,9 @@ export class DegaUserUpdateComponent implements OnInit {
                 this.degaUser.slug = this.slug;
             });
         }
+    }
+
+    getImageSrcUrl() {
+        this.degaUser.profilePicture = this.mediaService.getImageSrcUrl();
     }
 }

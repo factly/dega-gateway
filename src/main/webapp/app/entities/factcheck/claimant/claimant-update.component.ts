@@ -31,8 +31,10 @@ export class ClaimantUpdateComponent implements OnInit {
             this.createdDate = this.claimant.createdDate != null ? this.claimant.createdDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.claimant.lastUpdatedDate != null ? this.claimant.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
-        if (this.claimant.id === undefined) {
+        if (this.claimant.id === undefined || this.claimant.imageURL === undefined) {
             this.mediaService.setImageSrcUrl(null);
+        } else {
+            this.mediaService.setImageSrcUrl(this.claimant.imageURL);
         }
     }
 

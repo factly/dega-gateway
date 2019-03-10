@@ -121,8 +121,10 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.factcheck.id === undefined) {
+        if (this.factcheck.id === undefined || this.factcheck.featuredMedia === undefined) {
             this.mediaService.setImageSrcUrl(null);
+        } else {
+            this.mediaService.setImageSrcUrl(this.factcheck.featuredMedia);
         }
     }
 

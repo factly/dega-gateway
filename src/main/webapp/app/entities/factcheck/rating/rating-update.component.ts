@@ -58,8 +58,10 @@ export class RatingUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.rating.id === undefined) {
+        if (this.rating.id === undefined || this.rating.iconURL === undefined) {
             this.mediaService.setImageSrcUrl(null);
+        } else {
+            this.mediaService.setImageSrcUrl(this.rating.iconURL);
         }
     }
 

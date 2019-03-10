@@ -49,7 +49,7 @@ export class OrganizationUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.organization.logoURL === undefined) {
+        if (this.organization.id === undefined) {
             this.mediaService.setImageSrcUrl(null);
         }
     }

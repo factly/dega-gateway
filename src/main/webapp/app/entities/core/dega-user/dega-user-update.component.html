@@ -62,8 +62,18 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.profilePicture" for="field_profilePicture">Profile Picture</label>
-                    <input type="text" class="form-control" name="profilePicture" id="field_profilePicture"
-                        [(ngModel)]="degaUser.profilePicture" />
+                    <button id="field_profilePicture" class="btn btn-primary jh-create-entity create-media"
+                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            replaceUrl="true" type="button">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
+                            Upload Media
+                        </span>
+                    </button>
+                    <img src={{degaUser.profilePicture}} alt="" width="100" height="100">
+                    <div *ngIf="getImageSrcUrl()">
+                        <span [(ngModel)]="degaUser.profilePicture" name="featuredMedia" ngDefaultControl></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreDegaUser.description" for="field_description">Description</label>

@@ -105,7 +105,7 @@ export class OrganizationUpdateComponent implements OnInit {
         if (this.organization.id === undefined) {
             this.slugExtention = 0;
             this.slug = event.target.value
-                .replace(/[^\w\s]/gi, '')
+                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
                 .replace(/\s+/g, '-')
                 .toLowerCase();
             this.tempSlug = this.slug;

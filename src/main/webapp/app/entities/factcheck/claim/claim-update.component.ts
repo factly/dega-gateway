@@ -131,7 +131,8 @@ export class ClaimUpdateComponent implements OnInit {
         if (this.claim.id === undefined) {
             this.slugExtention = 0;
             this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
+                .replace(/[;/?:@=&"<>#%{}|\^~$-`“‘]/g, '')
+                .trim()
                 .replace(/\s+/g, '-')
                 .toLowerCase();
             this.tempSlug = this.slug;

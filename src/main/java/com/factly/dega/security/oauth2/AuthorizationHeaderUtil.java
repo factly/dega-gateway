@@ -1,7 +1,5 @@
 package com.factly.dega.security.oauth2;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -10,6 +8,8 @@ import org.springframework.security.oauth2.client.resource.UserRedirectRequiredE
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
+import java.util.Optional;
 
 @Component
 public class AuthorizationHeaderUtil {

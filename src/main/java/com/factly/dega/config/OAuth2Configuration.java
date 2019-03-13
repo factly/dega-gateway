@@ -1,7 +1,6 @@
 package com.factly.dega.config;
 
 import com.factly.dega.security.OAuth2AuthenticationSuccessHandler;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

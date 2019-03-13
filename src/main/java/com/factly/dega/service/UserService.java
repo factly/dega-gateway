@@ -8,7 +8,6 @@ import com.factly.dega.repository.UserRepository;
 import com.factly.dega.repository.search.UserSearchRepository;
 import com.factly.dega.security.SecurityUtils;
 import com.factly.dega.service.dto.UserDTO;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;

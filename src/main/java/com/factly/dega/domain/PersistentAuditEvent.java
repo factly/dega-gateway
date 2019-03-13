@@ -3,6 +3,7 @@ package com.factly.dega.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;

@@ -15,8 +15,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * Utility class for testing REST controllers.
  */

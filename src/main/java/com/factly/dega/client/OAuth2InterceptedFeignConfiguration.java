@@ -1,12 +1,10 @@
 package com.factly.dega.client;
 
-import java.io.IOException;
-
+import com.factly.dega.security.oauth2.AuthorizationHeaderUtil;
+import feign.RequestInterceptor;
 import org.springframework.context.annotation.Bean;
 
-import feign.RequestInterceptor;
-
-import com.factly.dega.security.oauth2.AuthorizationHeaderUtil;
+import java.io.IOException;
 
 public class OAuth2InterceptedFeignConfiguration {
 

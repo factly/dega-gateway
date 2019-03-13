@@ -1,11 +1,9 @@
 package com.factly.dega.config;
 
-import io.github.jhipster.config.JHipsterProperties;
-
-import com.factly.dega.gateway.ratelimiting.RateLimitingFilter;
 import com.factly.dega.gateway.accesscontrol.AccessControlFilter;
+import com.factly.dega.gateway.ratelimiting.RateLimitingFilter;
 import com.factly.dega.gateway.responserewriting.SwaggerBasePathRewritingFilter;
-
+import io.github.jhipster.config.JHipsterProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
 import org.springframework.context.annotation.Bean;

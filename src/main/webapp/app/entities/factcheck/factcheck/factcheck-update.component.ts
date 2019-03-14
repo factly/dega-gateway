@@ -237,7 +237,8 @@ export class FactcheckUpdateComponent implements OnInit {
         if (this.factcheck.id === undefined) {
             this.slugExtention = 0;
             this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
+                .replace(/[;/?:@=&"<>#%{}|\^~$-`“‘]/g, '')
+                .trim()
                 .replace(/\s+/g, '-')
                 .toLowerCase();
             this.tempSlug = this.slug;

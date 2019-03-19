@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claim" for="field_claim">Claim</label>
                     <input type="text" class="form-control" name="claim" id="field_claim"
-                        [(ngModel)]="claim.claim" (change)="bindSlug($event)" required/>
+                        [(ngModel)]="claim.claim" required/>
                     <div [hidden]="!(editForm.controls.claim?.dirty && editForm.controls.claim?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.claim?.errors?.required" jhiTranslate="entity.validation.required">

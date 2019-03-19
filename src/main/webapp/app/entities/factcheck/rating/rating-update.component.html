@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="rating.name" (change)="bindSlug($event)" required/>
+                        [(ngModel)]="rating.name" required/>
                     <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">

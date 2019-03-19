@@ -101,31 +101,6 @@ export class OrganizationUpdateComponent implements OnInit {
         return option;
     }
 
-    bindSlug(event: any) {
-        if (this.organization.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-    createSlug() {
-        if (this.slug) {
-            this.organizationService.getOrganizationBySlug(this.slug).subscribe((res: HttpResponse<IOrganization>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.organization.slug = this.slug;
-                this.organization.clientId = this.slug;
-            });
-        }
-    }
-
     getLogoURL() {
         if (!this.organization.logoURL) {
             this.organization.logoURL = this.mediaService.getImageSrcUrl();

@@ -208,31 +208,6 @@ export class PostUpdateComponent implements OnInit {
         return option;
     }
 
-    bindSlug(event: any) {
-        if (this.post.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-
-    createSlug() {
-        if (this.slug) {
-            this.postService.getPostBySlug(this.slug).subscribe((res: HttpResponse<IPost>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.post.slug = this.slug;
-            });
-        }
-    }
-
     getImageSrcUrl() {
         this.post.featuredMedia = this.mediaService.getImageSrcUrl();
     }

@@ -66,30 +66,6 @@ export class ClaimantUpdateComponent implements OnInit {
         this.isSaving = false;
     }
 
-    bindSlug(event: any) {
-        if (this.claimant.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-
-    createSlug() {
-        if (this.slug) {
-            this.claimantService.getClaimantBySlug(this.slug).subscribe((res: HttpResponse<IClaimant>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.claimant.slug = this.slug;
-            });
-        }
-    }
     getImageSrcUrl() {
         this.claimant.imageURL = this.mediaService.getImageSrcUrl();
     }

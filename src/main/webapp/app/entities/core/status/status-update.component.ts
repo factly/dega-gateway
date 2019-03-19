@@ -86,30 +86,6 @@ export class StatusUpdateComponent implements OnInit {
         this.isSaving = false;
     }
 
-    bindSlug(event: any) {
-        if (this.status.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-    createSlug() {
-        if (this.slug) {
-            this.statusService.getStatusBySlug(this.slug).subscribe((res: HttpResponse<IStatus>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.status.slug = this.slug;
-            });
-        }
-    }
-
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }

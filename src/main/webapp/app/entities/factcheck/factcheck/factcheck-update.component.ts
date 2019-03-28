@@ -75,12 +75,17 @@ export class FactcheckUpdateComponent implements OnInit {
             this.lastUpdatedDate = this.factcheck.lastUpdatedDate != null ? this.factcheck.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.factcheck.createdDate != null ? this.factcheck.createdDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.claimService.query().subscribe(
-            (res: HttpResponse<IClaim[]>) => {
-                this.claims = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.claimService
+            .query({
+                size: 1000,
+                sort: ['createdDate,desc']
+            })
+            .subscribe(
+                (res: HttpResponse<IClaim[]>) => {
+                    this.claims = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         this.formGroup = this.formBuilder.group({
             claims: this.formBuilder.array([])
         });

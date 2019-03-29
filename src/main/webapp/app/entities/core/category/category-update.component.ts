@@ -94,29 +94,4 @@ export class CategoryUpdateComponent implements OnInit {
         }
         return option;
     }
-
-    bindSlug(event: any) {
-        if (this.category.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~$-`“‘]/g, '')
-                .trim()
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-    createSlug() {
-        if (this.slug) {
-            this.categoryService.getCategoryBySlug(this.slug).subscribe((res: HttpResponse<ICategory>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.category.slug = this.slug;
-            });
-        }
-    }
 }

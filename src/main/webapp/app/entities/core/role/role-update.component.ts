@@ -86,30 +86,6 @@ export class RoleUpdateComponent implements OnInit {
         this.isSaving = false;
     }
 
-    bindSlug(event: any) {
-        if (this.role.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~$-`“‘]/g, '')
-                .trim()
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-    createSlug() {
-        if (this.slug) {
-            this.roleService.getRoleBySlug(this.slug).subscribe((res: HttpResponse<IRole>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.role.slug = this.slug;
-            });
-        }
-    }
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }

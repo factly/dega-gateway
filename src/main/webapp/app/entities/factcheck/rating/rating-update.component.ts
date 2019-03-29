@@ -93,30 +93,6 @@ export class RatingUpdateComponent implements OnInit {
         this.isSaving = false;
     }
 
-    bindSlug(event: any) {
-        if (this.rating.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~$-`“‘]/g, '')
-                .trim()
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-    createSlug() {
-        if (this.slug) {
-            this.ratingService.getRatingBySlug(this.slug).subscribe((res: HttpResponse<IRating>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.rating.slug = this.slug;
-            });
-        }
-    }
     getImageSrcUrl() {
         this.rating.iconURL = this.mediaService.getImageSrcUrl();
     }

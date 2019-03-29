@@ -126,29 +126,4 @@ export class ClaimUpdateComponent implements OnInit {
         }
         return option;
     }
-
-    bindSlug(event: any) {
-        if (this.claim.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~$-`“‘]/g, '')
-                .trim()
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-    createSlug() {
-        if (this.slug) {
-            this.claimService.getClaimBySlug(this.slug).subscribe((res: HttpResponse<IClaim>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.claim.slug = this.slug;
-            });
-        }
-    }
 }

@@ -129,31 +129,6 @@ export class DegaUserUpdateComponent implements OnInit {
         return option;
     }
 
-    bindSlug(event: any) {
-        if (this.degaUser.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~$-`“‘]/g, '')
-                .trim()
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-    createSlug() {
-        if (this.slug) {
-            this.degaUserService.getDegaUserBySlug(this.slug).subscribe((res: HttpResponse<IDegaUser>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.degaUser.slug = this.slug;
-            });
-        }
-    }
-
     getImageSrcUrl() {
         this.degaUser.profilePicture = this.mediaService.getImageSrcUrl();
     }

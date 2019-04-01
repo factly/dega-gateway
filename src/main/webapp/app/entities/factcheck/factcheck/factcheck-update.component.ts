@@ -75,12 +75,17 @@ export class FactcheckUpdateComponent implements OnInit {
             this.lastUpdatedDate = this.factcheck.lastUpdatedDate != null ? this.factcheck.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.factcheck.createdDate != null ? this.factcheck.createdDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.claimService.query().subscribe(
-            (res: HttpResponse<IClaim[]>) => {
-                this.claims = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.claimService
+            .query({
+                size: 1000,
+                sort: ['createdDate,desc']
+            })
+            .subscribe(
+                (res: HttpResponse<IClaim[]>) => {
+                    this.claims = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
         this.formGroup = this.formBuilder.group({
             claims: this.formBuilder.array([])
         });
@@ -231,31 +236,6 @@ export class FactcheckUpdateComponent implements OnInit {
             }
         }
         return option;
-    }
-
-    bindSlug(event: any) {
-        if (this.factcheck.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-
-    createSlug() {
-        if (this.slug) {
-            this.factcheckService.getFactcheckBySlug(this.slug).subscribe((res: HttpResponse<IFactcheck>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.factcheck.slug = this.slug;
-            });
-        }
     }
 
     get claimsArray() {

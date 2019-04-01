@@ -86,29 +86,6 @@ export class FormatUpdateComponent implements OnInit {
         this.isSaving = false;
     }
 
-    bindSlug(event: any) {
-        if (this.format.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-    createSlug() {
-        if (this.slug) {
-            this.formatService.getFormatBySlug(this.slug).subscribe((res: HttpResponse<IFormat>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.format.slug = this.slug;
-            });
-        }
-    }
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }

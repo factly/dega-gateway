@@ -94,28 +94,4 @@ export class TagUpdateComponent implements OnInit {
         }
         return option;
     }
-
-    bindSlug(event: any) {
-        if (this.tag.id === undefined) {
-            this.slugExtention = 0;
-            this.slug = event.target.value
-                .replace(/[;/?:@=&"<>#%{}|\^~]/g, '')
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-            this.tempSlug = this.slug;
-            this.createSlug();
-        }
-    }
-    createSlug() {
-        if (this.slug) {
-            this.tagService.getTagBySlug(this.slug).subscribe((res: HttpResponse<ITag>) => {
-                if (res.body) {
-                    this.slugExtention += 1;
-                    this.slug = this.tempSlug + this.slugExtention;
-                    this.createSlug();
-                }
-                this.tag.slug = this.slug;
-            });
-        }
-    }
 }

@@ -58,8 +58,8 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
     loadAll() {
         this.mediaService
             .query({
-                page: 0,
-                size: -1
+                size: 100,
+                sort: ['createdDate,desc']
             })
             .subscribe(
                 (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),

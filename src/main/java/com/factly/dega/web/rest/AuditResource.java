@@ -2,6 +2,7 @@ package com.factly.dega.web.rest;
 
 import com.factly.dega.service.AuditEventService;
 import com.factly.dega.web.rest.util.PaginationUtil;
+
 import io.github.jhipster.web.util.ResponseUtil;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.data.domain.Page;

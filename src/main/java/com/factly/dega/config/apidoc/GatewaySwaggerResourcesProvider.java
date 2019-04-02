@@ -1,18 +1,16 @@
 package com.factly.dega.config.apidoc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.jhipster.config.JHipsterConstants;
-
-import org.springframework.context.annotation.*;
 import org.springframework.cloud.netflix.zuul.filters.Route;
 import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-
 import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Retrieves all registered microservices Swagger resources.

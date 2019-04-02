@@ -3,11 +3,10 @@ package com.factly.dega.service;
 import com.factly.dega.GatewayApp;
 import com.factly.dega.config.Constants;
 import com.factly.dega.domain.User;
-import com.factly.dega.repository.search.UserSearchRepository;
 import com.factly.dega.repository.UserRepository;
-import com.factly.dega.service.dto.UserDTO;
+import com.factly.dega.repository.search.UserSearchRepository;
 import com.factly.dega.security.AuthoritiesConstants;
-
+import com.factly.dega.service.dto.UserDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,16 +21,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import java.util.*;
 
 /**
  * Test class for the UserResource REST controller.

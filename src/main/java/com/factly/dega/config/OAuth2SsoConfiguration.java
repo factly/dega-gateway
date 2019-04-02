@@ -1,7 +1,7 @@
 package com.factly.dega.config;
 
 import com.factly.dega.security.AuthoritiesConstants;
-
+import io.github.jhipster.security.AjaxLogoutSuccessHandler;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +18,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CorsFilter;
 
-import io.github.jhipster.security.AjaxLogoutSuccessHandler;
-
 @EnableOAuth2Sso
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
@@ -30,11 +28,6 @@ public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
 
     public OAuth2SsoConfiguration(CorsFilter corsFilter) {
         this.corsFilter = corsFilter;
-    }
-
-    @Bean
-    public AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler() {
-        return new AjaxLogoutSuccessHandler();
     }
 
     @Override
@@ -59,10 +52,6 @@ public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
             .headers()
             .frameOptions()
             .disable()
-        .and()
-            .logout()
-            .logoutUrl("/api/logout")
-            .logoutSuccessHandler(ajaxLogoutSuccessHandler())
         .and()
             .authorizeRequests()
             .antMatchers("/api/**").authenticated()

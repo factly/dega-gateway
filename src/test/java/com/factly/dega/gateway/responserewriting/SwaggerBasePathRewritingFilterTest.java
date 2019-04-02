@@ -12,7 +12,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 
 import static com.factly.dega.gateway.responserewriting.SwaggerBasePathRewritingFilter.gzipData;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static springfox.documentation.swagger2.web.Swagger2Controller.DEFAULT_URL;
 
 /**

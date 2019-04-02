@@ -1,13 +1,14 @@
 package com.factly.dega.service.dto;
 
 import com.factly.dega.config.Constants;
+
 import com.factly.dega.domain.Authority;
 import com.factly.dega.domain.User;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
+import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;

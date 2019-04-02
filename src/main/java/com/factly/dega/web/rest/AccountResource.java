@@ -1,9 +1,10 @@
 package com.factly.dega.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.factly.dega.service.UserService;
 import com.factly.dega.service.dto.UserDTO;
 import com.factly.dega.web.rest.errors.InternalServerErrorException;
+
+import com.codahale.metrics.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;

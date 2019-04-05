@@ -38,6 +38,7 @@
                 </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.introduction" for="field_introduction">Introduction</label>
+                    <span class="text-danger" [hidden]="factcheck.introduction">*</span>
                     <quill-editor [(ngModel)]="factcheck.introduction" name="introduction" id="field_introduction" [style]="{height: '200px'}" required></quill-editor>
                 </div>
                 <div class="form-group">
@@ -51,7 +52,8 @@
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.summary" for="field_summary">Summary</label>
                     <!--<input type="text" class="form-control" name="summary" id="field_summary"
                            [(ngModel)]="factcheck.summary" required/>-->
-                    <quill-editor [(ngModel)]="factcheck.summary" name="summary" id="field_summary" [style]="{height: '200px'}"></quill-editor>
+                    <span class="text-danger" [hidden]="factcheck.summary">*</span>
+                    <quill-editor [(ngModel)]="factcheck.summary" name="summary" id="field_summary" [style]="{height: '200px'}" required></quill-editor>
                     <!--<div [hidden]="!(editForm.controls.summary?.dirty && editForm.controls.summary?.invalid)">
                         <small class="form-text text-danger"
                                [hidden]="!editForm.controls.summary?.errors?.required" jhiTranslate="entity.validation.required">
@@ -211,8 +213,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.description" for="field_description">Description</label>
-                                    <!--<input type="text" class="form-control" formControlName="description" name="description" id="field_description" required/>-->
-                                    <quill-editor formControlName="description" name="description" id="field_description" [style]="{height: '200px'}" required></quill-editor>
+                                <span class="text-danger">*</span>
+                                <quill-editor formControlName="description" name="description" id="field_description" [style]="{height: '200px'}" required></quill-editor>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claimDate" for="field_claimDate">Claim Date</label>

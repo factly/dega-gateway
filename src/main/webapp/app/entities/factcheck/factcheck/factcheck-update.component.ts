@@ -155,9 +155,8 @@ export class FactcheckUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
-        this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
-        this.factcheck.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        // this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
+        // this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
 
         if (this.formGroup) {
             for (const key in this.formGroup.value.claims) {
@@ -180,8 +179,19 @@ export class FactcheckUpdateComponent implements OnInit {
 
     publish() {
         this.isSaving = true;
-        this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
-        this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        // this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
+        // this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        if (this.formGroup) {
+            for (const key in this.formGroup.value.claims) {
+                if (key) {
+                    if (this.factcheck.claims && this.factcheck.claims.length > 0) {
+                        this.factcheck.claims.push(this.formGroup.value.claims[key]);
+                    } else {
+                        this.factcheck.claims = this.formGroup.value.claims[key];
+                    }
+                }
+            }
+        }
         if (this.factcheck.id !== undefined) {
             this.factcheck.statusName = 'Publish';
             this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));

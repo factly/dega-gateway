@@ -32,6 +32,11 @@ public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
         this.corsFilter = corsFilter;
     }
 
+    @Bean
+    public AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler() {
+        return new AjaxLogoutSuccessHandler();
+    }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
@@ -54,6 +59,10 @@ public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
             .headers()
             .frameOptions()
             .disable()
+        .and()
+            .logout()
+            .logoutUrl("/api/logout")
+            .logoutSuccessHandler(ajaxLogoutSuccessHandler())
         .and()
             .authorizeRequests()
             .antMatchers("/api/**").authenticated()

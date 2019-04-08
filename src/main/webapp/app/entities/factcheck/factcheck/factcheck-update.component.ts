@@ -310,7 +310,10 @@ export class FactcheckUpdateComponent implements OnInit {
     openDialog() {
         this.range_1 = this.quillEditorRef.getSelection();
         console.log('working');
-        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], { queryParams: { media_type: 'quill' } });
+        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], {
+            queryParams: { media_type: 'quill' },
+            replaceUrl: true
+        });
     }
     updateMediaForQuill_1(url) {
         const img = '<img src="' + url + '" />';
@@ -325,7 +328,10 @@ export class FactcheckUpdateComponent implements OnInit {
 
     openDialog2() {
         this.range_2 = this.quillEditorRef2.getSelection();
-        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], { queryParams: { media_type: 'quill2' } });
+        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], {
+            queryParams: { media_type: 'quill2' },
+            replaceUrl: true
+        });
     }
     updateMediaForQuill_2(url) {
         const img = '<img src="' + url + '" />';

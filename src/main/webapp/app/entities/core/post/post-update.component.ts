@@ -149,13 +149,11 @@ export class PostUpdateComponent implements OnInit {
     openDialog() {
         this.range_1 = this.quillEditorRef.getSelection();
         console.log('working');
-        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], { queryParams: { media_type: 'quill' } });
+        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], { queryParams: { media_type: 'quill' }, replaceUrl: true });
     }
     updateMediaForQuill_1(url) {
         const img = '<img src="' + url + '" />';
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.range_1.index, img);
-        // this.router.navigate([{ outlets: { } }], { queryParams: {}}); // TODO: Remove: to remove the query param
-        // this.router.navigate([], { replaceUrl: true, }); // TODO: Remove
     }
 
     updateMediaForFeature(url) {

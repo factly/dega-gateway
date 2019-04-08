@@ -24,6 +24,7 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
     itemsPerPage: any;
     page: any;
     currentSearch: string;
+    url_query_type: string;
     @Output()
     messageEvent = new EventEmitter<String>();
 
@@ -39,11 +40,38 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {});
+        this.activatedRoute.queryParams.subscribe(params => {
+            this.url_query_type = params['media_type'];
+        });
     }
 
     ngOnInit() {
         this.currentSearch = '';
         this.loadAll();
+    }
+
+    public _onChange(files: FileList): void {
+        /*---if (files && files.length > 0) {
+          const file: File = files.item(0);
+          const extension = ['image/jpg', 'image/jpeg', 'image/png'];
+          if (extension.indexOf(file.type) > -1) {
+            const reader = new FileReader();
+
+            reader.onload = ((e) => {
+              this.url = e.target['result'];
+              const formData = new FormData();
+              formData.append('upload', files[0]);
+              this.contentSubmitApiService.postUserCoverImageContent(formData).subscribe(content => {
+                const x = content;
+                this.url = this.asset_url + x;
+              });
+            });
+            reader.readAsDataURL(file);
+          } else {
+            alert('File not Supported');
+          }
+        }---*/
+        console.log(files);
     }
 
     clear() {
@@ -107,6 +135,11 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
                 (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+    }
+
+    onSearch(url) {
+        this.mediaService.sendProductId(url, this.url_query_type);
+        this.activeModal.close();
     }
 }
 

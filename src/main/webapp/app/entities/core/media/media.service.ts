@@ -102,14 +102,6 @@ export class MediaService {
         return this.http.post<IMedia>(this.uploadImageUrl, formData, { observe: 'response' });
     }
 
-    setImageSrcUrl(imageUrl: string) {
-        this.imageSrcUrl = imageUrl;
-    }
-
-    getImageSrcUrl() {
-        return this.imageSrcUrl;
-    }
-
     emptyImageSrcUrl() {
         this.imageSrcUrl = null;
     }

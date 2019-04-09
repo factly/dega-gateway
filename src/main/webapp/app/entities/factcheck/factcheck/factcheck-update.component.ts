@@ -147,11 +147,6 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.factcheck.id === undefined || this.factcheck.featuredMedia === undefined) {
-            this.mediaService.setImageSrcUrl(null);
-        } else {
-            this.mediaService.setImageSrcUrl(this.factcheck.featuredMedia);
-        }
     }
 
     addClaimGroup(): FormGroup {
@@ -283,10 +278,6 @@ export class FactcheckUpdateComponent implements OnInit {
 
     submitHandler() {
         this.claims = this.formGroup.value;
-    }
-
-    getImageSrcUrl() {
-        this.factcheck.featuredMedia = this.mediaService.getImageSrcUrl();
     }
 
     trackTagById(index: number, item: ITag) {

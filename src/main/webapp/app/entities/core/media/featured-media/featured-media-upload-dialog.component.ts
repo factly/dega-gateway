@@ -78,11 +78,6 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
         this.activeModal.dismiss('cancel');
     }
 
-    uploadImage(url) {
-        this.mediaService.setImageSrcUrl(url);
-        this.activeModal.close();
-    }
-
     loadAll() {
         this.mediaService
             .query({

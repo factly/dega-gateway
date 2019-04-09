@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -13,6 +13,7 @@ import { DegaUserService } from 'app/entities/core/dega-user';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { JhiAlertService } from 'ng-jhipster';
 import { Principal, Account } from 'app/core';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-rating-update',
@@ -30,6 +31,7 @@ export class RatingUpdateComponent implements OnInit {
     showClientId: boolean;
     currentUser: IDegaUser;
     account: Account;
+    subscription: Subscription;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -37,8 +39,15 @@ export class RatingUpdateComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private degaUserService: DegaUserService,
         private mediaService: MediaService,
-        private principal: Principal
-    ) {}
+        private principal: Principal,
+        private router: Router
+    ) {
+        this.subscription = this.mediaService.getProductID().subscribe(message => {
+            if (message['type_of_data'] === 'feature') {
+                this.updateMediaForFeature(message['selected_url']);
+            }
+        });
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -58,11 +67,6 @@ export class RatingUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.rating.id === undefined || this.rating.iconURL === undefined) {
-            this.mediaService.setImageSrcUrl(null);
-        } else {
-            this.mediaService.setImageSrcUrl(this.rating.iconURL);
-        }
     }
 
     previousState() {
@@ -93,8 +97,8 @@ export class RatingUpdateComponent implements OnInit {
         this.isSaving = false;
     }
 
-    getImageSrcUrl() {
-        this.rating.iconURL = this.mediaService.getImageSrcUrl();
+    updateMediaForFeature(url) {
+        this.rating.iconURL = url;
     }
 
     private onError(errorMessage: string) {

@@ -133,11 +133,6 @@ export class PostUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.post.id === undefined || this.post.featuredMedia === undefined) {
-            this.mediaService.setImageSrcUrl(null);
-        } else {
-            this.mediaService.setImageSrcUrl(this.post.featuredMedia);
-        }
     }
 
     getEditorInstance(editorInstance: any) {
@@ -244,8 +239,4 @@ export class PostUpdateComponent implements OnInit {
         }
         return option;
     }
-
-    // getImageSrcUrl() {
-    // this.post.featuredMedia = this.mediaService.getImageSrcUrl();
-    // }
 }

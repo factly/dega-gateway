@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -8,6 +8,7 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { ClaimantService } from './claimant.service';
 import { MediaService } from '../../core/media/media.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-claimant-update',
@@ -21,8 +22,20 @@ export class ClaimantUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
+    subscription: Subscription;
 
-    constructor(private claimantService: ClaimantService, private activatedRoute: ActivatedRoute, private mediaService: MediaService) {}
+    constructor(
+        private claimantService: ClaimantService,
+        private activatedRoute: ActivatedRoute,
+        private mediaService: MediaService,
+        private router: Router
+    ) {
+        this.subscription = this.mediaService.getProductID().subscribe(message => {
+            if (message['type_of_data'] === 'feature') {
+                this.updateMediaForFeature(message['selected_url']);
+            }
+        });
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -31,11 +44,6 @@ export class ClaimantUpdateComponent implements OnInit {
             this.createdDate = this.claimant.createdDate != null ? this.claimant.createdDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.claimant.lastUpdatedDate != null ? this.claimant.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
-        if (this.claimant.id === undefined || this.claimant.imageURL === undefined) {
-            this.mediaService.setImageSrcUrl(null);
-        } else {
-            this.mediaService.setImageSrcUrl(this.claimant.imageURL);
-        }
     }
 
     previousState() {
@@ -66,7 +74,7 @@ export class ClaimantUpdateComponent implements OnInit {
         this.isSaving = false;
     }
 
-    getImageSrcUrl() {
-        this.claimant.imageURL = this.mediaService.getImageSrcUrl();
+    updateMediaForFeature(url) {
+        this.claimant.imageURL = url;
     }
 }

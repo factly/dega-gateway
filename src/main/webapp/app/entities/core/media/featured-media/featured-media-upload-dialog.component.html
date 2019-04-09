@@ -1,5 +1,6 @@
 <div class="modal-header">
-    <h4 class="modal-title">Featured Media</h4>
+    <h4 class="modal-title">Featured Media OR Upload</h4>
+    <input type="file" name="Brows" class="pad-left" (change)="uploadImage($event.target.files)" accept="image/*" #fileInput>
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
             (click)="clear()">&times;</button>
 </div>
@@ -27,8 +28,6 @@
             </div>
         </div>
 </div>
- <h1>OR Upload</h1>
-<input type="file" name="Brows" class="upload" (change)="_onChange($event.target.files)" accept="image/*" #fileInput>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
         <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

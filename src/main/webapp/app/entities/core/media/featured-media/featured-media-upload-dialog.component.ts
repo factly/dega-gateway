@@ -50,28 +50,21 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
         this.loadAll();
     }
 
-    public _onChange(files: FileList): void {
-        /*---if (files && files.length > 0) {
-          const file: File = files.item(0);
-          const extension = ['image/jpg', 'image/jpeg', 'image/png'];
-          if (extension.indexOf(file.type) > -1) {
-            const reader = new FileReader();
-
-            reader.onload = ((e) => {
-              this.url = e.target['result'];
-              const formData = new FormData();
-              formData.append('upload', files[0]);
-              this.contentSubmitApiService.postUserCoverImageContent(formData).subscribe(content => {
-                const x = content;
-                this.url = this.asset_url + x;
-              });
-            });
-            reader.readAsDataURL(file);
-          } else {
-            alert('File not Supported');
-          }
-        }---*/
-        console.log(files);
+    private uploadImage(files: FileList): void {
+        if (files && files.length > 0) {
+            const file: File = files.item(0);
+            const extension = ['image/jpg', 'image/jpeg', 'image/png'];
+            if (extension.indexOf(file.type) > -1) {
+                this.mediaService.uploadImage(file).subscribe(
+                    (res: HttpResponse<IMedia>) => {
+                        this.loadAll();
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            } else {
+                alert('File not Supported');
+            }
+        }
     }
 
     clear() {

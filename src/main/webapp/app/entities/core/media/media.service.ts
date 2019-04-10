@@ -9,6 +9,8 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IMedia } from 'app/shared/model/core/media.model';
 
+import { Subject } from 'rxjs';
+
 type EntityResponseType = HttpResponse<IMedia>;
 type EntityArrayResponseType = HttpResponse<IMedia[]>;
 
@@ -20,6 +22,7 @@ export class MediaService {
     public uploadImageUrl = SERVER_API_URL + 'core/api/media/upload';
     private imageSrcUrl: string;
 
+    private subject = new Subject<any>();
     constructor(private http: HttpClient) {}
 
     create(media: IMedia): Observable<EntityResponseType> {
@@ -99,15 +102,15 @@ export class MediaService {
         return this.http.post<IMedia>(this.uploadImageUrl, formData, { observe: 'response' });
     }
 
-    setImageSrcUrl(imageUrl: string) {
-        this.imageSrcUrl = imageUrl;
-    }
-
-    getImageSrcUrl() {
-        return this.imageSrcUrl;
-    }
-
     emptyImageSrcUrl() {
         this.imageSrcUrl = null;
+    }
+
+    sendProductId(url: string, event_type: string) {
+        this.subject.next({ selected_url: url, type_of_data: event_type });
+    }
+
+    getProductID(): Observable<any> {
+        return this.subject.asObservable();
     }
 }

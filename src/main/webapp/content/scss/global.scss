@@ -232,4 +232,13 @@ ui bootstrap tweaks
     white-space: nowrap;
 }
 
+.modal.show .modal-dialog {
+    max-width: 100%;
+    margin: 1rem;
+}
+
+.img-bottom {
+    margin-bottom: 1rem;
+}
+
 /* jhipster-needle-scss-add-main JHipster will add new css style */

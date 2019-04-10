@@ -52,6 +52,7 @@
                         [(ngModel)]="organization.logoURL" />-->
                     <button id="field_logoURL" class="btn btn-primary jh-create-entity create-media"
                             [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            [queryParams]="{ media_type: 'logoURL'}"
                             replaceUrl="true" type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
@@ -62,7 +63,7 @@
                     <button class="btn btn-danger" *ngIf="organization.logoURL" (click)="removeImage('logoURL')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="getLogoURL()">
+                    <div *ngIf="organization.logoURL">
                         <span [(ngModel)]="organization.logoURL" name="featuredMedia" ngDefaultControl></span>
                     </div>
                 </div>
@@ -72,6 +73,7 @@
                         [(ngModel)]="organization.logoURLMobile" />-->
                     <button id="field_logoURLMobile" class="btn btn-primary jh-create-entity create-media"
                             [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            [queryParams]="{ media_type: 'logoURLMobile'}"
                             replaceUrl="true" type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
@@ -82,7 +84,7 @@
                     <button class="btn btn-danger" *ngIf="organization.logoURLMobile" (click)="removeImage('logoURLMobile')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="getLogoURLMobile()">
+                    <div *ngIf="organization.logoURLMobile">
                         <span [(ngModel)]="organization.logoURLMobile" name="featuredMedia" ngDefaultControl></span>
                     </div>
                 </div>
@@ -92,6 +94,7 @@
                         [(ngModel)]="organization.favIconURL" />-->
                     <button id="field_favIconURL" class="btn btn-primary jh-create-entity create-media"
                             [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            [queryParams]="{ media_type: 'favIconURL'}"
                             replaceUrl="true" type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
@@ -102,7 +105,7 @@
                     <button class="btn btn-danger" *ngIf="organization.favIconURL" (click)="removeImage('favIconURL')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="getFavIconURL()">
+                    <div *ngIf="organization.favIconURL">
                         <span [(ngModel)]="organization.favIconURL" name="featuredMedia" ngDefaultControl></span>
                     </div>
                 </div>
@@ -112,6 +115,7 @@
                         [(ngModel)]="organization.mobileIconURL" />-->
                     <button id="field_mobileIconURL" class="btn btn-primary jh-create-entity create-media"
                             [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            [queryParams]="{ media_type: 'mobileIconURL'}"
                             replaceUrl="true" type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
@@ -122,7 +126,7 @@
                     <button class="btn btn-danger" *ngIf="organization.mobileIconURL" (click)="removeImage('mobileIconURL')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="getMobileIconURLMobile()">
+                    <div *ngIf="organization.mobileIconURL">
                         <span [(ngModel)]="organization.mobileIconURL" name="featuredMedia" ngDefaultControl></span>
                     </div>
                 </div>

@@ -24,6 +24,7 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
     itemsPerPage: any;
     page: any;
     currentSearch: string;
+    url_query_type: string;
     @Output()
     messageEvent = new EventEmitter<String>();
 
@@ -39,6 +40,9 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {});
+        this.activatedRoute.queryParams.subscribe(params => {
+            this.url_query_type = params['media_type'];
+        });
     }
 
     ngOnInit() {
@@ -46,13 +50,25 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
         this.loadAll();
     }
 
-    clear() {
-        this.activeModal.dismiss('cancel');
+    public uploadImageFromLocalSystem(files: FileList): void {
+        if (files && files.length > 0) {
+            const file: File = files.item(0);
+            const extension = ['image/jpg', 'image/jpeg', 'image/png'];
+            if (extension.indexOf(file.type) > -1) {
+                this.mediaService.uploadImage(file).subscribe(
+                    (res: HttpResponse<IMedia>) => {
+                        this.loadAll();
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            } else {
+                alert('File not Supported');
+            }
+        }
     }
 
-    uploadImage(url) {
-        this.mediaService.setImageSrcUrl(url);
-        this.activeModal.close();
+    clear() {
+        this.activeModal.dismiss('cancel');
     }
 
     loadAll() {
@@ -107,6 +123,11 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
                 (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+    }
+
+    onSearch(url) {
+        this.mediaService.sendProductId(url, this.url_query_type);
+        this.activeModal.close();
     }
 }
 

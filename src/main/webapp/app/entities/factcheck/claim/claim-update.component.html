@@ -22,7 +22,9 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.description" for="field_description">Description</label>
-                    <quill-editor [(ngModel)]="claim.description" name="description" id="field_description" [style]="{height: '200px'}" required></quill-editor>
+                    <span class="text-danger" [hidden]="claim.description">*</span>
+                    <quill-editor [(ngModel)]="claim.description" name="description" id="field_description"
+                                  (onEditorCreated)="getEditorInstance($event)" [style]="{height: '200px'}" required></quill-editor>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
@@ -69,6 +71,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.reviewSources" for="field_reviewSources">Review Sources</label>
+                    <span class="text-danger" [hidden]="claim.reviewSources">*</span>
                     <textarea rows="5" type="text" class="form-control" name="reviewSources" id="field_reviewSources"
                               [(ngModel)]="claim.reviewSources" required ></textarea>
                     <div [hidden]="!(editForm.controls.reviewSources?.dirty && editForm.controls.reviewSources?.invalid)">
@@ -80,6 +83,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.review" for="field_review">Review</label>
+                    <span class="text-danger" [hidden]="claim.review">*</span>
                     <textarea rows="5" type="text" class="form-control" name="review" id="field_review"
                               [(ngModel)]="claim.review" required ></textarea>
                     <div [hidden]="!(editForm.controls.review?.dirty && editForm.controls.review?.invalid)">

@@ -46,6 +46,7 @@
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.iconURL" for="field_featuredMedia">Icon URL</label>
                     <button id="field_iconURL" class="btn btn-primary jh-create-entity create-media"
                             [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            [queryParams]="{ media_type: 'feature'}"
                             replaceUrl="true" type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
@@ -53,7 +54,7 @@
                         </span>
                     </button>
                     <img src={{rating.iconURL}} alt="" width="100" height="100">
-                    <div *ngIf="getImageSrcUrl()">
+                    <div *ngIf="rating.iconURL">
                         <span [(ngModel)]="rating.iconURL" name="iconURL" ngDefaultControl></span>
                     </div>
                 </div>
@@ -120,6 +121,7 @@
                 </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.description" for="field_description">Description</label>
+                    <span class="text-danger" [hidden]="rating.description">*</span>
                     <textarea rows="5" type="text" class="form-control" name="description" id="field_description"
                               [(ngModel)]="rating.description" required ></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">

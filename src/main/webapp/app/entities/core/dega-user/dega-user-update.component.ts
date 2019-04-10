@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -15,6 +15,7 @@ import { OrganizationService } from 'app/entities/core/organization';
 import { IPost } from 'app/shared/model/core/post.model';
 import { PostService } from 'app/entities/core/post';
 import { MediaService } from '../media/media.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-dega-user-update',
@@ -33,6 +34,7 @@ export class DegaUserUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
+    subscription: Subscription;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -41,8 +43,15 @@ export class DegaUserUpdateComponent implements OnInit {
         private organizationService: OrganizationService,
         private postService: PostService,
         private activatedRoute: ActivatedRoute,
-        private mediaService: MediaService
-    ) {}
+        private mediaService: MediaService,
+        private router: Router
+    ) {
+        this.subscription = this.mediaService.getProductID().subscribe(message => {
+            if (message['type_of_data'] === 'feature') {
+                this.updateMediaForFeature(message['selected_url']);
+            }
+        });
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -68,11 +77,6 @@ export class DegaUserUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.degaUser.id === undefined || this.degaUser.profilePicture === undefined) {
-            this.mediaService.setImageSrcUrl(null);
-        } else {
-            this.mediaService.setImageSrcUrl(this.degaUser.profilePicture);
-        }
     }
 
     previousState() {
@@ -129,7 +133,7 @@ export class DegaUserUpdateComponent implements OnInit {
         return option;
     }
 
-    getImageSrcUrl() {
-        this.degaUser.profilePicture = this.mediaService.getImageSrcUrl();
+    updateMediaForFeature(url) {
+        this.degaUser.profilePicture = url;
     }
 }

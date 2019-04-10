@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -25,6 +25,7 @@ import { CategoryService } from 'app/entities/core/category';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { Principal, Account } from 'app/core';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -52,6 +53,12 @@ export class FactcheckUpdateComponent implements OnInit {
     showPublish: boolean;
     account: Account;
 
+    quillEditorRef; // Quill editor reference obj
+    quillEditorRef2; // Quill editor reference obj
+    subscription: Subscription;
+    range_1;
+    range_2;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private factcheckService: FactcheckService,
@@ -64,8 +71,22 @@ export class FactcheckUpdateComponent implements OnInit {
         private tagService: TagService,
         private categoryService: CategoryService,
         private degaUserService: DegaUserService,
-        private principal: Principal
-    ) {}
+        private principal: Principal,
+        private router: Router
+    ) {
+        this.subscription = this.mediaService.getProductID().subscribe(message => {
+            if (message['type_of_data'] === 'quill') {
+                this.updateMediaForQuill_1(message['selected_url']);
+            }
+            if (message['type_of_data'] === 'quill2') {
+                // { queryParams: { media_type: 'quill2' } } // { replaceUrl: true, queryParamsHandling: 'merge' }
+                this.updateMediaForQuill_2(message['selected_url']);
+            }
+            if (message['type_of_data'] === 'feature') {
+                this.updateMediaForFeature(message['selected_url']);
+            }
+        });
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -126,11 +147,6 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.factcheck.id === undefined || this.factcheck.featuredMedia === undefined) {
-            this.mediaService.setImageSrcUrl(null);
-        } else {
-            this.mediaService.setImageSrcUrl(this.factcheck.featuredMedia);
-        }
     }
 
     addClaimGroup(): FormGroup {
@@ -155,9 +171,8 @@ export class FactcheckUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
-        this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
-        this.factcheck.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        // this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
+        // this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
 
         if (this.formGroup) {
             for (const key in this.formGroup.value.claims) {
@@ -180,8 +195,19 @@ export class FactcheckUpdateComponent implements OnInit {
 
     publish() {
         this.isSaving = true;
-        this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
-        this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        // this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
+        // this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        if (this.formGroup) {
+            for (const key in this.formGroup.value.claims) {
+                if (key) {
+                    if (this.factcheck.claims && this.factcheck.claims.length > 0) {
+                        this.factcheck.claims.push(this.formGroup.value.claims[key]);
+                    } else {
+                        this.factcheck.claims = this.formGroup.value.claims[key];
+                    }
+                }
+            }
+        }
         if (this.factcheck.id !== undefined) {
             this.factcheck.statusName = 'Publish';
             this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
@@ -254,10 +280,6 @@ export class FactcheckUpdateComponent implements OnInit {
         this.claims = this.formGroup.value;
     }
 
-    getImageSrcUrl() {
-        this.factcheck.featuredMedia = this.mediaService.getImageSrcUrl();
-    }
-
     trackTagById(index: number, item: ITag) {
         return item.id;
     }
@@ -268,5 +290,46 @@ export class FactcheckUpdateComponent implements OnInit {
 
     trackDegaUserById(index: number, item: IDegaUser) {
         return item.id;
+    }
+
+    getEditorInstance(editorInstance: any) {
+        this.quillEditorRef = editorInstance;
+        const toolbar = editorInstance.getModule('toolbar');
+        toolbar.addHandler('image', this.openDialog.bind(this));
+    }
+
+    openDialog() {
+        this.range_1 = this.quillEditorRef.getSelection();
+        console.log('working');
+        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], {
+            queryParams: { media_type: 'quill' },
+            replaceUrl: true
+        });
+    }
+    updateMediaForQuill_1(url) {
+        const img = '<img src="' + url + '" />';
+        this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.range_1.index, img);
+    }
+
+    getEditorInstance2(editorInstance: any) {
+        this.quillEditorRef2 = editorInstance;
+        const toolbar = editorInstance.getModule('toolbar');
+        toolbar.addHandler('image', this.openDialog2.bind(this));
+    }
+
+    openDialog2() {
+        this.range_2 = this.quillEditorRef2.getSelection();
+        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], {
+            queryParams: { media_type: 'quill2' },
+            replaceUrl: true
+        });
+    }
+    updateMediaForQuill_2(url) {
+        const img = '<img src="' + url + '" />';
+        this.quillEditorRef2.clipboard.dangerouslyPasteHTML(this.range_2.index, img);
+    }
+
+    updateMediaForFeature(url) {
+        this.factcheck.featuredMedia = url;
     }
 }

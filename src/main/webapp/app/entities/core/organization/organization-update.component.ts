@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -11,6 +11,7 @@ import { OrganizationService } from './organization.service';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { MediaService } from '../media/media.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-organization-update',
@@ -26,14 +27,31 @@ export class OrganizationUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
+    subscription: Subscription;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private organizationService: OrganizationService,
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
-        private mediaService: MediaService
-    ) {}
+        private mediaService: MediaService,
+        private router: Router
+    ) {
+        this.subscription = this.mediaService.getProductID().subscribe(message => {
+            if (message['type_of_data'] === 'logoURL') {
+                this.updateMediaForLogoURL(message['selected_url']);
+            }
+            if (message['type_of_data'] === 'logoURLMobile') {
+                this.updateMediaForLogoURLMobile(message['selected_url']);
+            }
+            if (message['type_of_data'] === 'favIconURL') {
+                this.updateMediaForFavIconURL(message['selected_url']);
+            }
+            if (message['type_of_data'] === 'mobileIconURL') {
+                this.updateMediaForMobileIconURLMobile(message['selected_url']);
+            }
+        });
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -49,9 +67,6 @@ export class OrganizationUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.organization.id === undefined) {
-            this.mediaService.setImageSrcUrl(null);
-        }
     }
 
     previousState() {
@@ -101,31 +116,6 @@ export class OrganizationUpdateComponent implements OnInit {
         return option;
     }
 
-    getLogoURL() {
-        if (!this.organization.logoURL) {
-            this.organization.logoURL = this.mediaService.getImageSrcUrl();
-            this.mediaService.emptyImageSrcUrl();
-        }
-    }
-    getLogoURLMobile() {
-        if (!this.organization.logoURLMobile) {
-            this.organization.logoURLMobile = this.mediaService.getImageSrcUrl();
-            this.mediaService.emptyImageSrcUrl();
-        }
-    }
-    getFavIconURL() {
-        if (!this.organization.favIconURL) {
-            this.organization.favIconURL = this.mediaService.getImageSrcUrl();
-            this.mediaService.emptyImageSrcUrl();
-        }
-    }
-    getMobileIconURLMobile() {
-        if (!this.organization.mobileIconURL) {
-            this.organization.mobileIconURL = this.mediaService.getImageSrcUrl();
-            this.mediaService.emptyImageSrcUrl();
-        }
-    }
-
     removeImage(imageUrl) {
         if (imageUrl === 'logoURL') {
             this.organization.logoURL = '';
@@ -136,5 +126,18 @@ export class OrganizationUpdateComponent implements OnInit {
         } else {
             this.organization.mobileIconURL = '';
         }
+    }
+
+    updateMediaForLogoURL(url) {
+        this.organization.logoURL = url;
+    }
+    updateMediaForLogoURLMobile(url) {
+        this.organization.logoURLMobile = url;
+    }
+    updateMediaForFavIconURL(url) {
+        this.organization.favIconURL = url;
+    }
+    updateMediaForMobileIconURLMobile(url) {
+        this.organization.mobileIconURL = url;
     }
 }

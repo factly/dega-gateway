@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -22,6 +22,8 @@ import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { MediaService } from '../media/media.service';
 import { Principal, Account } from 'app/core';
+
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-post-update',
@@ -51,6 +53,11 @@ export class PostUpdateComponent implements OnInit {
     tempSlug: string;
     account: Account;
 
+    quillEditorRef; // Quill editor reference obj
+    subscription: Subscription;
+    range_1;
+    range_2;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private postService: PostService,
@@ -61,8 +68,18 @@ export class PostUpdateComponent implements OnInit {
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
         private mediaService: MediaService,
-        private principal: Principal
-    ) {}
+        private principal: Principal,
+        private router: Router
+    ) {
+        this.subscription = this.mediaService.getProductID().subscribe(message => {
+            if (message['type_of_data'] === 'quill') {
+                this.updateMediaForQuill_1(message['selected_url']);
+            }
+            if (message['type_of_data'] === 'feature') {
+                this.updateMediaForFeature(message['selected_url']);
+            }
+        });
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -116,11 +133,26 @@ export class PostUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        if (this.post.id === undefined || this.post.featuredMedia === undefined) {
-            this.mediaService.setImageSrcUrl(null);
-        } else {
-            this.mediaService.setImageSrcUrl(this.post.featuredMedia);
-        }
+    }
+
+    getEditorInstance(editorInstance: any) {
+        this.quillEditorRef = editorInstance;
+        const toolbar = editorInstance.getModule('toolbar');
+        toolbar.addHandler('image', this.openDialog.bind(this));
+    }
+
+    openDialog() {
+        this.range_1 = this.quillEditorRef.getSelection();
+        console.log('working');
+        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], { queryParams: { media_type: 'quill' }, replaceUrl: true });
+    }
+    updateMediaForQuill_1(url) {
+        const img = '<img src="' + url + '" />';
+        this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.range_1.index, img);
+    }
+
+    updateMediaForFeature(url) {
+        this.post.featuredMedia = url;
     }
 
     previousState() {
@@ -206,9 +238,5 @@ export class PostUpdateComponent implements OnInit {
             }
         }
         return option;
-    }
-
-    getImageSrcUrl() {
-        this.post.featuredMedia = this.mediaService.getImageSrcUrl();
     }
 }

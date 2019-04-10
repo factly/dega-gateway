@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -14,6 +14,8 @@ import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { ClaimantService } from 'app/entities/factcheck/claimant';
 import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
 import { FactcheckService } from 'app/entities/factcheck/factcheck';
+import { MediaService } from '../../core/media/media.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-claim-update',
@@ -35,6 +37,9 @@ export class ClaimUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
+    quillEditorRef; // Quill editor reference obj
+    subscription: Subscription;
+    range_1;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -42,8 +47,16 @@ export class ClaimUpdateComponent implements OnInit {
         private ratingService: RatingService,
         private claimantService: ClaimantService,
         private factcheckService: FactcheckService,
-        private activatedRoute: ActivatedRoute
-    ) {}
+        private mediaService: MediaService,
+        private activatedRoute: ActivatedRoute,
+        private router: Router
+    ) {
+        this.subscription = this.mediaService.getProductID().subscribe(message => {
+            if (message['type_of_data'] === 'quill') {
+                this.updateMediaForQuill(message['selected_url']);
+            }
+        });
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -125,5 +138,21 @@ export class ClaimUpdateComponent implements OnInit {
             }
         }
         return option;
+    }
+
+    getEditorInstance(editorInstance: any) {
+        this.quillEditorRef = editorInstance;
+        const toolbar = editorInstance.getModule('toolbar');
+        toolbar.addHandler('image', this.openDialog.bind(this));
+    }
+
+    openDialog() {
+        this.range_1 = this.quillEditorRef.getSelection();
+        console.log('working');
+        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], { queryParams: { media_type: 'quill' }, replaceUrl: true });
+    }
+    updateMediaForQuill(url) {
+        const img = '<img src="' + url + '" />';
+        this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.range_1.index, img);
     }
 }

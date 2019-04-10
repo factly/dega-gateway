@@ -8,7 +8,10 @@ export class LoginService {
     constructor(private accountService: AccountService, private authServerProvider: AuthServerProvider) {}
 
     login() {
-        const port = location.port ? ':' + location.port : '';
+        let port = location.port ? ':' + location.port : '';
+        if (port === ':9000') {
+            port = ':8080';
+        }
         location.href = '//' + location.hostname + port + location.pathname + 'login';
     }
 

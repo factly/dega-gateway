@@ -50,7 +50,7 @@ export class FeaturedMediaUploadDialogComponent implements OnInit {
         this.loadAll();
     }
 
-    private uploadImage(files: FileList): void {
+    public uploadImageFromLocalSystem(files: FileList): void {
         if (files && files.length > 0) {
             const file: File = files.item(0);
             const extension = ['image/jpg', 'image/jpeg', 'image/png'];

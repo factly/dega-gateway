@@ -27,6 +27,9 @@ import { DegaUserService } from 'app/entities/core/dega-user';
 import { Principal, Account } from 'app/core';
 import { Subscription } from 'rxjs';
 
+import { MatDialog } from '@angular/material';
+import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
+
 @Component({
     selector: 'jhi-factcheck-update',
     templateUrl: './factcheck-update.component.html'
@@ -72,7 +75,8 @@ export class FactcheckUpdateComponent implements OnInit {
         private categoryService: CategoryService,
         private degaUserService: DegaUserService,
         private principal: Principal,
-        private router: Router
+        private router: Router,
+        private dialog: MatDialog
     ) {
         this.subscription = this.mediaService.getProductID().subscribe(message => {
             if (message['type_of_data'] === 'quill') {
@@ -147,6 +151,16 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+
+    openDialogPopUp(): void {
+        const dialogRef = this.dialog.open(NewClaimPopupComponent, {
+            width: '250px'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+        });
     }
 
     addClaimGroup(): FormGroup {

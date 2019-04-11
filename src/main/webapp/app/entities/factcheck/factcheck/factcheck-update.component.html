@@ -25,17 +25,6 @@
                     <input type="text" class="form-control" name="subTitle" id="field_subTitle"
                            [(ngModel)]="factcheck.subTitle" />
                 </div>
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.clientId" for="field_clientId">Client Id</label>
-                    <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="factcheck.clientId" required/>
-                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.introduction" for="field_introduction">Introduction</label>
                     <span class="text-danger" [hidden]="factcheck.introduction">*</span>
@@ -44,59 +33,15 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.excerpt" for="field_excerpt">Excerpt</label>
-                    <!--<input type="text" class="form-control" name="excerpt" id="field_excerpt"
-                           [(ngModel)]="factcheck.excerpt" />-->
                     <textarea rows="5" class="form-control" name="excerpt" id="field_excerpt"
                               [(ngModel)]="factcheck.excerpt" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.summary" for="field_summary">Summary</label>
-                    <!--<input type="text" class="form-control" name="summary" id="field_summary"
-                           [(ngModel)]="factcheck.summary" required/>-->
                     <span class="text-danger" [hidden]="factcheck.summary">*</span>
                     <quill-editor [(ngModel)]="factcheck.summary" name="summary" id="field_summary" [style]="{height: '200px'}"
                                   (onEditorCreated)="getEditorInstance2($event)" required></quill-editor>
-                    <!--<div [hidden]="!(editForm.controls.summary?.dirty && editForm.controls.summary?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.summary?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                    </div>-->
                 </div>
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.publishedDate" for="field_publishedDate">Published Date</label>
-                    <div class="d-flex">
-                        <input id="field_publishedDate" type="datetime-local" class="form-control" name="publishedDate" [(ngModel)]="publishedDate"
-                               required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.publishedDate?.dirty && editForm.controls.publishedDate?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.publishedDate?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.publishedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>-->
-                <!-- <div class="form-group">
-                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
-                     <div class="d-flex">
-                         <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="lastUpdatedDate"
-                         required/>
-                     </div>
-                     <div [hidden]="!(editForm.controls.lastUpdatedDate?.dirty && editForm.controls.lastUpdatedDate?.invalid)">
-                         <small class="form-text text-danger"
-                         [hidden]="!editForm.controls.lastUpdatedDate?.errors?.required" jhiTranslate="entity.validation.required">
-                         This field is required.
-                         </small>
-                         <small class="form-text text-danger"
-                             [hidden]="!editForm.controls.lastUpdatedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                             This field should be a date and time.
-                         </small>
-                     </div>
-                 </div>-->
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.featured" for="field_featured">Featured</label>
@@ -113,27 +58,7 @@
                     <input type="text" class="form-control" name="updates" id="field_updates"
                            [(ngModel)]="factcheck.updates" />
                 </div>
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.slug" for="field_slug">Slug</label>
-                    <input type="text" class="form-control" name="slug" id="field_slug"
-                        [(ngModel)]="factcheck.slug" required/>
-                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>-->
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.password" for="field_password">Password</label>
-                    <input type="text" class="form-control" name="password" id="field_password"
-                           [(ngModel)]="factcheck.password" />
-                </div>-->
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia" for="field_featuredMedia">Featured Media</label>
-                    <input type="text" class="form-control" name="featuredMedia" id="field_featuredMedia"
-                           [(ngModel)]="factcheck.featuredMedia" />
-                </div>-->
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia" for="field_featuredMedia">Featured Media</label>
                     <button id="field_featuredMedia" class="btn btn-primary jh-create-entity create-media"
@@ -150,23 +75,7 @@
                         <span [(ngModel)]="factcheck.featuredMedia" name="featuredMedia" ngDefaultControl></span>
                     </div>
                 </div>
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.createdDate" for="field_createdDate">Created Date</label>
-                    <div class="d-flex">
-                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
-                        required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>-->
+
 
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.tag" for="field_tag">Tag</label>
@@ -274,6 +183,9 @@
                         </div>
                         <div class="pad-up-bottom">
                             <button type="button" id="add-claim" class="btn btn-success" (click)="addClaim()">Add a Claim</button>
+                        </div>
+                        <div class="pad-up-bottom">
+                            <button type="button" id="add-pop-claim" class="btn btn-success" (click)="openDialogPopUp()">Add a Popup Claim</button>
                         </div>
                     </div>
                 </form>

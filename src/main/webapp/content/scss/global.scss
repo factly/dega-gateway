@@ -242,3 +242,18 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+/* Angular material css starts */
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+// Use the desired palette
+$palette: mat-palette($mat-indigo);
+// Create the theme
+$theme: mat-light-theme($palette, $palette);
+
+// Include component specific mixin
+@include mat-dialog-theme($theme);
+
+/* Angular material css ends */

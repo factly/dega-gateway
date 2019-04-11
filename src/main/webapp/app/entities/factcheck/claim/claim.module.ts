@@ -9,6 +9,7 @@ import {
     ClaimUpdateComponent,
     ClaimDeletePopupComponent,
     ClaimDeleteDialogComponent,
+    NewClaimPopupComponent,
     claimRoute,
     claimPopupRoute
 } from './';
@@ -17,8 +18,15 @@ const ENTITY_STATES = [...claimRoute, ...claimPopupRoute];
 
 @NgModule({
     imports: [GatewaySharedModule, QuillModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [ClaimComponent, ClaimDetailComponent, ClaimUpdateComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent],
-    entryComponents: [ClaimComponent, ClaimUpdateComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent],
+    declarations: [
+        ClaimComponent,
+        ClaimDetailComponent,
+        ClaimUpdateComponent,
+        ClaimDeleteDialogComponent,
+        ClaimDeletePopupComponent,
+        NewClaimPopupComponent
+    ],
+    entryComponents: [ClaimComponent, ClaimUpdateComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent, NewClaimPopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayClaimModule {}

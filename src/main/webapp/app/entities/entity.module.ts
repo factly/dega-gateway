@@ -15,6 +15,9 @@ import { GatewayClaimantModule as FactcheckClaimantModule } from './factcheck/cl
 import { GatewayFactcheckModule as FactcheckFactcheckModule } from './factcheck/factcheck/factcheck.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material';
+
 @NgModule({
     // prettier-ignore
     imports: [
@@ -32,6 +35,10 @@ import { GatewayFactcheckModule as FactcheckFactcheckModule } from './factcheck/
         FactcheckClaimantModule,
         FactcheckFactcheckModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
+
+        // Angular material import
+        BrowserAnimationsModule,
+        MatDialogModule
     ],
     declarations: [],
     entryComponents: [],

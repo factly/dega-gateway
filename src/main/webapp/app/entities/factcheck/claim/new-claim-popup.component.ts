@@ -1,7 +1,6 @@
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -51,7 +50,7 @@ export class NewClaimPopupComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-
+        // If new claim then null data would be sent
         this.claim = this.data === null ? new Claim() : this.data;
         this.createdDate = this.claim.createdDate != null ? this.claim.createdDate.format(DATE_TIME_FORMAT) : null;
         this.lastUpdatedDate = this.claim.lastUpdatedDate != null ? this.claim.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;

@@ -23,9 +23,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.description" for="field_description">Description</label>
                     <span class="text-danger" [hidden]="claim.description">*</span>
-                    <jhi-quill-editor [original_content]="claim.description" id="field_description" (updated_content)="updateIntroductionFormData($event)"></jhi-quill-editor>
-                    <!--<quill-editor [(ngModel)]="claim.description" name="description" id="field_description"-->
-                                  <!--(onEditorCreated)="getEditorInstance($event)" [style]="{height: '200px'}" required></quill-editor>-->
+                    <jhi-quill-editor [original_content]="claim.description"
+                                      id="field_description"
+                                      (updated_content)="updateIntroductionFormData($event)">
+                    </jhi-quill-editor>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
                                [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">

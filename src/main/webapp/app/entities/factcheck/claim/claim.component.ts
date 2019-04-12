@@ -160,14 +160,16 @@ export class ClaimComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    openClaimantEditDialog(data) {
-        console.log(data);
-        const dialogRef = this.dialog.open(NewClaimPopupComponent, {
+    openClaimEditDialog(claim_data) {
+        const config = {
+            height: '98%',
+            width: '100vw',
+            maxWidth: '95vw',
             autoFocus: false,
-            maxHeight: '90vh',
             disableClose: true,
-            data: data
-        });
+            data: claim_data
+        };
+        const dialogRef = this.dialog.open(NewClaimPopupComponent, config);
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(result);

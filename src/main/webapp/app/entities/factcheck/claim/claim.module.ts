@@ -6,7 +6,6 @@ import { QuillModule } from 'ngx-quill';
 import {
     ClaimComponent,
     ClaimDetailComponent,
-    ClaimUpdateComponent,
     ClaimDeletePopupComponent,
     ClaimDeleteDialogComponent,
     NewClaimPopupComponent,
@@ -18,15 +17,8 @@ const ENTITY_STATES = [...claimRoute, ...claimPopupRoute];
 
 @NgModule({
     imports: [GatewaySharedModule, QuillModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [
-        ClaimComponent,
-        ClaimDetailComponent,
-        ClaimUpdateComponent,
-        ClaimDeleteDialogComponent,
-        ClaimDeletePopupComponent,
-        NewClaimPopupComponent
-    ],
-    entryComponents: [ClaimComponent, ClaimUpdateComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent, NewClaimPopupComponent],
+    declarations: [ClaimComponent, ClaimDetailComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent, NewClaimPopupComponent],
+    entryComponents: [ClaimComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent, NewClaimPopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayClaimModule {}

@@ -9,7 +9,6 @@ import { Claim } from 'app/shared/model/factcheck/claim.model';
 import { ClaimService } from './claim.service';
 import { ClaimComponent } from './claim.component';
 import { ClaimDetailComponent } from './claim-detail.component';
-import { ClaimUpdateComponent } from './claim-update.component';
 import { ClaimDeletePopupComponent } from './claim-delete-dialog.component';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
 
@@ -46,30 +45,6 @@ export const claimRoute: Routes = [
     {
         path: 'claim/:id/view',
         component: ClaimDetailComponent,
-        resolve: {
-            claim: ClaimResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gatewayApp.factcheckClaim.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'claim/new',
-        component: ClaimUpdateComponent,
-        resolve: {
-            claim: ClaimResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gatewayApp.factcheckClaim.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'claim/:id/edit',
-        component: ClaimUpdateComponent,
         resolve: {
             claim: ClaimResolve
         },

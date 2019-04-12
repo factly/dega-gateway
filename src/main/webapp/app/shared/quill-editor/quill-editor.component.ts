@@ -35,10 +35,13 @@ export class QuillEditorComponent {
     }
     openFileUploadDialog(): void {
         this.cursorPosition = this.quillEditorRef.getSelection();
-        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, {
-            width: '250px',
+        const config = {
+            height: '70%',
+            width: '70vw',
+            maxWidth: '70vw',
             data: { url: 'https://cdn.pixabay.com/photo/2016/05/17/22/16/baby-1399332_1280.jpg' }
-        });
+        };
+        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
 
         dialogRef.afterClosed().subscribe(image_data => {
             this.updateMediaForQuill(image_data['url']);

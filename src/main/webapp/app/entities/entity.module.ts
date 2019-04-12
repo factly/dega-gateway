@@ -1,5 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material';
+
 import { GatewayPostModule as CorePostModule } from './core/post/post.module';
 import { GatewayCategoryModule as CoreCategoryModule } from './core/category/category.module';
 import { GatewayFormatModule as CoreFormatModule } from './core/format/format.module';
@@ -15,8 +18,7 @@ import { GatewayClaimantModule as FactcheckClaimantModule } from './factcheck/cl
 import { GatewayFactcheckModule as FactcheckFactcheckModule } from './factcheck/factcheck/factcheck.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material';
+import { GatewaySharedModule } from 'app/shared/shared.module';
 
 @NgModule({
     // prettier-ignore
@@ -38,7 +40,9 @@ import { MatDialogModule } from '@angular/material';
 
         // Angular material import
         BrowserAnimationsModule,
-        MatDialogModule
+        MatDialogModule,
+
+        GatewaySharedModule
     ],
     declarations: [],
     entryComponents: [],

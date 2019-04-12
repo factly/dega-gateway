@@ -230,6 +230,10 @@ export class FactcheckUpdateComponent implements OnInit {
         }
     }
 
+    updateIntroductionFormData(data) {
+        console.log(data['html']);
+    }
+
     showSaveButton(degausersRole: String): boolean {
         return AUTHOR_ROLE.includes(degausersRole);
     }

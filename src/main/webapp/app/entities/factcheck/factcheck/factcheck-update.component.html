@@ -1,3 +1,4 @@
+
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
@@ -28,6 +29,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckFactcheck.introduction" for="field_introduction">Introduction</label>
                     <span class="text-danger" [hidden]="factcheck.introduction">*</span>
+                    <jhi-quill-editor [original_content]="factcheck.introduction" (updated_content)="updateIntroductionFormData($event)"></jhi-quill-editor>
                     <quill-editor [(ngModel)]="factcheck.introduction" name="introduction" id="field_introduction" [style]="{height: '200px'}"
                                   (onEditorCreated)="getEditorInstance($event)" required></quill-editor>
                 </div>

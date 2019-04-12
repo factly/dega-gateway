@@ -155,7 +155,9 @@ export class FactcheckUpdateComponent implements OnInit {
 
     openDialogPopUp(): void {
         const dialogRef = this.dialog.open(NewClaimPopupComponent, {
-            width: '250px'
+            autoFocus: false,
+            maxHeight: '90vh',
+            disableClose: true
         });
 
         dialogRef.afterClosed().subscribe(result => {

@@ -9,6 +9,8 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ClaimService } from './claim.service';
+import { MatDialog } from '@angular/material';
+import { NewClaimPopupComponent } from 'app/entities/factcheck/claim/new-claim-popup.component';
 
 @Component({
     selector: 'jhi-claim',
@@ -38,7 +40,8 @@ export class ClaimComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private dialog: MatDialog
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -155,6 +158,21 @@ export class ClaimComponent implements OnInit, OnDestroy {
             result.push('createdDate');
         }
         return result;
+    }
+
+    openClaimantEditDialog(data) {
+        console.log(data);
+        const dialogRef = this.dialog.open(NewClaimPopupComponent, {
+            autoFocus: false,
+            maxHeight: '90vh',
+            disableClose: true,
+            data: data
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(result);
+            console.log('The dialog was closed');
+        });
     }
 
     private paginateClaims(data: IClaim[], headers: HttpHeaders) {

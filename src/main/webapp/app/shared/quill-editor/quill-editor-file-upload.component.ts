@@ -13,7 +13,7 @@ export interface DialogData {
 export class QuillEditorFileUploadComponent {
     constructor(public dialogRef: MatDialogRef<QuillEditorFileUploadComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-    onNoClick(): void {
-        this.dialogRef.close(this.data);
+    selectImage(url): void {
+        this.dialogRef.close({ url: url });
     }
 }

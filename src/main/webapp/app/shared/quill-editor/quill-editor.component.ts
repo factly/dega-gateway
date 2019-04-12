@@ -10,6 +10,7 @@ import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-ed
 })
 export class QuillEditorComponent {
     quillEditorRef: any;
+    cursorPosition: any;
 
     @Input()
     original_content: string;
@@ -33,10 +34,19 @@ export class QuillEditorComponent {
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(0, this.original_content);
     }
     openFileUploadDialog(): void {
-        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, { width: '250px' });
-
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+        this.cursorPosition = this.quillEditorRef.getSelection();
+        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, {
+            width: '250px',
+            data: { url: 'https://cdn.pixabay.com/photo/2016/05/17/22/16/baby-1399332_1280.jpg' }
         });
+
+        dialogRef.afterClosed().subscribe(image_data => {
+            this.updateMediaForQuill(image_data['url']);
+        });
+    }
+
+    updateMediaForQuill(url) {
+        const img = '<img src="' + url + '" />';
+        this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.cursorPosition.index, img);
     }
 }

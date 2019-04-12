@@ -8,12 +8,12 @@ export interface DialogData {
 
 @Component({
     selector: 'jhi-quill-editor-file-upload',
-    templateUrl: 'quill-editor-file-upload.component.html'
+    templateUrl: './quill-editor-file-upload.component.html'
 })
 export class QuillEditorFileUploadComponent {
     constructor(public dialogRef: MatDialogRef<QuillEditorFileUploadComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
     onNoClick(): void {
-        this.dialogRef.close();
+        this.dialogRef.close(this.data);
     }
 }

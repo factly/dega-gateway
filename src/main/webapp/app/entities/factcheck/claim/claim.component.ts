@@ -172,8 +172,7 @@ export class ClaimComponent implements OnInit, OnDestroy {
         const dialogRef = this.dialog.open(NewClaimPopupComponent, config);
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
-            console.log('The dialog was closed');
+            // Add any function call here, if you want it to do anything after the dialog is closed
         });
     }
 

@@ -1,22 +1,21 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { Claim } from 'app/shared/model/factcheck/claim.model';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
-import { ClaimService } from './claim.service';
-import { IRating } from 'app/shared/model/factcheck/rating.model';
-import { RatingService } from 'app/entities/factcheck/rating';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
+import { ClaimService } from 'app/entities/factcheck/claim/claim.service';
 import { ClaimantService } from 'app/entities/factcheck/claimant';
 import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
 import { FactcheckService } from 'app/entities/factcheck/factcheck';
-import { Subscription } from 'rxjs';
-import { Claim } from 'app/shared/model/factcheck/claim.model';
+import { IRating } from 'app/shared/model/factcheck/rating.model';
+import { RatingService } from 'app/entities/factcheck/rating';
 
 @Component({
     selector: 'jhi-new-claim-popup',
@@ -36,7 +35,6 @@ export class NewClaimPopupComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
-    subscription: Subscription;
 
     constructor(
         private jhiAlertService: JhiAlertService,

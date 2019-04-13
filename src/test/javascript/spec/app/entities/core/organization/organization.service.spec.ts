@@ -69,7 +69,9 @@ describe('Service Tests', () => {
                 'AAAAAAA',
                 'AAAAAAA',
                 currentDate,
-                currentDate
+                currentDate,
+                'AAAAAAA',
+                false
             );
         });
 
@@ -160,7 +162,9 @@ describe('Service Tests', () => {
                         slug: 'BBBBBB',
                         email: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT)
+                        lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
+                        siteAddress: 'BBBBBB',
+                        enableFactchecking: true
                     },
                     elemDefault
                 );
@@ -225,7 +229,9 @@ describe('Service Tests', () => {
                         slug: 'BBBBBB',
                         email: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),
-                        lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT)
+                        lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
+                        siteAddress: 'BBBBBB',
+                        enableFactchecking: true
                     },
                     elemDefault
                 );

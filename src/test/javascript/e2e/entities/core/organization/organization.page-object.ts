@@ -69,6 +69,8 @@ export class OrganizationUpdatePage {
     emailInput = element(by.id('field_email'));
     createdDateInput = element(by.id('field_createdDate'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
+    siteAddressInput = element(by.id('field_siteAddress'));
+    enableFactcheckingInput = element(by.id('field_enableFactchecking'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -416,6 +418,18 @@ export class OrganizationUpdatePage {
 
     async getLastUpdatedDateInput() {
         return this.lastUpdatedDateInput.getAttribute('value');
+    }
+
+    async setSiteAddressInput(siteAddress) {
+        await this.siteAddressInput.sendKeys(siteAddress);
+    }
+
+    async getSiteAddressInput() {
+        return this.siteAddressInput.getAttribute('value');
+    }
+
+    getEnableFactcheckingInput() {
+        return this.enableFactcheckingInput;
     }
 
     async save() {

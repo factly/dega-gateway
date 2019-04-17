@@ -81,7 +81,8 @@ describe('Organization e2e test', () => {
             organizationUpdatePage.setSlugInput('slug'),
             organizationUpdatePage.setEmailInput('email'),
             organizationUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-            organizationUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
+            organizationUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            organizationUpdatePage.setSiteAddressInput('siteAddress')
         ]);
         expect(await organizationUpdatePage.getNameInput()).to.eq('name');
         expect(await organizationUpdatePage.getPhoneInput()).to.eq('phone');
@@ -126,6 +127,15 @@ describe('Organization e2e test', () => {
         expect(await organizationUpdatePage.getEmailInput()).to.eq('email');
         expect(await organizationUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         expect(await organizationUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');
+        expect(await organizationUpdatePage.getSiteAddressInput()).to.eq('siteAddress');
+        const selectedEnableFactchecking = organizationUpdatePage.getEnableFactcheckingInput();
+        if (await selectedEnableFactchecking.isSelected()) {
+            await organizationUpdatePage.getEnableFactcheckingInput().click();
+            expect(await organizationUpdatePage.getEnableFactcheckingInput().isSelected()).to.be.false;
+        } else {
+            await organizationUpdatePage.getEnableFactcheckingInput().click();
+            expect(await organizationUpdatePage.getEnableFactcheckingInput().isSelected()).to.be.true;
+        }
         await organizationUpdatePage.save();
         expect(await organizationUpdatePage.getSaveButton().isPresent()).to.be.false;
 

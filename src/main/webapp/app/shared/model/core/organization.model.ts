@@ -46,6 +46,8 @@ export interface IOrganization {
     email?: string;
     createdDate?: Moment;
     lastUpdatedDate?: Moment;
+    siteAddress?: string;
+    enableFactchecking?: boolean;
     degaUsers?: IDegaUser[];
     degaUserDefaults?: IDegaUser[];
     degaUserCurrents?: IDegaUser[];
@@ -97,8 +99,12 @@ export class Organization implements IOrganization {
         public email?: string,
         public createdDate?: Moment,
         public lastUpdatedDate?: Moment,
+        public siteAddress?: string,
+        public enableFactchecking?: boolean,
         public degaUsers?: IDegaUser[],
         public degaUserDefaults?: IDegaUser[],
         public degaUserCurrents?: IDegaUser[]
-    ) {}
+    ) {
+        this.enableFactchecking = this.enableFactchecking || false;
+    }
 }

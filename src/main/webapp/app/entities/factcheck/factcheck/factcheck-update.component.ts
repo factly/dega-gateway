@@ -19,9 +19,11 @@ import { ITag } from 'app/shared/model/core/tag.model';
 import { TagService } from 'app/entities/core/tag';
 import { ICategory } from 'app/shared/model/core/category.model';
 import { CategoryService } from 'app/entities/core/category';
+import { MediaService } from '../../core/media/media.service';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
+import { Subscription } from 'rxjs';
 
 import { MatDialog } from '@angular/material';
 import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
@@ -51,6 +53,7 @@ export class FactcheckUpdateComponent implements OnInit {
     showSave: boolean;
     showPublish: boolean;
     account: Account;
+    subscription: Subscription;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -63,9 +66,16 @@ export class FactcheckUpdateComponent implements OnInit {
         private tagService: TagService,
         private categoryService: CategoryService,
         private degaUserService: DegaUserService,
+        private mediaService: MediaService,
         private principal: Principal,
         private dialog: MatDialog
-    ) {}
+    ) {
+        this.subscription = this.mediaService.getProductID().subscribe(message => {
+            if (message['type_of_data'] === 'feature') {
+                this.updateMediaForFeature(message['selected_url']);
+            }
+        });
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -266,5 +276,9 @@ export class FactcheckUpdateComponent implements OnInit {
 
     trackDegaUserById(index: number, item: IDegaUser) {
         return item.id;
+    }
+
+    updateMediaForFeature(url) {
+        this.factcheck.featuredMedia = url;
     }
 }

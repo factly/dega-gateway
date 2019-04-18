@@ -57,7 +57,10 @@ export class QuillEditorFileUploadComponent implements OnInit {
     }
 
     selectImage(url): void {
-        this.dialogRef.close({ url: url });
+        const data = {
+            url: url
+        };
+        this.dialogRef.close(data);
     }
 
     public uploadImageFromLocalSystem(files: FileList): void {

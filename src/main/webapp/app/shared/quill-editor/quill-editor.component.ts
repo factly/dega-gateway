@@ -22,7 +22,11 @@ export class QuillEditorComponent {
     constructor(private dialog: MatDialog) {}
 
     emitEventOnTextChange({ quill, html, text }) {
-        this.updated_content.emit({ html: html, plain_text: text });
+        const data = {
+            html: html,
+            plain_text: text
+        };
+        this.updated_content.emit(data);
     }
 
     getEditorInstance(editorInstance: any) {

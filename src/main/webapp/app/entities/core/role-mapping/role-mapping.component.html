@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="gatewayApp.coreRole.home.title">Roles</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-role" [routerLink]="['/role/new']">
+        <span jhiTranslate="gatewayApp.coreRoleMapping.home.title">Role Mappings</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-role-mapping" [routerLink]="['/role-mapping/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreRole.home.createLabel">
-            Create new Role
+            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreRoleMapping.home.createLabel">
+            Create new Role Mapping
             </span>
         </button>
     </h2>
@@ -13,7 +13,7 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreRole.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreRoleMapping.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
@@ -25,43 +25,47 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="roles">
+    <div class="table-responsive" *ngIf="roleMappings">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreRole.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreRole.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="isDefault"><span jhiTranslate="gatewayApp.coreRole.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreRole.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreRole.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreRoleMapping.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="organizationName"><span jhiTranslate="gatewayApp.coreRoleMapping.organization">Organization</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="roleName"><span jhiTranslate="gatewayApp.coreRoleMapping.role">Role</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let role of roles ;trackBy: trackId">
-                <!--<td><a [routerLink]="['/role', role.id, 'view' ]">{{role.id}}</a></td>-->
-                <td>{{role.name}}</td>
-                <td>{{role.clientId}}</td>
-                <td>{{role.isDefault}}</td>
-                <td>{{role.slug}}</td>
-                <td>{{role.createdDate | date:'medium'}}</td>
-                <!--<td>{{role.lastUpdatedDate | date:'medium'}}</td>-->
+            <tr *ngFor="let roleMapping of roleMappings ;trackBy: trackId">
+                <td><a [routerLink]="['/role-mapping', roleMapping.id, 'view' ]">{{roleMapping.id}}</a></td>
+                <td>{{roleMapping.name}}</td>
+                <td>
+                    <div *ngIf="roleMapping.organizationId">
+                        <a [routerLink]="['../organization', roleMapping.organizationId , 'view' ]" >{{roleMapping.organizationName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="roleMapping.roleId">
+                        <a [routerLink]="['../role', roleMapping.roleId , 'view' ]" >{{roleMapping.roleName}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/role', role.id, 'view' ]"
+                                [routerLink]="['/role-mapping', roleMapping.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/role', role.id, 'edit']"
+                                [routerLink]="['/role-mapping', roleMapping.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'role/'+ role.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'role-mapping/'+ roleMapping.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
@@ -74,7 +78,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="roles && roles.length">
+    <div *ngIf="roleMappings && roleMappings.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

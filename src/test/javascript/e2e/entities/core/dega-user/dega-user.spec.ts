@@ -57,6 +57,7 @@ describe('DegaUser e2e test', () => {
             // degaUserUpdatePage.organizationSelectLastOption(),
             degaUserUpdatePage.organizationDefaultSelectLastOption(),
             degaUserUpdatePage.organizationCurrentSelectLastOption(),
+            // degaUserUpdatePage.roleMappingSelectLastOption(),
         ]);
         expect(await degaUserUpdatePage.getFirstNameInput()).to.eq('firstName');
         expect(await degaUserUpdatePage.getLastNameInput()).to.eq('lastName');

@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="roleMapping">
+            <h2><span jhiTranslate="gatewayApp.coreRoleMapping.detail.title">Role Mapping</span> {{roleMapping.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.coreRoleMapping.name">Name</span></dt>
+                <dd>
+                    <span>{{roleMapping.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreRoleMapping.organization">Organization</span></dt>
+                <dd>
+                    <div *ngIf="roleMapping.organizationId">
+                        <a [routerLink]="['/organization', roleMapping.organizationId, 'view']">{{roleMapping.organizationName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreRoleMapping.role">Role</span></dt>
+                <dd>
+                    <div *ngIf="roleMapping.roleId">
+                        <a [routerLink]="['/role', roleMapping.roleId, 'view']">{{roleMapping.roleName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/role-mapping', roleMapping.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

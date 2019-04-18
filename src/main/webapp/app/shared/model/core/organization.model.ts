@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { IRoleMapping } from 'app/shared/model/core/role-mapping.model';
 
 export interface IOrganization {
     id?: string;
@@ -51,6 +52,7 @@ export interface IOrganization {
     degaUsers?: IDegaUser[];
     degaUserDefaults?: IDegaUser[];
     degaUserCurrents?: IDegaUser[];
+    roleMappings?: IRoleMapping[];
 }
 
 export class Organization implements IOrganization {
@@ -103,7 +105,8 @@ export class Organization implements IOrganization {
         public enableFactchecking?: boolean,
         public degaUsers?: IDegaUser[],
         public degaUserDefaults?: IDegaUser[],
-        public degaUserCurrents?: IDegaUser[]
+        public degaUserCurrents?: IDegaUser[],
+        public roleMappings?: IRoleMapping[]
     ) {
         this.enableFactchecking = this.enableFactchecking || false;
     }

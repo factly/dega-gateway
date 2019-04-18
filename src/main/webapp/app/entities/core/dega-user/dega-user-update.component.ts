@@ -16,6 +16,8 @@ import { IPost } from 'app/shared/model/core/post.model';
 import { PostService } from 'app/entities/core/post';
 import { MediaService } from '../media/media.service';
 import { Subscription } from 'rxjs';
+import { IRoleMapping } from 'app/shared/model/core/role-mapping.model';
+import { RoleMappingService } from 'app/entities/core/role-mapping';
 
 @Component({
     selector: 'jhi-dega-user-update',
@@ -30,6 +32,8 @@ export class DegaUserUpdateComponent implements OnInit {
     organizations: IOrganization[];
 
     posts: IPost[];
+
+    rolemappings: IRoleMapping[];
     createdDate: string;
     slug: string;
     slugExtention: number;
@@ -42,6 +46,7 @@ export class DegaUserUpdateComponent implements OnInit {
         private roleService: RoleService,
         private organizationService: OrganizationService,
         private postService: PostService,
+        private roleMappingService: RoleMappingService,
         private activatedRoute: ActivatedRoute,
         private mediaService: MediaService,
         private router: Router
@@ -74,6 +79,12 @@ export class DegaUserUpdateComponent implements OnInit {
         this.postService.query().subscribe(
             (res: HttpResponse<IPost[]>) => {
                 this.posts = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.roleMappingService.query().subscribe(
+            (res: HttpResponse<IRoleMapping[]>) => {
+                this.rolemappings = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -119,6 +130,10 @@ export class DegaUserUpdateComponent implements OnInit {
     }
 
     trackPostById(index: number, item: IPost) {
+        return item.id;
+    }
+
+    trackRoleMappingById(index: number, item: IRoleMapping) {
         return item.id;
     }
 

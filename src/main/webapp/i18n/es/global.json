@@ -20,6 +20,7 @@
                 "factcheckClaim": "Claim",
                 "factcheckClaimant": "Claimant",
                 "factcheckFactcheck": "Factcheck",
+                "coreRoleMapping": "Role Mapping",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

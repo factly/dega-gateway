@@ -33,7 +33,8 @@
             "organization": "Organization",
             "organizationDefault": "Organization Default",
             "organizationCurrent": "Organization Current",
-            "post": "Post"
+            "post": "Post",
+            "roleMapping": "Role Mapping"
         }
     },
     "coreApp": {

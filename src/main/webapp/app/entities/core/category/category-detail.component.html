@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="category">
+            <h2><span jhiTranslate="gatewayApp.coreCategory.detail.title">Category</span> {{category.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.coreCategory.name">Name</span></dt>
+                <dd>
+                    <span>{{category.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreCategory.description">Description</span></dt>
+                <dd>
+                    <span>{{category.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreCategory.slug">Slug</span></dt>
+                <dd>
+                    <span>{{category.slug}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreCategory.parent">Parent</span></dt>
+                <dd>
+                    <span>{{category.parent}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreCategory.clientId">Client Id</span></dt>
+                <dd>
+                    <span>{{category.clientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreCategory.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{category.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreCategory.lastUpdatedDate">Last Updated Date</span></dt>
+                <dd>
+                    <span>{{category.lastUpdatedDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/category', category.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

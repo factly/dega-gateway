@@ -9,10 +9,6 @@
                 <dd>
                     <span>{{organization.name}}</span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.coreOrganization.email">Email</span></dt>
-                <dd>
-                    <span>{{organization.email}}</span>
-                </dd>
                 <dt><span jhiTranslate="gatewayApp.coreOrganization.phone">Phone</span></dt>
                 <dd>
                     <span>{{organization.phone}}</span>
@@ -29,21 +25,21 @@
                 <dd>
                     <span>{{organization.description}}</span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.coreOrganization.logoURL">Logo URL</span></dt>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.logoURL">Logo</span></dt>
                 <dd>
-                    <span>{{organization.logoURL}}</span>
+                    <span><img src={{organization.logoURL}} alt="" width="100" height="100"></span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.coreOrganization.logoURLMobile">Logo URL Mobile</span></dt>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.logoURLMobile">Mobile Logo</span></dt>
                 <dd>
-                    <span>{{organization.logoURLMobile}}</span>
+                    <span><img src={{organization.logoURLMobile}} alt="" width="100" height="100"></span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.coreOrganization.favIconURL">Fav Icon URL</span></dt>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.favIconURL">Fav Icon</span></dt>
                 <dd>
-                    <span>{{organization.favIconURL}}</span>
+                    <span><img src={{organization.favIconURL}} alt="" width="100" height="100"></span>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.coreOrganization.mobileIconURL">Mobile Icon URL</span></dt>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.mobileIconURL">Mobile Icon</span></dt>
                 <dd>
-                    <span>{{organization.mobileIconURL}}</span>
+                    <span><img src={{organization.mobileIconURL}} alt="" width="100" height="100"></span>
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.coreOrganization.baiduVerificationCode">Baidu Verification Code</span></dt>
                 <dd>
@@ -164,6 +160,30 @@
                 <dt><span jhiTranslate="gatewayApp.coreOrganization.clientId">Client Id</span></dt>
                 <dd>
                     <span>{{organization.clientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.slug">Slug</span></dt>
+                <dd>
+                    <span>{{organization.slug}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.email">Email</span></dt>
+                <dd>
+                    <span>{{organization.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{organization.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.lastUpdatedDate">Last Updated Date</span></dt>
+                <dd>
+                    <span>{{organization.lastUpdatedDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.siteAddress">Site Address</span></dt>
+                <dd>
+                    <span>{{organization.siteAddress}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreOrganization.enableFactchecking">Enable Factchecking</span></dt>
+                <dd>
+                    <span>{{organization.enableFactchecking}}</span>
                 </dd>
             </dl>
 

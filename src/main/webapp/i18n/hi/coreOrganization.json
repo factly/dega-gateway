@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "home": {
                 "title": "Organizations",
                 "createLabel": "नया Organization बनाएँ",
@@ -15,7 +14,6 @@
                 "title": "Organization"
             },
             "name": "Name",
-            "email": "Email",
             "phone": "Phone",
             "siteTitle": "Site Title",
             "tagLine": "Tag Line",
@@ -53,11 +51,20 @@
             "mailchimpAPIKey": "Mailchimp API Key",
             "siteLanguage": "Site Language",
             "timeZone": "Time Zone",
-            "clientId": "Client Id"
+            "clientId": "Client Id",
+            "slug": "Slug",
+            "email": "Email",
+            "createdDate": "Created Date",
+            "lastUpdatedDate": "Last Updated Date",
+            "siteAddress": "Site Address",
+            "enableFactchecking": "Enable Factchecking",
+            "degaUser": "Dega User",
+            "degaUserDefault": "Dega User Default",
+            "degaUserCurrent": "Dega User Current"
         }
     },
     "coreApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "created": "एक नया Organization [identifier: {{ param }}] तैयार है",
             "updated": "एक Organization [identifier: {{ param }}] का अद्यतन हुआ है",
             "deleted": "Organization [identifier: {{ param }}] हटा दिया है"

@@ -54,10 +54,6 @@ server:
     port: 10344
     address: localhost
 
-info:
-    project:
-        version: #project.version#
-
 # ===================================================================
 # JHipster specific properties
 #
@@ -95,3 +91,23 @@ jhipster:
 # ===================================================================
 
 # application:
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 30000
+ribbon:
+    ReadTimeout: 60000
+    connection-timeout: 3000
+    eureka:
+        enabled: true
+zuul:
+    host:
+        connect-timeout-millis: 5000
+        max-per-route-connections: 10000
+        max-total-connections: 5000
+        socket-timeout-millis: 60000
+    semaphore:
+        max-semaphores: 500

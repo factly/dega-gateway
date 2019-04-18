@@ -1,0 +1,31 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { GatewaySharedModule } from 'app/shared';
+import { ReactiveFormsModule } from '@angular/forms';
+import { QuillModule } from 'ngx-quill';
+import {
+    FactcheckComponent,
+    FactcheckDetailComponent,
+    FactcheckUpdateComponent,
+    FactcheckDeletePopupComponent,
+    FactcheckDeleteDialogComponent,
+    factcheckRoute,
+    factcheckPopupRoute
+} from './';
+
+const ENTITY_STATES = [...factcheckRoute, ...factcheckPopupRoute];
+
+@NgModule({
+    imports: [GatewaySharedModule, QuillModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
+    declarations: [
+        FactcheckComponent,
+        FactcheckDetailComponent,
+        FactcheckUpdateComponent,
+        FactcheckDeleteDialogComponent,
+        FactcheckDeletePopupComponent
+    ],
+    entryComponents: [FactcheckComponent, FactcheckUpdateComponent, FactcheckDeleteDialogComponent, FactcheckDeletePopupComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class GatewayFactcheckModule {}

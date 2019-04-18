@@ -44,7 +44,8 @@ Generic styles
     border-left: 5px solid green;
 }
 
-.ng-invalid:not(form) {
+input.ng-invalid:not(form),
+select.ng-invalid:not(form) {
     border-left: 5px solid red;
 }
 
@@ -63,6 +64,14 @@ Generic styles
 
 .pad {
     padding: 10px;
+}
+
+.pad-left {
+    padding-left: 80px;
+}
+
+.pad-up-bottom {
+    padding: 10px 0px;
 }
 
 .w-40 {
@@ -221,6 +230,15 @@ ui bootstrap tweaks
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.modal.show .modal-dialog {
+    max-width: 100%;
+    margin: 1rem;
+}
+
+.img-bottom {
+    margin-bottom: 1rem;
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */

@@ -1,0 +1,46 @@
+{
+    "gatewayApp": {
+        "coreDegaUser": {
+            "home": {
+                "title": "Dega Users",
+                "createLabel": "Crear nuevo Dega User",
+                "createOrEditLabel": "Crear o editar Dega User",
+                "search": "Search for Dega User"
+            },
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Dega User {{ id }}?"
+            },
+            "detail": {
+                "title": "Dega User"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "displayName": "Display Name",
+            "website": "Website",
+            "facebookURL": "Facebook URL",
+            "twitterURL": "Twitter URL",
+            "instagramURL": "Instagram URL",
+            "linkedinURL": "Linkedin URL",
+            "githubURL": "Github URL",
+            "profilePicture": "Profile Picture",
+            "description": "Description",
+            "slug": "Slug",
+            "enabled": "Enabled",
+            "emailVerified": "Email Verified",
+            "email": "Email",
+            "createdDate": "Created Date",
+            "role": "Role",
+            "organization": "Organization",
+            "organizationDefault": "Organization Default",
+            "organizationCurrent": "Organization Current",
+            "post": "Post"
+        }
+    },
+    "coreApp": {
+        "coreDegaUser": {
+            "created": "Un nuevo Dega User ha sido creado con el identificador {{ param }}",
+            "updated": "Un Dega User ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Dega User ha sido eliminado con el identificador {{ param }}"
+        }
+    }
+}

@@ -1,7 +1,6 @@
-
 {
     "gatewayApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "home": {
                 "title": "Organizations",
                 "createLabel": "Create a new Organization",
@@ -15,15 +14,14 @@
                 "title": "Organization"
             },
             "name": "Name",
-            "email": "Email",
             "phone": "Phone",
             "siteTitle": "Site Title",
             "tagLine": "Tag Line",
             "description": "Description",
-            "logoURL": "Logo URL",
-            "logoURLMobile": "Logo URL Mobile",
-            "favIconURL": "Fav Icon URL",
-            "mobileIconURL": "Mobile Icon URL",
+            "logoURL": "Logo",
+            "logoURLMobile": "Mobile Logo",
+            "favIconURL": "Fav Icon",
+            "mobileIconURL": "Mobile Icon",
             "baiduVerificationCode": "Baidu Verification Code",
             "bingVerificationCode": "Bing Verification Code",
             "googleVerificationCode": "Google Verification Code",
@@ -53,11 +51,20 @@
             "mailchimpAPIKey": "Mailchimp API Key",
             "siteLanguage": "Site Language",
             "timeZone": "Time Zone",
-            "clientId": "Client Id"
+            "clientId": "Client Id",
+            "slug": "Slug",
+            "email": "Email",
+            "createdDate": "Created Date",
+            "lastUpdatedDate": "Last Updated Date",
+            "siteAddress": "Site Address",
+            "enableFactchecking": "Enable Factchecking",
+            "degaUser": "Dega User",
+            "degaUserDefault": "Dega User Default",
+            "degaUserCurrent": "Dega User Current"
         }
     },
     "coreApp": {
-        "coreOrganization" : {
+        "coreOrganization": {
             "created": "A new Organization is created with identifier {{ param }}",
             "updated": "A Organization is updated with identifier {{ param }}",
             "deleted": "A Organization is deleted with identifier {{ param }}"

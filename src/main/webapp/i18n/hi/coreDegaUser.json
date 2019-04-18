@@ -1,0 +1,46 @@
+{
+    "gatewayApp": {
+        "coreDegaUser": {
+            "home": {
+                "title": "DegaUsers",
+                "createLabel": "नया Dega User बनाएँ",
+                "createOrEditLabel": "Dega User बनाएँ या संपादित करें",
+                "search": "Dega User खोजें"
+            },
+            "delete": {
+                "question": "Dega User [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Dega User"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "displayName": "Display Name",
+            "website": "Website",
+            "facebookURL": "Facebook URL",
+            "twitterURL": "Twitter URL",
+            "instagramURL": "Instagram URL",
+            "linkedinURL": "Linkedin URL",
+            "githubURL": "Github URL",
+            "profilePicture": "Profile Picture",
+            "description": "Description",
+            "slug": "Slug",
+            "enabled": "Enabled",
+            "emailVerified": "Email Verified",
+            "email": "Email",
+            "createdDate": "Created Date",
+            "role": "Role",
+            "organization": "Organization",
+            "organizationDefault": "Organization Default",
+            "organizationCurrent": "Organization Current",
+            "post": "Post"
+        }
+    },
+    "coreApp": {
+        "coreDegaUser": {
+            "created": "एक नया Dega User [identifier: {{ param }}] तैयार है",
+            "updated": "एक Dega User [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Dega User [identifier: {{ param }}] हटा दिया है"
+        }
+    }
+}

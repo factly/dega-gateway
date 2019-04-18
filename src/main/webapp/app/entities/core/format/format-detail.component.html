@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="format">
+            <h2><span jhiTranslate="gatewayApp.coreFormat.detail.title">Format</span> {{format.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.coreFormat.name">Name</span></dt>
+                <dd>
+                    <span>{{format.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreFormat.isDefault">Is Default</span></dt>
+                <dd>
+                    <span>{{format.isDefault}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreFormat.clientId">Client Id</span></dt>
+                <dd>
+                    <span>{{format.clientId}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreFormat.description">Description</span></dt>
+                <dd>
+                    <span>{{format.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreFormat.slug">Slug</span></dt>
+                <dd>
+                    <span>{{format.slug}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreFormat.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{format.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreFormat.lastUpdatedDate">Last Updated Date</span></dt>
+                <dd>
+                    <span>{{format.lastUpdatedDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/format', format.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

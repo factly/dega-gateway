@@ -5,7 +5,7 @@
       "nativeLanguage": "en",
       "microservicePath": "../dega-core"
     },
-    "jhipsterVersion": "5.4.1",
+    "jhipsterVersion": "5.6.0",
     "applicationType": "gateway",
     "baseName": "gateway",
     "packageName": "com.factly.dega",

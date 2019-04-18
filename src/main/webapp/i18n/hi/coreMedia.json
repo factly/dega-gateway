@@ -1,0 +1,40 @@
+{
+    "gatewayApp": {
+        "coreMedia": {
+            "home": {
+                "title": "Media",
+                "createLabel": "नया Media बनाएँ",
+                "createOrEditLabel": "Media बनाएँ या संपादित करें",
+                "search": "Media खोजें"
+            },
+            "delete": {
+                "question": "Media [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "Media"
+            },
+            "name": "Name",
+            "type": "Type",
+            "url": "Url",
+            "fileSize": "File Size",
+            "dimensions": "Dimensions",
+            "title": "Title",
+            "caption": "Caption",
+            "altText": "Alt Text",
+            "description": "Description",
+            "uploadedBy": "Uploaded By",
+            "publishedDate": "Published Date",
+            "lastUpdatedDate": "Last Updated Date",
+            "slug": "Slug",
+            "clientId": "Client Id",
+            "createdDate": "Created Date"
+        }
+    },
+    "coreApp": {
+        "coreMedia": {
+            "created": "एक नया Media [identifier: {{ param }}] तैयार है",
+            "updated": "एक Media [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "Media [identifier: {{ param }}] हटा दिया है"
+        }
+    }
+}

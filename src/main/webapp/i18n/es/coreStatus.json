@@ -1,0 +1,32 @@
+{
+    "gatewayApp": {
+        "coreStatus": {
+            "home": {
+                "title": "Statuses",
+                "createLabel": "Crear nuevo Status",
+                "createOrEditLabel": "Crear o editar Status",
+                "search": "Search for Status"
+            },
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Status {{ id }}?"
+            },
+            "detail": {
+                "title": "Status"
+            },
+            "name": "Name",
+            "clientId": "Client Id",
+            "isDefault": "Is Default",
+            "slug": "Slug",
+            "createdDate": "Created Date",
+            "lastUpdatedDate": "Last Updated Date",
+            "post": "Post"
+        }
+    },
+    "coreApp": {
+        "coreStatus": {
+            "created": "Un nuevo Status ha sido creado con el identificador {{ param }}",
+            "updated": "Un Status ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Status ha sido eliminado con el identificador {{ param }}"
+        }
+    }
+}

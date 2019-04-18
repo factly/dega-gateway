@@ -21,17 +21,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.email" for="field_email">Email</label>
-                    <input type="text" class="form-control" name="email" id="field_email"
-                        [(ngModel)]="organization.email" required/>
-                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.phone" for="field_phone">Phone</label>
                     <input type="text" class="form-control" name="phone" id="field_phone"
                         [(ngModel)]="organization.phone" />
@@ -54,28 +43,92 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.description" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
-                        [(ngModel)]="organization.description" />
+                    <textarea rows="5" class="form-control" name="description" id="field_description"
+                              [(ngModel)]="organization.description" ></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.logoURL" for="field_logoURL">Logo URL</label>
-                    <input type="text" class="form-control" name="logoURL" id="field_logoURL"
-                        [(ngModel)]="organization.logoURL" />
+                    <!--<input type="text" class="form-control" name="logoURL" id="field_logoURL"
+                        [(ngModel)]="organization.logoURL" />-->
+                    <button id="field_logoURL" class="btn btn-primary jh-create-entity create-media"
+                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            [queryParams]="{ media_type: 'logoURL'}"
+                            replaceUrl="true" type="button">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
+                            Upload Media
+                        </span>
+                    </button>
+                    <img src={{organization.logoURL}} alt="" width="100" height="100">
+                    <button class="btn btn-danger" *ngIf="organization.logoURL" (click)="removeImage('logoURL')">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                    <div *ngIf="organization.logoURL">
+                        <span [(ngModel)]="organization.logoURL" name="featuredMedia" ngDefaultControl></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.logoURLMobile" for="field_logoURLMobile">Logo URL Mobile</label>
-                    <input type="text" class="form-control" name="logoURLMobile" id="field_logoURLMobile"
-                        [(ngModel)]="organization.logoURLMobile" />
+                    <!--<input type="text" class="form-control" name="logoURLMobile" id="field_logoURLMobile"
+                        [(ngModel)]="organization.logoURLMobile" />-->
+                    <button id="field_logoURLMobile" class="btn btn-primary jh-create-entity create-media"
+                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            [queryParams]="{ media_type: 'logoURLMobile'}"
+                            replaceUrl="true" type="button">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
+                            Upload Media
+                        </span>
+                    </button>
+                    <img src={{organization.logoURLMobile}} alt="" width="100" height="100">
+                    <button class="btn btn-danger" *ngIf="organization.logoURLMobile" (click)="removeImage('logoURLMobile')">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                    <div *ngIf="organization.logoURLMobile">
+                        <span [(ngModel)]="organization.logoURLMobile" name="featuredMedia" ngDefaultControl></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.favIconURL" for="field_favIconURL">Fav Icon URL</label>
-                    <input type="text" class="form-control" name="favIconURL" id="field_favIconURL"
-                        [(ngModel)]="organization.favIconURL" />
+                    <!--<input type="text" class="form-control" name="favIconURL" id="field_favIconURL"
+                        [(ngModel)]="organization.favIconURL" />-->
+                    <button id="field_favIconURL" class="btn btn-primary jh-create-entity create-media"
+                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            [queryParams]="{ media_type: 'favIconURL'}"
+                            replaceUrl="true" type="button">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
+                            Upload Media
+                        </span>
+                    </button>
+                    <img src={{organization.favIconURL}} alt="" width="100" height="100">
+                    <button class="btn btn-danger" *ngIf="organization.favIconURL" (click)="removeImage('favIconURL')">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                    <div *ngIf="organization.favIconURL">
+                        <span [(ngModel)]="organization.favIconURL" name="featuredMedia" ngDefaultControl></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.mobileIconURL" for="field_mobileIconURL">Mobile Icon URL</label>
-                    <input type="text" class="form-control" name="mobileIconURL" id="field_mobileIconURL"
-                        [(ngModel)]="organization.mobileIconURL" />
+                    <!--<input type="text" class="form-control" name="mobileIconURL" id="field_mobileIconURL"
+                        [(ngModel)]="organization.mobileIconURL" />-->
+                    <button id="field_mobileIconURL" class="btn btn-primary jh-create-entity create-media"
+                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                            [queryParams]="{ media_type: 'mobileIconURL'}"
+                            replaceUrl="true" type="button">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
+                            Upload Media
+                        </span>
+                    </button>
+                    <img src={{organization.mobileIconURL}} alt="" width="100" height="100">
+                    <button class="btn btn-danger" *ngIf="organization.mobileIconURL" (click)="removeImage('mobileIconURL')">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                    <div *ngIf="organization.mobileIconURL">
+                        <span [(ngModel)]="organization.mobileIconURL" name="featuredMedia" ngDefaultControl></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.baiduVerificationCode" for="field_baiduVerificationCode">Baidu Verification Code</label>
@@ -222,7 +275,7 @@
                     <input type="text" class="form-control" name="timeZone" id="field_timeZone"
                         [(ngModel)]="organization.timeZone" />
                 </div>
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
                         [(ngModel)]="organization.clientId" required/>
@@ -232,6 +285,82 @@
                         This field is required.
                         </small>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.slug" for="field_slug">Slug</label>
+                    <input type="text" class="form-control" name="slug" id="field_slug"
+                        [(ngModel)]="organization.slug" required/>
+                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="organization.email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,30}$"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.email?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'Email' }">
+                            This field should follow pattern for "Email".
+                        </small>
+                    </div>
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.createdDate" for="field_createdDate">Created Date</label>
+                    <div class="d-flex">
+                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
+                    <div class="d-flex">
+                        <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="lastUpdatedDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.lastUpdatedDate?.dirty && editForm.controls.lastUpdatedDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.lastUpdatedDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.lastUpdatedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.siteAddress" for="field_siteAddress">Site Address</label>
+                    <input type="text" class="form-control" name="siteAddress" id="field_siteAddress"
+                        [(ngModel)]="organization.siteAddress" required/>
+                    <div [hidden]="!(editForm.controls.siteAddress?.dirty && editForm.controls.siteAddress?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.siteAddress?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.enableFactchecking" for="field_enableFactchecking">Enable Factchecking</label>
+                    <input type="checkbox" class="form-control" name="enableFactchecking" id="field_enableFactchecking"
+                        [(ngModel)]="organization.enableFactchecking" />
                 </div>
 
             </div>

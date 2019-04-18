@@ -1,5 +1,5 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec } from 'protractor';
+import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../../page-objects/jhi-page-objects';
 
 import { OrganizationComponentsPage, OrganizationDeleteDialog, OrganizationUpdatePage } from './organization.page-object';
@@ -38,86 +38,104 @@ describe('Organization e2e test', () => {
         const nbButtonsBeforeCreate = await organizationComponentsPage.countDeleteButtons();
 
         await organizationComponentsPage.clickOnCreateButton();
-        await organizationUpdatePage.setNameInput('name');
+        await promise.all([
+            organizationUpdatePage.setNameInput('name'),
+            organizationUpdatePage.setPhoneInput('phone'),
+            organizationUpdatePage.setSiteTitleInput('siteTitle'),
+            organizationUpdatePage.setTagLineInput('tagLine'),
+            organizationUpdatePage.setDescriptionInput('description'),
+            organizationUpdatePage.setLogoURLInput('logoURL'),
+            organizationUpdatePage.setLogoURLMobileInput('logoURLMobile'),
+            organizationUpdatePage.setFavIconURLInput('favIconURL'),
+            organizationUpdatePage.setMobileIconURLInput('mobileIconURL'),
+            organizationUpdatePage.setBaiduVerificationCodeInput('baiduVerificationCode'),
+            organizationUpdatePage.setBingVerificationCodeInput('bingVerificationCode'),
+            organizationUpdatePage.setGoogleVerificationCodeInput('googleVerificationCode'),
+            organizationUpdatePage.setYandexVerificationCodeInput('yandexVerificationCode'),
+            organizationUpdatePage.setFacebookURLInput('facebookURL'),
+            organizationUpdatePage.setTwitterURLInput('twitterURL'),
+            organizationUpdatePage.setInstagramURLInput('instagramURL'),
+            organizationUpdatePage.setLinkedInURLInput('linkedInURL'),
+            organizationUpdatePage.setPinterestURLInput('pinterestURL'),
+            organizationUpdatePage.setYouTubeURLInput('youTubeURL'),
+            organizationUpdatePage.setGooglePlusURLInput('googlePlusURL'),
+            organizationUpdatePage.setGithubURLInput('githubURL'),
+            organizationUpdatePage.setFacebookPageAccessTokenInput('facebookPageAccessToken'),
+            organizationUpdatePage.setGaTrackingCodeInput('gaTrackingCode'),
+            organizationUpdatePage.setGithubClientIdInput('githubClientId'),
+            organizationUpdatePage.setGithubClientSecretInput('githubClientSecret'),
+            organizationUpdatePage.setTwitterClientIdInput('twitterClientId'),
+            organizationUpdatePage.setTwitterClientSecretInput('twitterClientSecret'),
+            organizationUpdatePage.setFacebookClientIdInput('facebookClientId'),
+            organizationUpdatePage.setFacebookClientSecretInput('facebookClientSecret'),
+            organizationUpdatePage.setGoogleClientIdInput('googleClientId'),
+            organizationUpdatePage.setGoogleClientSecretInput('googleClientSecret'),
+            organizationUpdatePage.setLinkedInClientIdInput('linkedInClientId'),
+            organizationUpdatePage.setLinkedInClientSecretInput('linkedInClientSecret'),
+            organizationUpdatePage.setInstagramClientIdInput('instagramClientId'),
+            organizationUpdatePage.setInstagramClientSecretInput('instagramClientSecret'),
+            organizationUpdatePage.setMailchimpAPIKeyInput('mailchimpAPIKey'),
+            organizationUpdatePage.setSiteLanguageInput('siteLanguage'),
+            organizationUpdatePage.setTimeZoneInput('timeZone'),
+            organizationUpdatePage.setClientIdInput('clientId'),
+            organizationUpdatePage.setSlugInput('slug'),
+            organizationUpdatePage.setEmailInput('email'),
+            organizationUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            organizationUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            organizationUpdatePage.setSiteAddressInput('siteAddress')
+        ]);
         expect(await organizationUpdatePage.getNameInput()).to.eq('name');
-        await organizationUpdatePage.setEmailInput('email');
-        expect(await organizationUpdatePage.getEmailInput()).to.eq('email');
-        await organizationUpdatePage.setPhoneInput('phone');
         expect(await organizationUpdatePage.getPhoneInput()).to.eq('phone');
-        await organizationUpdatePage.setSiteTitleInput('siteTitle');
         expect(await organizationUpdatePage.getSiteTitleInput()).to.eq('siteTitle');
-        await organizationUpdatePage.setTagLineInput('tagLine');
         expect(await organizationUpdatePage.getTagLineInput()).to.eq('tagLine');
-        await organizationUpdatePage.setDescriptionInput('description');
         expect(await organizationUpdatePage.getDescriptionInput()).to.eq('description');
-        await organizationUpdatePage.setLogoURLInput('logoURL');
         expect(await organizationUpdatePage.getLogoURLInput()).to.eq('logoURL');
-        await organizationUpdatePage.setLogoURLMobileInput('logoURLMobile');
         expect(await organizationUpdatePage.getLogoURLMobileInput()).to.eq('logoURLMobile');
-        await organizationUpdatePage.setFavIconURLInput('favIconURL');
         expect(await organizationUpdatePage.getFavIconURLInput()).to.eq('favIconURL');
-        await organizationUpdatePage.setMobileIconURLInput('mobileIconURL');
         expect(await organizationUpdatePage.getMobileIconURLInput()).to.eq('mobileIconURL');
-        await organizationUpdatePage.setBaiduVerificationCodeInput('baiduVerificationCode');
         expect(await organizationUpdatePage.getBaiduVerificationCodeInput()).to.eq('baiduVerificationCode');
-        await organizationUpdatePage.setBingVerificationCodeInput('bingVerificationCode');
         expect(await organizationUpdatePage.getBingVerificationCodeInput()).to.eq('bingVerificationCode');
-        await organizationUpdatePage.setGoogleVerificationCodeInput('googleVerificationCode');
         expect(await organizationUpdatePage.getGoogleVerificationCodeInput()).to.eq('googleVerificationCode');
-        await organizationUpdatePage.setYandexVerificationCodeInput('yandexVerificationCode');
         expect(await organizationUpdatePage.getYandexVerificationCodeInput()).to.eq('yandexVerificationCode');
-        await organizationUpdatePage.setFacebookURLInput('facebookURL');
         expect(await organizationUpdatePage.getFacebookURLInput()).to.eq('facebookURL');
-        await organizationUpdatePage.setTwitterURLInput('twitterURL');
         expect(await organizationUpdatePage.getTwitterURLInput()).to.eq('twitterURL');
-        await organizationUpdatePage.setInstagramURLInput('instagramURL');
         expect(await organizationUpdatePage.getInstagramURLInput()).to.eq('instagramURL');
-        await organizationUpdatePage.setLinkedInURLInput('linkedInURL');
         expect(await organizationUpdatePage.getLinkedInURLInput()).to.eq('linkedInURL');
-        await organizationUpdatePage.setPinterestURLInput('pinterestURL');
         expect(await organizationUpdatePage.getPinterestURLInput()).to.eq('pinterestURL');
-        await organizationUpdatePage.setYouTubeURLInput('youTubeURL');
         expect(await organizationUpdatePage.getYouTubeURLInput()).to.eq('youTubeURL');
-        await organizationUpdatePage.setGooglePlusURLInput('googlePlusURL');
         expect(await organizationUpdatePage.getGooglePlusURLInput()).to.eq('googlePlusURL');
-        await organizationUpdatePage.setGithubURLInput('githubURL');
         expect(await organizationUpdatePage.getGithubURLInput()).to.eq('githubURL');
-        await organizationUpdatePage.setFacebookPageAccessTokenInput('facebookPageAccessToken');
         expect(await organizationUpdatePage.getFacebookPageAccessTokenInput()).to.eq('facebookPageAccessToken');
-        await organizationUpdatePage.setGaTrackingCodeInput('gaTrackingCode');
         expect(await organizationUpdatePage.getGaTrackingCodeInput()).to.eq('gaTrackingCode');
-        await organizationUpdatePage.setGithubClientIdInput('githubClientId');
         expect(await organizationUpdatePage.getGithubClientIdInput()).to.eq('githubClientId');
-        await organizationUpdatePage.setGithubClientSecretInput('githubClientSecret');
         expect(await organizationUpdatePage.getGithubClientSecretInput()).to.eq('githubClientSecret');
-        await organizationUpdatePage.setTwitterClientIdInput('twitterClientId');
         expect(await organizationUpdatePage.getTwitterClientIdInput()).to.eq('twitterClientId');
-        await organizationUpdatePage.setTwitterClientSecretInput('twitterClientSecret');
         expect(await organizationUpdatePage.getTwitterClientSecretInput()).to.eq('twitterClientSecret');
-        await organizationUpdatePage.setFacebookClientIdInput('facebookClientId');
         expect(await organizationUpdatePage.getFacebookClientIdInput()).to.eq('facebookClientId');
-        await organizationUpdatePage.setFacebookClientSecretInput('facebookClientSecret');
         expect(await organizationUpdatePage.getFacebookClientSecretInput()).to.eq('facebookClientSecret');
-        await organizationUpdatePage.setGoogleClientIdInput('googleClientId');
         expect(await organizationUpdatePage.getGoogleClientIdInput()).to.eq('googleClientId');
-        await organizationUpdatePage.setGoogleClientSecretInput('googleClientSecret');
         expect(await organizationUpdatePage.getGoogleClientSecretInput()).to.eq('googleClientSecret');
-        await organizationUpdatePage.setLinkedInClientIdInput('linkedInClientId');
         expect(await organizationUpdatePage.getLinkedInClientIdInput()).to.eq('linkedInClientId');
-        await organizationUpdatePage.setLinkedInClientSecretInput('linkedInClientSecret');
         expect(await organizationUpdatePage.getLinkedInClientSecretInput()).to.eq('linkedInClientSecret');
-        await organizationUpdatePage.setInstagramClientIdInput('instagramClientId');
         expect(await organizationUpdatePage.getInstagramClientIdInput()).to.eq('instagramClientId');
-        await organizationUpdatePage.setInstagramClientSecretInput('instagramClientSecret');
         expect(await organizationUpdatePage.getInstagramClientSecretInput()).to.eq('instagramClientSecret');
-        await organizationUpdatePage.setMailchimpAPIKeyInput('mailchimpAPIKey');
         expect(await organizationUpdatePage.getMailchimpAPIKeyInput()).to.eq('mailchimpAPIKey');
-        await organizationUpdatePage.setSiteLanguageInput('siteLanguage');
         expect(await organizationUpdatePage.getSiteLanguageInput()).to.eq('siteLanguage');
-        await organizationUpdatePage.setTimeZoneInput('timeZone');
         expect(await organizationUpdatePage.getTimeZoneInput()).to.eq('timeZone');
-        await organizationUpdatePage.setClientIdInput('clientId');
         expect(await organizationUpdatePage.getClientIdInput()).to.eq('clientId');
+        expect(await organizationUpdatePage.getSlugInput()).to.eq('slug');
+        expect(await organizationUpdatePage.getEmailInput()).to.eq('email');
+        expect(await organizationUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
+        expect(await organizationUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');
+        expect(await organizationUpdatePage.getSiteAddressInput()).to.eq('siteAddress');
+        const selectedEnableFactchecking = organizationUpdatePage.getEnableFactcheckingInput();
+        if (await selectedEnableFactchecking.isSelected()) {
+            await organizationUpdatePage.getEnableFactcheckingInput().click();
+            expect(await organizationUpdatePage.getEnableFactcheckingInput().isSelected()).to.be.false;
+        } else {
+            await organizationUpdatePage.getEnableFactcheckingInput().click();
+            expect(await organizationUpdatePage.getEnableFactcheckingInput().isSelected()).to.be.true;
+        }
         await organizationUpdatePage.save();
         expect(await organizationUpdatePage.getSaveButton().isPresent()).to.be.false;
 

@@ -1,0 +1,111 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="degaUser">
+            <h2><span jhiTranslate="gatewayApp.coreDegaUser.detail.title">Dega User</span> {{degaUser.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{degaUser.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{degaUser.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.displayName">Display Name</span></dt>
+                <dd>
+                    <span>{{degaUser.displayName}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.website">Website</span></dt>
+                <dd>
+                    <span>{{degaUser.website}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.facebookURL">Facebook URL</span></dt>
+                <dd>
+                    <span>{{degaUser.facebookURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.twitterURL">Twitter URL</span></dt>
+                <dd>
+                    <span>{{degaUser.twitterURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.instagramURL">Instagram URL</span></dt>
+                <dd>
+                    <span>{{degaUser.instagramURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.linkedinURL">Linkedin URL</span></dt>
+                <dd>
+                    <span>{{degaUser.linkedinURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.githubURL">Github URL</span></dt>
+                <dd>
+                    <span>{{degaUser.githubURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.profilePicture">Profile Picture</span></dt>
+                <dd>
+                    <span> <img src={{degaUser.profilePicture}} alt="" width="100" height="100"> </span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.description">Description</span></dt>
+                <dd>
+                    <span>{{degaUser.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.slug">Slug</span></dt>
+                <dd>
+                    <span>{{degaUser.slug}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.enabled">Enabled</span></dt>
+                <dd>
+                    <span>{{degaUser.enabled}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.emailVerified">Email Verified</span></dt>
+                <dd>
+                    <span>{{degaUser.emailVerified}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.email">Email</span></dt>
+                <dd>
+                    <span>{{degaUser.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{degaUser.createdDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.role">Role</span></dt>
+                <dd>
+                    <div *ngIf="degaUser.roleId">
+                        <a [routerLink]="['/role', degaUser.roleId, 'view']">{{degaUser.roleName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.organization">Organization</span></dt>
+                <dd>
+                    <span *ngFor="let organization of degaUser.organizations; let last = last">
+                        <a [routerLink]="['/organization', organization?.id, 'view' ]">{{organization.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.organizationDefault">Organization Default</span></dt>
+                <dd>
+                    <div *ngIf="degaUser.organizationDefaultId">
+                        <a [routerLink]="['/organization', degaUser.organizationDefaultId, 'view']">{{degaUser.organizationDefaultName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.organizationCurrent">Organization Current</span></dt>
+                <dd>
+                    <div *ngIf="degaUser.organizationCurrentId">
+                        <a [routerLink]="['/organization', degaUser.organizationCurrentId, 'view']">{{degaUser.organizationCurrentName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/dega-user', degaUser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -29,17 +29,53 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="featuredMedia"><span jhiTranslate="gatewayApp.corePost.featuredMedia">Featured Media</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span jhiTranslate="gatewayApp.corePost.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.corePost.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.corePost.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="content"><span jhiTranslate="gatewayApp.corePost.content">Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="excerpt"><span jhiTranslate="gatewayApp.corePost.excerpt">Excerpt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="publishedDate"><span jhiTranslate="gatewayApp.corePost.publishedDate">Published Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.corePost.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="featured"><span jhiTranslate="gatewayApp.corePost.featured">Featured</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sticky"><span jhiTranslate="gatewayApp.corePost.sticky">Sticky</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="updates"><span jhiTranslate="gatewayApp.corePost.updates">Updates</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.corePost.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="password"><span jhiTranslate="gatewayApp.corePost.password">Password</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <!--<th jhiSortBy="subTitle"><span jhiTranslate="gatewayApp.corePost.subTitle">Sub Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.corePost.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="statusName"><span jhiTranslate="gatewayApp.corePost.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="formatName"><span jhiTranslate="gatewayApp.corePost.format">Format</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let post of posts ;trackBy: trackId">
-                <td><a [routerLink]="['/post', post.id, 'view' ]">{{post.id}}</a></td>
+                <td><img src={{post.featuredMedia}} alt="" width="100" height="100"></td>
+                <!--<td><a [routerLink]="['/post', post.id, 'view' ]">{{post.id}}</a></td>-->
                 <td>{{post.title}}</td>
-                <td>{{post.clientId}}</td>
+                <!--<td>{{post.clientId}}</td>-->
+                <!--<td>{{post.content}}</td>-->
+                <td>{{post.excerpt}}</td>
+                <!--<td>{{post.publishedDate | date:'medium'}}</td>-->
+                <!--<td>{{post.lastUpdatedDate | date:'medium'}}</td>
+                <td>{{post.featured}}</td>
+                <td>{{post.sticky}}</td>
+                <td>{{post.updates}}</td>
+                <td>{{post.slug}}</td>
+                <td>{{post.password}}</td>
+                <td>{{post.subTitle}}</td>-->
+                <td>{{post.createdDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="post.statusId">
+                        <a [routerLink]="['../status', post.statusId , 'view' ]" >{{post.statusName}}</a>
+                    </div>
+                </td>
+                <!--<td>
+                    <div *ngIf="post.formatId">
+                        <a [routerLink]="['../format', post.formatId , 'view' ]" >{{post.formatName}}</a>
+                    </div>
+                </td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

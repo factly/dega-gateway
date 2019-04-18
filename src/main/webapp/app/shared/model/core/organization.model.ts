@@ -1,7 +1,9 @@
+import { Moment } from 'moment';
+import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+
 export interface IOrganization {
     id?: string;
     name?: string;
-    email?: string;
     phone?: string;
     siteTitle?: string;
     tagLine?: string;
@@ -40,13 +42,21 @@ export interface IOrganization {
     siteLanguage?: string;
     timeZone?: string;
     clientId?: string;
+    slug?: string;
+    email?: string;
+    createdDate?: Moment;
+    lastUpdatedDate?: Moment;
+    siteAddress?: string;
+    enableFactchecking?: boolean;
+    degaUsers?: IDegaUser[];
+    degaUserDefaults?: IDegaUser[];
+    degaUserCurrents?: IDegaUser[];
 }
 
 export class Organization implements IOrganization {
     constructor(
         public id?: string,
         public name?: string,
-        public email?: string,
         public phone?: string,
         public siteTitle?: string,
         public tagLine?: string,
@@ -84,6 +94,17 @@ export class Organization implements IOrganization {
         public mailchimpAPIKey?: string,
         public siteLanguage?: string,
         public timeZone?: string,
-        public clientId?: string
-    ) {}
+        public clientId?: string,
+        public slug?: string,
+        public email?: string,
+        public createdDate?: Moment,
+        public lastUpdatedDate?: Moment,
+        public siteAddress?: string,
+        public enableFactchecking?: boolean,
+        public degaUsers?: IDegaUser[],
+        public degaUserDefaults?: IDegaUser[],
+        public degaUserCurrents?: IDegaUser[]
+    ) {
+        this.enableFactchecking = this.enableFactchecking || false;
+    }
 }

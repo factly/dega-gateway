@@ -27,7 +27,6 @@ export class OrganizationUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
-    emailInput = element(by.id('field_email'));
     phoneInput = element(by.id('field_phone'));
     siteTitleInput = element(by.id('field_siteTitle'));
     tagLineInput = element(by.id('field_tagLine'));
@@ -66,6 +65,12 @@ export class OrganizationUpdatePage {
     siteLanguageInput = element(by.id('field_siteLanguage'));
     timeZoneInput = element(by.id('field_timeZone'));
     clientIdInput = element(by.id('field_clientId'));
+    slugInput = element(by.id('field_slug'));
+    emailInput = element(by.id('field_email'));
+    createdDateInput = element(by.id('field_createdDate'));
+    lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
+    siteAddressInput = element(by.id('field_siteAddress'));
+    enableFactcheckingInput = element(by.id('field_enableFactchecking'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -77,14 +82,6 @@ export class OrganizationUpdatePage {
 
     async getNameInput() {
         return this.nameInput.getAttribute('value');
-    }
-
-    async setEmailInput(email) {
-        await this.emailInput.sendKeys(email);
-    }
-
-    async getEmailInput() {
-        return this.emailInput.getAttribute('value');
     }
 
     async setPhoneInput(phone) {
@@ -389,6 +386,50 @@ export class OrganizationUpdatePage {
 
     async getClientIdInput() {
         return this.clientIdInput.getAttribute('value');
+    }
+
+    async setSlugInput(slug) {
+        await this.slugInput.sendKeys(slug);
+    }
+
+    async getSlugInput() {
+        return this.slugInput.getAttribute('value');
+    }
+
+    async setEmailInput(email) {
+        await this.emailInput.sendKeys(email);
+    }
+
+    async getEmailInput() {
+        return this.emailInput.getAttribute('value');
+    }
+
+    async setCreatedDateInput(createdDate) {
+        await this.createdDateInput.sendKeys(createdDate);
+    }
+
+    async getCreatedDateInput() {
+        return this.createdDateInput.getAttribute('value');
+    }
+
+    async setLastUpdatedDateInput(lastUpdatedDate) {
+        await this.lastUpdatedDateInput.sendKeys(lastUpdatedDate);
+    }
+
+    async getLastUpdatedDateInput() {
+        return this.lastUpdatedDateInput.getAttribute('value');
+    }
+
+    async setSiteAddressInput(siteAddress) {
+        await this.siteAddressInput.sendKeys(siteAddress);
+    }
+
+    async getSiteAddressInput() {
+        return this.siteAddressInput.getAttribute('value');
+    }
+
+    getEnableFactcheckingInput() {
+        return this.enableFactcheckingInput;
     }
 
     async save() {

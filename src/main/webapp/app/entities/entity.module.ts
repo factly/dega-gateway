@@ -16,6 +16,7 @@ import { GatewayRatingModule as FactcheckRatingModule } from './factcheck/rating
 import { GatewayClaimModule as FactcheckClaimModule } from './factcheck/claim/claim.module';
 import { GatewayClaimantModule as FactcheckClaimantModule } from './factcheck/claimant/claimant.module';
 import { GatewayFactcheckModule as FactcheckFactcheckModule } from './factcheck/factcheck/factcheck.module';
+import { GatewayRoleMappingModule as CoreRoleMappingModule } from './core/role-mapping/role-mapping.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 import { GatewaySharedModule } from 'app/shared/shared.module';
@@ -36,6 +37,7 @@ import { GatewaySharedModule } from 'app/shared/shared.module';
         FactcheckClaimModule,
         FactcheckClaimantModule,
         FactcheckFactcheckModule,
+        CoreRoleMappingModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
 
         // Angular material import

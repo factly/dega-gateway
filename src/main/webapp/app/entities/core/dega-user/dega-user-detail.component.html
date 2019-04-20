@@ -93,6 +93,12 @@
                         <a [routerLink]="['/organization', degaUser.organizationCurrentId, 'view']">{{degaUser.organizationCurrentName}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="gatewayApp.coreDegaUser.roleMapping">Role Mapping</span></dt>
+                <dd>
+                    <span *ngFor="let roleMapping of degaUser.roleMappings; let last = last">
+                        <a [routerLink]="['/role-mapping', roleMapping?.id, 'view' ]">{{roleMapping.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"

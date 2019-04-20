@@ -1,0 +1,29 @@
+{
+    "gatewayApp": {
+        "coreRoleMapping": {
+            "home": {
+                "title": "Role Mappings",
+                "createLabel": "Create a new Role Mapping",
+                "createOrEditLabel": "Create or edit a Role Mapping",
+                "search": "Search for Role Mapping"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Role Mapping {{ id }}?"
+            },
+            "detail": {
+                "title": "Role Mapping"
+            },
+            "name": "Name",
+            "organization": "Organization",
+            "role": "Role",
+            "degaUser": "Dega User"
+        }
+    },
+    "coreApp": {
+        "coreRoleMapping": {
+            "created": "A new Role Mapping is created with identifier {{ param }}",
+            "updated": "A Role Mapping is updated with identifier {{ param }}",
+            "deleted": "A Role Mapping is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -19,7 +19,8 @@
             "slug": "Slug",
             "createdDate": "Created Date",
             "lastUpdatedDate": "Last Updated Date",
-            "degaUser": "Dega User"
+            "degaUser": "Dega User",
+            "roleMapping": "Role Mapping"
         }
     },
     "coreApp": {

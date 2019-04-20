@@ -60,7 +60,8 @@
             "enableFactchecking": "Enable Factchecking",
             "degaUser": "Dega User",
             "degaUserDefault": "Dega User Default",
-            "degaUserCurrent": "Dega User Current"
+            "degaUserCurrent": "Dega User Current",
+            "roleMapping": "Role Mapping"
         }
     },
     "coreApp": {

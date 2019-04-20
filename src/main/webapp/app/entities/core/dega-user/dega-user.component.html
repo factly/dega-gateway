@@ -30,18 +30,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="profilePicture"><span jhiTranslate="gatewayApp.coreDegaUser.profilePicture">Profile Picture</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <!--<th jhiSortBy="firstName"><span jhiTranslate="gatewayApp.coreDegaUser.firstName">First Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="lastName"><span jhiTranslate="gatewayApp.coreDegaUser.lastName">Last Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="displayName"><span jhiTranslate="gatewayApp.coreDegaUser.displayName">Display Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="website"><span jhiTranslate="gatewayApp.coreDegaUser.website">Website</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="facebookURL"><span jhiTranslate="gatewayApp.coreDegaUser.facebookURL">Facebook URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="twitterURL"><span jhiTranslate="gatewayApp.coreDegaUser.twitterURL">Twitter URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="instagramURL"><span jhiTranslate="gatewayApp.coreDegaUser.instagramURL">Instagram URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="linkedinURL"><span jhiTranslate="gatewayApp.coreDegaUser.linkedinURL">Linkedin URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="githubURL"><span jhiTranslate="gatewayApp.coreDegaUser.githubURL">Github URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <!--<th jhiSortBy="description"><span jhiTranslate="gatewayApp.coreDegaUser.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreDegaUser.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="enabled"><span jhiTranslate="gatewayApp.coreDegaUser.enabled">Enabled</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="emailVerified"><span jhiTranslate="gatewayApp.coreDegaUser.emailVerified">Email Verified</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="email"><span jhiTranslate="gatewayApp.coreDegaUser.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -54,19 +43,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let degaUser of degaUsers ;trackBy: trackId">
-                <!--<td><a [routerLink]="['/dega-user', degaUser.id, 'view' ]">{{degaUser.id}}</a></td>-->
                 <td><img src={{degaUser.profilePicture}} alt="" width="100" height="100"></td>
-                <!--<td>{{degaUser.firstName}}</td>
-                <td>{{degaUser.lastName}}</td>-->
                 <td>{{degaUser.displayName}}</td>
-                <!--<td>{{degaUser.website}}</td>
-                <td>{{degaUser.facebookURL}}</td>
-                <td>{{degaUser.twitterURL}}</td>
-                <td>{{degaUser.instagramURL}}</td>
-                <td>{{degaUser.linkedinURL}}</td>
-                <td>{{degaUser.githubURL}}</td>-->
-                <!--<td>{{degaUser.description}}</td>
-                <td>{{degaUser.slug}}</td>-->
                 <td>{{degaUser.enabled}}</td>
                 <td>{{degaUser.emailVerified}}</td>
                 <td>{{degaUser.email}}</td>

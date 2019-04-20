@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { IOrganization } from 'app/shared/model/core/organization.model';
 import { IPost } from 'app/shared/model/core/post.model';
+import { IRoleMapping } from 'app/shared/model/core/role-mapping.model';
 
 export interface IDegaUser {
     id?: string;
@@ -28,6 +29,7 @@ export interface IDegaUser {
     organizationCurrentName?: string;
     organizationCurrentId?: string;
     posts?: IPost[];
+    roleMappings?: IRoleMapping[];
 }
 
 export class DegaUser implements IDegaUser {
@@ -56,7 +58,8 @@ export class DegaUser implements IDegaUser {
         public organizationDefaultId?: string,
         public organizationCurrentName?: string,
         public organizationCurrentId?: string,
-        public posts?: IPost[]
+        public posts?: IPost[],
+        public roleMappings?: IRoleMapping[]
     ) {
         this.enabled = this.enabled || false;
         this.emailVerified = this.emailVerified || false;

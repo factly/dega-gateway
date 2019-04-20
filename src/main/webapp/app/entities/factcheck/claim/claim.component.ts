@@ -9,7 +9,7 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ClaimService } from './claim.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { NewClaimPopupComponent } from 'app/entities/factcheck/claim/new-claim-popup.component';
 
 @Component({

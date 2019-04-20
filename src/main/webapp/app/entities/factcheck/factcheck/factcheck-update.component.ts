@@ -25,7 +25,7 @@ import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
 import { Subscription } from 'rxjs';
 
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
 
 @Component({

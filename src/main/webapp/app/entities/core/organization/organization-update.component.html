@@ -275,28 +275,6 @@
                     <input type="text" class="form-control" name="timeZone" id="field_timeZone"
                         [(ngModel)]="organization.timeZone" />
                 </div>
-               <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.clientId" for="field_clientId">Client Id</label>
-                    <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="organization.clientId" required/>
-                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.slug" for="field_slug">Slug</label>
-                    <input type="text" class="form-control" name="slug" id="field_slug"
-                        [(ngModel)]="organization.slug" required/>
-                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.email" for="field_email">Email</label>
                     <input type="text" class="form-control" name="email" id="field_email"
@@ -312,40 +290,6 @@
                         </small>
                     </div>
                 </div>
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.createdDate" for="field_createdDate">Created Date</label>
-                    <div class="d-flex">
-                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
-                        required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
-                    <div class="d-flex">
-                        <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="lastUpdatedDate"
-                        required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.lastUpdatedDate?.dirty && editForm.controls.lastUpdatedDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.lastUpdatedDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.lastUpdatedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.siteAddress" for="field_siteAddress">Site Address</label>
                     <input type="text" class="form-control" name="siteAddress" id="field_siteAddress"

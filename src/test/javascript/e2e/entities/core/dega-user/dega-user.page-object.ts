@@ -46,6 +46,7 @@ export class DegaUserUpdatePage {
     organizationSelect = element(by.id('field_organization'));
     organizationDefaultSelect = element(by.id('field_organizationDefault'));
     organizationCurrentSelect = element(by.id('field_organizationCurrent'));
+    roleMappingSelect = element(by.id('field_roleMapping'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -243,6 +244,25 @@ export class DegaUserUpdatePage {
 
     async getOrganizationCurrentSelectedOption() {
         return this.organizationCurrentSelect.element(by.css('option:checked')).getText();
+    }
+
+    async roleMappingSelectLastOption() {
+        await this.roleMappingSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async roleMappingSelectOption(option) {
+        await this.roleMappingSelect.sendKeys(option);
+    }
+
+    getRoleMappingSelect(): ElementFinder {
+        return this.roleMappingSelect;
+    }
+
+    async getRoleMappingSelectedOption() {
+        return this.roleMappingSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

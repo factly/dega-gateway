@@ -32,12 +32,7 @@
       "protractor"
     ],
     "jhiPrefix": "jhi",
-    "otherModules": [
-      {
-        "name": "generator-jhipster-audit-helper",
-        "version": "1.0.3"
-      }
-    ],
+    "otherModules": [],
     "enableTranslation": true,
     "nativeLanguage": "en",
     "languages": [

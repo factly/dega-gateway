@@ -1,24 +1,25 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { GatewaySharedModule } from 'app/shared';
-import { QuillModule } from 'ngx-quill';
 import {
     PostComponent,
-    PostDetailComponent,
-    PostUpdateComponent,
-    PostDeletePopupComponent,
     PostDeleteDialogComponent,
+    PostDeletePopupComponent,
+    PostDetailComponent,
+    postPopupRoute,
     postRoute,
-    postPopupRoute
+    PostUpdateComponent
 } from './';
-import { FeaturedMediaUploadPopupComponent } from '../media/featured-media/featured-media-upload-dialog.component';
-import { FeaturedMediaUploadDialogComponent } from '../media/featured-media/featured-media-upload-dialog.component';
+import {
+    FeaturedMediaUploadDialogComponent,
+    FeaturedMediaUploadPopupComponent
+} from '../media/featured-media/featured-media-upload-dialog.component';
 
 const ENTITY_STATES = [...postRoute, ...postPopupRoute];
 
 @NgModule({
-    imports: [GatewaySharedModule, QuillModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         PostComponent,
         PostDetailComponent,

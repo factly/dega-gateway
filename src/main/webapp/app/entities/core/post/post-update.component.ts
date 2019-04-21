@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
-import { AUTHOR_ROLE } from 'app/shared/constants/role.constants';
+import { AUTHOR_ROLE, PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IPost } from 'app/shared/model/core/post.model';
@@ -20,10 +19,7 @@ import { IFormat } from 'app/shared/model/core/format.model';
 import { FormatService } from 'app/entities/core/format';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
-import { MediaService } from '../media/media.service';
-import { Principal, Account } from 'app/core';
-
-import { Subscription } from 'rxjs';
+import { Account, Principal } from 'app/core';
 
 @Component({
     selector: 'jhi-post-update',
@@ -53,11 +49,6 @@ export class PostUpdateComponent implements OnInit {
     tempSlug: string;
     account: Account;
 
-    quillEditorRef; // Quill editor reference obj
-    subscription: Subscription;
-    range_1;
-    range_2;
-
     constructor(
         private jhiAlertService: JhiAlertService,
         private postService: PostService,
@@ -67,19 +58,8 @@ export class PostUpdateComponent implements OnInit {
         private formatService: FormatService,
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
-        private mediaService: MediaService,
-        private principal: Principal,
-        private router: Router
-    ) {
-        this.subscription = this.mediaService.getProductID().subscribe(message => {
-            if (message['type_of_data'] === 'quill') {
-                this.updateMediaForQuill_1(message['selected_url']);
-            }
-            if (message['type_of_data'] === 'feature') {
-                this.updateMediaForFeature(message['selected_url']);
-            }
-        });
-    }
+        private principal: Principal
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -135,24 +115,8 @@ export class PostUpdateComponent implements OnInit {
         );
     }
 
-    getEditorInstance(editorInstance: any) {
-        this.quillEditorRef = editorInstance;
-        const toolbar = editorInstance.getModule('toolbar');
-        toolbar.addHandler('image', this.openDialog.bind(this));
-    }
-
-    openDialog() {
-        this.range_1 = this.quillEditorRef.getSelection();
-        console.log('working');
-        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], { queryParams: { media_type: 'quill' }, replaceUrl: true });
-    }
-    updateMediaForQuill_1(url) {
-        const img = '<img src="' + url + '" />';
-        this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.range_1.index, img);
-    }
-
-    updateMediaForFeature(url) {
-        this.post.featuredMedia = url;
+    updatePostContentFormData(data) {
+        this.post.content = data['html'];
     }
 
     previousState() {

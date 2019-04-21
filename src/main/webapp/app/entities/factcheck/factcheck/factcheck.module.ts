@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { GatewaySharedModule } from 'app/shared';
 import { ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
+import { MatDialogModule } from '@angular/material/dialog';
 import {
     FactcheckComponent,
     FactcheckDetailComponent,
@@ -17,7 +18,7 @@ import {
 const ENTITY_STATES = [...factcheckRoute, ...factcheckPopupRoute];
 
 @NgModule({
-    imports: [GatewaySharedModule, QuillModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule],
+    imports: [GatewaySharedModule, QuillModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule, MatDialogModule],
     declarations: [
         FactcheckComponent,
         FactcheckDetailComponent,

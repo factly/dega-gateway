@@ -18,6 +18,8 @@ import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
+import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -47,6 +49,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
             multi: true
         }
     ],
+    entryComponents: [QuillEditorFileUploadComponent],
     bootstrap: [JhiMainComponent]
 })
 export class GatewayAppModule {

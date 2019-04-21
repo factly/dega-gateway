@@ -8,6 +8,7 @@ import { FactcheckUpdateComponent } from 'app/entities/factcheck/factcheck/factc
 import { FactcheckService } from 'app/entities/factcheck/factcheck/factcheck.service';
 import { Factcheck } from 'app/shared/model/factcheck/factcheck.model';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('Component Tests', () => {
     describe('Factcheck Management Update Component', () => {
@@ -17,7 +18,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GatewayTestModule, FormsModule, ReactiveFormsModule],
+                imports: [GatewayTestModule, FormsModule, ReactiveFormsModule, MatDialogModule],
                 declarations: [FactcheckUpdateComponent],
                 providers: [FormBuilder]
             })
@@ -36,7 +37,7 @@ describe('Component Tests', () => {
                 spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.factcheck = entity;
                 // WHEN
-                comp.save();
+                comp.saveOrPublish('Publish');
                 tick(); // simulate async
 
                 // THEN
@@ -50,7 +51,7 @@ describe('Component Tests', () => {
                 spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.factcheck = entity;
                 // WHEN
-                comp.save();
+                comp.saveOrPublish('Publish');
                 tick(); // simulate async
 
                 // THEN

@@ -1,31 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
-import { AUTHOR_ROLE } from 'app/shared/constants/role.constants';
+import { AUTHOR_ROLE, PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
 import { FactcheckService } from './factcheck.service';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
 import { ClaimService } from 'app/entities/factcheck/claim';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClaimantService } from 'app/entities/factcheck/claimant';
 import { RatingService } from 'app/entities/factcheck/rating';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
-import { MediaService } from '../../core/media/media.service';
 import { ITag } from 'app/shared/model/core/tag.model';
 import { TagService } from 'app/entities/core/tag';
 import { ICategory } from 'app/shared/model/core/category.model';
 import { CategoryService } from 'app/entities/core/category';
+import { MediaService } from '../../core/media/media.service';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
-import { Principal, Account } from 'app/core';
+import { Account, Principal } from 'app/core';
 import { Subscription } from 'rxjs';
+
+import { MatDialog } from '@angular/material/dialog';
+import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -52,12 +53,7 @@ export class FactcheckUpdateComponent implements OnInit {
     showSave: boolean;
     showPublish: boolean;
     account: Account;
-
-    quillEditorRef; // Quill editor reference obj
-    quillEditorRef2; // Quill editor reference obj
     subscription: Subscription;
-    range_1;
-    range_2;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -67,21 +63,14 @@ export class FactcheckUpdateComponent implements OnInit {
         private formBuilder: FormBuilder,
         private claimantService: ClaimantService,
         private ratingService: RatingService,
-        private mediaService: MediaService,
         private tagService: TagService,
         private categoryService: CategoryService,
         private degaUserService: DegaUserService,
+        private mediaService: MediaService,
         private principal: Principal,
-        private router: Router
+        private dialog: MatDialog
     ) {
         this.subscription = this.mediaService.getProductID().subscribe(message => {
-            if (message['type_of_data'] === 'quill') {
-                this.updateMediaForQuill_1(message['selected_url']);
-            }
-            if (message['type_of_data'] === 'quill2') {
-                // { queryParams: { media_type: 'quill2' } } // { replaceUrl: true, queryParamsHandling: 'merge' }
-                this.updateMediaForQuill_2(message['selected_url']);
-            }
             if (message['type_of_data'] === 'feature') {
                 this.updateMediaForFeature(message['selected_url']);
             }
@@ -149,6 +138,21 @@ export class FactcheckUpdateComponent implements OnInit {
         );
     }
 
+    openDialogPopUp(): void {
+        const config = {
+            height: '98%',
+            width: '100vw',
+            maxWidth: '95vw',
+            autoFocus: false,
+            disableClose: true
+        };
+        const dialogRef = this.dialog.open(NewClaimPopupComponent, config);
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+        });
+    }
+
     addClaimGroup(): FormGroup {
         return this.formBuilder.group({
             claim: ['', Validators.required],
@@ -169,11 +173,8 @@ export class FactcheckUpdateComponent implements OnInit {
         window.history.back();
     }
 
-    save() {
+    saveOrPublish(statusName) {
         this.isSaving = true;
-        // this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
-        // this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
-
         if (this.formGroup) {
             for (const key in this.formGroup.value.claims) {
                 if (key) {
@@ -186,34 +187,19 @@ export class FactcheckUpdateComponent implements OnInit {
             }
         }
         if (this.factcheck.id !== undefined) {
-            this.factcheck.statusName = 'Draft';
+            this.factcheck.statusName = statusName;
             this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
         } else {
             this.subscribeToSaveResponse(this.factcheckService.create(this.factcheck));
         }
     }
 
-    publish() {
-        this.isSaving = true;
-        // this.factcheck.publishedDate = this.publishedDate != null ? moment(this.publishedDate, DATE_TIME_FORMAT) : null;
-        // this.factcheck.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
-        if (this.formGroup) {
-            for (const key in this.formGroup.value.claims) {
-                if (key) {
-                    if (this.factcheck.claims && this.factcheck.claims.length > 0) {
-                        this.factcheck.claims.push(this.formGroup.value.claims[key]);
-                    } else {
-                        this.factcheck.claims = this.formGroup.value.claims[key];
-                    }
-                }
-            }
-        }
-        if (this.factcheck.id !== undefined) {
-            this.factcheck.statusName = 'Publish';
-            this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
-        } else {
-            this.subscribeToSaveResponse(this.factcheckService.publish(this.factcheck));
-        }
+    updateIntroductionFormData(data) {
+        this.factcheck.introduction = data['html'];
+    }
+
+    updateSummaryFormData(data) {
+        this.factcheck.summary = data['html'];
     }
 
     showSaveButton(degausersRole: String): boolean {
@@ -290,43 +276,6 @@ export class FactcheckUpdateComponent implements OnInit {
 
     trackDegaUserById(index: number, item: IDegaUser) {
         return item.id;
-    }
-
-    getEditorInstance(editorInstance: any) {
-        this.quillEditorRef = editorInstance;
-        const toolbar = editorInstance.getModule('toolbar');
-        toolbar.addHandler('image', this.openDialog.bind(this));
-    }
-
-    openDialog() {
-        this.range_1 = this.quillEditorRef.getSelection();
-        console.log('working');
-        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], {
-            queryParams: { media_type: 'quill' },
-            replaceUrl: true
-        });
-    }
-    updateMediaForQuill_1(url) {
-        const img = '<img src="' + url + '" />';
-        this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.range_1.index, img);
-    }
-
-    getEditorInstance2(editorInstance: any) {
-        this.quillEditorRef2 = editorInstance;
-        const toolbar = editorInstance.getModule('toolbar');
-        toolbar.addHandler('image', this.openDialog2.bind(this));
-    }
-
-    openDialog2() {
-        this.range_2 = this.quillEditorRef2.getSelection();
-        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], {
-            queryParams: { media_type: 'quill2' },
-            replaceUrl: true
-        });
-    }
-    updateMediaForQuill_2(url) {
-        const img = '<img src="' + url + '" />';
-        this.quillEditorRef2.clipboard.dangerouslyPasteHTML(this.range_2.index, img);
     }
 
     updateMediaForFeature(url) {

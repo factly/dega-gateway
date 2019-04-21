@@ -1,27 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { Claim } from 'app/shared/model/factcheck/claim.model';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
-import { ClaimService } from './claim.service';
-import { IRating } from 'app/shared/model/factcheck/rating.model';
-import { RatingService } from 'app/entities/factcheck/rating';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
+import { ClaimService } from 'app/entities/factcheck/claim/claim.service';
 import { ClaimantService } from 'app/entities/factcheck/claimant';
 import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
 import { FactcheckService } from 'app/entities/factcheck/factcheck';
-import { MediaService } from '../../core/media/media.service';
-import { Subscription } from 'rxjs';
+import { IRating } from 'app/shared/model/factcheck/rating.model';
+import { RatingService } from 'app/entities/factcheck/rating';
 
 @Component({
-    selector: 'jhi-claim-update',
-    templateUrl: './claim-update.component.html'
+    selector: 'jhi-new-claim-popup',
+    templateUrl: './new-claim-popup.component.html'
 })
-export class ClaimUpdateComponent implements OnInit {
+export class NewClaimPopupComponent implements OnInit {
     claim: IClaim;
     isSaving: boolean;
 
@@ -30,16 +30,11 @@ export class ClaimUpdateComponent implements OnInit {
     claimants: IClaimant[];
 
     factchecks: IFactcheck[];
-    claimDateDp: any;
-    checkedDateDp: any;
     createdDate: string;
     lastUpdatedDate: string;
     slug: string;
     slugExtention: number;
     tempSlug: string;
-    quillEditorRef; // Quill editor reference obj
-    subscription: Subscription;
-    range_1;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -47,24 +42,16 @@ export class ClaimUpdateComponent implements OnInit {
         private ratingService: RatingService,
         private claimantService: ClaimantService,
         private factcheckService: FactcheckService,
-        private mediaService: MediaService,
-        private activatedRoute: ActivatedRoute,
-        private router: Router
-    ) {
-        this.subscription = this.mediaService.getProductID().subscribe(message => {
-            if (message['type_of_data'] === 'quill') {
-                this.updateMediaForQuill(message['selected_url']);
-            }
-        });
-    }
+        public dialogRef: MatDialogRef<NewClaimPopupComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ claim }) => {
-            this.claim = claim;
-            this.createdDate = this.claim.createdDate != null ? this.claim.createdDate.format(DATE_TIME_FORMAT) : null;
-            this.lastUpdatedDate = this.claim.lastUpdatedDate != null ? this.claim.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
-        });
+        // If new claim then null data would be sent
+        this.claim = this.data === null ? new Claim() : this.data;
+        this.createdDate = this.claim.createdDate != null ? this.claim.createdDate.format(DATE_TIME_FORMAT) : null;
+        this.lastUpdatedDate = this.claim.lastUpdatedDate != null ? this.claim.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         this.ratingService.query().subscribe(
             (res: HttpResponse<IRating[]>) => {
                 this.ratings = res.body;
@@ -86,7 +73,7 @@ export class ClaimUpdateComponent implements OnInit {
     }
 
     previousState() {
-        window.history.back();
+        this.dialogRef.close();
     }
 
     save() {
@@ -140,19 +127,7 @@ export class ClaimUpdateComponent implements OnInit {
         return option;
     }
 
-    getEditorInstance(editorInstance: any) {
-        this.quillEditorRef = editorInstance;
-        const toolbar = editorInstance.getModule('toolbar');
-        toolbar.addHandler('image', this.openDialog.bind(this));
-    }
-
-    openDialog() {
-        this.range_1 = this.quillEditorRef.getSelection();
-        console.log('working');
-        this.router.navigate([{ outlets: { popup: 'featured-media/upload' } }], { queryParams: { media_type: 'quill' }, replaceUrl: true });
-    }
-    updateMediaForQuill(url) {
-        const img = '<img src="' + url + '" />';
-        this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.range_1.index, img);
+    updateIntroductionFormData(data) {
+        this.claim.description = data['html'];
     }
 }

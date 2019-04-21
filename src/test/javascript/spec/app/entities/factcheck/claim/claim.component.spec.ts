@@ -9,6 +9,8 @@ import { ClaimComponent } from 'app/entities/factcheck/claim/claim.component';
 import { ClaimService } from 'app/entities/factcheck/claim/claim.service';
 import { Claim } from 'app/shared/model/factcheck/claim.model';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
 describe('Component Tests', () => {
     describe('Claim Management Component', () => {
         let comp: ClaimComponent;
@@ -17,7 +19,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GatewayTestModule],
+                imports: [GatewayTestModule, MatDialogModule],
                 declarations: [ClaimComponent],
                 providers: [
                     {

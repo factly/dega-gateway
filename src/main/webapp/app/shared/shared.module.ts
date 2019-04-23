@@ -1,4 +1,5 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { MatCheckboxModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -7,15 +8,20 @@ import { QuillModule } from 'ngx-quill';
 
 import { QuillEditorComponent } from 'app/shared/quill-editor/quill-editor.component';
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
-
+import { MultipleCheckboxComponent } from 'app/shared/multiple-checkbox/multiple-checkbox.component';
 import { NgbDateMomentAdapter } from 'app/shared/util/datepicker-adapter';
-import { GatewaySharedLibsModule, GatewaySharedCommonModule, HasAnyAuthorityDirective } from 'app/shared/index';
+import { GatewaySharedCommonModule, GatewaySharedLibsModule, HasAnyAuthorityDirective } from 'app/shared/index';
 
 @NgModule({
-    imports: [BrowserAnimationsModule, GatewaySharedLibsModule, GatewaySharedCommonModule, MatDialogModule, QuillModule],
-    declarations: [HasAnyAuthorityDirective, QuillEditorComponent, QuillEditorFileUploadComponent],
-    providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
-    exports: [GatewaySharedCommonModule, HasAnyAuthorityDirective, QuillEditorComponent],
+    imports: [BrowserAnimationsModule, GatewaySharedLibsModule, GatewaySharedCommonModule, MatCheckboxModule, MatDialogModule, QuillModule],
+    declarations: [HasAnyAuthorityDirective, MultipleCheckboxComponent, QuillEditorComponent, QuillEditorFileUploadComponent],
+    providers: [
+        {
+            provide: NgbDateAdapter,
+            useClass: NgbDateMomentAdapter
+        }
+    ],
+    exports: [GatewaySharedCommonModule, HasAnyAuthorityDirective, MultipleCheckboxComponent, QuillEditorComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewaySharedModule {}

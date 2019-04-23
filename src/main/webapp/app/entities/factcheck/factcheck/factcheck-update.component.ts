@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { AUTHOR_ROLE, PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
 import { JhiAlertService } from 'ng-jhipster';
@@ -23,7 +23,6 @@ import { MediaService } from '../../core/media/media.service';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
-import { Subscription } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
 import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
@@ -54,6 +53,9 @@ export class FactcheckUpdateComponent implements OnInit {
     showPublish: boolean;
     account: Account;
     subscription: Subscription;
+    backend_compatible_claim_list: IClaim[];
+    all_claim_options;
+    selected_claim_options;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -81,6 +83,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ factcheck }) => {
             this.factcheck = factcheck;
+            this.selected_claim_options = this.processClaimToDesireCheckboxFormat(this.factcheck.claims);
             this.publishedDate = this.factcheck.publishedDate != null ? this.factcheck.publishedDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.factcheck.lastUpdatedDate != null ? this.factcheck.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.factcheck.createdDate != null ? this.factcheck.createdDate.format(DATE_TIME_FORMAT) : null;
@@ -93,6 +96,8 @@ export class FactcheckUpdateComponent implements OnInit {
             .subscribe(
                 (res: HttpResponse<IClaim[]>) => {
                     this.claims = res.body;
+                    this.backend_compatible_claim_list = res.body;
+                    this.all_claim_options = this.processClaimToDesireCheckboxFormat(this.claims);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -175,17 +180,6 @@ export class FactcheckUpdateComponent implements OnInit {
 
     saveOrPublish(statusName) {
         this.isSaving = true;
-        if (this.formGroup) {
-            for (const key in this.formGroup.value.claims) {
-                if (key) {
-                    if (this.factcheck.claims && this.factcheck.claims.length > 0) {
-                        this.factcheck.claims.push(this.formGroup.value.claims[key]);
-                    } else {
-                        this.factcheck.claims = this.formGroup.value.claims[key];
-                    }
-                }
-            }
-        }
         if (this.factcheck.id !== undefined) {
             this.factcheck.statusName = statusName;
             this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
@@ -280,5 +274,28 @@ export class FactcheckUpdateComponent implements OnInit {
 
     updateMediaForFeature(url) {
         this.factcheck.featuredMedia = url;
+    }
+
+    processClaimToDesireCheckboxFormat(claim_list) {
+        const formatted_claim_list = [];
+        for (const claim_details of claim_list) {
+            const claim_format = {};
+            claim_format['id'] = claim_details['id'];
+            claim_format['name'] = claim_details['claim'];
+            formatted_claim_list.push(claim_format);
+        }
+        return formatted_claim_list;
+    }
+
+    processClaimToBackendRequiredFormat(claim_list) {
+        const formatted_claim_list = [];
+        for (const claim_details of claim_list) {
+            formatted_claim_list.push(this.backend_compatible_claim_list.filter(obj => obj['id'] === claim_details['id'])[0]);
+        }
+        return formatted_claim_list;
+    }
+
+    update_claim_selection(val) {
+        this.factcheck.claims = this.processClaimToBackendRequiredFormat(val);
     }
 }

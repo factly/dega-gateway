@@ -1,0 +1,8 @@
+<span *ngFor="let option_details of option_list">
+<mat-checkbox [checked]="is_selected(option_details.id)"
+              [value]="option_details.id"
+              (change)="checkbox_change_operation($event)"
+              [labelPosition]="labelPosition">
+    {{option_details.name}}
+</mat-checkbox>
+</span>

@@ -113,12 +113,11 @@
                         <option [ngValue]="getSelected(factcheck.claims, claimOption)" *ngFor="let claimOption of claims; trackBy: trackClaimById">{{claimOption.claim}}</option>
                     </select>
                 </div>
-                <div [hidden]="!(editForm.controls.claim?.dirty && editForm.controls.claim?.invalid)">
-                    <small class="form-text text-danger"
-                           [hidden]="!editForm.controls.claim?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
+
+                <jhi-multiple-checkbox [option_list]="all_claim_options"
+                                       [selected_options]="selected_claim_options"
+                                       (updated_selection)="update_claim_selection($event)">
+                </jhi-multiple-checkbox>
                 <div class="pad-up-bottom">
                     <button type="button" id="add-pop-claim" class="btn btn-success" (click)="openDialogPopUp()">Add a Popup Claim</button>
                 </div>

@@ -53,9 +53,22 @@ export class FactcheckUpdateComponent implements OnInit {
     showPublish: boolean;
     account: Account;
     subscription: Subscription;
+
     backend_compatible_claim_list: IClaim[];
-    all_claim_options;
-    selected_claim_options;
+    all_claim_options: IClaim[];
+    selected_claim_options: IClaim[];
+
+    backend_compatible_author_list: IDegaUser[];
+    all_author_options: IDegaUser[];
+    selected_author_options: IDegaUser[];
+
+    backend_compatible_tag_list: ITag[];
+    all_tag_options: ITag[];
+    selected_tag_options: ITag[];
+
+    backend_compatible_category_list: ICategory[];
+    all_category_options: ICategory[];
+    selected_category_options: ICategory[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -83,7 +96,10 @@ export class FactcheckUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ factcheck }) => {
             this.factcheck = factcheck;
-            this.selected_claim_options = this.processClaimToDesireCheckboxFormat(this.factcheck.claims);
+            this.selected_claim_options = this.processOptionToDesireCheckboxFormat(this.factcheck.claims, 'claim');
+            this.selected_tag_options = this.processOptionToDesireCheckboxFormat(this.factcheck.tags, 'name');
+            this.selected_category_options = this.processOptionToDesireCheckboxFormat(this.factcheck.categories, 'name');
+            this.selected_author_options = this.processOptionToDesireCheckboxFormat(this.factcheck.degaUsers, 'displayName');
             this.publishedDate = this.factcheck.publishedDate != null ? this.factcheck.publishedDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.factcheck.lastUpdatedDate != null ? this.factcheck.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.factcheck.createdDate != null ? this.factcheck.createdDate.format(DATE_TIME_FORMAT) : null;
@@ -97,7 +113,7 @@ export class FactcheckUpdateComponent implements OnInit {
                 (res: HttpResponse<IClaim[]>) => {
                     this.claims = res.body;
                     this.backend_compatible_claim_list = res.body;
-                    this.all_claim_options = this.processClaimToDesireCheckboxFormat(this.claims);
+                    this.all_claim_options = this.processOptionToDesireCheckboxFormat(this.claims, 'claim');
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -120,12 +136,16 @@ export class FactcheckUpdateComponent implements OnInit {
         this.tagService.query().subscribe(
             (res: HttpResponse<ITag[]>) => {
                 this.tags = res.body;
+                this.backend_compatible_tag_list = res.body;
+                this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_tag_list, 'name');
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
         this.categoryService.query().subscribe(
             (res: HttpResponse<ICategory[]>) => {
                 this.categories = res.body;
+                this.backend_compatible_category_list = res.body;
+                this.all_category_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_category_list, 'name');
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -135,6 +155,8 @@ export class FactcheckUpdateComponent implements OnInit {
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
+                this.backend_compatible_author_list = res.body;
+                this.all_author_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_author_list, 'displayName');
                 this.currentUser = this.degausers.filter(u => u.email === this.account.email).shift();
                 this.showSave = this.showSaveButton(this.currentUser.roleName);
                 this.showPublish = this.showPublishButton(this.currentUser.roleName);
@@ -276,15 +298,16 @@ export class FactcheckUpdateComponent implements OnInit {
         this.factcheck.featuredMedia = url;
     }
 
-    processClaimToDesireCheckboxFormat(claim_list) {
-        const formatted_claim_list = [];
-        for (const claim_details of claim_list) {
-            const claim_format = {};
-            claim_format['id'] = claim_details['id'];
-            claim_format['name'] = claim_details['claim'];
-            formatted_claim_list.push(claim_format);
+    // Think about optimising this code block, move it to a service, Starts here
+    processOptionToDesireCheckboxFormat(option_list, key_name) {
+        const formatted_option_list = [];
+        for (const option_details of option_list) {
+            const option_format = {};
+            option_format['id'] = option_details['id'];
+            option_format['display_text'] = option_details[key_name];
+            formatted_option_list.push(option_format);
         }
-        return formatted_claim_list;
+        return formatted_option_list;
     }
 
     processClaimToBackendRequiredFormat(claim_list) {
@@ -295,7 +318,44 @@ export class FactcheckUpdateComponent implements OnInit {
         return formatted_claim_list;
     }
 
+    processTagToBackendRequiredFormat(tag_list) {
+        const formatted_tag_list = [];
+        for (const tag_details of tag_list) {
+            formatted_tag_list.push(this.backend_compatible_tag_list.filter(obj => obj['id'] === tag_details['id'])[0]);
+        }
+        return formatted_tag_list;
+    }
+
+    processAuthorToBackendRequiredFormat(author_list) {
+        const formatted_author_list = [];
+        for (const author_details of author_list) {
+            formatted_author_list.push(this.backend_compatible_author_list.filter(obj => obj['id'] === author_details['id'])[0]);
+        }
+        return formatted_author_list;
+    }
+
+    processCategoryToBackendRequiredFormat(category_list) {
+        const formatted_category_list = [];
+        for (const category_details of category_list) {
+            formatted_category_list.push(this.backend_compatible_category_list.filter(obj => obj['id'] === category_details['id'])[0]);
+        }
+        return formatted_category_list;
+    }
+    // Think about optimising this code block, move it to a service, Ends here
+
     update_claim_selection(val) {
         this.factcheck.claims = this.processClaimToBackendRequiredFormat(val);
+    }
+
+    update_tag_selection(val) {
+        this.factcheck.tags = this.processTagToBackendRequiredFormat(val);
+    }
+
+    update_category_selection(val) {
+        this.factcheck.categories = this.processCategoryToBackendRequiredFormat(val);
+    }
+
+    update_author_selection(val) {
+        this.factcheck.degaUsers = this.processAuthorToBackendRequiredFormat(val);
     }
 }

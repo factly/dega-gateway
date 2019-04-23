@@ -255,5 +255,5 @@ $theme: mat-light-theme($palette, $palette);
 
 // Include component specific mixin
 @include mat-dialog-theme($theme);
-
+@include mat-checkbox-theme($theme);
 /* Angular material css ends */

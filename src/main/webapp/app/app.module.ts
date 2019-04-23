@@ -1,7 +1,6 @@
 import './vendor.ts';
 
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2Webstorage } from 'ngx-webstorage';
@@ -22,7 +21,6 @@ import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-ed
 
 @NgModule({
     imports: [
-        BrowserModule,
         GatewayAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         GatewaySharedModule,

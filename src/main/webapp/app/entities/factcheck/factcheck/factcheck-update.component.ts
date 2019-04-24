@@ -54,21 +54,21 @@ export class FactcheckUpdateComponent implements OnInit {
     account: Account;
     subscription: Subscription;
 
-    backend_compatible_claim_list: IClaim[];
-    all_claim_options: IClaim[];
-    selected_claim_options: IClaim[];
+    backend_compatible_claim_list = [];
+    all_claim_options = [];
+    selected_claim_options = [];
 
-    backend_compatible_author_list: IDegaUser[];
-    all_author_options: IDegaUser[];
-    selected_author_options: IDegaUser[];
+    backend_compatible_author_list = [];
+    all_author_options = [];
+    selected_author_options = [];
 
-    backend_compatible_tag_list: ITag[];
-    all_tag_options: ITag[];
-    selected_tag_options: ITag[];
+    backend_compatible_tag_list = [];
+    all_tag_options = [];
+    selected_tag_options = [];
 
-    backend_compatible_category_list: ICategory[];
-    all_category_options: ICategory[];
-    selected_category_options: ICategory[];
+    backend_compatible_category_list = [];
+    all_category_options = [];
+    selected_category_options = [];
 
     constructor(
         private jhiAlertService: JhiAlertService,

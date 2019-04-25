@@ -83,21 +83,21 @@
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.tag" for="field_tag">Tag</label>
-                    <select class="form-control" id="field_tag" multiple name="tag" [(ngModel)]="post.tags">
-                        <option [ngValue]="getSelected(post.tags, tagOption)"
-                                *ngFor="let tagOption of tags; trackBy: trackTagById">{{tagOption.name}}
-                        </option>
-                    </select>
+                    <br>
+                    <jhi-multiple-checkbox id="field_tag"
+                                           [option_list]="all_tag_options"
+                                           [selected_options]="selected_tag_options"
+                                           (updated_selection)="update_tag_selection($event)">
+                    </jhi-multiple-checkbox>
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.category" for="field_category">Category</label>
-                    <select class="form-control" id="field_category" multiple name="category"
-                            [(ngModel)]="post.categories">
-                        <option [ngValue]="getSelected(post.categories, categoryOption)"
-                                *ngFor="let categoryOption of categories; trackBy: trackCategoryById">
-                            {{categoryOption.name}}
-                        </option>
-                    </select>
+                    <br>
+                    <jhi-multiple-checkbox id="field_category"
+                                           [option_list]="all_category_options"
+                                           [selected_options]="selected_category_options"
+                                           (updated_selection)="update_category_selection($event)">
+                    </jhi-multiple-checkbox>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.format" for="field_format">Format</label>
@@ -117,20 +117,13 @@
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.degaUser" for="field_degaUser">Author</label>
-                    <select class="form-control" id="field_degaUser" multiple name="degaUser"
-                            [(ngModel)]="post.degaUsers" required>
-                        <option [ngValue]="getSelected(post.degaUsers, degaUserOption)"
-                                *ngFor="let degaUserOption of degausers; trackBy: trackDegaUserById">
-                            {{degaUserOption.displayName}}
-                        </option>
-                    </select>
-                </div>
-                <div [hidden]="!(editForm.controls.degaUser?.dirty && editForm.controls.degaUser?.invalid)">
-                    <small class="form-text text-danger"
-                           [hidden]="!editForm.controls.degaUser?.errors?.required"
-                           jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
+                    <br>
+                    <jhi-multiple-checkbox id="field_degaUser"
+                                           [option_list]="all_author_options"
+                                           [selected_options]="selected_author_options"
+                                           (updated_selection)="update_author_selection($event)">
+
+                    </jhi-multiple-checkbox>
                 </div>
             </div>
             <div>

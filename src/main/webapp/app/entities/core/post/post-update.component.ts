@@ -49,6 +49,18 @@ export class PostUpdateComponent implements OnInit {
     tempSlug: string;
     account: Account;
 
+    backend_compatible_author_list = [];
+    all_author_options = [];
+    selected_author_options = [];
+
+    backend_compatible_tag_list = [];
+    all_tag_options = [];
+    selected_tag_options = [];
+
+    backend_compatible_category_list = [];
+    all_category_options = [];
+    selected_category_options = [];
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private postService: PostService,
@@ -65,6 +77,9 @@ export class PostUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ post }) => {
             this.post = post;
+            this.selected_tag_options = this.processOptionToDesireCheckboxFormat(this.post.tags, 'name');
+            this.selected_category_options = this.processOptionToDesireCheckboxFormat(this.post.categories, 'name');
+            this.selected_author_options = this.processOptionToDesireCheckboxFormat(this.post.degaUsers, 'displayName');
             this.publishedDate = this.post.publishedDate != null ? this.post.publishedDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.post.lastUpdatedDate != null ? this.post.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.post.createdDate != null ? this.post.createdDate.format(DATE_TIME_FORMAT) : null;
@@ -72,12 +87,16 @@ export class PostUpdateComponent implements OnInit {
         this.tagService.query().subscribe(
             (res: HttpResponse<ITag[]>) => {
                 this.tags = res.body;
+                this.backend_compatible_tag_list = res.body;
+                this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_tag_list, 'name');
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
         this.categoryService.query().subscribe(
             (res: HttpResponse<ICategory[]>) => {
                 this.categories = res.body;
+                this.backend_compatible_category_list = res.body;
+                this.all_category_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_category_list, 'name');
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -102,6 +121,8 @@ export class PostUpdateComponent implements OnInit {
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
+                this.backend_compatible_author_list = res.body;
+                this.all_author_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_author_list, 'displayName');
                 this.currentUser = this.degausers
                     .filter(u => {
                         const found = u.email === this.account.email;
@@ -202,5 +223,54 @@ export class PostUpdateComponent implements OnInit {
             }
         }
         return option;
+    }
+
+    // Think about optimising this code block, move it to a service, Starts here
+    processOptionToDesireCheckboxFormat(option_list, key_name) {
+        const formatted_option_list = [];
+        for (const option_details of option_list) {
+            const option_format = {};
+            option_format['id'] = option_details['id'];
+            option_format['display_text'] = option_details[key_name];
+            formatted_option_list.push(option_format);
+        }
+        return formatted_option_list;
+    }
+
+    processTagToBackendRequiredFormat(tag_list) {
+        const formatted_tag_list = [];
+        for (const tag_details of tag_list) {
+            formatted_tag_list.push(this.backend_compatible_tag_list.filter(obj => obj['id'] === tag_details['id'])[0]);
+        }
+        return formatted_tag_list;
+    }
+
+    processAuthorToBackendRequiredFormat(author_list) {
+        const formatted_author_list = [];
+        for (const author_details of author_list) {
+            formatted_author_list.push(this.backend_compatible_author_list.filter(obj => obj['id'] === author_details['id'])[0]);
+        }
+        return formatted_author_list;
+    }
+
+    processCategoryToBackendRequiredFormat(category_list) {
+        const formatted_category_list = [];
+        for (const category_details of category_list) {
+            formatted_category_list.push(this.backend_compatible_category_list.filter(obj => obj['id'] === category_details['id'])[0]);
+        }
+        return formatted_category_list;
+    }
+    // Think about optimising this code block, move it to a service, Ends here
+
+    update_tag_selection(val) {
+        this.post.tags = this.processTagToBackendRequiredFormat(val);
+    }
+
+    update_category_selection(val) {
+        this.post.categories = this.processCategoryToBackendRequiredFormat(val);
+    }
+
+    update_author_selection(val) {
+        this.post.degaUsers = this.processAuthorToBackendRequiredFormat(val);
     }
 }

@@ -1,5 +1,5 @@
 
-<quill-editor [style]="{height: '200px'}"
-              (onContentChanged)="emitEventOnTextChange($event)"
-              (onEditorCreated)="getEditorInstance($event)" required>
+<quill-editor (onContentChanged)="emitEventOnTextChange($event)"
+              (onEditorCreated)="getEditorInstance($event)"
+              required>
 </quill-editor>

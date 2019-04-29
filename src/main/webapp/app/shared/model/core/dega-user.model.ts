@@ -28,6 +28,8 @@ export interface IDegaUser {
     organizationDefaultId?: string;
     organizationCurrentName?: string;
     organizationCurrentId?: string;
+    organizationDefault?: IOrganization;
+    organizationCurrent?: IOrganization;
     posts?: IPost[];
     roleMappings?: IRoleMapping[];
 }
@@ -59,7 +61,9 @@ export class DegaUser implements IDegaUser {
         public organizationCurrentName?: string,
         public organizationCurrentId?: string,
         public posts?: IPost[],
-        public roleMappings?: IRoleMapping[]
+        public roleMappings?: IRoleMapping[],
+        public organizationDefault?: IOrganization,
+        public organizationCurrent?: IOrganization
     ) {
         this.enabled = this.enabled || false;
         this.emailVerified = this.emailVerified || false;

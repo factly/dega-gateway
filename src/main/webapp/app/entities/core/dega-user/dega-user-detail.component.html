@@ -75,12 +75,6 @@
                         <a [routerLink]="['/role', degaUser.roleId, 'view']">{{degaUser.roleName}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="gatewayApp.coreDegaUser.organization">Organization</span></dt>
-                <dd>
-                    <span *ngFor="let organization of degaUser.organizations; let last = last">
-                        <a [routerLink]="['/organization', organization?.id, 'view' ]">{{organization.name}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
                 <dt><span jhiTranslate="gatewayApp.coreDegaUser.organizationDefault">Organization Default</span></dt>
                 <dd>
                     <div *ngIf="degaUser.organizationDefaultId">

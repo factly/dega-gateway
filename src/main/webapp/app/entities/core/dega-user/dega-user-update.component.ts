@@ -73,6 +73,14 @@ export class DegaUserUpdateComponent implements OnInit {
         this.organizationService.query().subscribe(
             (res: HttpResponse<IOrganization[]>) => {
                 this.organizations = res.body;
+
+                // assign default
+                const orgsDegault = this.organizations.filter(o => o.id === this.degaUser.organizationDefaultId);
+                this.degaUser.organizationDefault = orgsDegault.shift();
+
+                // assign current
+                const orgsCurrent = this.organizations.filter(o => o.id === this.degaUser.organizationCurrentId);
+                this.degaUser.organizationCurrent = orgsCurrent.shift();
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

@@ -35,3 +35,7 @@ services:
         extends:
             file: keycloak.yml
             service: keycloak
+#    kibana:
+#        extends:
+#            file: kibana.yml
+#            service: kibana

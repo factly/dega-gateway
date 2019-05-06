@@ -20,7 +20,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group" *ngIf="show">
+                <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.clientId" for="field_clientId">Client Id</label>
                     <input type="text" class="form-control" name="clientId" id="field_clientId"
                         [(ngModel)]="status.clientId" required/>
@@ -31,56 +31,11 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group" *ngIf="show">
+                <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.isDefault" for="field_isDefault">Is Default</label>
                     <input type="checkbox" class="form-control" name="isDefault" id="field_isDefault"
                         [(ngModel)]="status.isDefault" />
                 </div>
-                <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.slug" for="field_slug">Slug</label>
-                    <input type="text" class="form-control" name="slug" id="field_slug"
-                        [(ngModel)]="status.slug" required/>
-                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-               <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.createdDate" for="field_createdDate">Created Date</label>
-                    <div class="d-flex">
-                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
-                        required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreStatus.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
-                    <div class="d-flex">
-                        <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="lastUpdatedDate"
-                        required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.lastUpdatedDate?.dirty && editForm.controls.lastUpdatedDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.lastUpdatedDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.lastUpdatedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>-->
 
             </div>
             <div>

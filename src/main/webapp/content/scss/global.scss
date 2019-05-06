@@ -257,3 +257,11 @@ $theme: mat-light-theme($palette, $palette);
 @include mat-dialog-theme($theme);
 @include mat-checkbox-theme($theme);
 /* Angular material css ends */
+
+/* Quill Editor CSS starts */
+
+.ql-editor {
+    min-height: 400px;
+}
+
+/* Quill Editor CSS ends */

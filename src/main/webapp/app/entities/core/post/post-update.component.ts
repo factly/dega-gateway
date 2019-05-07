@@ -20,6 +20,7 @@ import { FormatService } from 'app/entities/core/format';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
+import { MediaService } from '../media/media.service';
 
 @Component({
     selector: 'jhi-post-update',
@@ -49,6 +50,8 @@ export class PostUpdateComponent implements OnInit {
     tempSlug: string;
     account: Account;
 
+    subscription;
+
     backend_compatible_author_list = [];
     all_author_options = [];
     selected_author_options = [];
@@ -67,11 +70,18 @@ export class PostUpdateComponent implements OnInit {
         private tagService: TagService,
         private categoryService: CategoryService,
         private statusService: StatusService,
+        private mediaService: MediaService,
         private formatService: FormatService,
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
         private principal: Principal
-    ) {}
+    ) {
+        this.subscription = this.mediaService.getProductID().subscribe(message => {
+            if (message['type_of_data'] === 'feature') {
+                this.updateMediaForFeature(message['selected_url']);
+            }
+        });
+    }
 
     ngOnInit() {
         this.isSaving = false;
@@ -138,6 +148,10 @@ export class PostUpdateComponent implements OnInit {
 
     updatePostContentFormData(data) {
         this.post.content = data['html'];
+    }
+
+    updateMediaForFeature(url) {
+        this.post.featuredMedia = url;
     }
 
     previousState() {

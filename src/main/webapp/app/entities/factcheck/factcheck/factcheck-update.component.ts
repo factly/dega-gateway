@@ -104,19 +104,8 @@ export class FactcheckUpdateComponent implements OnInit {
             this.lastUpdatedDate = this.factcheck.lastUpdatedDate != null ? this.factcheck.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.factcheck.createdDate != null ? this.factcheck.createdDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.claimService
-            .query({
-                size: 1000,
-                sort: ['createdDate,desc']
-            })
-            .subscribe(
-                (res: HttpResponse<IClaim[]>) => {
-                    this.claims = res.body;
-                    this.backend_compatible_claim_list = res.body;
-                    this.all_claim_options = this.processOptionToDesireCheckboxFormat(this.claims, 'claim');
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        this.getAllClaims();
+
         this.formGroup = this.formBuilder.group({
             claims: this.formBuilder.array([])
         });
@@ -165,6 +154,22 @@ export class FactcheckUpdateComponent implements OnInit {
         );
     }
 
+    getAllClaims() {
+        this.claimService
+            .query({
+                size: 1000,
+                sort: ['createdDate,desc']
+            })
+            .subscribe(
+                (res: HttpResponse<IClaim[]>) => {
+                    this.claims = res.body;
+                    this.backend_compatible_claim_list = res.body;
+                    this.all_claim_options = this.processOptionToDesireCheckboxFormat(this.claims, 'claim');
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
     openDialogPopUp(): void {
         const config = {
             height: '98%',
@@ -176,7 +181,24 @@ export class FactcheckUpdateComponent implements OnInit {
         const dialogRef = this.dialog.open(NewClaimPopupComponent, config);
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+            // This is repeated code because of async issue on update.
+            this.claimService
+                .query({
+                    size: 1000,
+                    sort: ['createdDate,desc']
+                })
+                .subscribe(
+                    (res: HttpResponse<IClaim[]>) => {
+                        this.claims = res.body;
+                        this.backend_compatible_claim_list = res.body;
+                        this.all_claim_options = this.processOptionToDesireCheckboxFormat(this.claims, 'claim');
+                        this.selected_claim_options = this.selected_claim_options.concat(
+                            this.processOptionToDesireCheckboxFormat([result], 'claim')
+                        );
+                        this.update_claim_selection(this.selected_claim_options);
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
         });
     }
 
@@ -341,6 +363,7 @@ export class FactcheckUpdateComponent implements OnInit {
         }
         return formatted_category_list;
     }
+
     // Think about optimising this code block, move it to a service, Ends here
 
     update_claim_selection(val) {

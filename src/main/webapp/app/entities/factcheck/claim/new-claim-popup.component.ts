@@ -72,8 +72,8 @@ export class NewClaimPopupComponent implements OnInit {
         );
     }
 
-    previousState() {
-        this.dialogRef.close();
+    previousState(savedClaim) {
+        this.dialogRef.close(savedClaim);
     }
 
     save() {
@@ -88,12 +88,12 @@ export class NewClaimPopupComponent implements OnInit {
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IClaim>>) {
-        result.subscribe((res: HttpResponse<IClaim>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe((res: HttpResponse<IClaim>) => this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess() {
+    private onSaveSuccess(savedClaim: IClaim) {
         this.isSaving = false;
-        this.previousState();
+        this.previousState(savedClaim);
     }
 
     private onSaveError() {

@@ -34,14 +34,14 @@ describe('Component Tests', () => {
             it('Should call update service on save for existing entity', fakeAsync(() => {
                 // GIVEN
                 const entity = new Factcheck('123');
-                spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
+                spyOn(service, 'publish').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.factcheck = entity;
                 // WHEN
                 comp.saveOrPublish('Publish');
                 tick(); // simulate async
 
                 // THEN
-                expect(service.update).toHaveBeenCalledWith(entity);
+                expect(service.publish).toHaveBeenCalledWith(entity);
                 expect(comp.isSaving).toEqual(false);
             }));
 

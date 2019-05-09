@@ -30,8 +30,8 @@ describe('Component Tests', () => {
             service = fixture.debugElement.injector.get(FactcheckService);
         });
 
-        describe('save', () => {
-            it('Should call update service on save for existing entity', fakeAsync(() => {
+        describe('Publish', () => {
+            it('Should call publish service on publish for existing entity', fakeAsync(() => {
                 // GIVEN
                 const entity = new Factcheck('123');
                 spyOn(service, 'publish').and.returnValue(of(new HttpResponse({ body: entity })));
@@ -48,10 +48,37 @@ describe('Component Tests', () => {
             it('Should call create service on save for new entity', fakeAsync(() => {
                 // GIVEN
                 const entity = new Factcheck();
-                spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
+                spyOn(service, 'publish').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.factcheck = entity;
                 // WHEN
                 comp.saveOrPublish('Publish');
+                tick(); // simulate async
+
+                // THEN
+                expect(service.publish).toHaveBeenCalledWith(entity);
+                expect(comp.isSaving).toEqual(false);
+            }));
+            it('Should call update service on save for existing entity', fakeAsync(() => {
+                // GIVEN
+                const entity = new Factcheck('9121');
+                spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
+                comp.factcheck = entity;
+                // WHEN
+                comp.saveOrPublish('Draft');
+                tick(); // simulate async
+
+                // THEN
+                expect(service.update).toHaveBeenCalledWith(entity);
+                expect(comp.isSaving).toEqual(false);
+            }));
+
+            it('Should call create service on save for new entity', fakeAsync(() => {
+                // GIVEN
+                const entity = new Factcheck();
+                spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
+                comp.factcheck = entity;
+                // WHEN
+                comp.saveOrPublish('Draft');
                 tick(); // simulate async
 
                 // THEN

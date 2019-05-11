@@ -226,11 +226,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.isSaving = true;
         this.factcheck.statusName = statusName;
         if (this.factcheck.id !== undefined) {
-            if (statusName === 'Publish') {
-                this.subscribeToSaveResponse(this.factcheckService.publish(this.factcheck));
-            } else {
-                this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
-            }
+            this.subscribeToSaveResponse(this.factcheckService.update(this.factcheck));
         } else {
             if (statusName === 'Publish') {
                 this.subscribeToSaveResponse(this.factcheckService.publish(this.factcheck));

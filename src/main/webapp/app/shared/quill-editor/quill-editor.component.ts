@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
-
+import * as Quill from 'quill';
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
 import { QuillEditorCustomOptionsComponent } from './quill-editor-custom-options.component';
 
@@ -33,7 +33,7 @@ export class QuillEditorComponent {
         this.quillEditorRef = editorInstance;
         const toolbar = editorInstance.getModule('toolbar');
         toolbar.addHandler('image', this.openFileUploadDialog.bind(this));
-        toolbar.addHandler('link', this.openQuillCustomOption.bind(this));
+        toolbar.addHandler('link', this.openQuillCustomOption.bind(this, 'hyperlink'));
 
         // Updates the existing editor with the data passed from the parent component
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(0, this.original_content);
@@ -53,15 +53,20 @@ export class QuillEditorComponent {
         });
     }
 
-    openQuillCustomOption(): void {
+    openQuillCustomOption(optionName): void {
+        // var Link = Quill.import('formats/link');
+        // class test extends Link {
+        //
+        // }
         const config = {
-            data: { url: 'https://cdn.pixabay.com/photo/2016/05/17/22/16/baby-1399332_1280.jpg' }
+            data: { option: optionName }
         };
-
         const dialogRef = this.dialog.open(QuillEditorCustomOptionsComponent, config);
 
         dialogRef.afterClosed().subscribe(image_data => {
-            this.updateMediaForQuill(image_data['url']);
+            // this.quillEditorRef.formatText( 3, 6, 'link', 'https://google.com', '_self');
+            var a = `<a href="https://google.com" target="_self" rel="nofollow">Great</a>`;
+            this.quillEditorRef.clipboard.dangerouslyPasteHTML(2, a);
         });
     }
 

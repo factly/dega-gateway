@@ -16,7 +16,9 @@ export class QuillEditorCustomOptionsComponent implements OnInit {
     page: any;
     url: string;
 
-    constructor(public dialogRef: MatDialogRef<QuillEditorCustomOptionsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
+    constructor(public dialogRef: MatDialogRef<QuillEditorCustomOptionsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+        console.log(data);
+    }
 
     ngOnInit() {
         this.currentSearch = '';

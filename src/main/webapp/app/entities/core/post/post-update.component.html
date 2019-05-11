@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+        <form name="editForm" role="form" novalidate (ngSubmit)="saveOrPublish('Draft')" #editForm="ngForm">
             <h2 id="jhi-post-heading" jhiTranslate="gatewayApp.corePost.home.createOrEditLabel">Create or edit a
                 Post</h2>
             <div>
@@ -136,7 +136,7 @@
                     jhiTranslate="entity.action.savedraft">Save Draft</span>
                 </button>
                 <button type="button" id="publish-entity" [disabled]="editForm.form.invalid || isSaving"
-                        class="btn btn-primary" *ngIf="showPublish" (click)="publish()">
+                        class="btn btn-primary" *ngIf="showPublish" (click)="saveOrPublish('Publish')">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.publish">Publish</span>
                 </button>
             </div>

@@ -15,7 +15,6 @@ type EntityArrayResponseType = HttpResponse<IFactcheck[]>;
 @Injectable({ providedIn: 'root' })
 export class FactcheckService {
     public resourceUrl = SERVER_API_URL + 'factcheck/api/factchecks';
-    public resourceUrlForPublish = SERVER_API_URL + 'factcheck/api/publish';
     public resourceSearchUrl = SERVER_API_URL + 'factcheck/api/_search/factchecks';
     public resourceUrlForFactcheckBySlug = SERVER_API_URL + 'factcheck/api/factcheckbyslug';
 
@@ -25,13 +24,6 @@ export class FactcheckService {
         const copy = this.convertDateFromClient(factcheck);
         return this.http
             .post<IFactcheck>(this.resourceUrl, copy, { observe: 'response' })
-            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
-    }
-
-    publish(factcheck: IFactcheck): Observable<EntityResponseType> {
-        const copy = this.convertDateFromClient(factcheck);
-        return this.http
-            .post<IFactcheck>(this.resourceUrlForPublish, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 

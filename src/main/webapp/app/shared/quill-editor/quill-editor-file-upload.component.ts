@@ -66,7 +66,7 @@ export class QuillEditorFileUploadComponent implements OnInit {
     public uploadImageFromLocalSystem(files: FileList): void {
         if (files && files.length > 0) {
             const file: File = files.item(0);
-            const extension = ['image/jpg', 'image/jpeg', 'image/png'];
+            const extension = ['image/jpg', 'image/jpeg', 'image/png', 'image/tiff', 'image/ico', 'image/webp', 'image/gif'];
             if (extension.indexOf(file.type) > -1) {
                 this.mediaService.uploadImage(file).subscribe(
                     (res: HttpResponse<IMedia>) => {

@@ -15,9 +15,10 @@ import { GatewayHomeModule } from './home/home.module';
 import { GatewayEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import { ActiveMenuDirective, ErrorComponent, FooterComponent, JhiMainComponent, NavbarComponent, PageRibbonComponent } from './layouts';
 
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
+import { QuillEditorCustomOptionsComponent } from 'app/shared/quill-editor/quill-editor-custom-options.component';
 
 @NgModule({
     imports: [
@@ -47,7 +48,7 @@ import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-ed
             multi: true
         }
     ],
-    entryComponents: [QuillEditorFileUploadComponent],
+    entryComponents: [QuillEditorFileUploadComponent, QuillEditorCustomOptionsComponent],
     bootstrap: [JhiMainComponent]
 })
 export class GatewayAppModule {

@@ -10,10 +10,17 @@ import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-ed
 import { MultipleCheckboxComponent } from 'app/shared/multiple-checkbox/multiple-checkbox.component';
 import { NgbDateMomentAdapter } from 'app/shared/util/datepicker-adapter';
 import { GatewaySharedCommonModule, GatewaySharedLibsModule, HasAnyAuthorityDirective } from 'app/shared/index';
+import { QuillEditorCustomOptionsComponent } from 'app/shared/quill-editor/quill-editor-custom-options.component';
 
 @NgModule({
     imports: [GatewaySharedLibsModule, GatewaySharedCommonModule, MatCheckboxModule, MatDialogModule, QuillModule],
-    declarations: [HasAnyAuthorityDirective, MultipleCheckboxComponent, QuillEditorComponent, QuillEditorFileUploadComponent],
+    declarations: [
+        HasAnyAuthorityDirective,
+        MultipleCheckboxComponent,
+        QuillEditorComponent,
+        QuillEditorFileUploadComponent,
+        QuillEditorCustomOptionsComponent
+    ],
     providers: [
         {
             provide: NgbDateAdapter,

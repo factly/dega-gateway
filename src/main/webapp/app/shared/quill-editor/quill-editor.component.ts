@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
+import { QuillEditorCustomOptionsComponent } from './quill-editor-custom-options.component';
 
 @Component({
     selector: 'jhi-quill-editor',
@@ -32,6 +33,7 @@ export class QuillEditorComponent {
         this.quillEditorRef = editorInstance;
         const toolbar = editorInstance.getModule('toolbar');
         toolbar.addHandler('image', this.openFileUploadDialog.bind(this));
+        toolbar.addHandler('link', this.openQuillCustomOption.bind(this));
 
         // Updates the existing editor with the data passed from the parent component
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(0, this.original_content);
@@ -45,6 +47,18 @@ export class QuillEditorComponent {
             data: { url: 'https://cdn.pixabay.com/photo/2016/05/17/22/16/baby-1399332_1280.jpg' }
         };
         const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
+
+        dialogRef.afterClosed().subscribe(image_data => {
+            this.updateMediaForQuill(image_data['url']);
+        });
+    }
+
+    openQuillCustomOption(): void {
+        const config = {
+            data: { url: 'https://cdn.pixabay.com/photo/2016/05/17/22/16/baby-1399332_1280.jpg' }
+        };
+
+        const dialogRef = this.dialog.open(QuillEditorCustomOptionsComponent, config);
 
         dialogRef.afterClosed().subscribe(image_data => {
             this.updateMediaForQuill(image_data['url']);

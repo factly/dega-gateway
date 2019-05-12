@@ -126,12 +126,32 @@
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.factcheckFactcheck.claim" for="field_claim">Claim</label>
                     <br>
+                    <input [(ngModel)]="searchClaimKeyword" [ngModelOptions]="{standalone: true}">
+                    <button type="button" class="btn btn-success" (click)="searchClaimCurrentPage=0;searchClaims()">
+                        Search Claim
+                    </button>
+                    <button type="button" class="btn btn-success" (click)="getAllClaims()">
+                        Reset
+                    </button>
+                    <br>
                     <jhi-multiple-checkbox id="field_claim"
                                            [option_list]="all_claim_options"
                                            [selected_options]="selected_claim_options"
                                            (updated_selection)="update_claim_selection($event)">
-
                     </jhi-multiple-checkbox>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchClaimCurrentPage=searchClaimCurrentPage-1;searchClaims()"
+                            *ngIf="searchClaimCurrentPage>0">
+                        Previous
+                    </button>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchClaimCurrentPage=searchClaimCurrentPage+1;searchClaims()"
+                            *ngIf="searchClaimTotalResult>((searchClaimCurrentPage+1)*searchResultPerPage)">
+                        Next
+                    </button>
+
                 </div>
 
                 <div class="pad-up-bottom">

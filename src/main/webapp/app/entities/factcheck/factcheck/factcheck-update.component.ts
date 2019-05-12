@@ -70,6 +70,11 @@ export class FactcheckUpdateComponent implements OnInit {
     all_category_options = [];
     selected_category_options = [];
 
+    searchResultPerPage = 10;
+    searchClaimKeyword = '';
+    searchClaimTotalResult = 0;
+    searchClaimCurrentPage = 0;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private factcheckService: FactcheckService,
@@ -380,5 +385,23 @@ export class FactcheckUpdateComponent implements OnInit {
 
     update_author_selection(val) {
         this.factcheck.degaUsers = this.processAuthorToBackendRequiredFormat(val);
+    }
+
+    searchClaims() {
+        this.claimService
+            .search({
+                page: this.searchClaimCurrentPage,
+                query: this.searchClaimKeyword,
+                size: this.searchResultPerPage
+            })
+            .subscribe(
+                (res: HttpResponse<IClaim[]>) => {
+                    this.claims = res.body;
+                    this.backend_compatible_claim_list = res.body;
+                    this.all_claim_options = this.processOptionToDesireCheckboxFormat(this.claims, 'claim');
+                    this.searchClaimTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 }

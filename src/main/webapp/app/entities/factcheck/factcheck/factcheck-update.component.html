@@ -96,15 +96,44 @@
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.tag" for="field_tag">Tag</label>
                     <br>
+                    <input [(ngModel)]="searchTagKeyword" [ngModelOptions]="{standalone: true}">
+                    <button type="button" class="btn btn-success" (click)="searchTagCurrentPage=0;searchTags()">
+                        Search Tag
+                    </button>
+                    <button type="button" class="btn btn-success" (click)="getAllTags()">
+                        Reset
+                    </button>
+                    <br>
                     <jhi-multiple-checkbox id="field_tag"
                                            [option_list]="all_tag_options"
                                            [selected_options]="selected_tag_options"
                                            (updated_selection)="update_tag_selection($event)">
 
                     </jhi-multiple-checkbox>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchTagCurrentPage=searchTagCurrentPage-1;searchTags()"
+                            *ngIf="searchTagCurrentPage>0">
+                        Previous
+                    </button>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchTagCurrentPage=searchTagCurrentPage+1;searchTags()"
+                            *ngIf="searchTagTotalResult>((searchTagCurrentPage+1)*searchResultPerPage)">
+                        Next
+                    </button>
                 </div>
+
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.category" for="field_category">Category</label>
+                    <br>
+                    <input [(ngModel)]="searchCategoryKeyword" [ngModelOptions]="{standalone: true}">
+                    <button type="button" class="btn btn-success" (click)="searchCategoryCurrentPage=0;searchCategories()">
+                        Search Category
+                    </button>
+                    <button type="button" class="btn btn-success" (click)="getAllCategories()">
+                        Reset
+                    </button>
                     <br>
                     <jhi-multiple-checkbox id="field_category"
                                            [option_list]="all_category_options"
@@ -112,6 +141,18 @@
                                            (updated_selection)="update_category_selection($event)">
 
                     </jhi-multiple-checkbox>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchCategoryCurrentPage=searchCategoryCurrentPage-1;searchCategories()"
+                            *ngIf="searchCategoryCurrentPage>0">
+                        Previous
+                    </button>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchCategoryCurrentPage=searchCategoryCurrentPage+1;searchCategories()"
+                            *ngIf="searchCategoryTotalResult>((searchCategoryCurrentPage+1)*searchResultPerPage)">
+                        Next
+                    </button>
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.degaUser" for="field_degaUser">Author</label>
@@ -126,12 +167,32 @@
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.factcheckFactcheck.claim" for="field_claim">Claim</label>
                     <br>
+                    <input [(ngModel)]="searchClaimKeyword" [ngModelOptions]="{standalone: true}">
+                    <button type="button" class="btn btn-success" (click)="searchClaimCurrentPage=0;searchClaims()">
+                        Search Claim
+                    </button>
+                    <button type="button" class="btn btn-success" (click)="getAllClaims()">
+                        Reset
+                    </button>
+                    <br>
                     <jhi-multiple-checkbox id="field_claim"
                                            [option_list]="all_claim_options"
                                            [selected_options]="selected_claim_options"
                                            (updated_selection)="update_claim_selection($event)">
-
                     </jhi-multiple-checkbox>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchClaimCurrentPage=searchClaimCurrentPage-1;searchClaims()"
+                            *ngIf="searchClaimCurrentPage>0">
+                        Previous
+                    </button>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchClaimCurrentPage=searchClaimCurrentPage+1;searchClaims()"
+                            *ngIf="searchClaimTotalResult>((searchClaimCurrentPage+1)*searchResultPerPage)">
+                        Next
+                    </button>
+
                 </div>
 
                 <div class="pad-up-bottom">

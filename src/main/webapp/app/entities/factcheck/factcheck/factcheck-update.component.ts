@@ -70,6 +70,24 @@ export class FactcheckUpdateComponent implements OnInit {
     all_category_options = [];
     selected_category_options = [];
 
+    searchResultPerPage = 10;
+
+    searchClaimKeyword = '';
+    searchClaimTotalResult = 0;
+    searchClaimCurrentPage = 0;
+
+    searchTagKeyword = '';
+    searchTagTotalResult = 0;
+    searchTagCurrentPage = 0;
+
+    searchCategoryKeyword = '';
+    searchCategoryTotalResult = 0;
+    searchCategoryCurrentPage = 0;
+
+    searchDegaUserKeyword = '';
+    searchDegaUserTotalResult = 0;
+    searchDegaUserCurrentPage = 0;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private factcheckService: FactcheckService,
@@ -104,7 +122,10 @@ export class FactcheckUpdateComponent implements OnInit {
             this.lastUpdatedDate = this.factcheck.lastUpdatedDate != null ? this.factcheck.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.factcheck.createdDate != null ? this.factcheck.createdDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.getAllDegaUsers();
+        this.getAllCategories();
         this.getAllClaims();
+        this.getAllTags();
 
         this.formGroup = this.formBuilder.group({
             claims: this.formBuilder.array([])
@@ -122,36 +143,9 @@ export class FactcheckUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
 
-        this.tagService.query().subscribe(
-            (res: HttpResponse<ITag[]>) => {
-                this.tags = res.body;
-                this.backend_compatible_tag_list = res.body;
-                this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_tag_list, 'name');
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.categoryService.query().subscribe(
-            (res: HttpResponse<ICategory[]>) => {
-                this.categories = res.body;
-                this.backend_compatible_category_list = res.body;
-                this.all_category_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_category_list, 'name');
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
         this.principal.identity().then(account => {
             this.account = account;
         });
-        this.degaUserService.query().subscribe(
-            (res: HttpResponse<IDegaUser[]>) => {
-                this.degausers = res.body;
-                this.backend_compatible_author_list = res.body;
-                this.all_author_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_author_list, 'displayName');
-                this.currentUser = this.degausers.filter(u => u.email === this.account.email).shift();
-                this.showSave = this.showSaveButton(this.currentUser.roleName);
-                this.showPublish = this.showPublishButton(this.currentUser.roleName);
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
     }
 
     getAllClaims() {
@@ -168,6 +162,42 @@ export class FactcheckUpdateComponent implements OnInit {
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+    }
+
+    getAllTags() {
+        this.tagService.query().subscribe(
+            (res: HttpResponse<ITag[]>) => {
+                this.tags = res.body;
+                this.backend_compatible_tag_list = res.body;
+                this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_tag_list, 'name');
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    getAllDegaUsers() {
+        this.degaUserService.query().subscribe(
+            (res: HttpResponse<IDegaUser[]>) => {
+                this.degausers = res.body;
+                this.backend_compatible_author_list = res.body;
+                this.all_author_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_author_list, 'displayName');
+                this.currentUser = this.degausers.filter(u => u.email === this.account.email).shift();
+                this.showSave = this.showSaveButton(this.currentUser.roleName);
+                this.showPublish = this.showPublishButton(this.currentUser.roleName);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    getAllCategories() {
+        this.categoryService.query().subscribe(
+            (res: HttpResponse<ICategory[]>) => {
+                this.categories = res.body;
+                this.backend_compatible_category_list = res.body;
+                this.all_category_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_category_list, 'name');
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     openDialogPopUp(): void {
@@ -380,5 +410,59 @@ export class FactcheckUpdateComponent implements OnInit {
 
     update_author_selection(val) {
         this.factcheck.degaUsers = this.processAuthorToBackendRequiredFormat(val);
+    }
+
+    searchClaims() {
+        this.claimService
+            .search({
+                page: this.searchClaimCurrentPage,
+                query: this.searchClaimKeyword,
+                size: this.searchResultPerPage
+            })
+            .subscribe(
+                (res: HttpResponse<IClaim[]>) => {
+                    this.claims = res.body;
+                    this.backend_compatible_claim_list = res.body;
+                    this.all_claim_options = this.processOptionToDesireCheckboxFormat(this.claims, 'claim');
+                    this.searchClaimTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    searchTags() {
+        this.tagService
+            .search({
+                page: this.searchTagCurrentPage,
+                query: this.searchTagKeyword,
+                size: this.searchResultPerPage
+            })
+            .subscribe(
+                (res: HttpResponse<IClaim[]>) => {
+                    this.tags = res.body;
+                    this.backend_compatible_tag_list = res.body;
+                    this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.tags, 'claim');
+                    this.searchTagTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    searchCategories() {
+        this.categoryService
+            .search({
+                page: this.searchCategoryCurrentPage,
+                query: this.searchCategoryKeyword,
+                size: this.searchResultPerPage
+            })
+            .subscribe(
+                (res: HttpResponse<IClaim[]>) => {
+                    this.categories = res.body;
+                    this.backend_compatible_category_list = res.body;
+                    this.all_category_options = this.processOptionToDesireCheckboxFormat(this.categories, 'claim');
+                    this.searchCategoryTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 }

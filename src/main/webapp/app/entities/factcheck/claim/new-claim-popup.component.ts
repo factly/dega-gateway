@@ -130,4 +130,8 @@ export class NewClaimPopupComponent implements OnInit {
     updateIntroductionFormData(data) {
         this.claim.description = data['html'];
     }
+
+    updateReviewFormData(data) {
+        this.claim.review = data['html'];
+    }
 }

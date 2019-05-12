@@ -157,12 +157,32 @@
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.degaUser" for="field_degaUser">Author</label>
                     <br>
+                    <input [(ngModel)]="searchDegaUserKeyword" [ngModelOptions]="{standalone: true}">
+                    <button type="button" class="btn btn-success" (click)="searchDegaUserCurrentPage=0;searchDegaUsers()">
+                        Search DegaUser
+                    </button>
+                    <button type="button" class="btn btn-success" (click)="getAllDegaUsers()">
+                        Reset
+                    </button>
+                    <br>
                     <jhi-multiple-checkbox id="field_degaUser"
                                            [option_list]="all_author_options"
                                            [selected_options]="selected_author_options"
                                            (updated_selection)="update_author_selection($event)">
-
                     </jhi-multiple-checkbox>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchDegaUserCurrentPage=searchDegaUserCurrentPage-1;searchDegaUsers()"
+                            *ngIf="searchDegaUserCurrentPage>0">
+                        Previous
+                    </button>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchDegaUserCurrentPage=searchDegaUserCurrentPage+1;searchDegaUsers()"
+                            *ngIf="searchDegaUserTotalResult>((searchDegaUserCurrentPage+1)*searchResultPerPage)">
+                        Next
+                    </button>
+
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.factcheckFactcheck.claim" for="field_claim">Claim</label>

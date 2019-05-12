@@ -468,4 +468,20 @@ export class FactcheckUpdateComponent implements OnInit {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
+    searchDegaUsers() {
+        this.degaUserService
+            .search({
+                page: this.searchDegaUserCurrentPage,
+                query: this.searchDegaUserKeyword,
+                size: this.searchResultPerPage
+            })
+            .subscribe(
+                (res: HttpResponse<IDegaUser[]>) => {
+                    this.degausers = res.body;
+                    this.backend_compatible_author_list = res.body;
+                    this.all_author_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_author_list, 'displayName');
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
 }

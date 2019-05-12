@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { AUTHOR_ROLE, PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
 import { JhiAlertService } from 'ng-jhipster';
@@ -64,6 +63,20 @@ export class PostUpdateComponent implements OnInit {
     all_category_options = [];
     selected_category_options = [];
 
+    searchResultPerPage = 10;
+
+    searchTagKeyword = '';
+    searchTagTotalResult = 0;
+    searchTagCurrentPage = 0;
+
+    searchCategoryKeyword = '';
+    searchCategoryTotalResult = 0;
+    searchCategoryCurrentPage = 0;
+
+    searchDegaUserKeyword = '';
+    searchDegaUserTotalResult = 0;
+    searchDegaUserCurrentPage = 0;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private postService: PostService,
@@ -94,22 +107,9 @@ export class PostUpdateComponent implements OnInit {
             this.lastUpdatedDate = this.post.lastUpdatedDate != null ? this.post.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.post.createdDate != null ? this.post.createdDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.tagService.query().subscribe(
-            (res: HttpResponse<ITag[]>) => {
-                this.tags = res.body;
-                this.backend_compatible_tag_list = res.body;
-                this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_tag_list, 'name');
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.categoryService.query().subscribe(
-            (res: HttpResponse<ICategory[]>) => {
-                this.categories = res.body;
-                this.backend_compatible_category_list = res.body;
-                this.all_category_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_category_list, 'name');
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.getAllDegaUsers();
+        this.getAllCategories();
+        this.getAllTags();
         this.statusService.query().subscribe(
             (res: HttpResponse<IStatus[]>) => {
                 this.statuses = res.body;
@@ -128,6 +128,21 @@ export class PostUpdateComponent implements OnInit {
         this.principal.identity().then(account => {
             this.account = account;
         });
+    }
+
+    getAllTags() {
+        this.searchTagKeyword = '';
+        this.tagService.query().subscribe(
+            (res: HttpResponse<ITag[]>) => {
+                this.tags = res.body;
+                this.backend_compatible_tag_list = res.body;
+                this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_tag_list, 'name');
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    getAllDegaUsers() {
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
@@ -141,6 +156,18 @@ export class PostUpdateComponent implements OnInit {
                     .shift();
                 this.showSave = this.showSaveButton(this.currentUser.roleName);
                 this.showPublish = this.showPublishButton(this.currentUser.roleName);
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    getAllCategories() {
+        this.searchCategoryKeyword = '';
+        this.categoryService.query().subscribe(
+            (res: HttpResponse<ICategory[]>) => {
+                this.categories = res.body;
+                this.backend_compatible_category_list = res.body;
+                this.all_category_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_category_list, 'name');
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -259,6 +286,7 @@ export class PostUpdateComponent implements OnInit {
         }
         return formatted_category_list;
     }
+
     // Think about optimising this code block, move it to a service, Ends here
 
     update_tag_selection(val) {
@@ -271,5 +299,58 @@ export class PostUpdateComponent implements OnInit {
 
     update_author_selection(val) {
         this.post.degaUsers = this.processAuthorToBackendRequiredFormat(val);
+    }
+
+    searchTags() {
+        this.tagService
+            .search({
+                page: this.searchTagCurrentPage,
+                query: this.searchTagKeyword,
+                size: this.searchResultPerPage
+            })
+            .subscribe(
+                (res: HttpResponse<ITag[]>) => {
+                    this.tags = res.body;
+                    this.backend_compatible_tag_list = res.body;
+                    this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.tags, 'name');
+                    this.searchTagTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    searchCategories() {
+        this.categoryService
+            .search({
+                page: this.searchCategoryCurrentPage,
+                query: this.searchCategoryKeyword,
+                size: this.searchResultPerPage
+            })
+            .subscribe(
+                (res: HttpResponse<ICategory[]>) => {
+                    this.categories = res.body;
+                    this.backend_compatible_category_list = res.body;
+                    this.all_category_options = this.processOptionToDesireCheckboxFormat(this.categories, 'name');
+                    this.searchCategoryTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    searchDegaUsers() {
+        this.degaUserService
+            .search({
+                page: this.searchDegaUserCurrentPage,
+                query: this.searchDegaUserKeyword,
+                size: this.searchResultPerPage
+            })
+            .subscribe(
+                (res: HttpResponse<IDegaUser[]>) => {
+                    this.degausers = res.body;
+                    this.backend_compatible_author_list = res.body;
+                    this.all_author_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_author_list, 'displayName');
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 }

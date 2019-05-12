@@ -27,12 +27,13 @@
                                       id="field_description"
                                       (updated_content)="updateIntroductionFormData($event)">
                     </jhi-quill-editor>
-                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                    </div>
+                    <!--TODO make the below validation working with quill editor-->
+                    <!--<div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">-->
+                        <!--<small class="form-text text-danger"-->
+                               <!--[hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">-->
+                            <!--This field is required.-->
+                        <!--</small>-->
+                    <!--</div>-->
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claimDate" for="field_claimDate">Claim Date</label>
@@ -86,14 +87,17 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.review" for="field_review">Review</label>
                     <span class="text-danger" [hidden]="claim.review">*</span>
-                    <textarea rows="5" type="text" class="form-control" name="review" id="field_review"
-                              [(ngModel)]="claim.review" required ></textarea>
-                    <div [hidden]="!(editForm.controls.review?.dirty && editForm.controls.review?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.review?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                    </div>
+                    <jhi-quill-editor [original_content]="claim.review"
+                                      id="field_review"
+                                      (updated_content)="updateReviewFormData($event)">
+                    </jhi-quill-editor>
+                    <!--TODO make the below validation working with quill editor-->
+                    <!--<div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">-->
+                        <!--<small class="form-text text-danger"-->
+                               <!--[hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">-->
+                            <!--This field is required.-->
+                        <!--</small>-->
+                    <!--</div>-->
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.reviewTagLine" for="field_reviewTagLine">Review Tag Line</label>

@@ -149,6 +149,7 @@ export class FactcheckUpdateComponent implements OnInit {
     }
 
     getAllClaims() {
+        this.searchClaimKeyword = '';
         this.claimService
             .query({
                 size: 1000,
@@ -165,6 +166,7 @@ export class FactcheckUpdateComponent implements OnInit {
     }
 
     getAllTags() {
+        this.searchTagKeyword = '';
         this.tagService.query().subscribe(
             (res: HttpResponse<ITag[]>) => {
                 this.tags = res.body;
@@ -190,6 +192,7 @@ export class FactcheckUpdateComponent implements OnInit {
     }
 
     getAllCategories() {
+        this.searchCategoryKeyword = '';
         this.categoryService.query().subscribe(
             (res: HttpResponse<ICategory[]>) => {
                 this.categories = res.body;
@@ -438,10 +441,10 @@ export class FactcheckUpdateComponent implements OnInit {
                 size: this.searchResultPerPage
             })
             .subscribe(
-                (res: HttpResponse<IClaim[]>) => {
+                (res: HttpResponse<ITag[]>) => {
                     this.tags = res.body;
                     this.backend_compatible_tag_list = res.body;
-                    this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.tags, 'claim');
+                    this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.tags, 'name');
                     this.searchTagTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
@@ -456,10 +459,10 @@ export class FactcheckUpdateComponent implements OnInit {
                 size: this.searchResultPerPage
             })
             .subscribe(
-                (res: HttpResponse<IClaim[]>) => {
+                (res: HttpResponse<ICategory[]>) => {
                     this.categories = res.body;
                     this.backend_compatible_category_list = res.body;
-                    this.all_category_options = this.processOptionToDesireCheckboxFormat(this.categories, 'claim');
+                    this.all_category_options = this.processOptionToDesireCheckboxFormat(this.categories, 'name');
                     this.searchCategoryTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)

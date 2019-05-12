@@ -123,7 +123,7 @@ export class FactcheckUpdateComponent implements OnInit {
             this.createdDate = this.factcheck.createdDate != null ? this.factcheck.createdDate.format(DATE_TIME_FORMAT) : null;
         });
         this.getAllDegaUsers();
-        this.getAllCategory();
+        this.getAllCategories();
         this.getAllClaims();
         this.getAllTags();
 
@@ -189,7 +189,7 @@ export class FactcheckUpdateComponent implements OnInit {
         );
     }
 
-    getAllCategory() {
+    getAllCategories() {
         this.categoryService.query().subscribe(
             (res: HttpResponse<ICategory[]>) => {
                 this.categories = res.body;

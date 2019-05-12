@@ -123,8 +123,17 @@
                         Next
                     </button>
                 </div>
+
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.category" for="field_category">Category</label>
+                    <br>
+                    <input [(ngModel)]="searchCategoryKeyword" [ngModelOptions]="{standalone: true}">
+                    <button type="button" class="btn btn-success" (click)="searchCategoryCurrentPage=0;searchCategories()">
+                        Search Category
+                    </button>
+                    <button type="button" class="btn btn-success" (click)="getAllCategorys()">
+                        Reset
+                    </button>
                     <br>
                     <jhi-multiple-checkbox id="field_category"
                                            [option_list]="all_category_options"
@@ -132,6 +141,18 @@
                                            (updated_selection)="update_category_selection($event)">
 
                     </jhi-multiple-checkbox>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchCategoryCurrentPage=searchCategoryCurrentPage-1;searchCategories()"
+                            *ngIf="searchCategoryCurrentPage>0">
+                        Previous
+                    </button>
+                    <button type="button"
+                            class="btn btn-success"
+                            (click)="searchCategoryCurrentPage=searchCategoryCurrentPage+1;searchCategories()"
+                            *ngIf="searchCategoryTotalResult>((searchCategoryCurrentPage+1)*searchResultPerPage)">
+                        Next
+                    </button>
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.corePost.degaUser" for="field_degaUser">Author</label>

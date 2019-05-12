@@ -447,4 +447,22 @@ export class FactcheckUpdateComponent implements OnInit {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
+
+    searchCategories() {
+        this.categoryService
+            .search({
+                page: this.searchCategoryCurrentPage,
+                query: this.searchCategoryKeyword,
+                size: this.searchResultPerPage
+            })
+            .subscribe(
+                (res: HttpResponse<IClaim[]>) => {
+                    this.categories = res.body;
+                    this.backend_compatible_category_list = res.body;
+                    this.all_category_options = this.processOptionToDesireCheckboxFormat(this.categories, 'claim');
+                    this.searchCategoryTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
 }

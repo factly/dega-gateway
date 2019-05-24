@@ -62,10 +62,6 @@ export class QuillEditorComponent {
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.cursorPosition.index, img);
     }
 
-    testing_am(a) {
-        console.log(a);
-    }
-
     rowAbove() {
         this.tableInstance.insertRowAbove();
     }

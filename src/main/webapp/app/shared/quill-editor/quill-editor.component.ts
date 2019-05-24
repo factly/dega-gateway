@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 
@@ -18,6 +18,10 @@ export class QuillEditorComponent {
     original_content_1: string;
     @Output()
     updated_content: EventEmitter<any> = new EventEmitter();
+    tableInstance;
+    modules = {
+        table: true
+    };
 
     constructor(private dialog: MatDialog) {}
 
@@ -31,11 +35,13 @@ export class QuillEditorComponent {
     getEditorInstance(editorInstance: any) {
         this.quillEditorRef = editorInstance;
         const toolbar = editorInstance.getModule('toolbar');
+        this.tableInstance = editorInstance.getModule('table');
         toolbar.addHandler('image', this.openFileUploadDialog.bind(this));
 
         // Updates the existing editor with the data passed from the parent component
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(0, this.original_content);
     }
+
     openFileUploadDialog(): void {
         this.cursorPosition = this.quillEditorRef.getSelection();
         const config = {
@@ -54,5 +60,33 @@ export class QuillEditorComponent {
     updateMediaForQuill(url) {
         const img = '<img src="' + url + '" />';
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.cursorPosition.index, img);
+    }
+
+    rowAbove() {
+        this.tableInstance.insertRowAbove();
+    }
+
+    rowBelow() {
+        this.tableInstance.insertRowBelow();
+    }
+
+    colLeft() {
+        this.tableInstance.insertColumnLeft();
+    }
+
+    colRight() {
+        this.tableInstance.insertColumnRight();
+    }
+
+    rowDelete() {
+        this.tableInstance.deleteRow();
+    }
+
+    colDelete() {
+        this.tableInstance.deleteColumn();
+    }
+
+    tableDelete() {
+        this.tableInstance.deleteTable();
     }
 }

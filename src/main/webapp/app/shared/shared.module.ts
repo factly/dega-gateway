@@ -3,7 +3,7 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { QuillModule } from 'ngx-quill';
+import { QuillModule } from 'ngx-quill-v2';
 
 import { QuillEditorComponent } from 'app/shared/quill-editor/quill-editor.component';
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';

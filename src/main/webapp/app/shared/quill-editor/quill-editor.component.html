@@ -1,5 +1,13 @@
 
 <quill-editor (onContentChanged)="emitEventOnTextChange($event)"
               (onEditorCreated)="getEditorInstance($event)"
+              [modules]="modules"
               required>
 </quill-editor>
+<button id="insert-row-above" type="button" (click)="rowAbove()">Insert Row Above</button>
+<button id="insert-row-below" type="button" (click)="rowBelow()">Insert Row Below</button>
+<button id="insert-column-left" type="button" (click)="colLeft()">Insert Column Left</button>
+<button id="insert-column-right" type="button" (click)="colRight()">Insert Column Right</button>
+<button id="delete-row" type="button" (click)="rowDelete()">Delete Row</button>
+<button id="delete-column" type="button" (click)="colDelete()">Delete Column</button>
+<button id="delete-table" type="button" (click)="tableDelete()">Delete Table</button>

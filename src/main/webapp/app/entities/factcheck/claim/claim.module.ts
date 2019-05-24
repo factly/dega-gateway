@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { GatewaySharedModule } from 'app/shared';
-import { QuillModule } from 'ngx-quill';
 import { MatDialogModule } from '@angular/material/dialog';
 import {
     ClaimComponent,
@@ -17,7 +16,7 @@ import {
 const ENTITY_STATES = [...claimRoute, ...claimPopupRoute];
 
 @NgModule({
-    imports: [GatewaySharedModule, QuillModule, RouterModule.forChild(ENTITY_STATES), MatDialogModule],
+    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES), MatDialogModule],
     declarations: [ClaimComponent, ClaimDetailComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent, NewClaimPopupComponent],
     entryComponents: [ClaimComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent, NewClaimPopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

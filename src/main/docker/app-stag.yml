@@ -1,0 +1,25 @@
+version: '2'
+services:
+    gateway-mongodb:
+        extends:
+            file: mongodb.yml
+            service: gateway-mongodb
+    gateway-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: gateway-elasticsearch
+    consul:
+        image: consul:1.3.0
+        command: consul agent -dev -ui -client 0.0.0.0
+        ports:
+        - 8300:8300
+        - 8500:8500
+        - 8600:8600
+    consul-config-loader:
+        image: jhipster/consul-config-loader:v0.3.0
+        volumes:
+        - ./central-server-config:/config
+        environment:
+        - INIT_SLEEP_SECONDS=5
+        - CONSUL_URL=consul
+        - CONSUL_PORT=8500

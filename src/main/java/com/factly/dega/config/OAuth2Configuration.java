@@ -31,7 +31,7 @@ import java.io.IOException;
  * mode too.
  */
 @Configuration
-@Profile("dev")
+@Profile({"dev","stag"})
 public class OAuth2Configuration {
     public static final String SAVED_LOGIN_ORIGIN_URI = OAuth2Configuration.class.getName() + "_SAVED_ORIGIN";
 

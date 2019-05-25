@@ -30,14 +30,10 @@
     <div class="list-view" *ngIf="posts">
         <div class="acttion-bar-wrap">
             <div class="sort-button" [ngClass]="{'up': !sortList}">
-                <span (click)="toogleSortListDropdown()">Sort By:</span>
-                <ul [hidden]="sortList">
-                    <li>Last Created</li>
-                    <li>First Created</li>
-                    <li>Title: A to Z</li>
-                    <li>Title: Z to A</li>
-                    <li>Status: A to Z</li>
-                    <li>Status: Z to A</li>
+                <span (click)="toogleSortListDropdown()">Sort By: {{predicate}}, <span *ngIf="reverse">Asc</span><span *ngIf="!reverse">Des</span></span>
+                <ul jhiSort  [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)" [hidden]="sortList" (click)="sortList=!sortList">
+                    <li jhiSortBy="createdDate"><span *ngIf="reverse">Last</span><span *ngIf="!reverse">First</span> Created</li>
+                    <li jhiSortBy="title">Title: <span *ngIf="reverse">A to Z</span><span *ngIf="!reverse">Z to A</span></li>
                 </ul>
             </div>
         </div>

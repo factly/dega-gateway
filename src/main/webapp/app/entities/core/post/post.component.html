@@ -1,9 +1,10 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="gatewayApp.corePost.home.title">Posts</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-post" [routerLink]="['/post/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-post"
+                [routerLink]="['/post/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.corePost.home.createLabel">
+            <span class="hidden-sm-down" jhiTranslate="gatewayApp.corePost.home.createLabel">
             Create new Post
             </span>
         </button>
@@ -13,7 +14,8 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.corePost.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                           name="currentSearch" placeholder="{{ 'gatewayApp.corePost.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
@@ -25,16 +27,79 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="posts">
+    <div class="list-view" *ngIf="posts">
+        <div class="acttion-bar-wrap">
+            <div class="sort-button" [ngClass]="{'up': !sortList}">
+                <span (click)="toogleSortListDropdown()">Sort By:</span>
+                <ul [hidden]="sortList">
+                    <li>Last Created</li>
+                    <li>First Created</li>
+                    <li>Title: A to Z</li>
+                    <li>Title: Z to A</li>
+                    <li>Status: A to Z</li>
+                    <li>Status: Z to A</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-block-wrap">
+            <div class="content-block" *ngFor="let post of posts ;trackBy: trackId">
+                <div class="image-wrap">
+                    <img src="{{post.featuredMedia}}">
+                </div>
+                <div class="main-content">
+                    <div><h2 [routerLink]="['/post', post.id, 'view' ]">{{post.title}}</h2></div>
+                    <div><p>{{post.excerpt}}</p></div>
+                </div>
+                <div class="other-detail">
+                    <div class="author-details-wrap">
+                        <div class="author-details-text">
+                            <p class="created-by"><i>Created By</i></p>
+                            <p class="author-name"><span *ngFor="let author of post.degaUsers; index as i">{{author.firstName}} {{i != post.degaUsers.length -1 ?  '| ': ''}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="actions-wrap">
+                        <div>
+                            <p class="created-at">Apr 21, 2019, 8:14:24 PM</p>
+                        </div>
+                        <div class="actions">
+                            <div><span><fa-icon [icon]="'eye'"
+                                                matTooltip="Info about the action"
+                                                [matTooltipPosition]="'above'"
+                                                [routerLink]="['/post', post.id, 'view' ]"></fa-icon></span></div>
+                            <div><span><fa-icon [icon]="'pencil-alt'"
+                                                [routerLink]="['/post', post.id, 'edit']"></fa-icon></span></div>
+                            <div><span><fa-icon [icon]="'times'"
+                                                [routerLink]="['/', { outlets: { popup: 'post/'+ post.id + '/delete'} }]"></fa-icon></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive" *ngIf="false">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="featuredMedia"><span jhiTranslate="gatewayApp.corePost.featuredMedia">Featured Media</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="title"><span jhiTranslate="gatewayApp.corePost.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="excerpt"><span jhiTranslate="gatewayApp.corePost.excerpt">Excerpt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.corePost.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="statusName"><span jhiTranslate="gatewayApp.corePost.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
+                <th jhiSortBy="featuredMedia"><span
+                    jhiTranslate="gatewayApp.corePost.featuredMedia">Featured Media</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="title"><span jhiTranslate="gatewayApp.corePost.title">Title</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="excerpt"><span jhiTranslate="gatewayApp.corePost.excerpt">Excerpt</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.corePost.createdDate">Created Date</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="statusName"><span jhiTranslate="gatewayApp.corePost.status">Status</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -45,7 +110,7 @@
                 <td>{{post.createdDate | date:'medium'}}</td>
                 <td>
                     <div *ngIf="post.statusId">
-                        <a [routerLink]="['../status', post.statusId , 'view' ]" >{{post.statusName}}</a>
+                        <a [routerLink]="['../status', post.statusId , 'view' ]">{{post.statusName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -78,10 +143,12 @@
     </div>
     <div *ngIf="posts && posts.length">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 
 import { GatewaySharedModule } from 'app/shared';
@@ -19,7 +20,7 @@ import {
 const ENTITY_STATES = [...postRoute, ...postPopupRoute];
 
 @NgModule({
-    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES), MatTooltipModule],
     declarations: [
         PostComponent,
         PostDetailComponent,

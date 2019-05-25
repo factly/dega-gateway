@@ -1,0 +1,59 @@
+<div class="side-bar-wrap" [ngClass]="{'sticky': toggleSticky}">
+	<nav>
+		<ul>
+			<li>
+				<a routerLink="/">
+					<span>
+						<fa-icon [icon]="'home'"></fa-icon>
+                        <span jhiTranslate="global.menu.home">Home</span>
+					</span>
+				</a>
+			</li>
+			<li class="nested-menu" [ngClass]="{'open': activeDropdown == 1}" (click)="toggleDropdown(1)">
+				<a href="javascript:void(0);">
+					<span>
+                        <fa-icon [icon]="'th-list'"></fa-icon>
+                        <span jhiTranslate="global.menu.entities.main">
+                            Entities
+                        </span>
+                    </span>
+				</a>
+				<ul class="nav-dropdown-items">
+					<li>
+						<a href="">
+							<fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+							<span>Post</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+							<span>Category</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+							<span>Format</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+							<span>Organization</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+							<span>Status</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<div class="side-bar-minimizer-wrap" (click)="stickMenu()">
+        <button class="side-bar-minimizer" [ngClass]="{'sticky': toggleSticky}"></button>   
+    </div>
+</div>

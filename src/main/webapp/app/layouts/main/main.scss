@@ -1,0 +1,37 @@
+.app-body {
+    margin-top: 63px;
+    .side-bar {
+        position: fixed;
+        height: calc(100vh - 60px);
+        width: 200px;
+        z-index: 200;
+        background: #3a4248;
+        transition: 0.3s;
+        overflow-x: hidden;
+    }
+    &.sidebar-show .main {
+        margin-left: 200px;
+        transition: 0.3s;
+    }
+    &.sticky-nav.sidebar-show .main {
+        margin-left: 50px;
+    }
+    &.sticky-nav .side-bar {
+        width: 50px;
+        overflow-x: unset;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .app-body {
+        .side-bar {
+            left: -200px;
+            &.open {
+                left: 0px;
+            }
+        }
+        &.sidebar-show .main {
+            margin-left: 0px;
+        }
+    }
+}

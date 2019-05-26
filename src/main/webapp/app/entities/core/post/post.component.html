@@ -39,8 +39,8 @@
         </div>
         <div class="content-block-wrap">
             <div class="content-block" *ngFor="let post of posts ;trackBy: trackId">
-                <div class="image-wrap">
-                    <img src="{{post.featuredMedia}}">
+                <div class="image-wrap" [style.backgroundImage]="'url('+ post.featuredMedia +')'">
+                    <!--<img src="{{post.featuredMedia}}">-->
                 </div>
                 <div class="main-content">
                     <div><h2 [routerLink]="['/post', post.id, 'view' ]">{{post.title}}</h2></div>

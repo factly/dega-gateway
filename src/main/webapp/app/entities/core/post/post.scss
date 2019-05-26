@@ -43,7 +43,7 @@ $xs-sm-font-size: 12px;
                 margin: 0px;
                 background: white;
                 top: 30px;
-                left: -28px;
+                right: -30px;
                 font-size: 14px;
                 padding: 0px;
                 min-width: 160px;
@@ -78,6 +78,9 @@ $xs-sm-font-size: 12px;
                 max-height: $card-height;
                 width: #{$image-wrap-width};
                 overflow: hidden;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
                 img {
                     max-height: 100%;
                 }

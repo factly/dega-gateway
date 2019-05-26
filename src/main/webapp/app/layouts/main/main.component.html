@@ -3,7 +3,7 @@
     <router-outlet name="navbar"></router-outlet>
 </div>
 <div class="app-body sidebar-show" [ngClass]="{'sticky-nav' : stickyNav}">
-    <jhi-sidebar class="side-bar" [ngClass]="{'open' : open}" (change)="stickNavigation()"></jhi-sidebar>
+    <jhi-sidebar class="side-bar" (change)="stickNavigation()"></jhi-sidebar>
     <div class="main">
         <div class="container-fluid ">
             <div class="card jh-card">

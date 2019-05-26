@@ -257,6 +257,7 @@ $theme: mat-light-theme($palette, $palette);
 // Include component specific mixin
 @include mat-dialog-theme($theme);
 @include mat-checkbox-theme($theme);
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 /* Angular material css ends */
 
 /* Quill Editor CSS starts */

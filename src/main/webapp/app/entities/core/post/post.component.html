@@ -65,14 +65,28 @@
                             <p class="created-at">Apr 21, 2019, 8:14:24 PM</p>
                         </div>
                         <div class="actions">
-                            <div><span><fa-icon [icon]="'eye'"
-                                                matTooltip="Info about the action"
-                                                [matTooltipPosition]="'above'"
-                                                [routerLink]="['/post', post.id, 'view' ]"></fa-icon></span></div>
-                            <div><span><fa-icon [icon]="'pencil-alt'"
-                                                [routerLink]="['/post', post.id, 'edit']"></fa-icon></span></div>
-                            <div><span><fa-icon [icon]="'times'"
-                                                [routerLink]="['/', { outlets: { popup: 'post/'+ post.id + '/delete'} }]"></fa-icon></span>
+                            <div>
+                                <span matTooltip="View Post"
+                                      [matTooltipPosition]="'above'">
+                                        <fa-icon [icon]="'eye'"
+                                                 [routerLink]="['/post', post.id, 'view' ]">
+                                        </fa-icon>
+                                </span>
+                            </div>
+                            <div>
+                                <span matTooltip="Edit Post"
+                                      [matTooltipPosition]="'above'">
+                                    <fa-icon [icon]="'pencil-alt'"
+                                             [routerLink]="['/post', post.id, 'edit']">
+                                    </fa-icon>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    <fa-icon [icon]="'times'"
+                                             [routerLink]="['/', { outlets: { popup: 'post/'+ post.id + '/delete'} }]">
+                                    </fa-icon>
+                                </span>
                             </div>
                         </div>
                     </div>

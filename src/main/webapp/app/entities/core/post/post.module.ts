@@ -1,8 +1,9 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NgModuleRef } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -22,6 +23,8 @@ import {
     FeaturedMediaUploadDialogComponent,
     FeaturedMediaUploadPopupComponent
 } from '../media/featured-media/featured-media-upload-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const ENTITY_STATES = [...postRoute, ...postPopupRoute];
 
@@ -29,12 +32,16 @@ const ENTITY_STATES = [...postRoute, ...postPopupRoute];
     imports: [
         GatewaySharedModule,
         RouterModule.forChild(ENTITY_STATES),
+        BrowserAnimationsModule,
+        FormsModule,
         MatButtonModule,
         MatCheckboxModule,
         MatExpansionModule,
         MatFormFieldModule,
+        MatInputModule,
         MatSelectModule,
-        MatTooltipModule
+        MatTooltipModule,
+        ReactiveFormsModule
     ],
     declarations: [
         PostComponent,

@@ -30,17 +30,23 @@
     <div class="list-view" *ngIf="posts">
         <div class="acttion-bar-wrap">
             <div class="sort-button" [ngClass]="{'up': !sortList}">
-                <span (click)="toogleSortListDropdown()">Sort By: {{predicate}}, <span *ngIf="reverse">Asc</span><span *ngIf="!reverse">Des</span></span>
-                <ul jhiSort  [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)" [hidden]="sortList" (click)="sortList=!sortList">
-                    <li jhiSortBy="createdDate"><span *ngIf="reverse">Last</span><span *ngIf="!reverse">First</span> Created</li>
-                    <li jhiSortBy="title">Title: <span *ngIf="reverse">A to Z</span><span *ngIf="!reverse">Z to A</span></li>
+                <span (click)="toogleSortListDropdown()">Sort By: {{predicate}}, <span *ngIf="reverse">Asc</span><span
+                    *ngIf="!reverse">Des</span></span>
+                <ul jhiSort [(predicate)]="predicate"
+                    [(ascending)]="reverse"
+                    [callback]="transition.bind(this)"
+                    [hidden]="sortList" (click)="sortList=!sortList">
+                    <li jhiSortBy="createdDate"><span *ngIf="reverse">Last</span><span *ngIf="!reverse">First</span>
+                        Created
+                    </li>
+                    <li jhiSortBy="title">Title: <span *ngIf="reverse">A to Z</span><span *ngIf="!reverse">Z to A</span>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="content-block-wrap">
             <div class="content-block" *ngFor="let post of posts ;trackBy: trackId">
                 <div class="image-wrap" [style.backgroundImage]="'url('+ post.featuredMedia +')'">
-                    <!--<img src="{{post.featuredMedia}}">-->
                 </div>
                 <div class="main-content">
                     <div><h2 [routerLink]="['/post', post.id, 'view' ]">{{post.title}}</h2></div>

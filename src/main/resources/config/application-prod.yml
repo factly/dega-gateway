@@ -86,6 +86,8 @@ server:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
         min-response-size: 1024
+    # Set this to true if behind a front-end proxy server
+    use-forward-headers: false
 
 # ===================================================================
 # JHipster specific properties

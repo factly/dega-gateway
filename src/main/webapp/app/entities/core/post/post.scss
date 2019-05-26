@@ -161,3 +161,18 @@ $xs-sm-font-size: 12px;
         }
     }
 }
+
+.post-edit-view {
+    .editor-wrap {
+    }
+    .edit-view-right-pannel {
+        position: fixed;
+        top: 65px;
+        right: 0px;
+        width: 33%;
+        max-width: 300px;
+        background: white;
+        height: calc(100vh - 65px);
+        overflow-y: scroll;
+    }
+}

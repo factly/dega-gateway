@@ -23,7 +23,8 @@ import { MediaService } from '../media/media.service';
 
 @Component({
     selector: 'jhi-post-update',
-    templateUrl: './post-update.component.html'
+    templateUrl: './post-update.component.html',
+    styleUrls: ['post.scss']
 })
 export class PostUpdateComponent implements OnInit {
     post: IPost;

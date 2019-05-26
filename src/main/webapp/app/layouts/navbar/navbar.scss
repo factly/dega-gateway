@@ -8,8 +8,13 @@ Navbar
 }
 
 .jh-navbar {
-    background-color: #353d47;
+    background-color: #ffffff;
     padding: 0.2em 1em;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 100;
     .profile-image {
         margin: -10px 0px;
         height: 40px;
@@ -37,9 +42,6 @@ Navbar
         color: #ccc;
         font-size: 1.5em;
         padding: 10px;
-        &:hover {
-            color: #fff;
-        }
     }
 }
 
@@ -73,6 +75,9 @@ Logo styles
             vertical-align: middle;
             /*background: url('../../../content/images/logo-jhipster-bak.png') no-repeat center center;*/
             background-size: contain;
+        }
+        img {
+            height: 30px;
         }
     }
 }

@@ -5,9 +5,11 @@ import { JhiLanguageHelper } from 'app/core';
 
 @Component({
     selector: 'jhi-main',
-    templateUrl: './main.component.html'
+    templateUrl: './main.component.html',
+    styleUrls: ['main.scss']
 })
 export class JhiMainComponent implements OnInit {
+    stickyNav;
     constructor(private jhiLanguageHelper: JhiLanguageHelper, private router: Router) {}
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
@@ -24,5 +26,9 @@ export class JhiMainComponent implements OnInit {
                 this.jhiLanguageHelper.updateTitle(this.getPageTitle(this.router.routerState.snapshot.root));
             }
         });
+    }
+
+    stickNavigation() {
+        this.stickyNav = !this.stickyNav;
     }
 }

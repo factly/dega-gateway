@@ -12,7 +12,8 @@ import { PostService } from './post.service';
 
 @Component({
     selector: 'jhi-post',
-    templateUrl: './post.component.html'
+    templateUrl: './post.component.html',
+    styleUrls: ['post.scss']
 })
 export class PostComponent implements OnInit, OnDestroy {
     currentAccount: any;
@@ -30,6 +31,7 @@ export class PostComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    sortList = true;
 
     constructor(
         private postService: PostService,
@@ -155,6 +157,10 @@ export class PostComponent implements OnInit, OnDestroy {
             result.push('createdDate');
         }
         return result;
+    }
+
+    toogleSortListDropdown() {
+        this.sortList = !this.sortList;
     }
 
     private paginatePosts(data: IPost[], headers: HttpHeaders) {

@@ -1,0 +1,145 @@
+.side-bar-wrap {
+    height: 100%;
+    &.sticky {
+        nav {
+            overflow-y: unset;
+            ul {
+                li {
+                    width: 50px;
+                    white-space: nowrap;
+                    &:hover {
+                        width: 250px;
+                        > ul {
+                            position: absolute;
+                            left: 50px;
+                            display: inline;
+                        }
+                    }
+                    ul {
+                        display: none;
+                        max-height: 1500px;
+                        li {
+                            width: 200px;
+                            background: rgba(0, 0, 0, 0.2);
+                        }
+                    }
+                    > a:after {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    nav {
+        height: calc(100% - 50px);
+        overflow-y: scroll;
+        ul {
+            padding: 0px;
+            li {
+                width: 200px;
+                list-style: none;
+                background: #3a4248;
+                overflow: hidden;
+                a {
+                    position: relative;
+                    display: block;
+                    color: #fff;
+                    background: #3a4248;
+                    padding: 0.75rem 1rem;
+                    font-weight: 100;
+                    fa-icon {
+                        margin-right: 16px;
+                    }
+                    &:hover {
+                        text-decoration: none;
+                        background: #20a8d8;
+                    }
+                }
+                .nav-dropdown-items {
+                    max-height: 0;
+                    padding: 0;
+                    margin: 0;
+                    overflow-y: hidden;
+                    transition: max-height 0.3s ease-in-out;
+                }
+                &.open .nav-dropdown-items {
+                    max-height: 1500px;
+                }
+                &.nested-menu > a:after {
+                    position: absolute;
+                    content: '';
+                    width: 8px;
+                    height: 8px;
+                    border: solid 2px white;
+                    border-width: 2px 2px 0 0;
+                    transform: rotate(45deg);
+                    top: 20px;
+                    right: 19px;
+                    transition: 0.3s;
+                }
+                &.nested-menu.open > a:after {
+                    transform: rotate(135deg);
+                }
+            }
+        }
+    }
+    .side-bar-minimizer-wrap {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        height: 50px;
+        background: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px 10px;
+        cursor: pointer;
+        .side-bar-minimizer {
+            position: relative;
+            -ms-flex: 0 0 50px;
+            cursor: pointer;
+            background-color: unset;
+            border: 0;
+            width: 29px;
+            margin: 0px;
+            padding: 0px;
+            cursor: pointer;
+            &:after {
+                position: absolute;
+                content: '';
+                width: 15px;
+                height: 15px;
+                border: solid 2px white;
+                border-width: 2px 2px 0 0;
+                transform: rotate(45deg);
+                top: 7px;
+                right: 10px;
+                transition: 0.3s;
+            }
+            &.sticky:after {
+                transform: rotate(225deg);
+                right: 4px;
+            }
+        }
+    }
+    .screen-fade {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .side-bar-wrap {
+        .side-bar-minimizer-wrap {
+            display: none;
+        }
+        .screen-fade {
+            display: block;
+            position: fixed;
+            top: 50px;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            color: #000;
+            opacity: 0.2;
+        }
+    }
+}

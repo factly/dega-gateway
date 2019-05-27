@@ -1,6 +1,48 @@
 <div class="row post-edit-view">
     <div class="col-8 editor-wrap">
-        <form name="editForm" role="form" novalidate (ngSubmit)="saveOrPublish('Draft')" #editForm="ngForm">
+        <form [formGroup]="postEditFormGroup" class="form-group">
+            <mat-form-field>
+                <input matInput
+                       formControlName="title"
+                       placeholder="Title of the article">
+                <mat-error>
+                    Title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput
+                       formControlName="subTitle"
+                       placeholder="Subtitle of the article">
+                <mat-error>
+                    Sub Title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <jhi-quill-editor [original_content]="post.content"
+                              id="field_content"
+                              (updated_content)="updatePostContentFormData($event)">
+            </jhi-quill-editor>
+
+
+            <mat-form-field>
+                <textarea matInput
+                          formControlName="excerpt"
+                          placeholder="Excerpt">
+                </textarea>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput
+                       formControlName="updates"
+                       placeholder="Updates">
+                <mat-error>
+                    Updates is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+        </form>
+        <form name="editForm" role="form" novalidate (ngSubmit)="saveOrPublish('Draft')" #editForm="ngForm" hidden="true">
             <h2 id="jhi-post-heading" jhiTranslate="gatewayApp.corePost.home.createOrEditLabel">Create or edit a
                 Post</h2>
             <div>
@@ -32,10 +74,6 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.content" for="field_content">Content</label>
                     <span class="text-danger" [hidden]="post.content">*</span>
-                    <jhi-quill-editor [original_content]="post.content"
-                                      id="field_content"
-                                      (updated_content)="updatePostContentFormData($event)">
-                    </jhi-quill-editor>
                     <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
                         <small class="form-text text-danger"
                                [hidden]="!editForm.controls.content?.errors?.required"
@@ -97,6 +135,8 @@
                     </button>
                 </div>
         </form>
+
+
     </div>
     <div class="col-4 edit-view-right-pannel">
         <div class="form-group">

@@ -20,6 +20,7 @@ import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
 import { MediaService } from '../media/media.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-post-update',
@@ -49,6 +50,7 @@ export class PostUpdateComponent implements OnInit {
     slugExtention: number;
     tempSlug: string;
     account: Account;
+    postEditFormGroup: FormGroup;
 
     subscription;
 
@@ -88,7 +90,8 @@ export class PostUpdateComponent implements OnInit {
         private formatService: FormatService,
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
-        private principal: Principal
+        private principal: Principal,
+        private fb: FormBuilder
     ) {
         this.subscription = this.mediaService.getProductID().subscribe(message => {
             if (message['type_of_data'] === 'feature') {
@@ -107,6 +110,24 @@ export class PostUpdateComponent implements OnInit {
             this.publishedDate = this.post.publishedDate != null ? this.post.publishedDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.post.lastUpdatedDate != null ? this.post.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.post.createdDate != null ? this.post.createdDate.format(DATE_TIME_FORMAT) : null;
+        });
+        this.postEditFormGroup = this.fb.group({
+            id: [''],
+            title: ['', Validators.required],
+            content: ['', Validators.required],
+            excerpt: ['', Validators.required],
+            featured: [''],
+            sticky: [''],
+            updates: ['', Validators.required],
+            slug: ['', Validators.required],
+            password: ['', Validators.required],
+            featuredMedia: ['', Validators.required],
+            subTitle: ['', Validators.required],
+            tags: this.fb.array([]),
+            categories: this.fb.array([]),
+            formatName: ['', Validators.required],
+            formatId: ['', Validators.required],
+            degaUsers: this.fb.array([])
         });
         this.getAllDegaUsers();
         this.getAllCategories();

@@ -176,3 +176,8 @@ $xs-sm-font-size: 12px;
         overflow-y: scroll;
     }
 }
+
+// Remove this after ng-bootstrap is removed
+input.ng-invalid:not(form) {
+    border-left: 0px solid #42a948; /* green */
+}

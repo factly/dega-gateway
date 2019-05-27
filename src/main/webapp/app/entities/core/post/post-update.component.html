@@ -59,20 +59,19 @@
         </form>
         <div>
             <button type="button" mat-button
-                    class="btn btn-secondary" (click)="previousState()">
+                    (click)="previousState()">
                 <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
             </button>
             <button mat-button type="button"
                     (click)="saveOrPublish('Draft')"
-                    [disabled]="editForm.form.invalid || isSaving"
-                    class="btn btn-primary" *ngIf="showSave">
+                    [disabled]="isSaving"
+                    *ngIf="showSave">
                 <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
                 jhiTranslate="entity.action.savedraft">Save Draft</span>
             </button>
-            <div>{{postEditFormGroup.valid}}</div>
             <button type="button" mat-button
-                    [disabled]="editForm.form.invalid || isSaving"
-                    class="btn btn-primary" *ngIf="showPublish" (click)="saveOrPublish('Publish')">
+                    [disabled]="isSaving"
+                    *ngIf="showPublish" (click)="saveOrPublish('Publish')">
                 <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
                 jhiTranslate="entity.action.publish">Publish</span>
             </button>

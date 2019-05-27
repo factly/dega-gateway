@@ -20,7 +20,7 @@ import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
 import { MediaService } from '../media/media.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-post-update',
@@ -122,12 +122,12 @@ export class PostUpdateComponent implements OnInit {
             slug: [this.post.slug || '', Validators.required],
             featuredMedia: [this.post.featuredMedia || ''],
             subTitle: [this.post.subTitle || ''],
-            tags: this.fb.array([]),
-            categories: this.fb.array([]),
             formatId: [this.post.formatId || '', Validators.required],
             statusId: [this.post.statusId || ''],
             statusName: [this.post.statusName || ''],
-            degaUsers: this.fb.array([], Validators.required),
+            categories: [this.post.categories], // convert into this.fb.array
+            tags: [this.post.tags], // convert into this.fb.array
+            degaUsers: [this.post.degaUsers || '', Validators.required], // convert into this.fb.array
             clientId: [this.post.clientId || ''], // delete once backend is fixed
             publishedDate: [this.post.publishedDate || null], // delete once backend is fixed
             createdDate: [this.post.createdDate || null] // delete once backend is fixed
@@ -211,6 +211,17 @@ export class PostUpdateComponent implements OnInit {
     }
 
     saveOrPublish(statusName) {
+        if (this.postEditFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.postEditFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + ' is required');
+            return;
+        }
         this.isSaving = true;
         this.postEditFormGroup.value.statusName = statusName;
         if (this.postEditFormGroup.value.id !== undefined) {
@@ -243,26 +254,6 @@ export class PostUpdateComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackTagById(index: number, item: ITag) {
-        return item.id;
-    }
-
-    trackCategoryById(index: number, item: ICategory) {
-        return item.id;
-    }
-
-    trackStatusById(index: number, item: IStatus) {
-        return item.id;
-    }
-
-    trackFormatById(index: number, item: IFormat) {
-        return item.id;
-    }
-
-    trackDegaUserById(index: number, item: IDegaUser) {
-        return item.id;
     }
 
     getSelected(selectedVals: Array<any>, option: any) {
@@ -315,15 +306,15 @@ export class PostUpdateComponent implements OnInit {
     // Think about optimising this code block, move it to a service, Ends here
 
     update_tag_selection(val) {
-        this.post.tags = this.processTagToBackendRequiredFormat(val);
+        this.postEditFormGroup.controls['tags'].setValue(this.processTagToBackendRequiredFormat(val));
     }
 
     update_category_selection(val) {
-        this.post.categories = this.processCategoryToBackendRequiredFormat(val);
+        this.postEditFormGroup.controls['categories'].setValue(this.processCategoryToBackendRequiredFormat(val));
     }
 
     update_author_selection(val) {
-        this.post.degaUsers = this.processAuthorToBackendRequiredFormat(val);
+        this.postEditFormGroup.controls['degaUsers'].setValue(this.processAuthorToBackendRequiredFormat(val));
     }
 
     searchTags() {

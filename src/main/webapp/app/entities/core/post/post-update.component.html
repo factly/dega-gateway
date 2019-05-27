@@ -25,14 +25,29 @@
             </jhi-quill-editor>
 
 
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
                 <textarea matInput
                           formControlName="excerpt"
                           placeholder="Excerpt">
                 </textarea>
             </mat-form-field>
 
-            <mat-form-field>
+            <div class="container example-full-width">
+                <button mat-raised-button type="button" color="primary" (click)="fileInput.click()">Upload</button>
+                <input hidden type="file" #fileInput>
+                <img src={{post.featuredMedia}} alt="" width="100" height="100">
+            </div>
+
+            <div class="example-full-width">
+                <mat-checkbox formControlName="featured">
+                    Featured
+                </mat-checkbox>
+                <mat-checkbox formControlName="sticky">
+                    Sticky
+                </mat-checkbox>
+            </div>
+
+            <mat-form-field class="example-full-width">
                 <input matInput
                        formControlName="updates"
                        placeholder="Updates">
@@ -42,7 +57,27 @@
             </mat-form-field>
 
         </form>
-        <form name="editForm" role="form" novalidate (ngSubmit)="saveOrPublish('Draft')" #editForm="ngForm" hidden="true">
+        <div>
+            <button type="button" mat-button
+                    class="btn btn-secondary" (click)="previousState()">
+                <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
+            <button mat-button type="button"
+                    (click)="saveOrPublish('Draft')"
+                    [disabled]="editForm.form.invalid || isSaving"
+                    class="btn btn-primary" *ngIf="showSave">
+                <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
+                jhiTranslate="entity.action.savedraft">Save Draft</span>
+            </button>
+            <div>{{postEditFormGroup.valid}}</div>
+            <button type="button" mat-button
+                    [disabled]="editForm.form.invalid || isSaving"
+                    class="btn btn-primary" *ngIf="showPublish" (click)="saveOrPublish('Publish')">
+                <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
+                jhiTranslate="entity.action.publish">Publish</span>
+            </button>
+        </div>
+        <form name="editForm" role="form" novalidate (ngSubmit)="saveOrPublish('Draft')" #editForm="ngForm" hidden>
             <h2 id="jhi-post-heading" jhiTranslate="gatewayApp.corePost.home.createOrEditLabel">Create or edit a
                 Post</h2>
             <div>
@@ -74,6 +109,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.corePost.content" for="field_content">Content</label>
                     <span class="text-danger" [hidden]="post.content">*</span>
+                    <jhi-quill-editor [original_content]="post.content"
+                                      id="field_content"
+                                      (updated_content)="updatePostContentFormData($event)">
+                    </jhi-quill-editor>
                     <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
                         <small class="form-text text-danger"
                                [hidden]="!editForm.controls.content?.errors?.required"

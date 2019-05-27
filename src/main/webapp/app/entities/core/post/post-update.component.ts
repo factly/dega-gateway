@@ -112,22 +112,25 @@ export class PostUpdateComponent implements OnInit {
             this.createdDate = this.post.createdDate != null ? this.post.createdDate.format(DATE_TIME_FORMAT) : null;
         });
         this.postEditFormGroup = this.fb.group({
-            id: [''],
-            title: ['', Validators.required],
-            content: ['', Validators.required],
-            excerpt: ['', Validators.required],
-            featured: [''],
-            sticky: [''],
-            updates: ['', Validators.required],
-            slug: ['', Validators.required],
-            password: ['', Validators.required],
-            featuredMedia: ['', Validators.required],
-            subTitle: ['', Validators.required],
+            id: [this.post.id || ''],
+            title: [this.post.title || '', Validators.required],
+            content: [this.post.content || '', Validators.required],
+            excerpt: [this.post.excerpt || '', Validators.required],
+            featured: [this.post.featured || false],
+            sticky: [this.post.sticky || false],
+            updates: [this.post.updates || '', Validators.required],
+            slug: [this.post.slug || '', Validators.required],
+            featuredMedia: [this.post.featuredMedia || ''],
+            subTitle: [this.post.subTitle || ''],
             tags: this.fb.array([]),
             categories: this.fb.array([]),
-            formatName: ['', Validators.required],
-            formatId: ['', Validators.required],
-            degaUsers: this.fb.array([])
+            formatId: [this.post.formatId || '', Validators.required],
+            statusId: [this.post.statusId || ''],
+            statusName: [this.post.statusName || ''],
+            degaUsers: this.fb.array([], Validators.required),
+            clientId: [this.post.clientId || ''], // delete once backend is fixed
+            publishedDate: [this.post.publishedDate || null], // delete once backend is fixed
+            createdDate: [this.post.createdDate || null] // delete once backend is fixed
         });
         this.getAllDegaUsers();
         this.getAllCategories();
@@ -209,11 +212,11 @@ export class PostUpdateComponent implements OnInit {
 
     saveOrPublish(statusName) {
         this.isSaving = true;
-        this.post.statusName = statusName;
-        if (this.post.id !== undefined) {
-            this.subscribeToSaveResponse(this.postService.update(this.post));
+        this.postEditFormGroup.value.statusName = statusName;
+        if (this.postEditFormGroup.value.id !== undefined) {
+            this.subscribeToSaveResponse(this.postService.update(this.postEditFormGroup.value));
         } else {
-            this.subscribeToSaveResponse(this.postService.create(this.post));
+            this.subscribeToSaveResponse(this.postService.create(this.postEditFormGroup.value));
         }
     }
 

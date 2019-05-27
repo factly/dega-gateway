@@ -175,6 +175,9 @@ $xs-sm-font-size: 12px;
         height: calc(100vh - 65px);
         overflow-y: scroll;
     }
+    .example-full-width {
+        width: 100%;
+    }
 }
 
 // Remove this after ng-bootstrap is removed

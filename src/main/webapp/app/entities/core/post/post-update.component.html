@@ -1,7 +1,7 @@
 <div class="row post-edit-view">
     <div class="col-8 editor-wrap">
         <form [formGroup]="postEditFormGroup" class="form-group">
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
                 <input matInput
                        formControlName="title"
                        placeholder="Title of the article">
@@ -10,7 +10,7 @@
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
                 <input matInput
                        formControlName="subTitle"
                        placeholder="Subtitle of the article">
@@ -141,6 +141,21 @@
     <div class="col-4 edit-view-right-pannel">
         <div class="form-group">
             <div class="form-group">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Personal data
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Type your name and age
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <!--<mat-form-field>-->
+                            <!--<input placeholder="First name">-->
+                        <!--</mat-form-field>-->
+                    </mat-expansion-panel>
+                </mat-accordion>
                 <label jhiTranslate="gatewayApp.corePost.tag" for="field_tag">Tag</label>
                 <br>
                 <input [(ngModel)]="searchTagKeyword" [ngModelOptions]="{standalone: true}">
@@ -248,4 +263,4 @@
         </div>
     </div>
 </div>
-</div>
+

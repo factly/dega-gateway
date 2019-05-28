@@ -7,6 +7,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { PostUpdateComponent } from 'app/entities/core/post/post-update.component';
 import { PostService } from 'app/entities/core/post/post.service';
 import { Post } from 'app/shared/model/core/post.model';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('Component Tests', () => {
     describe('Post Management Update Component', () => {
@@ -16,7 +17,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GatewayTestModule],
+                imports: [GatewayTestModule, ReactiveFormsModule],
                 declarations: [PostUpdateComponent]
             })
                 .overrideTemplate(PostUpdateComponent, '')

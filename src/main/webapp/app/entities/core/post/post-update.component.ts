@@ -66,7 +66,7 @@ export class PostUpdateComponent implements OnInit {
     all_category_options = [];
     selected_category_options = [];
 
-    searchResultPerPage = 10;
+    searchResultPerPage = 1;
 
     searchTagKeyword = '';
     searchTagTotalResult = 0;

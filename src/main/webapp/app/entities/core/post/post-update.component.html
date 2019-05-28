@@ -32,9 +32,11 @@
             </mat-form-field>
 
             <div class="container example-full-width">
-                <button mat-raised-button type="button" color="primary" (click)="fileInput.click()">Upload</button>
-                <input hidden type="file" #fileInput>
-                <img src={{post.featuredMedia}} alt="" width="100" height="100">
+                <button mat-raised-button type="button" color="primary"
+                        replaceUrl="true"
+                        [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                        [queryParams]="{ media_type: 'feature'}">Upload</button>
+                <img [src]='postEditFormGroup.value.featuredMedia' alt="" width="100" height="100">
             </div>
 
             <div class="example-full-width">

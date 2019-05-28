@@ -203,7 +203,7 @@ export class PostUpdateComponent implements OnInit {
     }
 
     updateMediaForFeature(url) {
-        this.post.featuredMedia = url;
+        this.postEditFormGroup.controls['featuredMedia'].setValue(url);
     }
 
     previousState() {

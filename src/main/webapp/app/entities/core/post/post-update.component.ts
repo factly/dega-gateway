@@ -46,9 +46,6 @@ export class PostUpdateComponent implements OnInit {
     createdDate: string;
     showSave: boolean;
     showPublish: boolean;
-    slug: string;
-    slugExtention: number;
-    tempSlug: string;
     account: Account;
     postEditFormGroup: FormGroup;
 
@@ -144,16 +141,16 @@ export class PostUpdateComponent implements OnInit {
             featured: [this.post.featured || false],
             sticky: [this.post.sticky || false],
             updates: [this.post.updates || '', Validators.required],
-            slug: [this.post.slug || ' ', Validators.required],
+            slug: [this.post.slug || ''],
             featuredMedia: [this.post.featuredMedia || ''],
             subTitle: [this.post.subTitle || ''],
             formatId: [this.post.formatId || '', Validators.required],
-            statusId: [this.post.statusId || ''],
+            statusId: [this.post.statusId || null],
             statusName: [this.post.statusName || ''],
             categories: [this.post.categories], // convert into this.fb.array
             tags: [this.post.tags], // convert into this.fb.array
             degaUsers: [this.post.degaUsers || '', Validators.required], // convert into this.fb.array
-            clientId: [this.post.clientId || ''], // delete once backend is fixed
+            clientId: [this.post.clientId || 'Factly'], // delete once backend is fixed
             publishedDate: [this.post.publishedDate || null], // delete once backend is fixed
             createdDate: [this.post.createdDate || null] // delete once backend is fixed
         });
@@ -233,9 +230,10 @@ export class PostUpdateComponent implements OnInit {
         }
         this.isSaving = true;
         this.postEditFormGroup.value.statusName = statusName;
-        if (this.postEditFormGroup.value.id !== undefined) {
+        if (this.postEditFormGroup.value.id !== '') {
             this.subscribeToSaveResponse(this.postService.update(this.postEditFormGroup.value));
         } else {
+            delete this.postEditFormGroup.value.id;
             this.subscribeToSaveResponse(this.postService.create(this.postEditFormGroup.value));
         }
     }

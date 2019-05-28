@@ -20,7 +20,6 @@
             </mat-form-field>
 
             <jhi-quill-editor [original_content]="post.content"
-                              id="field_content"
                               (updated_content)="updatePostContentFormData($event)">
             </jhi-quill-editor>
 
@@ -54,6 +53,16 @@
                 <mat-error>
                     Updates is <strong>required</strong>
                 </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select placeholder="Format" formControlName="formatId">
+                    <mat-option [value]="formatOption.id"
+                            *ngFor="let formatOption of formats | orderBy:'name';">
+                        {{formatOption.name}}
+                    </mat-option>
+                </mat-select>
+
             </mat-form-field>
 
         </form>
@@ -252,23 +261,6 @@
                     </button>
                 </mat-accordion>
 
-            </div>
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="gatewayApp.corePost.format"
-                       for="field_format">Format</label>
-                <select class="form-control" id="field_format" name="format" [(ngModel)]="post.formatId" required>
-                    <option [ngValue]="formatOption.id"
-                            *ngFor="let formatOption of formats | orderBy:'name'; trackBy: trackFormatById">
-                        {{formatOption.name}}
-                    </option>
-                </select>
-            </div>
-            <div [hidden]="!(editForm.controls.format?.dirty && editForm.controls.format?.invalid)">
-                <small class="form-text text-danger"
-                       [hidden]="!editForm.controls.format?.errors?.required"
-                       jhiTranslate="entity.validation.required">
-                    This field is required.
-                </small>
             </div>
             <div class="form-group">
                 <mat-accordion>

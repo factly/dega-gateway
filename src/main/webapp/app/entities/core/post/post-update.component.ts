@@ -119,7 +119,7 @@ export class PostUpdateComponent implements OnInit {
             featured: [this.post.featured || false],
             sticky: [this.post.sticky || false],
             updates: [this.post.updates || '', Validators.required],
-            slug: [this.post.slug || '', Validators.required],
+            slug: [this.post.slug || ' ', Validators.required],
             featuredMedia: [this.post.featuredMedia || ''],
             subTitle: [this.post.subTitle || ''],
             formatId: [this.post.formatId || '', Validators.required],

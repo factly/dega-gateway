@@ -28,6 +28,19 @@ describe('Component Tests', () => {
             service = fixture.debugElement.injector.get(PostService);
         });
 
+        function createPostEditFormGroup(valid) {
+            comp.postEditFormGroup.controls['title'].setValue('testing title');
+            comp.postEditFormGroup.controls['content'].setValue('testing content');
+            comp.postEditFormGroup.controls['excerpt'].setValue('testing excerpt');
+            comp.postEditFormGroup.controls['updates'].setValue('testing updates');
+            comp.postEditFormGroup.controls['slug'].setValue('testing slug');
+            comp.postEditFormGroup.controls['formatId'].setValue('12121');
+            comp.postEditFormGroup.controls['degaUser'].setValue([{ id: '123' }]);
+            if (!valid) {
+                comp.postEditFormGroup.controls['title'].setValue('');
+            }
+        }
+
         describe('save', () => {
             it('Should call update service on save for existing entity', fakeAsync(() => {
                 // GIVEN
@@ -35,6 +48,7 @@ describe('Component Tests', () => {
                 spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.post = entity;
                 // WHEN
+                createPostEditFormGroup(true);
                 comp.saveOrPublish('Publish');
                 tick(); // simulate async
 
@@ -49,6 +63,7 @@ describe('Component Tests', () => {
                 spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.post = entity;
                 // WHEN
+                createPostEditFormGroup(true);
                 comp.saveOrPublish('Publish');
                 tick(); // simulate async
 

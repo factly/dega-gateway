@@ -206,6 +206,10 @@ export class PostUpdateComponent implements OnInit {
         this.postEditFormGroup.controls['featuredMedia'].setValue(url);
     }
 
+    deleteMediaForFeature() {
+        this.postEditFormGroup.controls['featuredMedia'].setValue('');
+    }
+
     previousState() {
         window.history.back();
     }

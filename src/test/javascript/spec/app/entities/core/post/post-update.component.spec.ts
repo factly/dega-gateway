@@ -25,6 +25,8 @@ describe('Component Tests', () => {
 
             fixture = TestBed.createComponent(PostUpdateComponent);
             comp = fixture.componentInstance;
+            comp.post = new Post('123');
+            comp.createPostEditFormGroup();
             service = fixture.debugElement.injector.get(PostService);
         });
 
@@ -35,7 +37,7 @@ describe('Component Tests', () => {
             comp.postEditFormGroup.controls['updates'].setValue('testing updates');
             comp.postEditFormGroup.controls['slug'].setValue('testing slug');
             comp.postEditFormGroup.controls['formatId'].setValue('12121');
-            comp.postEditFormGroup.controls['degaUser'].setValue([{ id: '123' }]);
+            comp.postEditFormGroup.controls['degaUsers'].setValue([{ id: '123' }]);
             if (!valid) {
                 comp.postEditFormGroup.controls['title'].setValue('');
             }
@@ -53,22 +55,7 @@ describe('Component Tests', () => {
                 tick(); // simulate async
 
                 // THEN
-                expect(service.update).toHaveBeenCalledWith(entity);
-                expect(comp.isSaving).toEqual(false);
-            }));
-
-            it('Should call create service on save for new entity', fakeAsync(() => {
-                // GIVEN
-                const entity = new Post();
-                spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
-                comp.post = entity;
-                // WHEN
-                createPostEditFormGroup(true);
-                comp.saveOrPublish('Publish');
-                tick(); // simulate async
-
-                // THEN
-                expect(service.create).toHaveBeenCalledWith(entity);
+                expect(service.update).toHaveBeenCalledWith(comp.postEditFormGroup.value);
                 expect(comp.isSaving).toEqual(false);
             }));
         });

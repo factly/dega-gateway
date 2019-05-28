@@ -111,27 +111,7 @@ export class PostUpdateComponent implements OnInit {
             this.lastUpdatedDate = this.post.lastUpdatedDate != null ? this.post.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.post.createdDate != null ? this.post.createdDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.postEditFormGroup = this.fb.group({
-            id: [this.post.id || ''],
-            title: [this.post.title || '', Validators.required],
-            content: [this.post.content || '', Validators.required],
-            excerpt: [this.post.excerpt || '', Validators.required],
-            featured: [this.post.featured || false],
-            sticky: [this.post.sticky || false],
-            updates: [this.post.updates || '', Validators.required],
-            slug: [this.post.slug || ' ', Validators.required],
-            featuredMedia: [this.post.featuredMedia || ''],
-            subTitle: [this.post.subTitle || ''],
-            formatId: [this.post.formatId || '', Validators.required],
-            statusId: [this.post.statusId || ''],
-            statusName: [this.post.statusName || ''],
-            categories: [this.post.categories], // convert into this.fb.array
-            tags: [this.post.tags], // convert into this.fb.array
-            degaUsers: [this.post.degaUsers || '', Validators.required], // convert into this.fb.array
-            clientId: [this.post.clientId || ''], // delete once backend is fixed
-            publishedDate: [this.post.publishedDate || null], // delete once backend is fixed
-            createdDate: [this.post.createdDate || null] // delete once backend is fixed
-        });
+        this.createPostEditFormGroup();
         this.getAllDegaUsers();
         this.getAllCategories();
         this.getAllTags();
@@ -152,6 +132,30 @@ export class PostUpdateComponent implements OnInit {
         );
         this.principal.identity().then(account => {
             this.account = account;
+        });
+    }
+
+    createPostEditFormGroup() {
+        this.postEditFormGroup = this.fb.group({
+            id: [this.post.id || ''],
+            title: [this.post.title || '', Validators.required],
+            content: [this.post.content || '', Validators.required],
+            excerpt: [this.post.excerpt || '', Validators.required],
+            featured: [this.post.featured || false],
+            sticky: [this.post.sticky || false],
+            updates: [this.post.updates || '', Validators.required],
+            slug: [this.post.slug || ' ', Validators.required],
+            featuredMedia: [this.post.featuredMedia || ''],
+            subTitle: [this.post.subTitle || ''],
+            formatId: [this.post.formatId || '', Validators.required],
+            statusId: [this.post.statusId || ''],
+            statusName: [this.post.statusName || ''],
+            categories: [this.post.categories], // convert into this.fb.array
+            tags: [this.post.tags], // convert into this.fb.array
+            degaUsers: [this.post.degaUsers || '', Validators.required], // convert into this.fb.array
+            clientId: [this.post.clientId || ''], // delete once backend is fixed
+            publishedDate: [this.post.publishedDate || null], // delete once backend is fixed
+            createdDate: [this.post.createdDate || null] // delete once backend is fixed
         });
     }
 
@@ -200,6 +204,7 @@ export class PostUpdateComponent implements OnInit {
 
     updatePostContentFormData(data) {
         this.post.content = data['html'];
+        this.postEditFormGroup.controls['content'].setValue(data['html']);
     }
 
     updateMediaForFeature(url) {

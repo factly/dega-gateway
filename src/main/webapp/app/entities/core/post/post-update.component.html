@@ -211,16 +211,19 @@
                             <input matInput
                                    [(ngModel)]="searchTagKeyword" [ngModelOptions]="{standalone: true}">
                         </mat-form-field>
-                        <button mat-raised-button type="button" (click)="searchTagCurrentPage=0;searchTags()">
-                            Search
+                        <button mat-icon-button type="button" (click)="searchTagCurrentPage=0;searchTags()">
+                            <mat-icon>search</mat-icon>
                         </button>
-                        <span (click)="getAllTags()"><fa-icon [icon]="'asterisk'"></fa-icon></span>
-                        <br>
-                        <jhi-multiple-checkbox id="field_tag"
-                                               [option_list]="all_tag_options"
-                                               [selected_options]="selected_tag_options"
-                                               (updated_selection)="update_tag_selection($event)">
-                        </jhi-multiple-checkbox>
+                        <button mat-icon-button type="button" (click)="getAllTags()">
+                            <mat-icon>refresh</mat-icon>
+                        </button>
+                        <div>
+                            <jhi-multiple-checkbox id="field_tag"
+                                                   [option_list]="all_tag_options"
+                                                   [selected_options]="selected_tag_options"
+                                                   (updated_selection)="update_tag_selection($event)">
+                            </jhi-multiple-checkbox>
+                        </div>
                         <button type="button"
                                 mat-raised-button
                                 (click)="searchTagCurrentPage=searchTagCurrentPage-1;searchTags()"
@@ -255,11 +258,16 @@
                                 (click)="searchCategoryCurrentPage=0;searchCategories()">
                             <mat-icon>search</mat-icon>
                         </button>
-                        <jhi-multiple-checkbox id="field_category"
-                                               [option_list]="all_category_options"
-                                               [selected_options]="selected_category_options"
-                                               (updated_selection)="update_category_selection($event)">
-                        </jhi-multiple-checkbox>
+                        <button mat-icon-button type="button" (click)="getAllCategories()">
+                            <mat-icon>refresh</mat-icon>
+                        </button>
+                        <div>
+                            <jhi-multiple-checkbox id="field_category"
+                                                   [option_list]="all_category_options"
+                                                   [selected_options]="selected_category_options"
+                                                   (updated_selection)="update_category_selection($event)">
+                            </jhi-multiple-checkbox>
+                        </div>
                     </mat-expansion-panel>
                     <button type="button"
                             mat-raised-button
@@ -286,17 +294,19 @@
                             <input matInput
                                    [(ngModel)]="searchDegaUserKeyword" [ngModelOptions]="{standalone: true}">
                         </mat-form-field>
-                        <button type="button" mat-raised-button (click)="searchDegaUserCurrentPage=0;searchDegaUsers()">
-                            Search
+                        <button type="button" mat-icon-button (click)="searchDegaUserCurrentPage=0;searchDegaUsers()">
+                            <mat-icon>search</mat-icon>
                         </button>
-                        <button type="button" mat-raised-button (click)="getAllDegaUsers()">
-                            Reset
+                        <button mat-icon-button type="button" (click)="getAllDegaUsers()">
+                            <mat-icon>refresh</mat-icon>
                         </button>
-                        <jhi-multiple-checkbox id="field_degaUser"
-                                               [option_list]="all_author_options"
-                                               [selected_options]="selected_author_options"
-                                               (updated_selection)="update_author_selection($event)">
-                        </jhi-multiple-checkbox>
+                        <div>
+                            <jhi-multiple-checkbox id="field_degaUser"
+                                                   [option_list]="all_author_options"
+                                                   [selected_options]="selected_author_options"
+                                                   (updated_selection)="update_author_selection($event)">
+                            </jhi-multiple-checkbox>
+                        </div>
                         <button type="button"
                                 mat-raised-button
                                 (click)="searchDegaUserCurrentPage=searchDegaUserCurrentPage-1;searchDegaUsers()"

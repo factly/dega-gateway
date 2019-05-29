@@ -245,13 +245,15 @@
                         <mat-form-field>
                             <input matInput placeholder="Category" [(ngModel)]="searchCategoryKeyword"
                                    [ngModelOptions]="{standalone: true}">
+                            <button mat-button *ngIf="searchCategoryKeyword" type="button"
+                                    matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="searchCategoryKeyword='';getAllCategories()">
+                                <mat-icon>close</mat-icon>
+                            </button>
                         </mat-form-field>
-                        <button mat-raised-button type="button"
+                        <button mat-button type="button" matSuffix mat-icon-button aria-label="Search"
                                 (click)="searchCategoryCurrentPage=0;searchCategories()">
-                            Search
-                        </button>
-                        <button mat-raised-button type="button" (click)="getAllCategories()">
-                            Reset
+                            <mat-icon>search</mat-icon>
                         </button>
                         <jhi-multiple-checkbox id="field_category"
                                                [option_list]="all_category_options"

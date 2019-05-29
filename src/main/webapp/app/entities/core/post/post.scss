@@ -165,7 +165,6 @@ $xs-sm-font-size: 12px;
 .post-edit-view {
     position: relative;
     .sub-header {
-        top: -20px;
         left: -17px;
         height: 50px;
         overflow: hidden;
@@ -179,14 +178,14 @@ $xs-sm-font-size: 12px;
         border-width: 1px 0;
     }
     .editor-wrap {
-        top: 30px;
+        top: 50px;
         position: relative;
         height: calc(100vh - 117px);
         overflow: scroll;
         margin-left: -15px;
         background: white;
         padding: 50px;
-        width: calc(100% - 270px);
+        width: calc(100% - 295px);
         box-shadow: 0 2px 2px #f3f3f3, 0 0 2px rgba(0, 0, 0, 0.12);
         .title-input {
             font-size: 24px;

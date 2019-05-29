@@ -1,76 +1,6 @@
 <div class="row post-edit-view">
-    <div class="col-8 editor-wrap">
-        <form [formGroup]="postEditFormGroup" class="form-group">
-            <mat-form-field class="example-full-width">
-                <input matInput
-                       formControlName="title"
-                       placeholder="Title of the article">
-                <mat-error>
-                    Title is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-                <input matInput
-                       formControlName="subTitle"
-                       placeholder="Subtitle of the article">
-                <mat-error>
-                    Sub Title is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-
-            <jhi-quill-editor [original_content]="post.content"
-                              (updated_content)="updatePostContentFormData($event)">
-            </jhi-quill-editor>
-
-
-            <mat-form-field class="example-full-width">
-                <textarea matInput
-                          formControlName="excerpt"
-                          placeholder="Excerpt">
-                </textarea>
-            </mat-form-field>
-
-            <div class="container example-full-width">
-                <button mat-raised-button type="button" color="primary"
-                        replaceUrl="true"
-                        [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                        [queryParams]="{ media_type: 'feature'}">Upload Featured media</button>
-                <button mat-raised-button type="button" color="primary"
-                        (click)="deleteMediaForFeature()"> Delete featured media</button>
-                <img [src]='postEditFormGroup.value.featuredMedia' alt="" width="100" height="100">
-            </div>
-
-            <div class="example-full-width">
-                <mat-checkbox formControlName="featured">
-                    Featured
-                </mat-checkbox>
-                <mat-checkbox formControlName="sticky">
-                    Sticky
-                </mat-checkbox>
-            </div>
-
-            <mat-form-field class="example-full-width">
-                <input matInput
-                       formControlName="updates"
-                       placeholder="Updates">
-                <mat-error>
-                    Updates is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-select placeholder="Format" formControlName="formatId">
-                    <mat-option [value]="formatOption.id"
-                            *ngFor="let formatOption of formats | orderBy:'name';">
-                        {{formatOption.name}}
-                    </mat-option>
-                </mat-select>
-
-            </mat-form-field>
-
-        </form>
-        <div>
+    <div class="sub-header">
+        <div class="button-wrap">
             <button type="button" mat-button
                     (click)="previousState()">
                 <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
@@ -89,6 +19,84 @@
                 jhiTranslate="entity.action.publish">Publish</span>
             </button>
         </div>
+    </div>
+    <div class="editor-wrap">
+        <form [formGroup]="postEditFormGroup" class="form-group">
+            <mat-form-field class="example-full-width">
+                <input class="title-input"
+                        matInput
+                       formControlName="title"
+                       placeholder="Title of the article">
+                <mat-error>
+                    Title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width margin-t-20">
+                <input matInput
+                       formControlName="subTitle"
+                       placeholder="Subtitle of the article">
+                <mat-error>
+                    Sub Title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="quill-editor-wrapper">
+                <jhi-quill-editor [original_content]="post.content"
+                                  (updated_content)="updatePostContentFormData($event)">
+                </jhi-quill-editor>
+            </div>
+
+            <div class="example-full-width margin-t-30">
+                <button mat-raised-button type="button" color="primary"
+                        replaceUrl="true"
+                        [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                        [queryParams]="{ media_type: 'feature'}">Upload Featured media</button>
+                <button mat-raised-button type="button" color="primary"
+                        (click)="deleteMediaForFeature()"> Delete featured media</button>
+                <img [src]='postEditFormGroup.value.featuredMedia' alt="" width="100" height="100">
+            </div>
+
+            <mat-form-field class="example-full-width margin-t-30">
+                <textarea matInput
+                          formControlName="excerpt"
+                          placeholder="Excerpt">
+                </textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input matInput
+                       formControlName="updates"
+                       placeholder="Updates">
+                <mat-error>
+                    Updates is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="example-full-width margin-t-20 row">
+                <div class="col-md-3">
+                    <mat-checkbox formControlName="featured">
+                        Featured
+                    </mat-checkbox>
+                </div>
+                <div class="col-md-3">
+                    <mat-checkbox formControlName="sticky">
+                        Sticky
+                    </mat-checkbox>
+                </div>
+            </div>
+
+            <mat-form-field>
+                <mat-select placeholder="Format" formControlName="formatId">
+                    <mat-option [value]="formatOption.id"
+                            *ngFor="let formatOption of formats | orderBy:'name';">
+                        {{formatOption.name}}
+                    </mat-option>
+                </mat-select>
+
+            </mat-form-field>
+
+        </form>
         <form name="editForm" role="form" novalidate (ngSubmit)="saveOrPublish('Draft')" #editForm="ngForm" hidden>
             <h2 id="jhi-post-heading" jhiTranslate="gatewayApp.corePost.home.createOrEditLabel">Create or edit a
                 Post</h2>

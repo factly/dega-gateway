@@ -110,13 +110,13 @@
                 height: 15px;
                 border: solid 2px white;
                 border-width: 2px 2px 0 0;
-                transform: rotate(45deg);
+                transform: rotate(225deg);
                 top: 7px;
                 right: 10px;
                 transition: 0.3s;
             }
             &.sticky:after {
-                transform: rotate(225deg);
+                transform: rotate(45deg);
                 right: 4px;
             }
         }

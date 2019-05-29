@@ -1,328 +1,231 @@
-<div class="row post-edit-view">
-    <div class="sub-header">
-        <div class="button-wrap">
-            <button type="button" mat-button
-                    (click)="previousState()">
-                <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-            </button>
-            <button mat-button type="button"
-                    (click)="saveOrPublish('Draft')"
-                    [disabled]="isSaving"
-                    *ngIf="showSave">
-                <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
-                jhiTranslate="entity.action.savedraft">Save Draft</span>
-            </button>
-            <button type="button" mat-button
-                    [disabled]="isSaving"
-                    *ngIf="showPublish" (click)="saveOrPublish('Publish')">
-                <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
-                jhiTranslate="entity.action.publish">Publish</span>
-            </button>
+<form [formGroup]="postEditFormGroup">
+    <div class="row post-edit-view">
+        <div class="sub-header">
+            <div class="button-wrap">
+                <button type="button" mat-button
+                        (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button mat-button type="button"
+                        (click)="saveOrPublish('Draft')"
+                        [disabled]="isSaving"
+                        *ngIf="showSave">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
+                    jhiTranslate="entity.action.savedraft">Save Draft</span>
+                </button>
+                <button type="button" mat-button
+                        [disabled]="isSaving"
+                        *ngIf="showPublish" (click)="saveOrPublish('Publish')">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
+                    jhiTranslate="entity.action.publish">Publish</span>
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="editor-wrap">
-        <form [formGroup]="postEditFormGroup" class="form-group">
-            <mat-form-field class="example-full-width">
-                <input class="title-input"
-                        matInput
-                       formControlName="title"
-                       placeholder="Title of the article">
-                <mat-error>
-                    Title is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
+        <div class="editor-wrap">
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <input class="title-input"
+                            matInput
+                           formControlName="title"
+                           placeholder="Title of the article">
+                    <mat-error>
+                        Title is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
 
-            <mat-form-field class="example-full-width margin-t-20">
-                <input matInput
-                       formControlName="subTitle"
-                       placeholder="Subtitle of the article">
-                <mat-error>
-                    Sub Title is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
+                <mat-form-field class="example-full-width margin-t-30">
+                    <textarea matInput
+                              formControlName="excerpt"
+                              placeholder="Excerpt">
+                    </textarea>
+                </mat-form-field>
 
-            <div class="quill-editor-wrapper">
-                <jhi-quill-editor [original_content]="post.content"
-                                  (updated_content)="updatePostContentFormData($event)">
-                </jhi-quill-editor>
-            </div>
+                <mat-form-field class="example-full-width margin-t-20">
+                    <input matInput
+                           formControlName="subTitle"
+                           placeholder="Subtitle of the article">
+                    <mat-error>
+                        Sub Title is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
 
-            <div class="example-full-width margin-t-30">
-                <button mat-raised-button type="button" color="primary"
-                        replaceUrl="true"
-                        [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                        [queryParams]="{ media_type: 'feature'}">Upload Featured media</button>
-                <button mat-raised-button type="button" color="primary"
-                        (click)="deleteMediaForFeature()"> Delete featured media</button>
-                <img [src]='postEditFormGroup.value.featuredMedia' alt="" width="100" height="100">
-            </div>
-
-            <mat-form-field class="example-full-width margin-t-30">
-                <textarea matInput
-                          formControlName="excerpt"
-                          placeholder="Excerpt">
-                </textarea>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-                <input matInput
-                       formControlName="updates"
-                       placeholder="Updates">
-                <mat-error>
-                    Updates is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-
-            <div class="example-full-width margin-t-20 row">
-                <div class="col-md-3">
-                    <mat-checkbox formControlName="featured">
-                        Featured
-                    </mat-checkbox>
-                </div>
-                <div class="col-md-3">
-                    <mat-checkbox formControlName="sticky">
-                        Sticky
-                    </mat-checkbox>
-                </div>
-            </div>
-
-            <mat-form-field>
-                <mat-select placeholder="Format" formControlName="formatId">
-                    <mat-option [value]="formatOption.id"
-                            *ngFor="let formatOption of formats | orderBy:'name';">
-                        {{formatOption.name}}
-                    </mat-option>
-                </mat-select>
-
-            </mat-form-field>
-
-        </form>
-        <form name="editForm" role="form" novalidate (ngSubmit)="saveOrPublish('Draft')" #editForm="ngForm" hidden>
-            <h2 id="jhi-post-heading" jhiTranslate="gatewayApp.corePost.home.createOrEditLabel">Create or edit a
-                Post</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!post.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="post.id" readonly/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.title"
-                           for="field_title">Title</label>
-                    <input type="text" class="form-control" name="title" id="field_title"
-                           [(ngModel)]="post.title" required/>
-                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.title?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.subTitle" for="field_subTitle">Sub
-                        Title</label>
-                    <input type="text" class="form-control" name="subTitle" id="field_subTitle"
-                           [(ngModel)]="post.subTitle"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.content" for="field_content">Content</label>
-                    <span class="text-danger" [hidden]="post.content">*</span>
+                <div class="quill-editor-wrapper">
                     <jhi-quill-editor [original_content]="post.content"
-                                      id="field_content"
                                       (updated_content)="updatePostContentFormData($event)">
                     </jhi-quill-editor>
-                    <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.content?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.excerpt" for="field_excerpt">Excerpt</label>
-                    <textarea rows="5" type="text" class="form-control" name="excerpt" id="field_excerpt"
-                              [(ngModel)]="post.excerpt"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.featured" for="field_featured">Featured</label>
-                    <input type="checkbox" class="form-control" name="featured" id="field_featured"
-                           [(ngModel)]="post.featured"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.sticky" for="field_sticky">Sticky</label>
-                    <input type="checkbox" class="form-control" name="sticky" id="field_sticky"
-                           [(ngModel)]="post.sticky"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.updates" for="field_updates">Updates</label>
-                    <input type="text" class="form-control" name="updates" id="field_updates"
-                           [(ngModel)]="post.updates"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.corePost.featuredMedia"
-                           for="field_featuredMedia">Featured Media</label>
-                    <button id="field_featuredMedia" class="btn btn-primary jh-create-entity create-media"
+
+                <div class="example-full-width margin-t-30">
+                    <button mat-raised-button type="button" color="primary"
+                            replaceUrl="true"
                             [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                            [queryParams]="{ media_type: 'feature'}"
-                            replaceUrl="true" type="button">
-                        <fa-icon [icon]="'plus'"></fa-icon>
-                        <span class="hidden-sm-down" jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
-                            Upload Media
-                        </span>
-                    </button>
-                    <img src={{post.featuredMedia}} alt="" width="100" height="100">
-                    <div *ngIf="post.featuredMedia">
-                        <span [(ngModel)]="post.featuredMedia" name="featuredMedia" ngDefaultControl></span>
+                            [queryParams]="{ media_type: 'feature'}">Upload Featured media</button>
+                    <button mat-raised-button type="button" color="primary"
+                            (click)="deleteMediaForFeature()"> Delete featured media</button>
+                    <img [src]='postEditFormGroup.value.featuredMedia' alt="" width="100" height="100">
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    <textarea matInput
+                           formControlName="updates"
+                           placeholder="Updates">
+                    </textarea>
+                    <mat-error>
+                        Updates is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+
+
+
+        </div>
+        <div class="col-4 edit-view-right-pannel">
+            <div class="form-group">
+                <div class="form-group">
+                    <mat-accordion>
+                        <mat-expansion-panel (opened)="true">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Tag
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-form-field>
+                                <input matInput
+                                       [(ngModel)]="searchTagKeyword" [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                            <button mat-icon-button type="button" (click)="searchTagCurrentPage=0;searchTags()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <button mat-icon-button type="button" (click)="getAllTags()">
+                                <mat-icon>refresh</mat-icon>
+                            </button>
+                            <div>
+                                <jhi-multiple-checkbox id="field_tag"
+                                                       [option_list]="all_tag_options"
+                                                       [selected_options]="selected_tag_options"
+                                                       (updated_selection)="update_tag_selection($event)">
+                                </jhi-multiple-checkbox>
+                            </div>
+                            <button type="button"
+                                    mat-raised-button
+                                    (click)="searchTagCurrentPage=searchTagCurrentPage-1;searchTags()"
+                                    *ngIf="searchTagCurrentPage>0">
+                                Previous
+                            </button>
+                            <button type="button"
+                                    mat-raised-button
+                                    (click)="searchTagCurrentPage=searchTagCurrentPage+1;searchTags()"
+                                    *ngIf="searchTagTotalResult>((searchTagCurrentPage+1)*searchResultPerPage)">
+                                Next
+                            </button>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+                <div class="form-group">
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title jhiTranslate="gatewayApp.corePost.category">Category</mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-form-field>
+                                <input matInput placeholder="Category" [(ngModel)]="searchCategoryKeyword"
+                                       [ngModelOptions]="{standalone: true}">
+                                <button mat-button *ngIf="searchCategoryKeyword" type="button"
+                                        matSuffix mat-icon-button aria-label="Clear"
+                                        (click)="searchCategoryKeyword='';getAllCategories()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <button mat-button type="button" matSuffix mat-icon-button aria-label="Search"
+                                    (click)="searchCategoryCurrentPage=0;searchCategories()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <button mat-icon-button type="button" (click)="getAllCategories()">
+                                <mat-icon>refresh</mat-icon>
+                            </button>
+                            <div>
+                                <jhi-multiple-checkbox id="field_category"
+                                                       [option_list]="all_category_options"
+                                                       [selected_options]="selected_category_options"
+                                                       (updated_selection)="update_category_selection($event)">
+                                </jhi-multiple-checkbox>
+                            </div>
+                        </mat-expansion-panel>
+                        <button type="button"
+                                mat-raised-button
+                                (click)="searchCategoryCurrentPage=searchCategoryCurrentPage-1;searchCategories()"
+                                *ngIf="searchCategoryCurrentPage>0">
+                            Previous
+                        </button>
+                        <button type="button"
+                                matInput
+                                (click)="searchCategoryCurrentPage=searchCategoryCurrentPage+1;searchCategories()"
+                                *ngIf="searchCategoryTotalResult>((searchCategoryCurrentPage+1)*searchResultPerPage)">
+                            Next
+                        </button>
+                    </mat-accordion>
+
+                </div>
+                <div class="form-group">
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-pannel-title jhiTranslate="gatewayApp.corePost.degaUser">Author</mat-pannel-title>
+                            </mat-expansion-panel-header>
+                            <mat-form-field>
+                                <input matInput
+                                       [(ngModel)]="searchDegaUserKeyword" [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                            <button type="button" mat-icon-button (click)="searchDegaUserCurrentPage=0;searchDegaUsers()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <button mat-icon-button type="button" (click)="getAllDegaUsers()">
+                                <mat-icon>refresh</mat-icon>
+                            </button>
+                            <div>
+                                <jhi-multiple-checkbox id="field_degaUser"
+                                                       [option_list]="all_author_options"
+                                                       [selected_options]="selected_author_options"
+                                                       (updated_selection)="update_author_selection($event)">
+                                </jhi-multiple-checkbox>
+                            </div>
+                            <button type="button"
+                                    mat-raised-button
+                                    (click)="searchDegaUserCurrentPage=searchDegaUserCurrentPage-1;searchDegaUsers()"
+                                    *ngIf="searchDegaUserCurrentPage>0">
+                                Previous
+                            </button>
+                            <button type="button"
+                                    mat-raised-button
+                                    (click)="searchDegaUserCurrentPage=searchDegaUserCurrentPage+1;searchDegaUsers()"
+                                    *ngIf="searchDegaUserTotalResult>((searchDegaUserCurrentPage+1)*searchResultPerPage)">
+                                Next
+                            </button>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+                <div class="example-full-width margin-t-20 row">
+                    <div class="col-md-6">
+                        <mat-checkbox formControlName="featured">
+                            Featured
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-checkbox formControlName="sticky">
+                            Sticky
+                        </mat-checkbox>
                     </div>
                 </div>
-                <div>
-                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                    </button>
-                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
-                            class="btn btn-primary" *ngIf="showSave">
-                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
-                        jhiTranslate="entity.action.savedraft">Save Draft</span>
-                    </button>
-                    <button type="button" id="publish-entity" [disabled]="editForm.form.invalid || isSaving"
-                            class="btn btn-primary" *ngIf="showPublish" (click)="saveOrPublish('Publish')">
-                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
-                        jhiTranslate="entity.action.publish">Publish</span>
-                    </button>
-                </div>
-        </form>
+                <mat-form-field>
+                    <mat-select placeholder="Format" formControlName="formatId">
+                        <mat-option [value]="formatOption.id"
+                                    *ngFor="let formatOption of formats | orderBy:'name';">
+                            {{formatOption.name}}
+                        </mat-option>
+                    </mat-select>
 
-
-    </div>
-    <div class="col-4 edit-view-right-pannel">
-        <div class="form-group">
-            <div class="form-group">
-                <mat-accordion>
-                    <mat-expansion-panel (opened)="true">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Tag
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <mat-form-field>
-                            <input matInput
-                                   [(ngModel)]="searchTagKeyword" [ngModelOptions]="{standalone: true}">
-                        </mat-form-field>
-                        <button mat-icon-button type="button" (click)="searchTagCurrentPage=0;searchTags()">
-                            <mat-icon>search</mat-icon>
-                        </button>
-                        <button mat-icon-button type="button" (click)="getAllTags()">
-                            <mat-icon>refresh</mat-icon>
-                        </button>
-                        <div>
-                            <jhi-multiple-checkbox id="field_tag"
-                                                   [option_list]="all_tag_options"
-                                                   [selected_options]="selected_tag_options"
-                                                   (updated_selection)="update_tag_selection($event)">
-                            </jhi-multiple-checkbox>
-                        </div>
-                        <button type="button"
-                                mat-raised-button
-                                (click)="searchTagCurrentPage=searchTagCurrentPage-1;searchTags()"
-                                *ngIf="searchTagCurrentPage>0">
-                            Previous
-                        </button>
-                        <button type="button"
-                                mat-raised-button
-                                (click)="searchTagCurrentPage=searchTagCurrentPage+1;searchTags()"
-                                *ngIf="searchTagTotalResult>((searchTagCurrentPage+1)*searchResultPerPage)">
-                            Next
-                        </button>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </div>
-            <div class="form-group">
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title jhiTranslate="gatewayApp.corePost.category">Category</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <mat-form-field>
-                            <input matInput placeholder="Category" [(ngModel)]="searchCategoryKeyword"
-                                   [ngModelOptions]="{standalone: true}">
-                            <button mat-button *ngIf="searchCategoryKeyword" type="button"
-                                    matSuffix mat-icon-button aria-label="Clear"
-                                    (click)="searchCategoryKeyword='';getAllCategories()">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                        </mat-form-field>
-                        <button mat-button type="button" matSuffix mat-icon-button aria-label="Search"
-                                (click)="searchCategoryCurrentPage=0;searchCategories()">
-                            <mat-icon>search</mat-icon>
-                        </button>
-                        <button mat-icon-button type="button" (click)="getAllCategories()">
-                            <mat-icon>refresh</mat-icon>
-                        </button>
-                        <div>
-                            <jhi-multiple-checkbox id="field_category"
-                                                   [option_list]="all_category_options"
-                                                   [selected_options]="selected_category_options"
-                                                   (updated_selection)="update_category_selection($event)">
-                            </jhi-multiple-checkbox>
-                        </div>
-                    </mat-expansion-panel>
-                    <button type="button"
-                            mat-raised-button
-                            (click)="searchCategoryCurrentPage=searchCategoryCurrentPage-1;searchCategories()"
-                            *ngIf="searchCategoryCurrentPage>0">
-                        Previous
-                    </button>
-                    <button type="button"
-                            matInput
-                            (click)="searchCategoryCurrentPage=searchCategoryCurrentPage+1;searchCategories()"
-                            *ngIf="searchCategoryTotalResult>((searchCategoryCurrentPage+1)*searchResultPerPage)">
-                        Next
-                    </button>
-                </mat-accordion>
-
-            </div>
-            <div class="form-group">
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-pannel-title jhiTranslate="gatewayApp.corePost.degaUser">Author</mat-pannel-title>
-                        </mat-expansion-panel-header>
-                        <mat-form-field>
-                            <input matInput
-                                   [(ngModel)]="searchDegaUserKeyword" [ngModelOptions]="{standalone: true}">
-                        </mat-form-field>
-                        <button type="button" mat-icon-button (click)="searchDegaUserCurrentPage=0;searchDegaUsers()">
-                            <mat-icon>search</mat-icon>
-                        </button>
-                        <button mat-icon-button type="button" (click)="getAllDegaUsers()">
-                            <mat-icon>refresh</mat-icon>
-                        </button>
-                        <div>
-                            <jhi-multiple-checkbox id="field_degaUser"
-                                                   [option_list]="all_author_options"
-                                                   [selected_options]="selected_author_options"
-                                                   (updated_selection)="update_author_selection($event)">
-                            </jhi-multiple-checkbox>
-                        </div>
-                        <button type="button"
-                                mat-raised-button
-                                (click)="searchDegaUserCurrentPage=searchDegaUserCurrentPage-1;searchDegaUsers()"
-                                *ngIf="searchDegaUserCurrentPage>0">
-                            Previous
-                        </button>
-                        <button type="button"
-                                mat-raised-button
-                                (click)="searchDegaUserCurrentPage=searchDegaUserCurrentPage+1;searchDegaUsers()"
-                                *ngIf="searchDegaUserTotalResult>((searchDegaUserCurrentPage+1)*searchResultPerPage)">
-                            Next
-                        </button>
-                    </mat-expansion-panel>
-                </mat-accordion>
+                </mat-form-field>
             </div>
         </div>
     </div>
-</div>
-
+</form>

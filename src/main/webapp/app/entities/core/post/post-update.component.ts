@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
@@ -87,6 +87,7 @@ export class PostUpdateComponent implements OnInit {
         private formatService: FormatService,
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
+        private route: Router,
         private principal: Principal,
         private fb: FormBuilder
     ) {
@@ -122,7 +123,7 @@ export class PostUpdateComponent implements OnInit {
             (res: HttpResponse<IFormat[]>) => {
                 this.formats = res.body;
                 if (this.post.id === undefined) {
-                    this.post.formatId = this.formats.find(format => format.name === 'Standard').id;
+                    this.postEditFormGroup.controls['formatId'].setValue(this.formats.find(format => format.name === 'Standard').id);
                 }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
@@ -213,7 +214,7 @@ export class PostUpdateComponent implements OnInit {
     }
 
     previousState() {
-        window.history.back();
+        this.route.navigate(['/post']);
     }
 
     saveOrPublish(statusName) {

@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { RouterModule } from '@angular/router';
@@ -42,6 +43,7 @@ const ENTITY_STATES = [...postRoute, ...postPopupRoute];
         MatIconModule,
         MatInputModule,
         MatSelectModule,
+        MatSlideToggleModule,
         MatTooltipModule,
         ReactiveFormsModule
     ],

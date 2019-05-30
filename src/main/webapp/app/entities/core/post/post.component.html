@@ -58,6 +58,7 @@
                             <p class="created-by"><i>Created By</i></p>
                             <p class="author-name"><span *ngFor="let author of post.degaUsers; index as i">{{author.firstName}} {{i != post.degaUsers.length -1 ?  '| ': ''}}</span>
                             </p>
+                            <p class="status"><span class="created-by">Status: </span>{{post.statusName}}</p>
                         </div>
                     </div>
                     <div class="actions-wrap">

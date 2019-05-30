@@ -141,6 +141,10 @@ $xs-sm-font-size: 12px;
                             font-size: #{$sm-font-size};
                             margin-bottom: 0px;
                         }
+                        .status {
+                            color: red;
+                            font-weight: 400;
+                        }
                         .author-name {
                             color: #{$black-font-color};
                         }
@@ -213,15 +217,23 @@ $xs-sm-font-size: 12px;
         width: 33%;
         max-width: 300px;
         background: white;
-        height: calc(100vh - 65px);
+        height: calc(100vh - 105px);
         overflow-y: scroll;
         padding: 10px 7px;
-        mat-form-field {
-            width: 140px;
+        mat-expansion-panel {
+            mat-form-field {
+                width: 140px;
+            }
+            .full-width {
+                width: 100%;
+            }
         }
-    }
-    .example-full-width {
-        width: 100%;
+        .featured-img {
+            height: 100px;
+            img {
+                max-width: 100%;
+            }
+        }
     }
 }
 

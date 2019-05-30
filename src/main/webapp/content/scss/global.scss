@@ -52,7 +52,6 @@ select.ng-invalid:not(form) {
 /* other generic styles */
 
 .jh-card {
-    padding: 1.5%;
     margin-top: 20px;
     border: none;
     background: none;
@@ -81,6 +80,18 @@ select.ng-invalid:not(form) {
 
 .w-60 {
     width: 60% !important;
+}
+
+.margin-t-20 {
+    margin-top: 20px;
+}
+
+.margin-t-30 {
+    margin-top: 30px;
+}
+
+.full-width {
+    width: 100%;
 }
 
 .break {
@@ -257,6 +268,7 @@ $theme: mat-light-theme($palette, $palette);
 // Include component specific mixin
 @include mat-dialog-theme($theme);
 @include mat-checkbox-theme($theme);
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 /* Angular material css ends */
 
 /* Quill Editor CSS starts */

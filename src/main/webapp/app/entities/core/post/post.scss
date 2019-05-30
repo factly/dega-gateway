@@ -141,6 +141,10 @@ $xs-sm-font-size: 12px;
                             font-size: #{$sm-font-size};
                             margin-bottom: 0px;
                         }
+                        .status {
+                            color: red;
+                            font-weight: 400;
+                        }
                         .author-name {
                             color: #{$black-font-color};
                         }
@@ -160,4 +164,80 @@ $xs-sm-font-size: 12px;
             }
         }
     }
+}
+
+.post-edit-view {
+    position: relative;
+    .sub-header {
+        left: -17px;
+        height: 50px;
+        overflow: hidden;
+        padding: 5px 15px;
+        background: white;
+        position: absolute;
+        width: calc(100% + 17px);
+        display: flex;
+        flex-flow: row-reverse;
+        border: solid 1px #d4d4d4;
+        border-width: 1px 0;
+    }
+    .editor-wrap {
+        top: 50px;
+        position: relative;
+        height: calc(100vh - 117px);
+        overflow: scroll;
+        margin-left: -15px;
+        background: white;
+        padding: 50px;
+        width: calc(100% - 295px);
+        box-shadow: 0 2px 2px #f3f3f3, 0 0 2px rgba(0, 0, 0, 0.12);
+        .title-input {
+            font-size: 24px;
+        }
+        .quill-editor-wrapper {
+            box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+            margin-top: 20px;
+            jhi-quill-editor {
+                quill-editor {
+                    .ql-toolbar {
+                        border: 0px;
+                    }
+                    .ql-container {
+                        border: 0px;
+                        padding: 10px;
+                    }
+                }
+            }
+        }
+    }
+    .edit-view-right-pannel {
+        position: fixed;
+        top: 113px;
+        right: 0px;
+        width: 33%;
+        max-width: 300px;
+        background: white;
+        height: calc(100vh - 105px);
+        overflow-y: scroll;
+        padding: 10px 7px;
+        mat-expansion-panel {
+            mat-form-field {
+                width: 140px;
+            }
+            .full-width {
+                width: 100%;
+            }
+        }
+        .featured-img {
+            img {
+                height: 100px;
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+// Remove this after ng-bootstrap is removed
+input.ng-invalid:not(form) {
+    border-left: 0px solid #42a948; /* green */
 }

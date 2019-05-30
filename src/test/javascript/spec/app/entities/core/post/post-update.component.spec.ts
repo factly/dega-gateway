@@ -7,6 +7,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { PostUpdateComponent } from 'app/entities/core/post/post-update.component';
 import { PostService } from 'app/entities/core/post/post.service';
 import { Post } from 'app/shared/model/core/post.model';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('Component Tests', () => {
     describe('Post Management Update Component', () => {
@@ -16,7 +17,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GatewayTestModule],
+                imports: [GatewayTestModule, ReactiveFormsModule],
                 declarations: [PostUpdateComponent]
             })
                 .overrideTemplate(PostUpdateComponent, '')
@@ -24,8 +25,23 @@ describe('Component Tests', () => {
 
             fixture = TestBed.createComponent(PostUpdateComponent);
             comp = fixture.componentInstance;
+            comp.post = new Post('123');
+            comp.createPostEditFormGroup();
             service = fixture.debugElement.injector.get(PostService);
         });
+
+        function createPostEditFormGroup(valid) {
+            comp.postEditFormGroup.controls['title'].setValue('testing title');
+            comp.postEditFormGroup.controls['content'].setValue('testing content');
+            comp.postEditFormGroup.controls['excerpt'].setValue('testing excerpt');
+            comp.postEditFormGroup.controls['updates'].setValue('testing updates');
+            comp.postEditFormGroup.controls['slug'].setValue('testing slug');
+            comp.postEditFormGroup.controls['formatId'].setValue('12121');
+            comp.postEditFormGroup.controls['degaUsers'].setValue([{ id: '123' }]);
+            if (!valid) {
+                comp.postEditFormGroup.controls['title'].setValue('');
+            }
+        }
 
         describe('save', () => {
             it('Should call update service on save for existing entity', fakeAsync(() => {
@@ -34,25 +50,12 @@ describe('Component Tests', () => {
                 spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.post = entity;
                 // WHEN
+                createPostEditFormGroup(true);
                 comp.saveOrPublish('Publish');
                 tick(); // simulate async
 
                 // THEN
-                expect(service.update).toHaveBeenCalledWith(entity);
-                expect(comp.isSaving).toEqual(false);
-            }));
-
-            it('Should call create service on save for new entity', fakeAsync(() => {
-                // GIVEN
-                const entity = new Post();
-                spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
-                comp.post = entity;
-                // WHEN
-                comp.saveOrPublish('Publish');
-                tick(); // simulate async
-
-                // THEN
-                expect(service.create).toHaveBeenCalledWith(entity);
+                expect(service.update).toHaveBeenCalledWith(comp.postEditFormGroup.value);
                 expect(comp.isSaving).toEqual(false);
             }));
         });

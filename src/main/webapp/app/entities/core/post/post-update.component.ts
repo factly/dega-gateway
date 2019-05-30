@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
@@ -20,10 +20,12 @@ import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
 import { MediaService } from '../media/media.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-post-update',
-    templateUrl: './post-update.component.html'
+    templateUrl: './post-update.component.html',
+    styleUrls: ['post.scss']
 })
 export class PostUpdateComponent implements OnInit {
     post: IPost;
@@ -44,10 +46,8 @@ export class PostUpdateComponent implements OnInit {
     createdDate: string;
     showSave: boolean;
     showPublish: boolean;
-    slug: string;
-    slugExtention: number;
-    tempSlug: string;
     account: Account;
+    postEditFormGroup: FormGroup;
 
     subscription;
 
@@ -87,7 +87,9 @@ export class PostUpdateComponent implements OnInit {
         private formatService: FormatService,
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
-        private principal: Principal
+        private route: Router,
+        private principal: Principal,
+        private fb: FormBuilder
     ) {
         this.subscription = this.mediaService.getProductID().subscribe(message => {
             if (message['type_of_data'] === 'feature') {
@@ -107,6 +109,7 @@ export class PostUpdateComponent implements OnInit {
             this.lastUpdatedDate = this.post.lastUpdatedDate != null ? this.post.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.post.createdDate != null ? this.post.createdDate.format(DATE_TIME_FORMAT) : null;
         });
+        this.createPostEditFormGroup();
         this.getAllDegaUsers();
         this.getAllCategories();
         this.getAllTags();
@@ -120,7 +123,7 @@ export class PostUpdateComponent implements OnInit {
             (res: HttpResponse<IFormat[]>) => {
                 this.formats = res.body;
                 if (this.post.id === undefined) {
-                    this.post.formatId = this.formats.find(format => format.name === 'Standard').id;
+                    this.postEditFormGroup.controls['formatId'].setValue(this.formats.find(format => format.name === 'Standard').id);
                 }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
@@ -130,8 +133,34 @@ export class PostUpdateComponent implements OnInit {
         });
     }
 
+    createPostEditFormGroup() {
+        this.postEditFormGroup = this.fb.group({
+            id: [this.post.id || ''],
+            title: [this.post.title || '', Validators.required],
+            content: [this.post.content || '', Validators.required],
+            excerpt: [this.post.excerpt || '', Validators.required],
+            featured: [this.post.featured || false],
+            sticky: [this.post.sticky || false],
+            updates: [this.post.updates || ''],
+            slug: [this.post.slug || ''],
+            featuredMedia: [this.post.featuredMedia || ''],
+            subTitle: [this.post.subTitle || ''],
+            formatId: [this.post.formatId || '', Validators.required],
+            statusId: [this.post.statusId || null],
+            statusName: [this.post.statusName || ''],
+            categories: [this.post.categories], // convert into this.fb.array
+            tags: [this.post.tags], // convert into this.fb.array
+            degaUsers: [this.post.degaUsers || '', Validators.required], // convert into this.fb.array
+            clientId: [this.post.clientId || 'Factly'], // delete once backend is fixed
+            publishedDate: [this.post.publishedDate || null], // delete once backend is fixed
+            createdDate: [this.post.createdDate || null] // delete once backend is fixed
+        });
+    }
+
     getAllTags() {
         this.searchTagKeyword = '';
+        this.searchTagTotalResult = 0;
+        this.searchTagCurrentPage = 0;
         this.tagService.query().subscribe(
             (res: HttpResponse<ITag[]>) => {
                 this.tags = res.body;
@@ -143,6 +172,9 @@ export class PostUpdateComponent implements OnInit {
     }
 
     getAllDegaUsers() {
+        this.searchDegaUserKeyword = '';
+        this.searchDegaUserTotalResult = 0;
+        this.searchDegaUserCurrentPage = 0;
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
@@ -163,6 +195,8 @@ export class PostUpdateComponent implements OnInit {
 
     getAllCategories() {
         this.searchCategoryKeyword = '';
+        this.searchCategoryTotalResult = 0;
+        this.searchCategoryCurrentPage = 0;
         this.categoryService.query().subscribe(
             (res: HttpResponse<ICategory[]>) => {
                 this.categories = res.body;
@@ -175,23 +209,40 @@ export class PostUpdateComponent implements OnInit {
 
     updatePostContentFormData(data) {
         this.post.content = data['html'];
+        this.postEditFormGroup.controls['content'].setValue(data['html']);
     }
 
     updateMediaForFeature(url) {
-        this.post.featuredMedia = url;
+        this.postEditFormGroup.controls['featuredMedia'].setValue(url);
+    }
+
+    deleteMediaForFeature() {
+        this.postEditFormGroup.controls['featuredMedia'].setValue('');
     }
 
     previousState() {
-        window.history.back();
+        this.route.navigate(['/post']);
     }
 
     saveOrPublish(statusName) {
+        if (this.postEditFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.postEditFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + ' is required');
+            return;
+        }
         this.isSaving = true;
-        this.post.statusName = statusName;
-        if (this.post.id !== undefined) {
-            this.subscribeToSaveResponse(this.postService.update(this.post));
+        this.postEditFormGroup.value.statusName = statusName;
+        if (this.postEditFormGroup.value.id !== '') {
+            this.subscribeToSaveResponse(this.postService.update(this.postEditFormGroup.value));
         } else {
-            this.subscribeToSaveResponse(this.postService.create(this.post));
+            delete this.postEditFormGroup.value.id;
+            this.subscribeToSaveResponse(this.postService.create(this.postEditFormGroup.value));
         }
     }
 
@@ -218,26 +269,6 @@ export class PostUpdateComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackTagById(index: number, item: ITag) {
-        return item.id;
-    }
-
-    trackCategoryById(index: number, item: ICategory) {
-        return item.id;
-    }
-
-    trackStatusById(index: number, item: IStatus) {
-        return item.id;
-    }
-
-    trackFormatById(index: number, item: IFormat) {
-        return item.id;
-    }
-
-    trackDegaUserById(index: number, item: IDegaUser) {
-        return item.id;
     }
 
     getSelected(selectedVals: Array<any>, option: any) {
@@ -290,15 +321,15 @@ export class PostUpdateComponent implements OnInit {
     // Think about optimising this code block, move it to a service, Ends here
 
     update_tag_selection(val) {
-        this.post.tags = this.processTagToBackendRequiredFormat(val);
+        this.postEditFormGroup.controls['tags'].setValue(this.processTagToBackendRequiredFormat(val));
     }
 
     update_category_selection(val) {
-        this.post.categories = this.processCategoryToBackendRequiredFormat(val);
+        this.postEditFormGroup.controls['categories'].setValue(this.processCategoryToBackendRequiredFormat(val));
     }
 
     update_author_selection(val) {
-        this.post.degaUsers = this.processAuthorToBackendRequiredFormat(val);
+        this.postEditFormGroup.controls['degaUsers'].setValue(this.processAuthorToBackendRequiredFormat(val));
     }
 
     searchTags() {

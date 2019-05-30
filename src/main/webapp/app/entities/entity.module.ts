@@ -1,8 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material';
-
 import { GatewayPostModule as CorePostModule } from './core/post/post.module';
 import { GatewayCategoryModule as CoreCategoryModule } from './core/category/category.module';
 import { GatewayFormatModule as CoreFormatModule } from './core/format/format.module';
@@ -39,10 +36,6 @@ import { GatewaySharedModule } from 'app/shared/shared.module';
         FactcheckFactcheckModule,
         CoreRoleMappingModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
-
-        // Angular material import
-        BrowserAnimationsModule,
-        MatDialogModule,
 
         GatewaySharedModule
     ],

@@ -159,6 +159,8 @@ export class PostUpdateComponent implements OnInit {
 
     getAllTags() {
         this.searchTagKeyword = '';
+        this.searchTagTotalResult = 0;
+        this.searchTagCurrentPage = 0;
         this.tagService.query().subscribe(
             (res: HttpResponse<ITag[]>) => {
                 this.tags = res.body;
@@ -170,6 +172,9 @@ export class PostUpdateComponent implements OnInit {
     }
 
     getAllDegaUsers() {
+        this.searchDegaUserKeyword = '';
+        this.searchDegaUserTotalResult = 0;
+        this.searchDegaUserCurrentPage = 0;
         this.degaUserService.query().subscribe(
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
@@ -190,6 +195,8 @@ export class PostUpdateComponent implements OnInit {
 
     getAllCategories() {
         this.searchCategoryKeyword = '';
+        this.searchCategoryTotalResult = 0;
+        this.searchCategoryCurrentPage = 0;
         this.categoryService.query().subscribe(
             (res: HttpResponse<ICategory[]>) => {
                 this.categories = res.body;

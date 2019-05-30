@@ -141,7 +141,7 @@ export class PostUpdateComponent implements OnInit {
             excerpt: [this.post.excerpt || '', Validators.required],
             featured: [this.post.featured || false],
             sticky: [this.post.sticky || false],
-            updates: [this.post.updates || '', Validators.required],
+            updates: [this.post.updates || ''],
             slug: [this.post.slug || ''],
             featuredMedia: [this.post.featuredMedia || ''],
             subTitle: [this.post.subTitle || ''],

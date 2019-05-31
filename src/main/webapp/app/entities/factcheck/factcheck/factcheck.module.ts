@@ -2,8 +2,10 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { GatewaySharedModule } from 'app/shared';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,6 +33,7 @@ const ENTITY_STATES = [...factcheckRoute, ...factcheckPopupRoute];
         GatewaySharedModule,
         RouterModule.forChild(ENTITY_STATES),
         FormsModule,
+        DragDropModule,
         MatButtonModule,
         MatCheckboxModule,
         MatExpansionModule,

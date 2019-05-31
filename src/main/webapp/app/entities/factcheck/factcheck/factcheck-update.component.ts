@@ -27,9 +27,12 @@ import { Account, Principal } from 'app/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
 
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 @Component({
     selector: 'jhi-factcheck-update',
-    templateUrl: './factcheck-update.component.html'
+    templateUrl: './factcheck-update.component.html',
+    styleUrls: ['./factcheck-update.component.css']
 })
 export class FactcheckUpdateComponent implements OnInit {
     factcheck: IFactcheck;
@@ -118,7 +121,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ factcheck }) => {
             this.factcheck = factcheck;
-            this.selected_claim_options = this.processOptionToDesireCheckboxFormat(this.factcheck.claims, 'claim');
+            this.selected_claim_options = this.factcheck.claims;
             this.selected_tag_options = this.processOptionToDesireCheckboxFormat(this.factcheck.tags, 'name');
             this.selected_category_options = this.processOptionToDesireCheckboxFormat(this.factcheck.categories, 'name');
             this.selected_author_options = this.processOptionToDesireCheckboxFormat(this.factcheck.degaUsers, 'displayName');
@@ -151,6 +154,10 @@ export class FactcheckUpdateComponent implements OnInit {
         this.principal.identity().then(account => {
             this.account = account;
         });
+    }
+
+    reorderClaims(event: CdkDragDrop<string[]>) {
+        moveItemInArray(this.factCheckEditFormGroup.value.claims, event.previousIndex, event.currentIndex);
     }
 
     createFactCheckEditFormGroup() {
@@ -187,8 +194,8 @@ export class FactcheckUpdateComponent implements OnInit {
             .subscribe(
                 (res: HttpResponse<IClaim[]>) => {
                     this.claims = res.body;
-                    this.backend_compatible_claim_list = res.body;
-                    this.all_claim_options = this.processOptionToDesireCheckboxFormat(this.claims, 'claim');
+                    this.all_claim_options = res.body;
+                    this.all_claim_options = this.all_claim_options.filter(ar => !this.selected_claim_options.find(rm => rm.id === ar.id));
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -240,7 +247,7 @@ export class FactcheckUpdateComponent implements OnInit {
         );
     }
 
-    openDialogPopUp(): void {
+    openDialogPopUp(claimData = null): void {
         const config = {
             height: '98%',
             width: '100vw',
@@ -248,24 +255,25 @@ export class FactcheckUpdateComponent implements OnInit {
             autoFocus: false,
             disableClose: true
         };
+        if (claimData) {
+            config['data'] = claimData;
+        }
         const dialogRef = this.dialog.open(NewClaimPopupComponent, config);
 
         dialogRef.afterClosed().subscribe(result => {
             // This is repeated code because of async issue on update.
             this.claimService
                 .query({
-                    size: 1000,
+                    size: 10,
                     sort: ['createdDate,desc']
                 })
                 .subscribe(
                     (res: HttpResponse<IClaim[]>) => {
                         this.claims = res.body;
-                        this.backend_compatible_claim_list = res.body;
-                        this.all_claim_options = this.processOptionToDesireCheckboxFormat(this.claims, 'claim');
-                        this.selected_claim_options = this.selected_claim_options.concat(
-                            this.processOptionToDesireCheckboxFormat([result], 'claim')
+                        this.all_claim_options = res.body;
+                        this.all_claim_options = this.all_claim_options.filter(
+                            ar => !this.selected_claim_options.find(rm => rm.id === ar.id)
                         );
-                        this.update_claim_selection(this.selected_claim_options);
                     },
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
@@ -311,6 +319,22 @@ export class FactcheckUpdateComponent implements OnInit {
         } else {
             this.subscribeToSaveResponse(this.factcheckService.create(this.factCheckEditFormGroup.value));
         }
+    }
+
+    addClaimToFactcheck(claimData) {
+        const currentClaims = this.factCheckEditFormGroup.value.claims;
+        if (!currentClaims.find(obj => obj['id'] === claimData.id)) {
+            currentClaims.push(claimData);
+        }
+        this.factCheckEditFormGroup.controls['claims'].setValue(currentClaims);
+        this.all_claim_options = this.all_claim_options.filter(obj => obj['id'] !== claimData.id);
+    }
+
+    removeClaimFromFactCheck(claimData) {
+        let currentClaims = this.factCheckEditFormGroup.value.claims;
+        currentClaims = currentClaims.filter(obj => obj['id'] !== claimData.id);
+        this.factCheckEditFormGroup.controls['claims'].setValue(currentClaims);
+        this.all_claim_options.push(claimData);
     }
 
     updateIntroductionFormData(data) {
@@ -366,14 +390,6 @@ export class FactcheckUpdateComponent implements OnInit {
         return formatted_option_list;
     }
 
-    processClaimToBackendRequiredFormat(claim_list) {
-        const formatted_claim_list = [];
-        for (const claim_details of claim_list) {
-            formatted_claim_list.push(this.backend_compatible_claim_list.filter(obj => obj['id'] === claim_details['id'])[0]);
-        }
-        return formatted_claim_list;
-    }
-
     processTagToBackendRequiredFormat(tag_list) {
         const formatted_tag_list = [];
         for (const tag_details of tag_list) {
@@ -400,10 +416,6 @@ export class FactcheckUpdateComponent implements OnInit {
 
     // Think about optimising this code block, move it to a service, Ends here
 
-    update_claim_selection(val) {
-        this.factCheckEditFormGroup.controls['claims'].setValue(this.processClaimToBackendRequiredFormat(val));
-    }
-
     update_tag_selection(val) {
         this.factCheckEditFormGroup.controls['tags'].setValue(this.processTagToBackendRequiredFormat(val));
     }
@@ -426,8 +438,8 @@ export class FactcheckUpdateComponent implements OnInit {
             .subscribe(
                 (res: HttpResponse<IClaim[]>) => {
                     this.claims = res.body;
-                    this.backend_compatible_claim_list = res.body;
-                    this.all_claim_options = this.processOptionToDesireCheckboxFormat(this.claims, 'claim');
+                    this.all_claim_options = this.claims;
+                    this.all_claim_options = this.all_claim_options.filter(ar => !this.selected_claim_options.find(rm => rm.id === ar.id));
                     this.searchClaimTotalResult = parseInt(res.headers.get('X-Total-Count'), 10);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)

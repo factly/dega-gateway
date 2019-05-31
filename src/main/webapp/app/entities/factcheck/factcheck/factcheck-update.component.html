@@ -257,46 +257,72 @@
                             </mat-slide-toggle>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-pannel-title jhiTranslate="gatewayApp.factcheckFactcheck.claim">Claims
+                                    </mat-pannel-title>
+                                </mat-expansion-panel-header>
+                                <mat-form-field>
+                                    <input matInput
+                                           [(ngModel)]="searchClaimKeyword"
+                                           [ngModelOptions]="{standalone: true}">
+                                    <button mat-button *ngIf="searchClaimKeyword" type="button"
+                                            matSuffix mat-icon-button aria-label="Clear"
+                                            (click)="searchClaimKeyword='';getAllClaims()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                                <button type="button" mat-icon-button
+                                        (click)="searchDegaUserCurrentPage=0;searchClaims()">
+                                    <mat-icon>search</mat-icon>
+                                </button>
+                                <button mat-icon-button type="button" (click)="getAllClaims()">
+                                    <mat-icon>refresh</mat-icon>
+                                </button>
+                                <div *ngFor="let claim_details of all_claim_options">
+                                    <button mat-mini-fab (click)="addClaimToFactcheck(claim_details)">Add</button>
+                                    <p>{{claim_details.claim}}</p>
+                                </div>
+                                <button type="button"
+                                        mat-icon-button
+                                        mat-raised-button
+                                        (click)="searchClaimCurrentPage=searchClaimCurrentPage-1;searchDegaUsers()"
+                                        *ngIf="searchClaimCurrentPage>0">
+                                    <mat-icon>chevron_left</mat-icon>
+                                </button>
+                                <button type="button"
+                                        mat-icon-button
+                                        mat-raised-button
+                                        (click)="searchClaimCurrentPage=searchClaimCurrentPage+1;searchClaims()"
+                                        *ngIf="searchClaimTotalResult>((searchClaimCurrentPage+1)*searchResultPerPage)">
+                                    <mat-icon>chevron_right</mat-icon>
+                                </button>
+                                <div class="pad-up-bottom">
+                                    <button type="button" id="add-pop-claim" class="btn btn-success" (click)="openDialogPopUp()">
+                                        Add a New Claim
+                                    </button>
+                                </div>
+                            </mat-expansion-panel>
+
+                        </mat-accordion>
+                    </div>
                 </div>
             </div>
 
-
-            <div class="form-group">
-                <label jhiTranslate="gatewayApp.factcheckFactcheck.claim" for="field_claim">Claim</label>
-                <br>
-                <input [(ngModel)]="searchClaimKeyword" [ngModelOptions]="{standalone: true}">
-                <button type="button" class="btn btn-success" (click)="searchClaimCurrentPage=0;searchClaims()">
-                    Search Claim
-                </button>
-                <button type="button" class="btn btn-success" (click)="getAllClaims()">
-                    Reset
-                </button>
-                <br>
-                <jhi-multiple-checkbox id="field_claim"
-                                       [option_list]="all_claim_options"
-                                       [selected_options]="selected_claim_options"
-                                       (updated_selection)="update_claim_selection($event)">
-                </jhi-multiple-checkbox>
-                <button type="button"
-                        class="btn btn-success"
-                        (click)="searchClaimCurrentPage=searchClaimCurrentPage-1;searchClaims()"
-                        *ngIf="searchClaimCurrentPage>0">
-                    Previous
-                </button>
-                <button type="button"
-                        class="btn btn-success"
-                        (click)="searchClaimCurrentPage=searchClaimCurrentPage+1;searchClaims()"
-                        *ngIf="searchClaimTotalResult>((searchClaimCurrentPage+1)*searchResultPerPage)">
-                    Next
-                </button>
-
+            <div cdkDropList class="example-list" (cdkDropListDropped)="reorderClaims($event)">
+                <div class="example-box" *ngFor="let claim_details of factCheckEditFormGroup.value.claims" cdkDrag>
+                    <h4>
+                        {{claim_details.claim}}
+                    </h4>
+                    <p [innerHTML]="claim_details.description">
+                    </p>
+                    <button type="button" (click)="openDialogPopUp(claim_details)">Edit</button>
+                    <button type="button" (click)="removeClaimFromFactCheck(claim_details)">Delete</button>
+                </div>
             </div>
 
-            <div class="pad-up-bottom">
-                <button type="button" id="add-pop-claim" class="btn btn-success" (click)="openDialogPopUp()">
-                    Add a New Claim
-                </button>
-            </div>
         </div>
     </div>
 </form>

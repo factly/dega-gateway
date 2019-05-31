@@ -171,7 +171,7 @@ export class FactcheckUpdateComponent implements OnInit {
             categories: [this.factcheck.categories], // convert into this.fb.array
             tags: [this.factcheck.tags], // convert into this.fb.array
             degaUsers: [this.factcheck.degaUsers || '', Validators.required], // convert into this.fb.array
-            clientId: [this.factcheck.clientId || 'Factly'], // delete once backend is fixed
+            clientId: [this.factcheck.clientId || ''], // delete once backend is fixed
             publishedDate: [this.factcheck.publishedDate || null], // delete once backend is fixed
             createdDate: [this.factcheck.createdDate || null] // delete once backend is fixed
         });

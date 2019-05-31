@@ -271,17 +271,6 @@ export class PostUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
-    }
-
     // Think about optimising this code block, move it to a service, Starts here
     processOptionToDesireCheckboxFormat(option_list, key_name) {
         const formatted_option_list = [];

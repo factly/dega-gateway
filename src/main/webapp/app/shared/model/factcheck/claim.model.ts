@@ -19,7 +19,6 @@ export interface IClaim {
     ratingId?: string;
     claimantName?: string;
     claimantId?: string;
-    factchecks?: IFactcheck[];
 }
 
 export class Claim implements IClaim {

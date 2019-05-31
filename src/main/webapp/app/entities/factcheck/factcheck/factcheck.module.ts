@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { GatewaySharedModule } from 'app/shared';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
     FactcheckComponent,
     FactcheckDetailComponent,
@@ -17,7 +18,7 @@ import {
 const ENTITY_STATES = [...factcheckRoute, ...factcheckPopupRoute];
 
 @NgModule({
-    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule, MatDialogModule],
+    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES), ReactiveFormsModule, MatDialogModule, MatTooltipModule],
     declarations: [
         FactcheckComponent,
         FactcheckDetailComponent,

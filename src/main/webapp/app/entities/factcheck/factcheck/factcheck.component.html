@@ -25,7 +25,60 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="factchecks">
+    <div class="custom-list-view" *ngIf="factchecks">
+        <div class="acttion-bar-wrap"></div>
+        <div class="content-block-wrap">
+            <div class="content-block" *ngFor="let factcheck of factchecks ;trackBy: trackId">
+                <div class="image-wrap" [style.backgroundImage]="'url('+ factcheck.featuredMedia +')'">
+                </div>
+                <div class="main-content">
+                    <div><h2 [routerLink]="['/factcheck', factcheck.id, 'view' ]">{{factcheck.title}}</h2></div>
+                    <div><p>{{factcheck.excerpt}}</p></div>
+                </div>
+                <div class="other-detail">
+                    <div class="author-details-wrap">
+                        <div class="author-details-text">
+                            <p class="created-by"><i>Created By</i></p>
+                            <p class="author-name"><span *ngFor="let author of factcheck.degaUsers; index as i">{{factcheck.firstName}} {{i != factcheck.degaUsers.length -1 ?  '| ': ''}}</span>
+                            </p>
+                            <p class="status"><span class="created-by">Status: </span>{{factcheck.statusName}}</p>
+                        </div>
+                    </div>
+                    <div class="actions-wrap">
+                        <div>
+                            <p class="created-at">{{factcheck.createdDate | date:'medium'}}</p>
+                        </div>
+                        <div class="actions">
+                            <div>
+                                <span matTooltip="View Factcheck"
+                                      [matTooltipPosition]="'above'">
+                                        <fa-icon [icon]="'eye'"
+                                                 [routerLink]="['/factcheck', factcheck.id, 'view' ]">
+                                        </fa-icon>
+                                </span>
+                            </div>
+                            <div>
+                                <span matTooltip="Edit Factcheck"
+                                      [matTooltipPosition]="'above'">
+                                    <fa-icon [icon]="'pencil-alt'"
+                                             [routerLink]="['/factcheck', factcheck.id, 'edit']">
+                                    </fa-icon>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    <fa-icon [icon]="'times'"
+                                             [routerLink]="['/', { outlets: { popup: 'factcheck/'+ factcheck.id + '/delete'} }]">
+                                    </fa-icon>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive" *ngIf="!factchecks">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">

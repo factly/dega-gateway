@@ -1,5 +1,4 @@
 import { Moment } from 'moment';
-import { IPost } from 'app/shared/model/core/post.model';
 
 export interface ITag {
     id?: string;

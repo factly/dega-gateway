@@ -12,15 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 
 import { GatewaySharedModule } from 'app/shared';
-import {
-    PostComponent,
-    PostDeleteDialogComponent,
-    PostDeletePopupComponent,
-    PostDetailComponent,
-    postPopupRoute,
-    postRoute,
-    PostUpdateComponent
-} from './';
+import { PostComponent, PostDetailComponent, postRoute, PostUpdateComponent } from './';
 import {
     FeaturedMediaUploadDialogComponent,
     FeaturedMediaUploadPopupComponent
@@ -28,7 +20,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-const ENTITY_STATES = [...postRoute, ...postPopupRoute];
+const ENTITY_STATES = [...postRoute];
 
 @NgModule({
     imports: [
@@ -51,19 +43,10 @@ const ENTITY_STATES = [...postRoute, ...postPopupRoute];
         PostComponent,
         PostDetailComponent,
         PostUpdateComponent,
-        PostDeleteDialogComponent,
-        PostDeletePopupComponent,
         FeaturedMediaUploadPopupComponent,
         FeaturedMediaUploadDialogComponent
     ],
-    entryComponents: [
-        PostComponent,
-        PostUpdateComponent,
-        PostDeleteDialogComponent,
-        PostDeletePopupComponent,
-        FeaturedMediaUploadPopupComponent,
-        FeaturedMediaUploadDialogComponent
-    ],
+    entryComponents: [PostComponent, PostUpdateComponent, FeaturedMediaUploadPopupComponent, FeaturedMediaUploadDialogComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayPostModule {}

@@ -29,6 +29,7 @@
                 <mat-form-field class="full-width margin-t-30">
                         <textarea matInput
                                   formControlName="claimSource"
+                                  [cdkTextareaAutosize]="true"
                                   placeholder="claimSource">
                         </textarea>
                 </mat-form-field>
@@ -42,6 +43,7 @@
                 <mat-form-field class="full-width margin-t-30">
                     <textarea matInput
                               formControlName="reviewSources"
+                              [cdkTextareaAutosize]="true"
                               placeholder="reviewSources">
                     </textarea>
                 </mat-form-field>
@@ -94,7 +96,6 @@
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
-            <!--</form>-->
         </div>
     </div>
 </form>

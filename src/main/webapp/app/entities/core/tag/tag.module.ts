@@ -3,11 +3,12 @@ import { RouterModule } from '@angular/router';
 
 import { GatewaySharedModule } from 'app/shared';
 
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import {
     TagComponent,
     TagDetailComponent,
@@ -21,7 +22,16 @@ import {
 const ENTITY_STATES = [...tagRoute, ...tagPopupRoute];
 
 @NgModule({
-    imports: [GatewaySharedModule, MatButtonModule, MatIconModule, MatInputModule, MatTableModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [
+        FormsModule,
+        GatewaySharedModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        RouterModule.forChild(ENTITY_STATES)
+    ],
     declarations: [TagComponent, TagDetailComponent, TagUpdateComponent, TagDeleteDialogComponent, TagDeletePopupComponent],
     entryComponents: [TagComponent, TagUpdateComponent, TagDeleteDialogComponent, TagDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

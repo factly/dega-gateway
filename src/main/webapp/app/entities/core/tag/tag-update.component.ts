@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { ITag } from 'app/shared/model/core/tag.model';
 import { TagService } from './tag.service';
-import { IPost } from 'app/shared/model/core/post.model';
-import { PostService } from 'app/entities/core/post';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-tag-update',
@@ -18,48 +15,56 @@ import { PostService } from 'app/entities/core/post';
 export class TagUpdateComponent implements OnInit {
     tag: ITag;
     isSaving: boolean;
-
-    posts: IPost[];
-    createdDate: string;
-    lastUpdatedDate: string;
-    slug: string;
-    slugExtention: number;
-    tempSlug: string;
+    tagFormGroup: FormGroup;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private tagService: TagService,
-        private postService: PostService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private fb: FormBuilder,
+        private route: Router
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ tag }) => {
             this.tag = tag;
-            this.createdDate = this.tag.createdDate != null ? this.tag.createdDate.format(DATE_TIME_FORMAT) : null;
-            this.lastUpdatedDate = this.tag.lastUpdatedDate != null ? this.tag.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.postService.query().subscribe(
-            (res: HttpResponse<IPost[]>) => {
-                this.posts = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.createTagFormGroup();
+    }
+
+    createTagFormGroup() {
+        this.tagFormGroup = this.fb.group({
+            id: [this.tag.id || ''],
+            name: [this.tag.name || '', Validators.required],
+            slug: [this.tag.slug || ''],
+            description: [this.tag.description || '', Validators.required],
+            clientId: [this.tag.clientId || ''],
+            createdDate: [this.tag.createdDate || '']
+        });
     }
 
     previousState() {
-        window.history.back();
+        this.route.navigate(['/tag']);
     }
 
     save() {
+        if (this.tagFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.tagFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + ' is required');
+            return;
+        }
         this.isSaving = true;
-        this.tag.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
-        this.tag.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
-        if (this.tag.id !== undefined) {
-            this.subscribeToSaveResponse(this.tagService.update(this.tag));
+        if (this.tagFormGroup.value.id !== undefined) {
+            this.subscribeToSaveResponse(this.tagService.update(this.tagFormGroup.value));
         } else {
-            this.subscribeToSaveResponse(this.tagService.create(this.tag));
+            this.subscribeToSaveResponse(this.tagService.create(this.tagFormGroup.value));
         }
     }
 
@@ -78,20 +83,5 @@ export class TagUpdateComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackPostById(index: number, item: IPost) {
-        return item.id;
-    }
-
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
     }
 }

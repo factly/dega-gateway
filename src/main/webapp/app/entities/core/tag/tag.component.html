@@ -1,7 +1,8 @@
-<div>
-    <h2 id="page-heading">
+<div class="padding-20">
+    <h2 id="page-heading font-sz-20">
         <span jhiTranslate="gatewayApp.coreTag.home.title">Tags</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tag" [routerLink]="['/tag/new']">
+        <button mat-button mat-raised-button color="primary"
+            id="jh-create-entity" class="float-right jh-create-entity create-tag" [routerLink]="['/tag/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreTag.home.createLabel">
             Create new Tag
@@ -13,20 +14,65 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreTag.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
+                    <mat-form-field class="col-md-3">
+                        <input matInput
+                               type="text"
+                               [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch"
+                               placeholder="{{ 'gatewayApp.coreTag.home.search' | translate }}">
+                    </mat-form-field>
+                    <button mat-icon-button mat-raised-button class="margin-r-10"
+                            (click)="search(currentSearch)">
+                        <mat-icon>search</mat-icon>
                     </button>
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    <button mat-icon-button mat-raised-button color="warn"
+                        (click)="clear()" *ngIf="currentSearch">
+                        <mat-icon class="white">delete_outline</mat-icon>
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    <br/>
-    <div class="table-responsive" *ngIf="tags">
-        <table class="table table-striped">
+    <div class="table-responsive col-md-12" *ngIf="tags" jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+        <table mat-table [dataSource]="tags" class="mat-elevation-z8 shadow-table full-width alternate-color box-shadow-2">
+            <ng-container matColumnDef="name">
+                <th jhiSortBy="name" mat-header-cell *matHeaderCellDef> <span jhiTranslate="gatewayApp.coreTag.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon> </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="slug">
+                <th jhiSortBy="slug" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.coreTag.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <td mat-cell *matCellDef="let element"> {{element.slug}} </td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <th jhiSortBy="description" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.coreTag.description">Description</span><fa-icon [icon]="'sort'"></fa-icon> </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="createdDate">
+                <th jhiSortBy="createdDate" mat-header-cell *matHeaderCellDef> <span jhiTranslate="gatewayApp.coreTag.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon> </th>
+                <td mat-cell *matCellDef="let element"> {{element.createdDate | date:'medium'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="action-button-container">
+                        <div [routerLink]="['/tag', element.id, 'view' ]">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                        </div>
+                        <div [routerLink]="['/tag', element.id, 'edit']">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                        </div>
+                        <div [routerLink]="['/', { outlets: { popup: 'tag/'+ element.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <table class="table table-striped" *ngIf="false">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->

@@ -9,8 +9,8 @@
 					</span>
 				</a>
 			</li>
-			<li class="nested-menu" [ngClass]="{'open': activeDropdown == 1}" (click)="toggleDropdown(1)">
-				<a href="javascript:void(0);">
+			<li class="nested-menu" [ngClass]="{'open': activeDropdown == 1}">
+				<a href="javascript:void(0);" (click)="toggleDropdown(1)">
 					<span>
                         <fa-icon [icon]="'th-list'"></fa-icon>
                         <span jhiTranslate="global.menu.entities.main">
@@ -105,8 +105,8 @@
                     </li>
 				</ul>
 			</li>
-            <li class="nested-menu" [ngClass]="{'open': activeDropdown == 2}" (click)="toggleDropdown(2)">
-                <a href="javascript:void(0);">
+            <li class="nested-menu" [ngClass]="{'open': activeDropdown == 2}">
+                <a href="javascript:void(0);" (click)="toggleDropdown(2)">
 					<span>
                         <fa-icon [icon]="'user-plus'"></fa-icon>
                         <span jhiTranslate="global.menu.admin.main">Administration</span>

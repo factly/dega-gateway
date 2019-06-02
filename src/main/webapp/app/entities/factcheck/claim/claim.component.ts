@@ -32,6 +32,7 @@ export class ClaimComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['claim', 'createdDate', 'ratingName', 'claimantName', 'actions'];
 
     constructor(
         private claimService: ClaimService,
@@ -172,6 +173,7 @@ export class ClaimComponent implements OnInit, OnDestroy {
         const dialogRef = this.dialog.open(NewClaimPopupComponent, config);
 
         dialogRef.afterClosed().subscribe(result => {
+            this.loadAll();
             // Add any function call here, if you want it to do anything after the dialog is closed
         });
     }

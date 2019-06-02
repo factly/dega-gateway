@@ -1,144 +1,135 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-claim-heading" jhiTranslate="gatewayApp.factcheckClaim.home.createOrEditLabel">Create or edit a Claim</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!claim.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="claim.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claim" for="field_claim">Claim</label>
-                    <input type="text" class="form-control" name="claim" id="field_claim"
-                           [(ngModel)]="claim.claim" required/>
-                    <div [hidden]="!(editForm.controls.claim?.dirty && editForm.controls.claim?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.claim?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
+<div>
+    <form [formGroup]="claimFormGroup">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h2 id="jhi-claim-heading" jhiTranslate="gatewayApp.factcheckClaim.home.createOrEditLabel">
+                    Create or edit a Claim
+                </h2>
+                <div class="mt-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                                <input class="title-input"
+                                       matInput
+                                       formControlName="claim"
+                                       placeholder="Claim Name">
+                                <mat-error>
+                                    Claim is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.description" for="field_description">Description</label>
-                    <span class="text-danger" [hidden]="claim.description">*</span>
-                    <jhi-quill-editor [original_content]="claim.description"
-                                      id="field_description"
-                                      (updated_content)="updateIntroductionFormData($event)">
-                    </jhi-quill-editor>
-                    <!--TODO make the below validation working with quill editor-->
-                    <!--<div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">-->
-                        <!--<small class="form-text text-danger"-->
-                               <!--[hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">-->
-                            <!--This field is required.-->
-                        <!--</small>-->
-                    <!--</div>-->
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claimDate" for="field_claimDate">Claim Date</label>
-                    <div class="input-group">
-                        <input id="field_claimDate" type="text" class="form-control" name="claimDate" ngbDatepicker  #claimDateDp="ngbDatepicker" [(ngModel)]="claim.claimDate"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="claimDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="quill-editor-wrapper">
+                                <jhi-quill-editor [original_content]="claim.description"
+                                                  (updated_content)="updateIntroductionFormData($event)">
+                                </jhi-quill-editor>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claimSource" for="field_claimSource">Claim Source</label>
-                    <input type="text" class="form-control" name="claimSource" id="field_claimSource"
-                           [(ngModel)]="claim.claimSource" required/>
-                    <div [hidden]="!(editForm.controls.claimSource?.dirty && editForm.controls.claimSource?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.claimSource?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
+
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <input matInput [matDatepicker]="picker_1" formControlName="claimDate"
+                                       placeholder="Choose Claim Date">
+                                <mat-datepicker-toggle matSuffix [for]="picker_1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker_1 startView="year"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="w-100">
+                                <input matInput [matDatepicker]="picker_2" formControlName="checkedDate"
+                                       placeholder="Choose Checked Date">
+                                <mat-datepicker-toggle matSuffix [for]="picker_2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker_2 startView="year"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.checkedDate" for="field_checkedDate">Checked Date</label>
-                    <div class="input-group">
-                        <input id="field_checkedDate" type="text" class="form-control" name="checkedDate" ngbDatepicker  #checkedDateDp="ngbDatepicker" [(ngModel)]="claim.checkedDate"
-                               required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="checkedDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                                <textarea matInput
+                                          formControlName="claimSource"
+                                          [cdkTextareaAutosize]="true"
+                                          placeholder="Claim Source">
+                                </textarea>
+                            </mat-form-field>
+                        </div>
                     </div>
-                    <div [hidden]="!(editForm.controls.checkedDate?.dirty && editForm.controls.checkedDate?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.checkedDate?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
+
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                                <textarea matInput
+                                          formControlName="reviewSources"
+                                          [cdkTextareaAutosize]="true"
+                                          placeholder="Review Sources">
+                                </textarea>
+                            </mat-form-field>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.reviewSources" for="field_reviewSources">Review Sources</label>
-                    <span class="text-danger" [hidden]="claim.reviewSources">*</span>
-                    <textarea rows="5" type="text" class="form-control" name="reviewSources" id="field_reviewSources"
-                              [(ngModel)]="claim.reviewSources" required ></textarea>
-                    <div [hidden]="!(editForm.controls.reviewSources?.dirty && editForm.controls.reviewSources?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.reviewSources?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
+
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="quill-editor-wrapper">
+                                <jhi-quill-editor [original_content]="claim.review"
+                                                  (updated_content)="updateReviewFormData($event)">
+                                </jhi-quill-editor>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="full-width">
+                                <input matInput
+                                       formControlName="eviewTagLine"
+                                       placeholder="Review Tag Line">
+                                <mat-error>
+                                    reviewTagLine is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="full-width">
+                                <mat-select placeholder="Rating" formControlName="ratingId">
+                                    <mat-option [value]="ratingOption.id"
+                                                *ngFor="let ratingOption of ratings | orderBy:'name';">
+                                        {{ratingOption.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="full-width">
+                                <mat-select placeholder="Claimants" formControlName="claimantId">
+                                    <mat-option [value]="claimantOption.id"
+                                                *ngFor="let claimantOption of claimants | orderBy:'name';">
+                                        {{claimantOption.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.review" for="field_review">Review</label>
-                    <span class="text-danger" [hidden]="claim.review">*</span>
-                    <jhi-quill-editor [original_content]="claim.review"
-                                      id="field_review"
-                                      (updated_content)="updateReviewFormData($event)">
-                    </jhi-quill-editor>
-                    <!--TODO make the below validation working with quill editor-->
-                    <!--<div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">-->
-                        <!--<small class="form-text text-danger"-->
-                               <!--[hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">-->
-                            <!--This field is required.-->
-                        <!--</small>-->
-                    <!--</div>-->
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.reviewTagLine" for="field_reviewTagLine">Review Tag Line</label>
-                    <input type="text" class="form-control" name="reviewTagLine" id="field_reviewTagLine"
-                           [(ngModel)]="claim.reviewTagLine" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.rating" for="field_rating">Rating</label>
-                    <select class="form-control" id="field_rating" name="rating" [(ngModel)]="claim.ratingId"  required>
-                        <option *ngIf="!editForm.value.rating" [ngValue]="null" selected></option>
-                        <option [ngValue]="ratingOption.id" *ngFor="let ratingOption of ratings; trackBy: trackRatingById">{{ratingOption.name}}</option>
-                    </select>
-                </div>
-                <div [hidden]="!(editForm.controls.rating?.dirty && editForm.controls.rating?.invalid)">
-                    <small class="form-text text-danger"
-                           [hidden]="!editForm.controls.rating?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaim.claimant" for="field_claimant">Claimant</label>
-                    <select class="form-control" id="field_claimant" name="claimant" [(ngModel)]="claim.claimantId"  required>
-                        <option *ngIf="!editForm.value.claimant" [ngValue]="null" selected></option>
-                        <option [ngValue]="claimantOption.id" *ngFor="let claimantOption of claimants; trackBy: trackClaimantById">{{claimantOption.name}}</option>
-                    </select>
-                </div>
-                <div [hidden]="!(editForm.controls.claimant?.dirty && editForm.controls.claimant?.invalid)">
-                    <small class="form-text text-danger"
-                           [hidden]="!editForm.controls.claimant?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
+                <div class="justify-content-end d-flex">
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState(null)">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="button" (click)="save()" id="save-entity" [disabled]="isSaving"
+                            class="btn btn-primary ml-3">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
                 </div>
             </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState(null)">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>

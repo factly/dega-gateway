@@ -10,7 +10,6 @@ import { PostService } from './post.service';
 import { PostComponent } from './post.component';
 import { PostDetailComponent } from './post-detail.component';
 import { PostUpdateComponent } from './post-update.component';
-import { PostDeletePopupComponent } from './post-delete-dialog.component';
 import { IPost } from 'app/shared/model/core/post.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const postRoute: Routes = [
             pageTitle: 'gatewayApp.corePost.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const postPopupRoute: Routes = [
-    {
-        path: 'post/:id/delete',
-        component: PostDeletePopupComponent,
-        resolve: {
-            post: PostResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gatewayApp.corePost.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

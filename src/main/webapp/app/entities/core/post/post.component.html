@@ -83,9 +83,8 @@
                                 </span>
                             </div>
                             <div>
-                                <span>
-                                    <fa-icon [icon]="'times'"
-                                             [routerLink]="['/', { outlets: { popup: 'post/'+ post.id + '/delete'} }]">
+                                <span (click)="openDialogPopUp(post)">
+                                    <fa-icon [icon]="'times'">
                                     </fa-icon>
                                 </span>
                             </div>

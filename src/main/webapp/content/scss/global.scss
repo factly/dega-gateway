@@ -574,3 +574,15 @@ $xs-sm-font-size: 12px;
         }
     }
 }
+
+/* Table view page layout*/
+.table-view-page {
+    h2 {
+        margin-top: 2rem;
+    }
+    table {
+        .action-column {
+            width: 140px;
+        }
+    }
+}

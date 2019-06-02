@@ -1,82 +1,97 @@
-<div>
-    <h2 id="page-heading">
-        <span jhiTranslate="gatewayApp.factcheckClaim.home.title">Claims</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-claim" (click)="openClaimEditDialog(null)">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckClaim.home.createLabel">
+<div class="table-view-page p-2">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 id="page-heading font-sz-20">
+                <span jhiTranslate="gatewayApp.factcheckClaim.home.title">Claims</span>
+                <button mat-button mat-raised-button color="primary"
+                        id="jh-create-entity" class="float-right jh-create-entity create-claim" (click)="openClaimEditDialog(null)">
+                    <fa-icon [icon]="'plus'"></fa-icon>
+                    <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckClaim.home.createLabel">
             Create new Claim
             </span>
-        </button>
-    </h2>
+                </button>
+            </h2>
+        </div>
+    </div>
     <jhi-alert></jhi-alert>
     <div class="row">
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckClaim.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
+                <div class="input-group w-100 mt-3 justify-content-end">
+                    <mat-form-field class="col-md-3">
+                        <input matInput
+                            type="text" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckClaim.home.search' | translate }}">
+                    </mat-form-field>
+                    <button mat-icon-button mat-raised-button  class="mr-2" (click)="search(currentSearch)">
+                        <mat-icon>search</mat-icon>
                     </button>
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    <button mat-icon-button mat-raised-button color="warn"
+                            (click)="clear()" *ngIf="currentSearch">
+                        <mat-icon class="white">delete_outline</mat-icon>
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    <br/>
-    <div class="table-responsive" *ngIf="claims">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="claim"><span jhiTranslate="gatewayApp.factcheckClaim.claim">Claim</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.factcheckClaim.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="ratingName"><span jhiTranslate="gatewayApp.factcheckClaim.rating">Rating</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="claimantName"><span jhiTranslate="gatewayApp.factcheckClaim.claimant">Claimant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let claim of claims ;trackBy: trackId">
-                <td>{{claim.claim}}</td>
-                <td>{{claim.createdDate | date:'medium'}}</td>
-                <td>
-                    <div *ngIf="claim.ratingId">
-                        <a [routerLink]="['../rating', claim.ratingId , 'view' ]" >{{claim.ratingName}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="claim.claimantId">
-                        <a [routerLink]="['../claimant', claim.claimantId , 'view' ]" >{{claim.claimantName}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/claim', claim.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                (click)="openClaimEditDialog(claim)"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'claim/'+ claim.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="table-responsive col-md-12" *ngIf="claims" jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
+             [callback]="transition.bind(this)">
+            <table mat-table [dataSource]="claims" class="mat-elevation-z8 shadow-table full-width alternate-color box-shadow-2">
+                <ng-container matColumnDef="claim">
+                    <th jhiSortBy="claim" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaim.claim">Claim</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.claim}}</td>
+                </ng-container>
+                <ng-container matColumnDef="createdDate">
+                    <th jhiSortBy="createdDate" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaim.createdDate">Created Date</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.createdDate | date:'medium'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="ratingName">
+                    <th jhiSortBy="ratingName" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaim.rating">Created Date</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.ratingId">
+                            <a [routerLink]="['../rating', element.ratingId , 'view' ]">{{element.ratingName}}</a>
+                        </span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="claimantName">
+                    <th jhiSortBy="claimantName" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaim.claimant">Created Date</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.claimantId">
+                            <a [routerLink]="['../clamant', element.claimantId , 'view' ]">{{element.claimantName}}</a>
+                        </span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="action-column"> Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="action-button-container">
+                            <div [routerLink]="['/claim', element.id, 'view' ]">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                            </div>
+                            <div (click)="openClaimEditDialog(element)">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            </div>
+                            <div [routerLink]="['/', { outlets: { popup: 'claim/'+ element.id + '/delete'} }]"
+                                 replaceUrl="true"
+                                 queryParamsHandling="merge">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
     </div>
     <div *ngIf="claims && claims.length">
         <div class="row justify-content-center">

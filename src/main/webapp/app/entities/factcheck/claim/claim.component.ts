@@ -32,6 +32,7 @@ export class ClaimComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['claim', 'createdDate', 'ratingName', 'claimantName', 'actions'];
 
     constructor(
         private claimService: ClaimService,

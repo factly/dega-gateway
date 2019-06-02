@@ -334,8 +334,14 @@ $theme: mat-light-theme($palette, $palette);
 .table-view-page {
     h2 {
         margin-top: 2rem;
+        border: solid 5px #dc3545;
+        border-width: 0 0 0 5px;
+        padding-left: 12px;
     }
     table {
+        td {
+            padding: 0.5rem;
+        }
         .action-column {
             width: 140px;
         }

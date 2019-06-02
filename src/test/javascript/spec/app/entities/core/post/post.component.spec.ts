@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { PostComponent } from 'app/entities/core/post/post.component';
 import { PostService } from 'app/entities/core/post/post.service';
 import { Post } from 'app/shared/model/core/post.model';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Post Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(PostComponent, '')

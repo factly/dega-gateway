@@ -27,8 +27,18 @@ describe('Component Tests', () => {
 
             fixture = TestBed.createComponent(FactcheckUpdateComponent);
             comp = fixture.componentInstance;
+            comp.factcheck = new Factcheck('123');
+            comp.createFactCheckEditFormGroup();
             service = fixture.debugElement.injector.get(FactcheckService);
         });
+
+        function createFactCheckEditFormGroup() {
+            comp.factCheckEditFormGroup.controls['title'].setValue('testing title');
+            comp.factCheckEditFormGroup.controls['introduction'].setValue('testing content');
+            comp.factCheckEditFormGroup.controls['excerpt'].setValue('testing excerpt');
+            comp.factCheckEditFormGroup.controls['summary'].setValue('testing updates');
+            comp.factCheckEditFormGroup.controls['degaUsers'].setValue([{ id: '123' }]);
+        }
 
         describe('Publish', () => {
             it('Should call publish service on publish for existing entity', fakeAsync(() => {
@@ -37,25 +47,28 @@ describe('Component Tests', () => {
                 spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.factcheck = entity;
                 // WHEN
+                createFactCheckEditFormGroup();
                 comp.saveOrPublish('Publish');
                 tick(); // simulate async
 
                 // THEN
-                expect(service.update).toHaveBeenCalledWith(entity);
+                expect(service.update).toHaveBeenCalledWith(comp.factCheckEditFormGroup.value);
                 expect(comp.isSaving).toEqual(false);
             }));
 
             it('Should call update service on save for existing entity', fakeAsync(() => {
                 // GIVEN
                 const entity = new Factcheck('9121');
+                comp.createFactCheckEditFormGroup();
                 spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.factcheck = entity;
                 // WHEN
+                createFactCheckEditFormGroup();
                 comp.saveOrPublish('Draft');
                 tick(); // simulate async
 
                 // THEN
-                expect(service.update).toHaveBeenCalledWith(entity);
+                expect(service.update).toHaveBeenCalledWith(comp.factCheckEditFormGroup.value);
                 expect(comp.isSaving).toEqual(false);
             }));
 
@@ -64,12 +77,14 @@ describe('Component Tests', () => {
                 const entity = new Factcheck();
                 spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
                 comp.factcheck = entity;
+                comp.createFactCheckEditFormGroup();
                 // WHEN
+                createFactCheckEditFormGroup();
                 comp.saveOrPublish('Draft');
                 tick(); // simulate async
 
                 // THEN
-                expect(service.create).toHaveBeenCalledWith(entity);
+                expect(service.create).toHaveBeenCalledWith(comp.factCheckEditFormGroup.value);
                 expect(comp.isSaving).toEqual(false);
             }));
         });

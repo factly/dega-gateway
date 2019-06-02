@@ -45,6 +45,7 @@
                 <mat-form-field class="full-width margin-t-30">
                     <textarea matInput
                               formControlName="excerpt"
+                              [cdkTextareaAutosize]="true"
                               placeholder="Excerpt">
                     </textarea>
                 </mat-form-field>
@@ -229,6 +230,7 @@
                                 <mat-form-field class="full-width">
                                     <textarea matInput
                                               formControlName="updates"
+                                              [cdkTextareaAutosize]="true"
                                               placeholder="Updates">
                                     </textarea>
                                 </mat-form-field>

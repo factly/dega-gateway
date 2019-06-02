@@ -314,7 +314,7 @@ export class FactcheckUpdateComponent implements OnInit {
         }
         this.isSaving = true;
         this.factCheckEditFormGroup.value.statusName = statusName;
-        if (this.factCheckEditFormGroup.value.id !== undefined) {
+        if (this.factCheckEditFormGroup.value.id !== '') {
             this.subscribeToSaveResponse(this.factcheckService.update(this.factCheckEditFormGroup.value));
         } else {
             this.subscribeToSaveResponse(this.factcheckService.create(this.factCheckEditFormGroup.value));

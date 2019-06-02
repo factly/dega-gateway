@@ -243,7 +243,7 @@
                             </mat-expansion-panel>
                         </mat-accordion>
                     </div>
-                    <div class="full-width margin-t-20">
+                    <div class="full-width form-group">
                         <div class="col-md-12 margin-t-20">
                             <span>Featured</span>
                             <mat-slide-toggle class="float-right"
@@ -283,9 +283,11 @@
                                 <button mat-icon-button type="button" (click)="getAllClaims()">
                                     <mat-icon>refresh</mat-icon>
                                 </button>
-                                <div *ngFor="let claim_details of all_claim_options">
-                                    <button mat-mini-fab (click)="addClaimToFactcheck(claim_details)">Add</button>
-                                    <p>{{claim_details.claim}}</p>
+                                <div class="mb-3" *ngFor="let claim_details of all_claim_options">
+                                    <button class="bg-white mr-2" mat-mini-fab (click)="addClaimToFactcheck(claim_details)">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    <span>{{claim_details.claim}}</span>
                                 </div>
                                 <button type="button"
                                         mat-icon-button
@@ -302,29 +304,44 @@
                                     <mat-icon>chevron_right</mat-icon>
                                 </button>
                                 <div class="pad-up-bottom">
-                                    <button type="button" id="add-pop-claim" class="btn btn-success" (click)="openDialogPopUp()">
+                                    <button mat-raised-button color="primary"
+                                        type="button" id="add-pop-claim" class="btn btn-success"
+                                            (click)="openDialogPopUp()">
+                                        <mat-icon>add</mat-icon>
                                         Add a New Claim
                                     </button>
                                 </div>
                             </mat-expansion-panel>
-
                         </mat-accordion>
                     </div>
                 </div>
             </div>
 
-            <div cdkDropList class="example-list" (cdkDropListDropped)="reorderClaims($event)">
-                <div class="example-box" *ngFor="let claim_details of factCheckEditFormGroup.value.claims" cdkDrag>
-                    <h4>
-                        {{claim_details.claim}}
-                    </h4>
-                    <p [innerHTML]="claim_details.description">
-                    </p>
-                    <button type="button" (click)="openDialogPopUp(claim_details)">Edit</button>
-                    <button type="button" (click)="removeClaimFromFactCheck(claim_details)">Delete</button>
+            <div class="row">
+                <div cdkDropList class="example-list col-md-12" (cdkDropListDropped)="reorderClaims($event)">
+                    <div class="mb-3 example-box" *ngFor="let claim_details of factCheckEditFormGroup.value.claims"
+                         cdkDrag>
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <mat-icon class="mr-2">clear_all</mat-icon>
+                                        <b>{{claim_details.claim}}</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <p [innerHTML]="claim_details.description">
+                                </p>
+                                <mat-action-row>
+                                    <button mat-button color="primary" (click)="openDialogPopUp(claim_details)">Edit
+                                    </button>
+                                    <button mat-button color="warn" (click)="openDialogPopUp(claim_details)">Delete
+                                    </button>
+                                </mat-action-row>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </form>

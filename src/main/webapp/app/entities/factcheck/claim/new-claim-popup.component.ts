@@ -77,8 +77,9 @@ export class NewClaimPopupComponent implements OnInit {
     }
 
     createClaimEditFormGroup() {
-        const claim_date = this.claim.claimDate !== null ? this.claim.claimDate.toISOString() : '';
-        const checked_date = this.claim.checkedDate !== null ? this.claim.checkedDate.toISOString() : '';
+        const claim_date = this.claim.claimDate !== null && this.claim.claimDate !== undefined ? this.claim.claimDate.toISOString() : '';
+        const checked_date =
+            this.claim.checkedDate !== null && this.claim.checkedDate !== undefined ? this.claim.checkedDate.toISOString() : '';
         this.claimFormGroup = this.fb.group({
             id: [this.claim.id || ''],
             claim: [this.claim.claim || '', Validators.required],

@@ -329,3 +329,15 @@ $theme: mat-light-theme($palette, $palette);
 }
 
 /* Quill Editor CSS ends */
+
+/* Table view page layout*/
+.table-view-page {
+    h2 {
+        margin-top: 2rem;
+    }
+    table {
+        .action-column {
+            width: 140px;
+        }
+    }
+}

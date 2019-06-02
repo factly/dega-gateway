@@ -27,7 +27,7 @@
         </div>
     </div>
     <br/>
-    <div class="list-view" *ngIf="posts">
+    <div class="custom-list-view" *ngIf="posts">
         <div class="acttion-bar-wrap">
             <div class="sort-button" [ngClass]="{'up': !sortList}">
                 <span (click)="toogleSortListDropdown()">Sort By: {{predicate}}, <span *ngIf="reverse">Asc</span><span

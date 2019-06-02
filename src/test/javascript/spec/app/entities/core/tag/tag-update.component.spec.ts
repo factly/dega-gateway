@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { GatewayTestModule } from '../../../../test.module';
 import { TagUpdateComponent } from 'app/entities/core/tag/tag-update.component';
 import { TagService } from 'app/entities/core/tag/tag.service';
@@ -16,7 +17,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GatewayTestModule],
+                imports: [GatewayTestModule, ReactiveFormsModule],
                 declarations: [TagUpdateComponent]
             })
                 .overrideTemplate(TagUpdateComponent, '')
@@ -24,43 +25,47 @@ describe('Component Tests', () => {
 
             fixture = TestBed.createComponent(TagUpdateComponent);
             comp = fixture.componentInstance;
+            comp.tag = new Tag('123');
+            comp.createTagFormGroup();
             service = fixture.debugElement.injector.get(TagService);
         });
 
+        function createTagFormGroup() {
+            comp.tagFormGroup.controls['name'].setValue('testing title');
+            comp.tagFormGroup.controls['description'].setValue('testing content');
+        }
+
         describe('save', () => {
-            it(
-                'Should call update service on save for existing entity',
-                fakeAsync(() => {
-                    // GIVEN
-                    const entity = new Tag('123');
-                    spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
-                    comp.tag = entity;
-                    // WHEN
-                    comp.save();
-                    tick(); // simulate async
+            it('Should call update service on save for existing entity', fakeAsync(() => {
+                // GIVEN
+                const entity = new Tag('123');
+                spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
+                comp.tag = entity;
+                // WHEN
+                createTagFormGroup();
+                comp.save();
+                tick(); // simulate async
 
-                    // THEN
-                    expect(service.update).toHaveBeenCalledWith(entity);
-                    expect(comp.isSaving).toEqual(false);
-                })
-            );
+                // THEN
+                expect(service.update).toHaveBeenCalledWith(comp.tagFormGroup.value);
+                expect(comp.isSaving).toEqual(false);
+            }));
 
-            it(
-                'Should call create service on save for new entity',
-                fakeAsync(() => {
-                    // GIVEN
-                    const entity = new Tag();
-                    spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
-                    comp.tag = entity;
-                    // WHEN
-                    comp.save();
-                    tick(); // simulate async
+            it('Should call create service on save for new entity', fakeAsync(() => {
+                // GIVEN
+                const entity = new Tag();
+                comp.tag = entity;
+                comp.createTagFormGroup();
+                spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
+                // WHEN
+                createTagFormGroup();
+                comp.save();
+                tick(); // simulate async
 
-                    // THEN
-                    expect(service.create).toHaveBeenCalledWith(entity);
-                    expect(comp.isSaving).toEqual(false);
-                })
-            );
+                // THEN
+                expect(service.create).toHaveBeenCalledWith(comp.tagFormGroup.value);
+                expect(comp.isSaving).toEqual(false);
+            }));
         });
     });
 });

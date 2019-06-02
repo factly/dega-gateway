@@ -1,5 +1,4 @@
 import { Moment } from 'moment';
-import { IPost } from 'app/shared/model/core/post.model';
 
 export interface ITag {
     id?: string;
@@ -9,7 +8,6 @@ export interface ITag {
     clientId?: string;
     createdDate?: Moment;
     lastUpdatedDate?: Moment;
-    posts?: IPost[];
 }
 
 export class Tag implements ITag {
@@ -20,7 +18,6 @@ export class Tag implements ITag {
         public description?: string,
         public clientId?: string,
         public createdDate?: Moment,
-        public lastUpdatedDate?: Moment,
-        public posts?: IPost[]
+        public lastUpdatedDate?: Moment
     ) {}
 }

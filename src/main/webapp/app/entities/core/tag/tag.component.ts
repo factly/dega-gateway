@@ -30,6 +30,7 @@ export class TagComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['name', 'slug', 'description', 'createdDate', 'actions'];
 
     constructor(
         private tagService: TagService,

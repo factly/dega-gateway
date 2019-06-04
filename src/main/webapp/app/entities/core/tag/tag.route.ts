@@ -10,7 +10,6 @@ import { TagService } from './tag.service';
 import { TagComponent } from './tag.component';
 import { TagDetailComponent } from './tag-detail.component';
 import { TagUpdateComponent } from './tag-update.component';
-import { TagDeletePopupComponent } from './tag-delete-dialog.component';
 import { ITag } from 'app/shared/model/core/tag.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const tagRoute: Routes = [
             pageTitle: 'gatewayApp.coreTag.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const tagPopupRoute: Routes = [
-    {
-        path: 'tag/:id/delete',
-        component: TagDeletePopupComponent,
-        resolve: {
-            tag: TagResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gatewayApp.coreTag.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

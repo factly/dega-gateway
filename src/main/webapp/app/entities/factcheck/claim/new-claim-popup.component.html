@@ -1,18 +1,23 @@
-<div>
+<div class="header-dialogue">
+    <div>
+        <div>
+            <h2 id="jhi-claim-heading" jhiTranslate="gatewayApp.factcheckClaim.home.createOrEditLabel">
+                Create or edit a Claim
+            </h2>
+        </div>
+    </div>
     <form [formGroup]="claimFormGroup">
         <div class="row justify-content-center">
-            <div class="col-8">
-                <h2 id="jhi-claim-heading" jhiTranslate="gatewayApp.factcheckClaim.home.createOrEditLabel">
-                    Create or edit a Claim
-                </h2>
+            <div class="col-12">
                 <div class="mt-5">
                     <div class="row">
                         <div class="col-md-12">
                             <mat-form-field class="full-width">
-                                <input class="title-input"
+                                <textarea class="title-input"
                                        matInput
                                        formControlName="claim"
                                        placeholder="Claim Name">
+                                </textarea>
                                 <mat-error>
                                     Claim is <strong>required</strong>
                                 </mat-error>
@@ -23,6 +28,7 @@
                     <div class="row mt-4">
                         <div class="col-md-12">
                             <div class="quill-editor-wrapper">
+                                <label> Claim Description</label>
                                 <jhi-quill-editor [original_content]="claim.description"
                                                   (updated_content)="updateIntroductionFormData($event)">
                                 </jhi-quill-editor>
@@ -76,6 +82,7 @@
                     <div class="row mb-4">
                         <div class="col-md-12">
                             <div class="quill-editor-wrapper">
+                                <label>Claim Review</label>
                                 <jhi-quill-editor [original_content]="claim.review"
                                                   (updated_content)="updateReviewFormData($event)">
                                 </jhi-quill-editor>

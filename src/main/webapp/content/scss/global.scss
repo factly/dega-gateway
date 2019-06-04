@@ -76,6 +76,27 @@ Generic styles
 .w-60 {
     width: 60% !important;
 }
+.mw-100 {
+    min-width: 100px;
+}
+.mw-150 {
+    min-width: 150px;
+}
+.mw-200 {
+    min-width: 200px;
+}
+
+@media (min-width: 768px) {
+    .mw-md-100 {
+        min-width: 100px;
+    }
+    .mw-md-150 {
+        min-width: 150px;
+    }
+    .mw-md-200 {
+        min-width: 200px;
+    }
+}
 margin-20 {
     margin: 20px;
 }
@@ -578,13 +599,13 @@ $xs-sm-font-size: 12px;
 /* Table view page layout*/
 .table-view-page {
     h2 {
-        margin-top: 2rem;
         border: solid 5px #dc3545;
         border-width: 0 0 0 5px;
         padding-left: 12px;
     }
     table {
-        td {
+        td,
+        th {
             padding: 0.5rem;
         }
         .action-column {
@@ -592,3 +613,12 @@ $xs-sm-font-size: 12px;
         }
     }
 }
+
+/* Header Dialogue*/
+.header-dialogue {
+}
+
+//.mat-dialog-container{
+//    padding: 0px !important;
+//    width: 700px;
+//}

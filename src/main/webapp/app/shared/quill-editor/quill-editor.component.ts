@@ -117,12 +117,3 @@ export class QuillEditorComponent {
         this.tableInstance.deleteTable();
     }
 }
-
-// const QuillBlockEmbed = Quill.import('blots/block/embed');
-//
-//
-// class Video extends QuillBlockEmbed {
-//
-// }
-
-// Quill.register(Video);

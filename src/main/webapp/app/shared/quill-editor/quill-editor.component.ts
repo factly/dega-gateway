@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
-import Quill from 'quill';
+import * as Quill from 'quill';
 
 const BlockEmbed = Quill.import('blots/block/embed');
 

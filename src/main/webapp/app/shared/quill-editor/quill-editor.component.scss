@@ -1,11 +1,11 @@
-:host ::ng-deep .ql-custom-embedd {
+:host ::ng-deep .custom-parent-container-for-embedded-data {
     width: 100%;
     position: relative;
     padding: 0;
     padding-top: 56.25%;
 }
 
-:host ::ng-deep .custom-parent-container-for-embedded-data {
+:host ::ng-deep .ql-custom-embedd {
     position: absolute;
     width: 100%;
     height: 100%;

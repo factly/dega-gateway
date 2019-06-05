@@ -15,7 +15,7 @@ class Video extends BlockEmbed {
         iframe.setAttribute('allowfullscreen', 'true');
         iframe.setAttribute('src', value);
 
-        iframe.className = 'custom-parent-container-for-embedded-data';
+        iframe.className = 'ql-custom-embedd';
         node.appendChild(iframe);
         return node;
     }
@@ -26,7 +26,7 @@ class Video extends BlockEmbed {
 }
 
 Video['blotName'] = 'video';
-Video['className'] = 'ql-custom-embedd';
+Video['className'] = 'custom-parent-container-for-embedded-data';
 Video['tagName'] = 'div';
 
 Quill.register('formats/video', Video);

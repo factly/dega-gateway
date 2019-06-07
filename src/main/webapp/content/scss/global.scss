@@ -76,8 +76,30 @@ Generic styles
 .w-60 {
     width: 60% !important;
 }
+
 .mh-50 {
     max-height: 50px;
+}
+.mw-100 {
+    min-width: 100px;
+}
+.mw-150 {
+    min-width: 150px;
+}
+.mw-200 {
+    min-width: 200px;
+}
+
+@media (min-width: 768px) {
+    .mw-md-100 {
+        min-width: 100px;
+    }
+    .mw-md-150 {
+        min-width: 150px;
+    }
+    .mw-md-200 {
+        min-width: 200px;
+    }
 }
 margin-20 {
     margin: 20px;
@@ -332,6 +354,15 @@ $theme: mat-light-theme($palette, $palette);
 }
 
 /* Quill Editor CSS ends */
+.quill-editor-table-action {
+    display: flex;
+    padding: 0 15px;
+    border: solid 1px #ccc;
+    border-width: 0 1px 1px 1px;
+    > div {
+        padding: 10px 12px;
+    }
+}
 
 /* Custom list view CSS */
 $card-height: 200px;
@@ -540,11 +571,7 @@ $xs-sm-font-size: 12px;
             margin-top: 20px;
             jhi-quill-editor {
                 quill-editor {
-                    .ql-toolbar {
-                        border: 0px;
-                    }
                     .ql-container {
-                        border: 0px;
                         padding: 10px;
                     }
                 }
@@ -609,11 +636,33 @@ $xs-sm-font-size: 12px;
         padding-left: 12px;
     }
     table {
-        td {
+        td,
+        th {
             padding: 0.5rem;
         }
         .action-column {
             width: 140px;
+        }
+    }
+}
+
+/* Dialogue with header */
+.header-dialogue {
+    position: relative;
+    .mat-dialog-container {
+        padding: 0px;
+        .dialogue-header {
+            position: sticky;
+            top: 0px;
+            width: 100%;
+            height: 50px;
+            background-color: #3a4248;
+            color: white;
+            z-index: 1;
+            padding: 10px 20px;
+            h2 {
+                font-size: 20px;
+            }
         }
     }
 }

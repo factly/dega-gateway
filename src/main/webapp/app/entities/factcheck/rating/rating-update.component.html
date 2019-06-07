@@ -1,47 +1,92 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+<div class="create-view-page p-2">
+    <div class="row shadow">
+        <div class="col-md-12">
             <h2 id="jhi-rating-heading" jhiTranslate="gatewayApp.factcheckRating.home.createOrEditLabel">Create or edit a Rating</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!rating.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="rating.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="rating.name" required/>
-                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
+        </div>
+        <div class="col-12 mt-5">
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+                <div>
+                    <jhi-alert-error></jhi-alert-error>
+                    <!--<div class="form-group" [hidden]="!rating.id">-->
+                        <!--<label for="id" jhiTranslate="global.field.id">ID</label>-->
+                        <!--<input type="text" class="form-control" id="id" name="id"-->
+                               <!--[(ngModel)]="rating.id" readonly />-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <mat-form-field class="w-100">
+                            <input matInput placeholder="{{ 'gatewayApp.factcheckRating.name' | translate }}"
+                                type="text" name="name" id="field_name"
+                                   [(ngModel)]="rating.name" required/>
+                        </mat-form-field>
+                        <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.numericValue" for="field_numericValue">Numeric Value</label>-->
+                        <mat-form-field class="w-100">
+                            <input  matInput placeholder="{{ 'gatewayApp.factcheckRating.numericValue' | translate }}"
+                                type="number" name="numericValue" id="field_numericValue"
+                                   [(ngModel)]="rating.numericValue" required min="1" jhiMin="1"/>
+                        </mat-form-field>
+                        <div [hidden]="!(editForm.controls.numericValue?.dirty && editForm.controls.numericValue?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.numericValue?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.numericValue?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                                This field should be at least 1.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.numericValue?.errors?.number" jhiTranslate="entity.validation.number">
+                                This field should be a number.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.clientId" for="field_clientId">Client Id</label>-->
+                        <mat-form-field class="w-100">
+                            <input  matInput placeholder="{{ 'gatewayApp.factcheckRating.clientId' | translate }}"
+                                type="text" name="clientId" id="field_clientId"
+                                   [(ngModel)]="rating.clientId" required/>
+                        </mat-form-field>
+                        <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger" [hidden]="rating.description">*</span>
+                        <mat-form-field class="w-100">
+                            <textarea matInput placeholder="{{ 'gatewayApp.factcheckRating.description' | translate }}"
+                                rows="5" type="text" name="description" id="field_description"
+                                      [(ngModel)]="rating.description" required ></textarea>
+                        </mat-form-field>
+                        <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.numericValue" for="field_numericValue">Numeric Value</label>
-                    <input type="number" class="form-control" name="numericValue" id="field_numericValue"
-                        [(ngModel)]="rating.numericValue" required min="1" jhiMin="1"/>
-                    <div [hidden]="!(editForm.controls.numericValue?.dirty && editForm.controls.numericValue?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.numericValue?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.numericValue?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
-                            This field should be at least 1.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.numericValue?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
+                <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                    <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.isDefault" for="field_isDefault">Is Default</label>-->
+                    <!--<input type="checkbox" class="form-control" name="isDefault" id="field_isDefault"-->
+                           <!--[(ngModel)]="rating.isDefault" />-->
+                    <mat-checkbox id="field_isDefault" name="isDefault" [(ngModel)]="rating.isDefault">{{'gatewayApp.factcheckRating.isDefault' | translate }}</mat-checkbox>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.iconURL" for="field_featuredMedia">Icon URL</label>
-                    <button id="field_iconURL" class="btn btn-primary jh-create-entity create-media"
+                    <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.iconURL" for="field_featuredMedia">Icon URL</label>-->
+                    <div class="mb-3"><img src={{rating.iconURL}} height="100"></div>
+                    <button mat-raised-button color="primary"
+                        id="field_iconURL" class="btn btn-primary jh-create-entity create-media"
                             [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
                             [queryParams]="{ media_type: 'feature'}"
                             replaceUrl="true" type="button">
@@ -50,48 +95,21 @@
                             Upload Media
                         </span>
                     </button>
-                    <img src={{rating.iconURL}} alt="" width="100" height="100">
                     <div *ngIf="rating.iconURL">
                         <span [(ngModel)]="rating.iconURL" name="iconURL" ngDefaultControl></span>
                     </div>
                 </div>
-                <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.isDefault" for="field_isDefault">Is Default</label>
-                    <input type="checkbox" class="form-control" name="isDefault" id="field_isDefault"
-                        [(ngModel)]="rating.isDefault" />
+                <div class="d-flex justify-content-end">
+                    <button mat-raised-button color="warn" class="mr-3"
+                        type="button" id="cancel-save" (click)="previousState()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button mat-raised-button
+                        type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
                 </div>
-               <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.clientId" for="field_clientId">Client Id</label>
-                    <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="rating.clientId" required/>
-                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.description" for="field_description">Description</label>
-                    <span class="text-danger" [hidden]="rating.description">*</span>
-                    <textarea rows="5" type="text" class="form-control" name="description" id="field_description"
-                              [(ngModel)]="rating.description" required ></textarea>
-                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>

@@ -30,6 +30,7 @@ export class RatingComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['iconURL', 'name', 'numericValue', 'isDefault', 'clientId', 'createdDate', 'actions'];
 
     constructor(
         private ratingService: RatingService,

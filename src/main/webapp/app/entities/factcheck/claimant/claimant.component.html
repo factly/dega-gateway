@@ -38,7 +38,7 @@
                     <th jhiSortBy="imageURL" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaimant.imageURL">Image URL</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <td mat-cell *matCellDef="let element"> <img src="{{element.imageURL}}"></td>
+                    <td class="p-2 pl-4" mat-cell *matCellDef="let element"><img class="mh-50" src="{{element.imageURL}}"></td>
                 </ng-container>
                 <ng-container matColumnDef="name">
                     <th jhiSortBy="name" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaimant.name">Name</span>

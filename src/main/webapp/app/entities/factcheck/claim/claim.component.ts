@@ -163,9 +163,10 @@ export class ClaimComponent implements OnInit, OnDestroy {
 
     openClaimEditDialog(claim_data) {
         const config = {
-            height: '98%',
-            width: '100vw',
-            maxWidth: '95vw',
+            height: '70%',
+            width: '70vw',
+            maxWidth: '70vw',
+            panelClass: ['header-dialogue'],
             autoFocus: false,
             disableClose: true,
             data: claim_data

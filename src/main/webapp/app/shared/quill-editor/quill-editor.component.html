@@ -4,10 +4,19 @@
               [modules]="modules"
               required>
 </quill-editor>
-<button id="insert-row-above" type="button" (click)="rowAbove()">Insert Row Above</button>
-<button id="insert-row-below" type="button" (click)="rowBelow()">Insert Row Below</button>
-<button id="insert-column-left" type="button" (click)="colLeft()">Insert Column Left</button>
-<button id="insert-column-right" type="button" (click)="colRight()">Insert Column Right</button>
-<button id="delete-row" type="button" (click)="rowDelete()">Delete Row</button>
-<button id="delete-column" type="button" (click)="colDelete()">Delete Column</button>
-<button id="delete-table" type="button" (click)="tableDelete()">Delete Table</button>
+<div class="quill-editor-table-action">
+    <!--<button id="insert-row-above" type="button" (click)="rowAbove()">Insert Row Above</button>-->
+    <!--<button id="insert-row-below" type="button" (click)="rowBelow()">Insert Row Below</button>-->
+    <!--<button id="insert-column-left" type="button" (click)="colLeft()">Insert Column Left</button>-->
+    <!--<button id="insert-column-right" type="button" (click)="colRight()">Insert Column Right</button>-->
+    <!--<button id="delete-row" type="button" (click)="rowDelete()">Delete Row</button>-->
+    <!--<button id="delete-column" type="button" (click)="colDelete()">Delete Column</button>-->
+    <!--<button id="delete-table" type="button" (click)="tableDelete()">Delete Table</button>-->
+    <div><mat-icon matTooltip="Insert Row Above" [matTooltipPosition]="'above'" id="insert-row-above" (click)="rowAbove()">border_top</mat-icon></div>
+    <div><mat-icon matTooltip="Insert Row Below" [matTooltipPosition]="'above'" id="insert-row-below" (click)="rowBelow()">border_bottom</mat-icon></div>
+    <div><mat-icon matTooltip="Insert Column Left" [matTooltipPosition]="'above'" id="insert-column-left" (click)="colLeft()">border_left</mat-icon></div>
+    <div><mat-icon matTooltip="Insert Column Right" [matTooltipPosition]="'above'" id="insert-column-right" (click)="colRight()">border_right</mat-icon></div>
+    <div><mat-icon matTooltip="Delete Row" [matTooltipPosition]="'above'" id="delete-row" (click)="rowDelete()">delete_sweep</mat-icon></div>
+    <div><mat-icon matTooltip="Delete Column" [matTooltipPosition]="'above'" id="delete-column" (click)="colDelete()">delete_outline</mat-icon></div>
+    <div><mat-icon matTooltip="Delete Table" [matTooltipPosition]="'above'" id="delete-table" (click)="tableDelete()">delete</mat-icon></div>
+</div>

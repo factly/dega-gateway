@@ -16,18 +16,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 
-import {
-    ClaimComponent,
-    ClaimDetailComponent,
-    ClaimDeletePopupComponent,
-    ClaimDeleteDialogComponent,
-    NewClaimPopupComponent,
-    claimRoute,
-    claimPopupRoute
-} from './';
+import { ClaimComponent, ClaimDetailComponent, NewClaimPopupComponent, claimRoute } from './';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material';
-const ENTITY_STATES = [...claimRoute, ...claimPopupRoute];
+const ENTITY_STATES = [...claimRoute];
 
 @NgModule({
     imports: [
@@ -49,8 +41,8 @@ const ENTITY_STATES = [...claimRoute, ...claimPopupRoute];
         ReactiveFormsModule,
         MatTableModule
     ],
-    declarations: [ClaimComponent, ClaimDetailComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent, NewClaimPopupComponent],
-    entryComponents: [ClaimComponent, ClaimDeleteDialogComponent, ClaimDeletePopupComponent, NewClaimPopupComponent],
+    declarations: [ClaimComponent, ClaimDetailComponent, NewClaimPopupComponent],
+    entryComponents: [ClaimComponent, NewClaimPopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayClaimModule {}

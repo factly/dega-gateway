@@ -16,17 +16,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {
-    FactcheckComponent,
-    FactcheckDetailComponent,
-    FactcheckUpdateComponent,
-    FactcheckDeletePopupComponent,
-    FactcheckDeleteDialogComponent,
-    factcheckRoute,
-    factcheckPopupRoute
-} from './';
+import { FactcheckComponent, FactcheckDetailComponent, FactcheckUpdateComponent, factcheckRoute } from './';
 
-const ENTITY_STATES = [...factcheckRoute, ...factcheckPopupRoute];
+const ENTITY_STATES = [...factcheckRoute];
 
 @NgModule({
     imports: [
@@ -46,14 +38,8 @@ const ENTITY_STATES = [...factcheckRoute, ...factcheckPopupRoute];
         ReactiveFormsModule,
         MatDialogModule
     ],
-    declarations: [
-        FactcheckComponent,
-        FactcheckDetailComponent,
-        FactcheckUpdateComponent,
-        FactcheckDeleteDialogComponent,
-        FactcheckDeletePopupComponent
-    ],
-    entryComponents: [FactcheckComponent, FactcheckUpdateComponent, FactcheckDeleteDialogComponent, FactcheckDeletePopupComponent],
+    declarations: [FactcheckComponent, FactcheckDetailComponent, FactcheckUpdateComponent],
+    entryComponents: [FactcheckComponent, FactcheckUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayFactcheckModule {}

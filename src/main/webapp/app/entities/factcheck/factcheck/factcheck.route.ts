@@ -10,7 +10,6 @@ import { FactcheckService } from './factcheck.service';
 import { FactcheckComponent } from './factcheck.component';
 import { FactcheckDetailComponent } from './factcheck-detail.component';
 import { FactcheckUpdateComponent } from './factcheck-update.component';
-import { FactcheckDeletePopupComponent } from './factcheck-delete-dialog.component';
 import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const factcheckRoute: Routes = [
             pageTitle: 'gatewayApp.factcheckFactcheck.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const factcheckPopupRoute: Routes = [
-    {
-        path: 'factcheck/:id/delete',
-        component: FactcheckDeletePopupComponent,
-        resolve: {
-            factcheck: FactcheckResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gatewayApp.factcheckFactcheck.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

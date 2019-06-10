@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { TagComponent } from 'app/entities/core/tag/tag.component';
 import { TagService } from 'app/entities/core/tag/tag.service';
 import { Tag } from 'app/shared/model/core/tag.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Tag Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(TagComponent, '')

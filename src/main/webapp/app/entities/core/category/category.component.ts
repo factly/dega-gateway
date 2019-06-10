@@ -30,6 +30,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['name', 'description', 'slug', 'parent', 'createdDate', 'actions'];
 
     constructor(
         private categoryService: CategoryService,

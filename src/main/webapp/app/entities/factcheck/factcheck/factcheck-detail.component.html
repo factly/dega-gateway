@@ -1,107 +1,143 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="factcheck">
-            <h2><span jhiTranslate="gatewayApp.factcheckFactcheck.detail.title">Factcheck</span> {{factcheck.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.title">Title</span></dt>
-                <dd>
-                    <span>{{factcheck.title}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.clientId">Client Id</span></dt>
-                <dd>
-                    <span>{{factcheck.clientId}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.introduction">Introduction</span></dt>
-                <dd>
-                    <span [innerHtml]="factcheck.introduction"></span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.summary">Summary</span></dt>
-                <dd>
-                    <span [innerHtml]="factcheck.summary"></span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.excerpt">Excerpt</span></dt>
-                <dd>
-                    <span>{{factcheck.excerpt}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.publishedDate">Published Date</span></dt>
-                <dd>
-                    <span>{{factcheck.publishedDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.lastUpdatedDate">Last Updated Date</span></dt>
-                <dd>
-                    <span>{{factcheck.lastUpdatedDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.featured">Featured</span></dt>
-                <dd>
-                    <span>{{factcheck.featured}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.sticky">Sticky</span></dt>
-                <dd>
-                    <span>{{factcheck.sticky}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.updates">Updates</span></dt>
-                <dd>
-                    <span>{{factcheck.updates}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.slug">Slug</span></dt>
-                <dd>
-                    <span>{{factcheck.slug}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.password">Password</span></dt>
-                <dd>
-                    <span>{{factcheck.password}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia">Featured Media</span></dt>
-                <dd>
-                    <span><img src={{factcheck.featuredMedia}} alt="" width="100" height="100"></span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.subTitle">Sub Title</span></dt>
-                <dd>
-                    <span>{{factcheck.subTitle}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.createdDate">Created Date</span></dt>
-                <dd>
-                    <span>{{factcheck.createdDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.tag">Tag</span></dt>
-                <dd>
-                    <span *ngFor="let tag of factcheck.tags; let last = last">
-                        <a [routerLink]="['/tag', tag?.id, 'view' ]">{{tag.name}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.category">Category</span></dt>
-                <dd>
-                    <span *ngFor="let category of factcheck.categories; let last = last">
-                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.name}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.degaUser">Dega User</span></dt>
-                <dd>
-                    <span *ngFor="let degaUser of factcheck.degaUsers; let last = last">
-                        <a [routerLink]="['/dega-user', degaUser?.id, 'view' ]">{{degaUser.displayName}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckFactcheck.claim">Claim</span></dt>
-                <dd>
-                    <span *ngFor="let claim of factcheck.claims; let last = last">
-                        <a [routerLink]="['/claim', claim?.id, 'view' ]">{{claim.claim}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/factcheck', factcheck.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+<div class="detail-view-page">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div *ngIf="factcheck">
+                <h2><span jhiTranslate="gatewayApp.factcheckFactcheck.detail.title">Factcheck</span></h2>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="table-wrap">
+                    <table class="row-md jh-entity-details">
+                        <tr>
+                            <td><span>Factchect Id</span></td>
+                            <td><span>{{factcheck.id}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.title">Title</span></td>
+                            <td>
+                                <span>{{factcheck.title}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.clientId">Client Id</span></td>
+                            <td>
+                                <span>{{factcheck.clientId}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.introduction">Introduction</span></td>
+                            <td>
+                                <span [innerHtml]="factcheck.introduction"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.summary">Summary</span></td>
+                            <td>
+                                <span [innerHtml]="factcheck.summary"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.excerpt">Excerpt</span></td>
+                            <td>
+                                <span>{{factcheck.excerpt}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.publishedDate">Published Date</span></td>
+                            <td>
+                                <span>{{factcheck.publishedDate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.lastUpdatedDate">Last Updated Date</span>
+                            </td>
+                            <td>
+                                <span>{{factcheck.lastUpdatedDate | date:'medium'}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.featured">Featured</span></td>
+                            <td>
+                                <span>{{factcheck.featured}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.sticky">Sticky</span></td>
+                            <td>
+                                <span>{{factcheck.sticky}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.updates">Updates</span></td>
+                            <td>
+                                <span>{{factcheck.updates}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.slug">Slug</span></td>
+                            <td>
+                                <span>{{factcheck.slug}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.password">Password</span></td>
+                            <td>
+                                <span>{{factcheck.password}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia">Featured Media</span></td>
+                            <td>
+                                <span><img src={{factcheck.featuredMedia}} alt="" width="100" height="100"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.subTitle">Sub Title</span></td>
+                            <td>
+                                <span>{{factcheck.subTitle}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.createdDate">Created Date</span></td>
+                            <td>
+                                <span>{{factcheck.createdDate | date:'medium'}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.tag">Tag</span></td>
+                            <td>
+                                <span *ngFor="let tag of factcheck.tags; let last = last"><a [routerLink]="['/tag', tag?.id, 'view' ]">{{tag.name}}</a>{{last ? '' : ', '}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.category">Category</span></td>
+                            <td>
+                                <span *ngFor="let category of factcheck.categories; let last = last"><a [routerLink]="['/category', category?.id, 'view' ]">{{category.name}}</a>{{last ? '' : ', '}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.degaUser">Dega User</span></td>
+                            <td>
+                                <span *ngFor="let degaUser of factcheck.degaUsers; let last = last"><a [routerLink]="['/dega-user', degaUser?.id, 'view' ]">{{degaUser.displayName}}</a>{{last ? '' : ', '}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckFactcheck.claim">Claim</span></td>
+                            <td>
+                                <span *ngFor="let claim of factcheck.claims; let last = last"><a [routerLink]="['/claim', claim?.id, 'view' ]">{{claim.claim}}</a>{{last ? '' : ', '}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" mat-raised-button class="mr-2"
+                            (click)="previousState()">
+                        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                    </button>
+                    <button type="button" mat-raised-button color="primary"
+                            [routerLink]="['/factcheck', factcheck.id, 'edit']">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -7,13 +7,7 @@
             <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
                 <div>
                     <jhi-alert-error></jhi-alert-error>
-                    <!--<div class="form-group" [hidden]="!format.id">-->
-                    <!--<label for="id" jhiTranslate="global.field.id">ID</label>-->
-                    <!--<input type="text" class="form-control" id="id" name="id"-->
-                    <!--[(ngModel)]="format.id" readonly />-->
-                    <!--</div>-->
                     <div class="form-group">
-                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.coreFormat.name" for="field_name">Name</label>-->
                         <mat-form-field class="w-100">
                             <input matInput placeholder="{{ 'gatewayApp.coreFormat.name' | translate }}"
                                 type="text" name="name" id="field_name"
@@ -27,7 +21,6 @@
                         </div>
                     </div>
                     <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
-                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.coreFormat.clientId" for="field_clientId">Client Id</label>-->
                         <mat-form-field class="w-100">
                             <input matInput placeholder="{{'gatewayApp.coreFormat.clientId' | translate}}"
                                 type="text" name="clientId" id="field_clientId"
@@ -41,7 +34,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.coreFormat.description" for="field_description">Description</label>-->
                         <mat-form-field class="w-100">
                             <textarea matInput placeholder="{{'gatewayApp.coreFormat.description' | translate}}"
                                 rows="5" type="text" name="description" id="field_description"
@@ -49,7 +41,6 @@
                         </mat-form-field>
                     </div>
                     <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
-                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.coreFormat.isDefault" for="field_isDefault">Is Default</label>-->
                         <mat-checkbox name="isDefault" id="field_isDefault" [(ngModel)]="format.isDefault">{{'gatewayApp.coreFormat.isDefault' | translate}}</mat-checkbox>
                     </div>
 

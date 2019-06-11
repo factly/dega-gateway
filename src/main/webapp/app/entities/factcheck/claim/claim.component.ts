@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
 import { Principal } from 'app/core';
@@ -11,6 +11,7 @@ import { ITEMS_PER_PAGE } from 'app/shared';
 import { ClaimService } from './claim.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewClaimPopupComponent } from 'app/entities/factcheck/claim/new-claim-popup.component';
+import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
     selector: 'jhi-claim',
@@ -145,8 +146,22 @@ export class ClaimComponent implements OnInit, OnDestroy {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: IClaim) {
-        return item.id;
+    openDialogPopUp(claimDetails): void {
+        const title = claimDetails.name;
+        const config = {
+            data: {
+                message: `You are going to delete claim with the title "${title}" ?`
+            }
+        };
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, config);
+
+        dialogRef.afterClosed().subscribe(selectedOption => {
+            if (selectedOption.accept) {
+                this.claimService.delete(claimDetails.id).subscribe(response => {
+                    this.loadAll();
+                });
+            }
+        });
     }
 
     registerChangeInClaims() {
@@ -163,9 +178,10 @@ export class ClaimComponent implements OnInit, OnDestroy {
 
     openClaimEditDialog(claim_data) {
         const config = {
-            height: '98%',
-            width: '100vw',
-            maxWidth: '95vw',
+            height: '70%',
+            width: '70vw',
+            maxWidth: '70vw',
+            panelClass: ['header-dialogue'],
             autoFocus: false,
             disableClose: true,
             data: claim_data

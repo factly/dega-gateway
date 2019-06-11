@@ -5,25 +5,27 @@
                 <span jhiTranslate="gatewayApp.factcheckClaim.home.title">Claims</span>
             </h2>
         </div>
-        <div class="col-md-7 d-flex align-content-center justify-content-end">
-            <mat-form-field class="col-5">
-                <input matInput
-                       type="text" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckClaim.home.search' | translate }}">
-            </mat-form-field>
-            <button mat-icon-button mat-raised-button  class="mr-2" (click)="search(currentSearch)">
-                <mat-icon>search</mat-icon>
-            </button>
-            <button mat-icon-button mat-raised-button color="warn" class="mr-3"
-                    (click)="clear()" *ngIf="currentSearch">
-                <mat-icon class="white">delete_outline</mat-icon>
-            </button>
-            <div>
-                <button mat-button mat-raised-button color="primary"
-                        id="jh-create-entity" class="jh-create-entity create-claim" (click)="openClaimEditDialog(null)">
-                    <fa-icon [icon]="'plus'"></fa-icon>
-                    <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckClaim.home.createLabel">Create new Claim</span>
+        <div class="col-md-7">
+            <form name="searchForm" class="d-flex align-content-center justify-content-end">
+                <mat-form-field class="col-5">
+                    <input matInput
+                           type="text" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckClaim.home.search' | translate }}">
+                </mat-form-field>
+                <button mat-icon-button mat-raised-button  class="mr-2" (click)="search(currentSearch)">
+                    <mat-icon>search</mat-icon>
                 </button>
-            </div>
+                <button mat-icon-button mat-raised-button color="warn" class="mr-3"
+                        (click)="clear()" *ngIf="currentSearch">
+                    <mat-icon class="white">delete_outline</mat-icon>
+                </button>
+                <div>
+                    <button mat-button mat-raised-button color="primary"
+                            id="jh-create-entity" class="jh-create-entity create-claim" (click)="openClaimEditDialog(null)">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckClaim.home.createLabel">Create new Claim</span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     <jhi-alert></jhi-alert>
@@ -73,10 +75,11 @@
                             <div (click)="openClaimEditDialog(element)">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </div>
-                            <div [routerLink]="['/', { outlets: { popup: 'claim/'+ element.id + '/delete'} }]"
-                                 replaceUrl="true"
-                                 queryParamsHandling="merge">
-                                <fa-icon [icon]="'times'"></fa-icon>
+                            <div>
+                                <span (click)="openDialogPopUp(element)">
+                                    <fa-icon [icon]="'times'">
+                                    </fa-icon>
+                                </span>
                             </div>
                         </div>
                     </td>

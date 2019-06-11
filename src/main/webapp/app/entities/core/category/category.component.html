@@ -1,89 +1,105 @@
-<div>
-    <h2 id="page-heading">
-        <span jhiTranslate="gatewayApp.coreCategory.home.title">Categories</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-category" [routerLink]="['/category/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreCategory.home.createLabel">
-            Create new Category
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreCategory.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
-                    </button>
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+<div class="table-view-page p-2">
+    <div class="row mt-5">
+        <div class="col-md-5">
+            <h2 id="page-heading">
+                <span jhiTranslate="gatewayApp.coreCategory.home.title">Categories</span>
+            </h2>
+        </div>
+        <div class="col-md-7">
+            <form name="searchForm" class="d-flex align-content-center justify-content-end">
+                <mat-form-field>
+                    <input type="text" matInput=""
+                           [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch"
+                           placeholder="{{ 'gatewayApp.coreCategory.home.search' | translate }}">
+                </mat-form-field>
+                <button mat-icon-button mat-raised-button class="mr-2" (click)="search(currentSearch)">
+                    <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+                <button mat-icon-button mat-raised-button color="warn" class="mr-3" (click)="clear()"
+                        *ngIf="currentSearch">
+                    <fa-icon [icon]="'trash-alt'"></fa-icon>
+                </button>
+                <div>
+                    <button id="jh-create-entity" mat-raised-button color="primary"
+                            [routerLink]="['/category/new']">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down" jhiTranslate="gatewayApp.coreCategory.home.createLabel">Create new Category</span>
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    <br/>
-    <div class="table-responsive" *ngIf="categories">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreCategory.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="description"><span jhiTranslate="gatewayApp.coreCategory.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="slug"><span jhiTranslate="gatewayApp.coreCategory.slug">Slug</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="parent"><span jhiTranslate="gatewayApp.coreCategory.parent">Parent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="clientId"><span jhiTranslate="gatewayApp.coreCategory.clientId">Client Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreCategory.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <!--<th jhiSortBy="lastUpdatedDate"><span jhiTranslate="gatewayApp.coreCategory.lastUpdatedDate">Last Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let category of categories ;trackBy: trackId">
-                <!--<td><a [routerLink]="['/category', category.id, 'view' ]">{{category.id}}</a></td>-->
-                <td>{{category.name}}</td>
-                <td>{{category.description}}</td>
-                <td>{{category.slug}}</td>
-                <td>{{category.parent}}</td>
-                <!--<td>{{category.clientId}}</td>-->
-                <td>{{category.createdDate | date:'medium'}}</td>
-                <!--<td>{{category.lastUpdatedDate | date:'medium'}}</td>-->
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/category', category.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/category', category.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'category/'+ category.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="table-responsive col-md-12" *ngIf="categories" jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
+             [callback]="transition.bind(this)">
+            <table mat-table [dataSource]="categories"
+                   class="mat-elevation-z8 shadow-table full-width alternate-color box-shadow-2">
+                <ng-container matColumnDef="name">
+                    <th jhiSortBy="name" mat-header-cell *matHeaderCellDef><span
+                        jhiTranslate="gatewayApp.coreCategory.name">Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                    <th jhiSortBy="description" mat-header-cell *matHeaderCellDef><span
+                        jhiTranslate="gatewayApp.coreCategory.description">Description</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}}</td>
+                </ng-container>
+                <ng-container matColumnDef="slug">
+                    <th jhiSortBy="slug" mat-header-cell *matHeaderCellDef><span
+                        jhiTranslate="gatewayApp.coreCategory.slug">Slug</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.slug}}</td>
+                </ng-container>
+                <ng-container matColumnDef="parent">
+                    <th jhiSortBy="parent" mat-header-cell *matHeaderCellDef class="mw-md-100"><span
+                        jhiTranslate="gatewayApp.coreCategory.parent">Parent</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.parent}}</td>
+                </ng-container>
+                <ng-container matColumnDef="createdDate">
+                    <th jhiSortBy="createdDate" mat-header-cell *matHeaderCellDef class="mw-md-200"><span
+                        jhiTranslate="gatewayApp.coreCategory.createdDate">Created Date</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.createdDate | date:'medium'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="action-column">Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="action-button-container">
+                            <div [routerLink]="['/category', element.id, 'view' ]">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                            </div>
+                            <div [routerLink]="['/category', element.id, 'edit']">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            </div>
+                            <div [routerLink]="['/', { outlets: { popup: 'category/'+ element.id + '/delete'} }]"
+                                 replaceUrl="true"
+                                 queryParamsHandling="merge">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
     </div>
-    <div *ngIf="categories && categories.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-        </div>
+</div>
+<div *ngIf="categories && categories.length">
+    <div class="row justify-content-center">
+        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+    <div class="row justify-content-center">
+        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                        [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
     </div>
 </div>

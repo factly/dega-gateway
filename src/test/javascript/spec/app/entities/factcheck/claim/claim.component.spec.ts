@@ -10,6 +10,7 @@ import { ClaimService } from 'app/entities/factcheck/claim/claim.service';
 import { Claim } from 'app/shared/model/factcheck/claim.model';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Claim Management Component', () => {
@@ -36,7 +37,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(ClaimComponent, '')

@@ -30,6 +30,7 @@ export class StatusComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['name', 'isDefault', 'slug', 'createdDate', 'actions'];
 
     constructor(
         private statusService: StatusService,

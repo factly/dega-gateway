@@ -30,6 +30,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['name', 'isDefault', 'slug', 'createdDate', 'actions'];
 
     constructor(
         private roleService: RoleService,

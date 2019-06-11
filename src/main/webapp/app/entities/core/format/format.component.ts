@@ -30,6 +30,7 @@ export class FormatComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['name', 'isDefault', 'description', 'slug', 'createdDate', 'actions'];
 
     constructor(
         private formatService: FormatService,

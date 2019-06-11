@@ -1,51 +1,54 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="category">
-            <h2><span jhiTranslate="gatewayApp.coreCategory.detail.title">Category</span> {{category.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gatewayApp.coreCategory.name">Name</span></dt>
-                <dd>
-                    <span>{{category.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreCategory.description">Description</span></dt>
-                <dd>
-                    <span>{{category.description}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreCategory.slug">Slug</span></dt>
-                <dd>
-                    <span>{{category.slug}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreCategory.parent">Parent</span></dt>
-                <dd>
-                    <span>{{category.parent}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreCategory.clientId">Client Id</span></dt>
-                <dd>
-                    <span>{{category.clientId}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreCategory.createdDate">Created Date</span></dt>
-                <dd>
-                    <span>{{category.createdDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreCategory.lastUpdatedDate">Last Updated Date</span></dt>
-                <dd>
-                    <span>{{category.lastUpdatedDate}}</span>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/category', category.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+<div class="detail-view-page">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div *ngIf="category">
+                <h2><span jhiTranslate="gatewayApp.coreCategory.detail.title">Category</span> {{category.id}}</h2>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="table-wrap">
+                    <table class="row-md jh-entity-details">
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreCategory.name">Name</span></td>
+                            <td><span>{{category.name}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreCategory.description">Description</span></td>
+                            <td><span>{{category.description}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreCategory.slug">Slug</span></td>
+                            <td><span>{{category.slug}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreCategory.parent">Parent</span></td>
+                            <td><span>{{category.parent}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreCategory.clientId">Client Id</span></td>
+                            <td><span>{{category.clientId}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreCategory.createdDate">Created Date</span></td>
+                            <td><span>{{category.createdDate | date:'medium'}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreCategory.lastUpdatedDate">Last Updated Date</span></td>
+                            <td><span>{{category.lastUpdatedDate | date:'medium'}}</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" mat-raised-button class="mr-2"
+                            (click)="previousState()">
+                        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span
+                        jhiTranslate="entity.action.back"> Back</span>
+                    </button>
+                    <button type="button" mat-raised-button color="primary"
+                            [routerLink]="['/category', category.id, 'edit']">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span
+                        jhiTranslate="entity.action.edit"> Edit</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

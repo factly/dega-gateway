@@ -1,51 +1,63 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="format">
-            <h2><span jhiTranslate="gatewayApp.coreFormat.detail.title">Format</span> {{format.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gatewayApp.coreFormat.name">Name</span></dt>
-                <dd>
-                    <span>{{format.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreFormat.isDefault">Is Default</span></dt>
-                <dd>
-                    <span>{{format.isDefault}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreFormat.clientId">Client Id</span></dt>
-                <dd>
-                    <span>{{format.clientId}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreFormat.description">Description</span></dt>
-                <dd>
-                    <span>{{format.description}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreFormat.slug">Slug</span></dt>
-                <dd>
-                    <span>{{format.slug}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreFormat.createdDate">Created Date</span></dt>
-                <dd>
-                    <span>{{format.createdDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreFormat.lastUpdatedDate">Last Updated Date</span></dt>
-                <dd>
-                    <span>{{format.lastUpdatedDate}}</span>
-                </dd>
-            </dl>
+<div class="detail-view-page">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div *ngIf="format">
+                <h2><span jhiTranslate="gatewayApp.coreFormat.detail.title">Format</span> {{format.id}}</h2>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="table-wrap">
+                    <table class="row-md jh-entity-details">
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreFormat.name">Name</span></td>
+                            <td><span>{{format.name}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreFormat.isDefault">Is Default</span></td>
+                            <td><span>{{format.isDefault}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreFormat.clientId">Client Id</span></td>
+                            <td>
+                                <span>{{format.clientId}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreFormat.description">Description</span></td>
+                            <td>
+                                <span>{{format.description}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreFormat.slug">Slug</span></td>
+                            <td>
+                                <span>{{format.slug}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreFormat.createdDate">Created Date</span></td>
+                            <td>
+                                <span>{{format.createdDate | date:'medium'}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreFormat.lastUpdatedDate">Last Updated Date</span></td>
+                            <td>
+                                <span>{{format.lastUpdatedDate | date:'medium'}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" mat-raised-button class="mr-2"
+                            (click)="previousState()">
+                        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                    </button>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/format', format.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+                    <button type="button" mat-raised-button color="primary"
+                            [routerLink]="['/format', format.id, 'edit']">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

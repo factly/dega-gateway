@@ -1,22 +1,11 @@
 <div class="table-view-page p-2">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row mt-5">
+        <div class="col-md-5">
             <h2 id="page-heading font-sz-20">
                 <span jhiTranslate="gatewayApp.coreTag.home.title">Tags</span>
-                <button mat-button mat-raised-button color="primary"
-                        id="jh-create-entity" class="float-right jh-create-entity create-tag"
-                        [routerLink]="['/tag/new']">
-                    <fa-icon [icon]="'plus'"></fa-icon>
-                    <span class="hidden-sm-down" jhiTranslate="gatewayApp.coreTag.home.createLabel">
-            Create new Tag
-            </span>
-                </button>
             </h2>
         </div>
-    </div>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-7">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3 justify-content-end">
                     <mat-form-field class="col-md-3">
@@ -29,13 +18,22 @@
                             (click)="search(currentSearch)">
                         <mat-icon>search</mat-icon>
                     </button>
-                    <button mat-icon-button mat-raised-button color="warn"
+                    <button mat-icon-button mat-raised-button color="warn" class="mr-3"
                             (click)="clear()" *ngIf="currentSearch">
                         <mat-icon class="white">delete_outline</mat-icon>
                     </button>
+                    <div>
+                        <button mat-button mat-raised-button color="primary"
+                                id="jh-create-entity" class="float-right jh-create-entity create-tag"
+                                [routerLink]="['/tag/new']">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span class="hidden-sm-down" jhiTranslate="gatewayApp.coreTag.home.createLabel">Create new Tag</span>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
+        <jhi-alert></jhi-alert>
     </div>
     <div class="row">
         <div class="table-responsive col-md-12" *ngIf="tags" jhiSort [(predicate)]="predicate" [(ascending)]="reverse"

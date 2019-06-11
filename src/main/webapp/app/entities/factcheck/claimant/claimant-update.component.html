@@ -1,120 +1,136 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+<div class="create-view-page p-2">
+    <div class="row shadow">
+        <div class="col-md-12">
             <h2 id="jhi-claimant-heading" jhiTranslate="gatewayApp.factcheckClaimant.home.createOrEditLabel">Create or edit a Claimant</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!claimant.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="claimant.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="claimant.name" required/>
-                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
+        </div>
+        <div class="col-12 mt-5">
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+                <div>
+                    <jhi-alert-error></jhi-alert-error>
+                    <!--<div class="form-group" [hidden]="!claimant.id">-->
+                        <!--<label for="id" jhiTranslate="global.field.id">ID</label>-->
+                        <!--<input type="text" class="form-control" id="id" name="id"-->
+                               <!--[(ngModel)]="claimant.id" readonly />-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <mat-form-field class="w-100">
+                            <input matInput placeholder="{{ 'gatewayApp.factcheckClaimant.name' | translate }}"
+                                   type="text" name="name" id="field_name"
+                                   [(ngModel)]="claimant.name">
+                            <mat-error>
+                                Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.tagLine" for="field_tagLine">Tag Line</label>
-                    <input type="text" class="form-control" name="tagLine" id="field_tagLine"
-                        [(ngModel)]="claimant.tagLine" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.description" for="field_description">Description</label>
-                    <textarea rows="5" type="text" class="form-control" name="description" id="field_description"
-                              [(ngModel)]="claimant.description" ></textarea>
-                </div>
-                <div class="form-group">
-                    <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.imageURL" for="field_imageURL">Image URL</label>
-                    <input type="text" class="form-control" name="imageURL" id="field_imageURL"
-                        [(ngModel)]="claimant.imageURL" />-->
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.imageURL" for="field_imageURL">Image URL</label>
-                    <button id="field_imageURL" class="btn btn-primary jh-create-entity create-media"
-                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                            [queryParams]="{ media_type: 'feature'}"
-                            replaceUrl="true" type="button">
-                        <fa-icon [icon]="'plus'"></fa-icon>
-                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
+                    <div class="form-group">
+                        <mat-form-field class="w-100">
+                            <input matInput  placeholder="{{ 'gatewayApp.factcheckClaimant.tagLine' | translate }}"
+                                   type="text" name="tagLine" id="field_tagLine"
+                                   [(ngModel)]="claimant.tagLine" />
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="w-100">
+                            <textarea matInput placeholder="{{ 'gatewayApp.factcheckClaimant.description' | translate }}"
+                                      rows="5" type="text" name="description" id="field_description"
+                                      [(ngModel)]="claimant.description" ></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.imageURL" for="field_imageURL">Image URL</label>
+                        <input type="text" class="form-control" name="imageURL" id="field_imageURL"
+                            [(ngModel)]="claimant.imageURL" />-->
+                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.imageURL" for="field_imageURL">Image URL</label>-->
+                        <div class="mb-3"><img src={{claimant.imageURL}} height="100"></div>
+                        <button mat-raised-button color="primary"
+                            id="field_imageURL" class="jh-create-entity create-media"
+                                [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
+                                [queryParams]="{ media_type: 'feature'}"
+                                replaceUrl="true" type="button">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
                             Upload Media
                         </span>
-                    </button>
-                    <img src={{claimant.imageURL}} alt="" width="100" height="100">
-                    <div *ngIf="claimant.imageURL">
-                        <span [(ngModel)]="claimant.imageURL" name="featuredMedia" ngDefaultControl></span>
+                        </button>
+                        <div *ngIf="claimant.imageURL">
+                            <span [(ngModel)]="claimant.imageURL" name="featuredMedia" ngDefaultControl></span>
+                        </div>
                     </div>
-                </div>
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.clientId" for="field_clientId">Client Id</label>
-                    <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="claimant.clientId" required/>
-                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
+                    <!--<div class="form-group">
+                        <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.clientId" for="field_clientId">Client Id</label>
+                        <input type="text" class="form-control" name="clientId" id="field_clientId"
+                            [(ngModel)]="claimant.clientId" required/>
+                        <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.slug" for="field_slug">Slug</label>
-                    <input type="text" class="form-control" name="slug" id="field_slug"
-                        [(ngModel)]="claimant.slug" required/>
-                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.slug" for="field_slug">Slug</label>
+                        <input type="text" class="form-control" name="slug" id="field_slug"
+                            [(ngModel)]="claimant.slug" required/>
+                        <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.createdDate" for="field_createdDate">Created Date</label>
-                    <div class="d-flex">
-                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
-                        required/>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.createdDate" for="field_createdDate">Created Date</label>
+                        <div class="d-flex">
+                            <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
+                            required/>
+                        </div>
+                        <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                This field should be a date and time.
+                            </small>
+                        </div>
                     </div>
-                    <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
-                    <div class="d-flex">
-                        <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="lastUpdatedDate"
-                        required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.lastUpdatedDate?.dirty && editForm.controls.lastUpdatedDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.lastUpdatedDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.lastUpdatedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>-->
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="gatewayApp.factcheckClaimant.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
+                        <div class="d-flex">
+                            <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="lastUpdatedDate"
+                            required/>
+                        </div>
+                        <div [hidden]="!(editForm.controls.lastUpdatedDate?.dirty && editForm.controls.lastUpdatedDate?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.lastUpdatedDate?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                [hidden]="!editForm.controls.lastUpdatedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                This field should be a date and time.
+                            </small>
+                        </div>
+                    </div>-->
 
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button mat-raised-button color="warn" class="mr-3"
+                        type="button" id="cancel-save"  (click)="previousState()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button mat-raised-button
+                        type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

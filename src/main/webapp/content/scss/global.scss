@@ -76,6 +76,9 @@ Generic styles
 .w-60 {
     width: 60% !important;
 }
+.mh-50 {
+    max-height: 50px;
+}
 .mw-100 {
     min-width: 100px;
 }
@@ -603,6 +606,28 @@ $xs-sm-font-size: 12px;
 
 /* Table view page layout*/
 .table-view-page {
+    h2 {
+        border: solid 5px #dc3545;
+        border-width: 0 0 0 5px;
+        padding-left: 12px;
+    }
+    table {
+        td {
+            padding: 0.5rem;
+        }
+        .action-column {
+            width: 140px;
+        }
+    }
+}
+
+/* Edit/Create View*/
+.create-view-page {
+    > div {
+        max-width: 800px;
+        background: white;
+        padding: 0 10px 50px 10px;
+    }
     h2 {
         border: solid 5px #dc3545;
         border-width: 0 0 0 5px;

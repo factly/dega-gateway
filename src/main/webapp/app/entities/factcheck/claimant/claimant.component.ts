@@ -30,6 +30,7 @@ export class ClaimantComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['imageURL', 'name', 'description', 'createdDate', 'actions'];
 
     constructor(
         private claimantService: ClaimantService,

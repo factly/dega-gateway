@@ -1,38 +1,34 @@
 <div class="table-view-page p-2">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row mt-5">
+        <div class="col-md-5">
             <h2 id="page-heading font-sz-20">
                 <span jhiTranslate="gatewayApp.factcheckClaim.home.title">Claims</span>
-                <button mat-button mat-raised-button color="primary"
-                        id="jh-create-entity" class="float-right jh-create-entity create-claim" (click)="openClaimEditDialog(null)">
-                    <fa-icon [icon]="'plus'"></fa-icon>
-                    <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckClaim.home.createLabel">
-            Create new Claim
-            </span>
-                </button>
             </h2>
         </div>
-    </div>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3 justify-content-end">
-                    <mat-form-field class="col-md-3">
-                        <input matInput
-                            type="text" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckClaim.home.search' | translate }}">
-                    </mat-form-field>
-                    <button mat-icon-button mat-raised-button  class="mr-2" (click)="search(currentSearch)">
-                        <mat-icon>search</mat-icon>
-                    </button>
-                    <button mat-icon-button mat-raised-button color="warn"
-                            (click)="clear()" *ngIf="currentSearch">
-                        <mat-icon class="white">delete_outline</mat-icon>
+        <div class="col-md-7">
+            <form name="searchForm" class="d-flex align-content-center justify-content-end">
+                <mat-form-field class="col-5">
+                    <input matInput
+                           type="text" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckClaim.home.search' | translate }}">
+                </mat-form-field>
+                <button mat-icon-button mat-raised-button  class="mr-2" (click)="search(currentSearch)">
+                    <mat-icon>search</mat-icon>
+                </button>
+                <button mat-icon-button mat-raised-button color="warn" class="mr-3"
+                        (click)="clear()" *ngIf="currentSearch">
+                    <mat-icon class="white">delete_outline</mat-icon>
+                </button>
+                <div>
+                    <button mat-button mat-raised-button color="primary"
+                            id="jh-create-entity" class="jh-create-entity create-claim" (click)="openClaimEditDialog(null)">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckClaim.home.createLabel">Create new Claim</span>
                     </button>
                 </div>
             </form>
         </div>
     </div>
+    <jhi-alert></jhi-alert>
     <div class="row">
         <div class="table-responsive col-md-12" *ngIf="claims" jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
              [callback]="transition.bind(this)">
@@ -44,7 +40,7 @@
                     <td mat-cell *matCellDef="let element"> {{element.claim}}</td>
                 </ng-container>
                 <ng-container matColumnDef="createdDate">
-                    <th jhiSortBy="createdDate" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaim.createdDate">Created Date</span>
+                    <th jhiSortBy="createdDate" mat-header-cell *matHeaderCellDef class="mw-md-200"><span jhiTranslate="gatewayApp.factcheckClaim.createdDate">Created Date</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.createdDate | date:'medium'}}</td>
@@ -60,7 +56,7 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="claimantName">
-                    <th jhiSortBy="claimantName" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaim.claimant">Created Date</span>
+                    <th class="mw-md-200" jhiSortBy="claimantName" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaim.claimant">Created Date</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <td mat-cell *matCellDef="let element">

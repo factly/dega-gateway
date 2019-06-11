@@ -1,0 +1,27 @@
+:host ::ng-deep .custom-parent-container-for-embedded-data {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    padding-top: 56.25%;
+}
+
+:host ::ng-deep .ql-custom-embedd {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    bottom: 0px;
+}
+
+:host ::ng-deep .ql-toolbar {
+    background: #b8c1c8;
+    border-bottom: 1px solid #989ea4;
+    border-top: 1px solid #717d85;
+    color: #fff;
+    margin: 0;
+    padding: 2px 0 0 12px;
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 2;
+    top: -50px;
+}

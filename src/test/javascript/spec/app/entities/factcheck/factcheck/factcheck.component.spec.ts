@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { FactcheckComponent } from 'app/entities/factcheck/factcheck/factcheck.component';
 import { FactcheckService } from 'app/entities/factcheck/factcheck/factcheck.service';
 import { Factcheck } from 'app/shared/model/factcheck/factcheck.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Factcheck Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(FactcheckComponent, '')

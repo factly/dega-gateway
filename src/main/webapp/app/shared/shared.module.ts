@@ -12,8 +12,21 @@ import { NgbDateMomentAdapter } from 'app/shared/util/datepicker-adapter';
 import { GatewaySharedCommonModule, GatewaySharedLibsModule, HasAnyAuthorityDirective } from 'app/shared/index';
 import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/confirmation-dialog.component';
 
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 @NgModule({
-    imports: [GatewaySharedLibsModule, GatewaySharedCommonModule, MatCheckboxModule, MatDialogModule, QuillModule],
+    imports: [
+        GatewaySharedLibsModule,
+        GatewaySharedCommonModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatTooltipModule,
+        QuillModule
+    ],
     declarations: [
         ConfirmationDialogComponent,
         HasAnyAuthorityDirective,

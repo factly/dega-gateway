@@ -9,7 +9,6 @@ import { Claim } from 'app/shared/model/factcheck/claim.model';
 import { ClaimService } from './claim.service';
 import { ClaimComponent } from './claim.component';
 import { ClaimDetailComponent } from './claim-detail.component';
-import { ClaimDeletePopupComponent } from './claim-delete-dialog.component';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
 
 @Injectable({ providedIn: 'root' })
@@ -53,21 +52,5 @@ export const claimRoute: Routes = [
             pageTitle: 'gatewayApp.factcheckClaim.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const claimPopupRoute: Routes = [
-    {
-        path: 'claim/:id/delete',
-        component: ClaimDeletePopupComponent,
-        resolve: {
-            claim: ClaimResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gatewayApp.factcheckClaim.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

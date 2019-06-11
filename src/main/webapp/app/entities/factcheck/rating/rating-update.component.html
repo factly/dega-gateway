@@ -7,11 +7,6 @@
             <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
                 <div>
                     <jhi-alert-error></jhi-alert-error>
-                    <!--<div class="form-group" [hidden]="!rating.id">-->
-                        <!--<label for="id" jhiTranslate="global.field.id">ID</label>-->
-                        <!--<input type="text" class="form-control" id="id" name="id"-->
-                               <!--[(ngModel)]="rating.id" readonly />-->
-                    <!--</div>-->
                     <div class="form-group">
                         <mat-form-field class="w-100">
                             <input matInput placeholder="{{ 'gatewayApp.factcheckRating.name' | translate }}"
@@ -26,7 +21,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.numericValue" for="field_numericValue">Numeric Value</label>-->
                         <mat-form-field class="w-100">
                             <input  matInput placeholder="{{ 'gatewayApp.factcheckRating.numericValue' | translate }}"
                                 type="number" name="numericValue" id="field_numericValue"
@@ -48,7 +42,6 @@
                         </div>
                     </div>
                     <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
-                        <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.clientId" for="field_clientId">Client Id</label>-->
                         <mat-form-field class="w-100">
                             <input  matInput placeholder="{{ 'gatewayApp.factcheckRating.clientId' | translate }}"
                                 type="text" name="clientId" id="field_clientId"
@@ -77,13 +70,9 @@
                     </div>
                 </div>
                 <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
-                    <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.isDefault" for="field_isDefault">Is Default</label>-->
-                    <!--<input type="checkbox" class="form-control" name="isDefault" id="field_isDefault"-->
-                           <!--[(ngModel)]="rating.isDefault" />-->
                     <mat-checkbox id="field_isDefault" name="isDefault" [(ngModel)]="rating.isDefault">{{'gatewayApp.factcheckRating.isDefault' | translate }}</mat-checkbox>
                 </div>
                 <div class="form-group">
-                    <!--<label class="form-control-label" jhiTranslate="gatewayApp.factcheckRating.iconURL" for="field_featuredMedia">Icon URL</label>-->
                     <div class="mb-3"><img src={{rating.iconURL}} height="100"></div>
                     <button mat-raised-button color="primary"
                         id="field_iconURL" class="btn btn-primary jh-create-entity create-media"

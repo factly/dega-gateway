@@ -61,6 +61,7 @@ export class PostComponent implements OnInit, OnDestroy {
     openDialogPopUp(postDetails): void {
         const post_title = postDetails.title;
         const config = {
+            panelClass: ['header-dialogue'],
             data: {
                 message: `You are going to delete post with the title "${post_title}" ?`
             }

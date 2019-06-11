@@ -646,6 +646,41 @@ $xs-sm-font-size: 12px;
     }
 }
 
+/* Detail View Page */
+.detail-view-page {
+    padding: 0.5rem;
+    > div {
+        padding: 30px 50px;
+        background: white;
+        h2 {
+            margin-top: 2rem;
+            border: solid 5px #dc3545;
+            border-width: 0 0 0 5px;
+            padding-left: 12px;
+        }
+        .table-wrap {
+            margin-top: 1rem;
+            table {
+                width: 100%;
+                margin: 3rem 0;
+                tr {
+                    td {
+                        border: solid 1px #e8e8e8;
+                        min-width: 200px;
+                        padding: 0.5rem 1rem;
+                    }
+                    td:first-child {
+                        font-weight: 500;
+                    }
+                }
+                tr:nth-child(odd) {
+                    background-color: #f5f5f5;
+                }
+            }
+        }
+    }
+}
+
 /* Dialogue with header */
 .header-dialogue {
     position: relative;

@@ -13,6 +13,8 @@ import { GatewayCoreModule } from 'app/core';
 import { GatewayAppRoutingModule } from './app-routing.module';
 import { GatewayHomeModule } from './home/home.module';
 import { GatewayEntityModule } from './entities/entity.module';
+
+import { MatIconModule } from '@angular/material/icon';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
@@ -36,7 +38,8 @@ import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/conf
         GatewayCoreModule,
         GatewayHomeModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
-        GatewayEntityModule
+        GatewayEntityModule,
+        MatIconModule
     ],
     declarations: [
         JhiMainComponent,

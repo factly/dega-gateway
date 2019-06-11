@@ -1,30 +1,32 @@
-<div>
-    <h2 id="page-heading">
-        <span jhiTranslate="gatewayApp.factcheckFactcheck.home.title">Factchecks</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-factcheck" [routerLink]="['/factcheck/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckFactcheck.home.createLabel">
-            Create new Factcheck
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckFactcheck.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
-                    </button>
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+<div class="p-2">
+    <div class="row mt-5">
+        <div class="col-md-5">
+            <h2 id="page-heading">
+                <span jhiTranslate="gatewayApp.factcheckFactcheck.home.title">Factchecks</span>
+            </h2>
+        </div>
+        <div class="col-md-7">
+            <form name="searchForm" class="d-flex align-content-center justify-content-end">
+                <mat-form-field>
+                    <input type="text" matInput
+                           [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckFactcheck.home.search' | translate }}">
+                </mat-form-field>
+                <button mat-raised-button mat-icon-button (click)="search(currentSearch)" class="mr-2">
+                    <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+                <button mat-raised-button mat-icon-button color="warn" class="mr-3" (click)="clear()" *ngIf="currentSearch">
+                    <fa-icon [icon]="'trash-alt'"></fa-icon>
+                </button>
+                <div>
+                    <button id="jh-create-entity" mat-raised-button color="primary" [routerLink]="['/factcheck/new']">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckFactcheck.home.createLabel">Create new Factcheck</span>
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    <br/>
+    <jhi-alert></jhi-alert>
     <div class="custom-list-view" *ngIf="factchecks">
         <div class="acttion-bar-wrap"></div>
         <div class="content-block-wrap">
@@ -77,53 +79,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="table-responsive" *ngIf="!factchecks">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="featuredMedia"><span jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia">Featured Media</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="title"><span jhiTranslate="gatewayApp.factcheckFactcheck.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="excerpt"><span jhiTranslate="gatewayApp.factcheckFactcheck.excerpt">Excerpt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.factcheckFactcheck.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="statusName"><span jhiTranslate="gatewayApp.corePost.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let factcheck of factchecks ;trackBy: trackId">
-                <td><img src={{factcheck.featuredMedia}} alt="" width="100" height="100"></td>
-                <td>{{factcheck.title}}</td>
-                <td>{{factcheck.excerpt}}</td>
-                <td>{{factcheck.createdDate | date:'medium'}}</td>
-                <td>{{factcheck.statusName}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/factcheck', factcheck.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/factcheck', factcheck.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'factcheck/'+ factcheck.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
     </div>
     <div *ngIf="factchecks && factchecks.length">
         <div class="row justify-content-center">

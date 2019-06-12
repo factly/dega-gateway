@@ -1,59 +1,83 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="rating">
-            <h2><span jhiTranslate="gatewayApp.factcheckRating.detail.title">Rating</span> {{rating.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gatewayApp.factcheckRating.name">Name</span></dt>
-                <dd>
-                    <span>{{rating.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckRating.numericValue">Numeric Value</span></dt>
-                <dd>
-                    <span>{{rating.numericValue}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckRating.iconURL">Icon URL</span></dt>
-                <dd>
-                    <span><img src={{rating.iconURL}} alt="" width="100" height="100"></span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckRating.isDefault">Is Default</span></dt>
-                <dd>
-                    <span>{{rating.isDefault}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckRating.clientId">Client Id</span></dt>
-                <dd>
-                    <span>{{rating.clientId}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckRating.slug">Slug</span></dt>
-                <dd>
-                    <span>{{rating.slug}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckRating.createdDate">Created Date</span></dt>
-                <dd>
-                    <span>{{rating.createdDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckRating.lastUpdatedDate">Last Updated Date</span></dt>
-                <dd>
-                    <span>{{rating.lastUpdatedDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckRating.description">Description</span></dt>
-                <dd>
-                    <span>{{rating.description}}</span>
-                </dd>
-            </dl>
+<div class="detail-view-page">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div *ngIf="rating">
+                <h2><span jhiTranslate="gatewayApp.factcheckRating.detail.title">Rating</span></h2>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="table-wrap">
+                    <table class="row-md jh-entity-details">
+                        <tr>
+                            <td><span>Rating Id</span></td>
+                            <td><span>{{rating.id}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.name">Name</span></td>
+                            <td>
+                                <span>{{rating.name}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.numericValue">Numeric Value</span></td>
+                            <td>
+                                <span>{{rating.numericValue}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.iconURL">Icon URL</span></td>
+                            <td>
+                                <span><img src={{rating.iconURL}} height="100"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.isDefault">Is Default</span></td>
+                            <td>
+                                <span>{{rating.isDefault}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.clientId">Client Id</span></td>
+                            <td>
+                                <span>{{rating.clientId}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.slug">Slug</span></td>
+                            <td>
+                                <span>{{rating.slug}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.createdDate">Created Date</span></td>
+                            <td>
+                                <span>{{rating.createdDate | date:'medium'}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.lastUpdatedDate">Last Updated Date</span></td>
+                            <td>
+                                <span>{{rating.lastUpdatedDate | date:'medium'}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.description">Description</span></td>
+                            <td>
+                                <span>{{rating.description}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" mat-raised-button class="mr-2"
+                            (click)="previousState()">
+                        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                    </button>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/rating', rating.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+                    <button type="button" mat-raised-button color="primary"
+                            [routerLink]="['/rating', rating.id, 'edit']">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,55 +1,76 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="claimant">
-            <h2><span jhiTranslate="gatewayApp.factcheckClaimant.detail.title">Claimant</span> {{claimant.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gatewayApp.factcheckClaimant.name">Name</span></dt>
-                <dd>
-                    <span>{{claimant.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckClaimant.tagLine">Tag Line</span></dt>
-                <dd>
-                    <span>{{claimant.tagLine}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckClaimant.description">Description</span></dt>
-                <dd>
-                    <span>{{claimant.description}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckClaimant.imageURL">Claimant</span></dt>
-                <dd>
-                    <span><img src={{claimant.imageURL}} alt="" width="100" height="100"></span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckClaimant.clientId">Client Id</span></dt>
-                <dd>
-                    <span>{{claimant.clientId}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckClaimant.slug">Slug</span></dt>
-                <dd>
-                    <span>{{claimant.slug}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckClaimant.createdDate">Created Date</span></dt>
-                <dd>
-                    <span>{{claimant.createdDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.factcheckClaimant.lastUpdatedDate">Last Updated Date</span></dt>
-                <dd>
-                    <span>{{claimant.lastUpdatedDate}}</span>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/claimant', claimant.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+<div class="detail-view-page">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div *ngIf="claimant">
+                <h2><span jhiTranslate="gatewayApp.factcheckClaimant.detail.title">Claimant</span></h2>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="table-wrap">
+                    <table class="row-md jh-entity-details">
+                        <tr>
+                            <td><span>Claimant Id</span></td>
+                            <td><span>{{claimant.id}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckClaimant.name">Name</span></td>
+                            <td>
+                                <span>{{claimant.name}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckClaimant.tagLine">Tag Line</span></td>
+                            <td>
+                                <span>{{claimant.tagLine}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckClaimant.description">Description</span></td>
+                            <td>
+                                <span>{{claimant.description}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckClaimant.imageURL">Claimant</span></td>
+                            <td>
+                                <span><img src={{claimant.imageURL}} alt="" width="100" height="100"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckClaimant.clientId">Client Id</span></td>
+                            <td>
+                                <span>{{claimant.clientId}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckClaimant.slug">Slug</span></td>
+                            <td>
+                                <span>{{claimant.slug}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckClaimant.createdDate">Created Date</span></td>
+                            <td>
+                                <span>{{claimant.createdDate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.factcheckClaimant.lastUpdatedDate">Last Updated Date</span></td>
+                            <td>
+                                <span>{{claimant.lastUpdatedDate}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" mat-raised-button class="mr-2"
+                            (click)="previousState()">
+                        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                    </button>
+                    <button type="button" mat-raised-button color="primary"
+                            [routerLink]="['/claimant', claimant.id, 'edit']">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

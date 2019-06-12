@@ -33,13 +33,13 @@
                         <tr>
                             <td><span jhiTranslate="gatewayApp.coreStatus.createdDate">Created Date</span></td>
                             <td>
-                                <span>{{status.createdDate}}</span>
+                                <span>{{status.createdDate | date:'medium'}}</span>
                             </td>
                         </tr>
                         <tr>
                             <td><span jhiTranslate="gatewayApp.coreStatus.lastUpdatedDate">Last Updated Date</span></td>
                             <td>
-                                <span>{{status.lastUpdatedDate}}</span>
+                                <span>{{status.lastUpdatedDate | date:'medium'}}</span>
                             </td>
                         </tr>
                     </table>

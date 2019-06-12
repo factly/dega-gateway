@@ -68,9 +68,8 @@
                                 </span>
                             </div>
                             <div>
-                                <span>
-                                    <fa-icon [icon]="'times'"
-                                             [routerLink]="['/', { outlets: { popup: 'factcheck/'+ factcheck.id + '/delete'} }]">
+                                <span (click)="openDialogPopUp(element)">
+                                    <fa-icon [icon]="'times'">
                                     </fa-icon>
                                 </span>
                             </div>

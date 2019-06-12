@@ -89,7 +89,7 @@ export class NewClaimPopupComponent implements OnInit {
             checkedDate: [checked_date, Validators.required],
             reviewSources: [this.claim.reviewSources || '', Validators.required],
             review: [this.claim.review || '', Validators.required],
-            reviewTagLine: [this.claim.reviewTagLine || '', Validators.required],
+            reviewTagLine: [this.claim.reviewTagLine || ''],
             clientId: [this.claim.clientId || ''],
             slug: [this.claim.slug || ''],
             createdDate: [this.claim.createdDate || ''],

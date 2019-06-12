@@ -2,10 +2,14 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div *ngIf="category">
-                <h2><span jhiTranslate="gatewayApp.coreCategory.detail.title">Category</span> {{category.id}}</h2>
+                <h2><span jhiTranslate="gatewayApp.coreCategory.detail.title">Category</span> </h2>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="table-wrap">
                     <table class="row-md jh-entity-details">
+                        <tr>
+                            <td><span>Category Id</span></td>
+                            <td><span>{{category.id}}</span></td>
+                        </tr>
                         <tr>
                             <td><span jhiTranslate="gatewayApp.coreCategory.name">Name</span></td>
                             <td><span>{{category.name}}</span></td>

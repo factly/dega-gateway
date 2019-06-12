@@ -2,10 +2,14 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div *ngIf="format">
-                <h2><span jhiTranslate="gatewayApp.coreFormat.detail.title">Format</span> {{format.id}}</h2>
+                <h2><span jhiTranslate="gatewayApp.coreFormat.detail.title">Format</span></h2>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="table-wrap">
                     <table class="row-md jh-entity-details">
+                        <tr>
+                            <td><span>Format Id</span></td>
+                            <td><span>{{format.id}}</span></td>
+                        </tr>
                         <tr>
                             <td><span jhiTranslate="gatewayApp.coreFormat.name">Name</span></td>
                             <td><span>{{format.name}}</span></td>

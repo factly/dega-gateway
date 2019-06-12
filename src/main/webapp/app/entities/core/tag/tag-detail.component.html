@@ -1,47 +1,64 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="tag">
-            <h2><span jhiTranslate="gatewayApp.coreTag.detail.title">Tag</span> {{tag.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gatewayApp.coreTag.name">Name</span></dt>
-                <dd>
-                    <span>{{tag.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreTag.slug">Slug</span></dt>
-                <dd>
-                    <span>{{tag.slug}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreTag.description">Description</span></dt>
-                <dd>
-                    <span>{{tag.description}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreTag.clientId">Client Id</span></dt>
-                <dd>
-                    <span>{{tag.clientId}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreTag.createdDate">Created Date</span></dt>
-                <dd>
-                    <span>{{tag.createdDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreTag.lastUpdatedDate">Last Updated Date</span></dt>
-                <dd>
-                    <span>{{tag.lastUpdatedDate}}</span>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/tag', tag.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+<div class="detail-view-page">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div *ngIf="tag">
+                <h2><span jhiTranslate="gatewayApp.coreTag.detail.title">Tag</span></h2>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="table-wrap">
+                    <table class="row-md jh-entity-details">
+                        <tr>
+                            <td><span>Tag Id</span></td>
+                            <td><span>{{tag.id}}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreTag.name">Name</span></td>
+                            <td>
+                                <span>{{tag.name}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreTag.slug">Slug</span></td>
+                            <td>
+                                <span>{{tag.slug}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreTag.description">Description</span></td>
+                            <td>
+                                <span>{{tag.description}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreTag.clientId">Client Id</span></td>
+                            <td>
+                                <span>{{tag.clientId}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreTag.createdDate">Created Date</span></td>
+                            <td>
+                                <span>{{tag.createdDate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.coreTag.lastUpdatedDate">Last Updated Date</span></td>
+                            <td>
+                                <span>{{tag.lastUpdatedDate}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" mat-raised-button class="mr-2"
+                            (click)="previousState()">
+                        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                    </button>
+                    <button type="button" mat-raised-button color="primary"
+                            [routerLink]="['/tag', tag.id, 'edit']">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

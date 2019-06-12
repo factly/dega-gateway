@@ -1,109 +1,151 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="post">
-            <h2><span jhiTranslate="gatewayApp.corePost.detail.title">Post</span> {{post.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gatewayApp.corePost.title">Title</span></dt>
-                <dd>
-                    <span>{{post.title}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.clientId">Client Id</span></dt>
-                <dd>
-                    <span>{{post.clientId}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.content">Content</span></dt>
-                <dd>
-                    <span [innerHtml]="post.content"></span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.excerpt">Excerpt</span></dt>
-                <dd>
-                    <span>{{post.excerpt}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.publishedDate">Published Date</span></dt>
-                <dd>
-                    <span>{{post.publishedDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.lastUpdatedDate">Last Updated Date</span></dt>
-                <dd>
-                    <span>{{post.lastUpdatedDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.featured">Featured</span></dt>
-                <dd>
-                    <span>{{post.featured}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.sticky">Sticky</span></dt>
-                <dd>
-                    <span>{{post.sticky}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.updates">Updates</span></dt>
-                <dd>
-                    <span>{{post.updates}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.slug">Slug</span></dt>
-                <dd>
-                    <span>{{post.slug}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.password">Password</span></dt>
-                <dd>
-                    <span>{{post.password}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.featuredMedia">Featured Media</span></dt>
-                <dd>
-                    <span><img src={{post.featuredMedia}} alt="" width="100" height="100"></span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.subTitle">Sub Title</span></dt>
-                <dd>
-                    <span>{{post.subTitle}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.createdDate">Created Date</span></dt>
-                <dd>
-                    <span>{{post.createdDate}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.tag">Tag</span></dt>
-                <dd>
-                    <span *ngFor="let tag of post.tags; let last = last">
-                        <a [routerLink]="['/tag', tag?.id, 'view' ]">{{tag.name}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.category">Category</span></dt>
-                <dd>
-                    <span *ngFor="let category of post.categories; let last = last">
-                        <a [routerLink]="['/category', category?.id, 'view' ]">{{category.name}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.status">Status</span></dt>
-                <dd>
-                    <div *ngIf="post.statusId">
-                        <a [routerLink]="['/status', post.statusId, 'view']">{{post.statusName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.format">Format</span></dt>
-                <dd>
-                    <div *ngIf="post.formatId">
-                        <a [routerLink]="['/format', post.formatId, 'view']">{{post.formatName}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.corePost.degaUser">Dega User</span></dt>
-                <dd>
-                    <span *ngFor="let degaUser of post.degaUsers; let last = last">
-                        <a [routerLink]="['/dega-user', degaUser?.id, 'view' ]">{{degaUser.displayName}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/post', post.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+<div class="detail-view-page">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div *ngIf="post">
+                <h2><span jhiTranslate="gatewayApp.corePost.detail.title">Post</span></h2>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="table-wrap">
+                    <table class="row-md jh-entity-details">
+                        <tr>
+                            <td><span>Post Id</span></td>
+                            <td>{{post.id}}</td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.title">Title</span></td>
+                            <td>
+                                <span>{{post.title}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.clientId">Client Id</span></td>
+                            <td>
+                                <span>{{post.clientId}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.content">Content</span></td>
+                            <td>
+                                <span [innerHtml]="post.content"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.excerpt">Excerpt</span></td>
+                            <td>
+                                <span>{{post.excerpt}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.publishedDate">Published Date</span></td>
+                            <td>
+                                <span>{{post.publishedDate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.lastUpdatedDate">Last Updated Date</span></td>
+                            <td>
+                                <span>{{post.lastUpdatedDate | date:'medium'}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.featured">Featured</span></td>
+                            <td>
+                                <span>{{post.featured}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.sticky">Sticky</span></td>
+                            <td>
+                                <span>{{post.sticky}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.updates">Updates</span></td>
+                            <td>
+                                <span>{{post.updates}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.slug">Slug</span></td>
+                            <td>
+                                <span>{{post.slug}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.password">Password</span></td>
+                            <td>
+                                <span>{{post.password}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.featuredMedia">Featured Media</span></td>
+                            <td>
+                                <span><img src={{post.featuredMedia}} alt="" width="100" height="100"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.subTitle">Sub Title</span></td>
+                            <td>
+                                <span>{{post.subTitle}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.createdDate">Created Date</span></td>
+                            <td>
+                                <span>{{post.createdDate | date:'medium'}}</span>
+                            </td>
+                        </tr>
+                        <!--<dt><span jhiTranslate="gatewayApp.corePost.tag">Tag</span></dt>-->
+                        <!--<dd>-->
+                        <!--<span *ngFor="let tag of post.tags; let last = last">-->
+                        <!--<a [routerLink]="['/tag', tag?.id, 'view' ]">{{tag.name}}</a>{{last ? '' : ', '}}-->
+                        <!--</span>-->
+                        <!--</dd>-->
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.category">Category</span></td>
+                            <td>
+                            <span *ngFor="let category of post.categories; let last = last">
+                                <a [routerLink]="['/category', category?.id, 'view' ]">{{category.name}}</a>{{last ? '' : ', '}}
+                            </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.status">Status</span></td>
+                            <td>
+                                <div *ngIf="post.statusId">
+                                    <a [routerLink]="['/status', post.statusId, 'view']">{{post.statusName}}</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.format">Format</span></td>
+                            <td>
+                                <div *ngIf="post.formatId">
+                                    <a [routerLink]="['/format', post.formatId, 'view']">{{post.formatName}}</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslate="gatewayApp.corePost.degaUser">Dega User</span></td>
+                            <td>
+                            <span *ngFor="let degaUser of post.degaUsers; let last = last">
+                                <a [routerLink]="['/dega-user', degaUser?.id, 'view' ]">{{degaUser.displayName}}</a>{{last ? '' : ', '}}
+                            </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" mat-raised-button class="mr-2"
+                            (click)="previousState()">
+                        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                    </button>
+                    <button type="button" mat-raised-button color="primary"
+                            [routerLink]="['/post', post.id, 'edit']">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>

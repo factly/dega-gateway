@@ -89,10 +89,10 @@ export class NewClaimPopupComponent implements OnInit {
             checkedDate: [checked_date, Validators.required],
             reviewSources: [this.claim.reviewSources || '', Validators.required],
             review: [this.claim.review || '', Validators.required],
-            reviewTagLine: [this.claim.reviewTagLine || '', Validators.required],
-            clientId: [this.claim.clientId || '', Validators.required],
-            slug: [this.claim.slug || '', Validators.required],
-            createdDate: [this.claim.createdDate || '', Validators.required],
+            reviewTagLine: [this.claim.reviewTagLine || ''],
+            clientId: [this.claim.clientId || ''],
+            slug: [this.claim.slug || ''],
+            createdDate: [this.claim.createdDate || ''],
             ratingId: [this.claim.ratingId || '', Validators.required],
             claimantId: [this.claim.claimantId || '', Validators.required]
         });
@@ -126,10 +126,9 @@ export class NewClaimPopupComponent implements OnInit {
             this.claimFormGroup.value.lastUpdatedDate != null ? moment(this.claimFormGroup.value.lastUpdatedDate, DATE_TIME_FORMAT) : null;
 
         if (this.claimFormGroup.value.id !== '') {
-            console.log(this.claimFormGroup.value);
             this.subscribeToSaveResponse(this.claimService.update(this.claimFormGroup.value));
         } else {
-            console.log(this.claimFormGroup.value);
+            delete this.claimFormGroup.value.id;
             this.subscribeToSaveResponse(this.claimService.create(this.claimFormGroup.value));
         }
     }

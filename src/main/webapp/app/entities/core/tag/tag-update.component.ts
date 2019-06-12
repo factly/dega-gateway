@@ -71,6 +71,7 @@ export class TagUpdateComponent implements OnInit {
         if (this.tagFormGroup.value.id !== '') {
             this.subscribeToSaveResponse(this.tagService.update(this.tagFormGroup.value));
         } else {
+            delete this.tagFormGroup.value.id;
             this.subscribeToSaveResponse(this.tagService.create(this.tagFormGroup.value));
         }
     }

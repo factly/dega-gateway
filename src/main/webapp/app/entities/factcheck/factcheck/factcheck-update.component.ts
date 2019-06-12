@@ -174,7 +174,7 @@ export class FactcheckUpdateComponent implements OnInit {
             featuredMedia: [this.factcheck.featuredMedia || ''],
             subTitle: [this.factcheck.subTitle || ''],
             statusName: [this.factcheck.statusName || ''],
-            claims: [this.factcheck.claims],
+            claims: [this.factcheck.claims || []],
             categories: [this.factcheck.categories], // convert into this.fb.array
             tags: [this.factcheck.tags], // convert into this.fb.array
             degaUsers: [this.factcheck.degaUsers || '', Validators.required], // convert into this.fb.array
@@ -317,6 +317,7 @@ export class FactcheckUpdateComponent implements OnInit {
         if (this.factCheckEditFormGroup.value.id !== '') {
             this.subscribeToSaveResponse(this.factcheckService.update(this.factCheckEditFormGroup.value));
         } else {
+            delete this.factCheckEditFormGroup.value.id;
             this.subscribeToSaveResponse(this.factcheckService.create(this.factCheckEditFormGroup.value));
         }
     }
@@ -338,11 +339,11 @@ export class FactcheckUpdateComponent implements OnInit {
     }
 
     updateIntroductionFormData(data) {
-        this.factcheck.introduction = data['html'];
+        this.factCheckEditFormGroup.controls['introduction'].setValue(data['html']);
     }
 
     updateSummaryFormData(data) {
-        this.factcheck.summary = data['html'];
+        this.factCheckEditFormGroup.controls['summary'].setValue(data['html']);
     }
 
     showSaveButton(degausersRole: String): boolean {

@@ -1,0 +1,48 @@
+<div class="table-view-page p-2">
+    <div class="row mt-5">
+        <div class="col-md-5">
+            <h2 id="page-heading font-sz-20">
+                <span>Search Claims</span>
+            </h2>
+        </div>
+        <div class="col-md-7">
+            <form name="searchForm" class="d-flex align-content-center justify-content-end">
+                <mat-form-field class="col-5">
+                    <input matInput
+                           type="text" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.factcheckClaim.home.search' | translate }}">
+                </mat-form-field>
+                <button mat-icon-button mat-raised-button  class="mr-2" (click)="search()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </form>
+        </div>
+    </div>
+    <jhi-alert></jhi-alert>
+
+    <div>
+        <div *ngFor="let claimDetails of claimsSearchResult">
+            <div>Claimant :{{claimDetails.claimant}}</div>
+            <div>Claim date: {{claimDetails.claimDate | date:'medium'}}</div>
+            <div>Text: {{claimDetails.text}}</div>
+            <div *ngFor="let claimReview of claimDetails.claimReview">
+                <div>
+                    <span>Publisher name: {{claimReview.publisher.name}}</span>
+                    <span>Publisher name: {{claimReview.publisher.site}}</span>
+                </div>
+                <div>
+                    Title: {{claimReview.title}}
+                </div>
+                <div>
+                    Link: <a target="_blank" [href]="claimReview.url">{{claimReview.url}}</a>
+                </div>
+                <div>
+                    Review Date: {{claimReview.reviewDate | date:'medium'}}
+                </div>
+                <div>
+                    Claim Status: {{claimReview.textualRating}}
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>

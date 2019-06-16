@@ -1,10 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { JhiAlertService } from 'ng-jhipster';
 
-import { IClaim } from 'app/shared/model/factcheck/claim.model';
-import { Principal } from 'app/core';
-
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { IClaimSearch, IClaimSearchClaimDetails } from 'app/shared/model/factcheck/claim-search.model';
 import { ClaimSearchService } from './claim-search.service';
 
 @Component({
@@ -12,22 +10,26 @@ import { ClaimSearchService } from './claim-search.service';
     templateUrl: './claim-search.component.html'
 })
 export class ClaimSearchComponent implements OnInit {
+    claimsSearchResult: IClaimSearchClaimDetails[];
+
     constructor(private claimSearchService: ClaimSearchService, private jhiAlertService: JhiAlertService) {}
 
-    // loadAll() {
-    //     this.claimSearchService
-    //         .query({
-    //             page: this.page - 1,
-    //             size: this.itemsPerPage
-    //         })
-    //         .subscribe(
-    //             (res: HttpResponse<IClaim[]>) => this.paginateClaims(res.body, res.headers),
-    //             (res: HttpErrorResponse) => this.onError(res.message)
-    //         );
-    // }
+    ngOnInit() {}
 
-    ngOnInit() {
-        // this.loadAll();
+    search(keyword) {
+        this.claimSearchService
+            .query({
+                query: keyword
+            })
+            .subscribe(
+                (res: HttpResponse<IClaimSearch>) => {
+                    this.claimsSearchResult = res.body.claims;
+                    if (!this.claimsSearchResult) {
+                        alert('No data found');
+                    }
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     private onError(errorMessage: string) {

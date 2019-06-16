@@ -58,6 +58,12 @@ export class DegaUserService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
+    get_detail_using_email(email: string): Observable<EntityResponseType> {
+        return this.http
+            .get<IDegaUser>(`${this.resourceUrl}/email/${email}`, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
     protected convertDateFromClient(degaUser: IDegaUser): IDegaUser {
         const copy: IDegaUser = Object.assign({}, degaUser, {
             createdDate: degaUser.createdDate != null && degaUser.createdDate.isValid() ? degaUser.createdDate.toJSON() : null

@@ -11,15 +11,16 @@ import { ClaimSearchService } from './claim-search.service';
 })
 export class ClaimSearchComponent implements OnInit {
     claimsSearchResult: IClaimSearchClaimDetails[];
+    currentSearch: string;
 
     constructor(private claimSearchService: ClaimSearchService, private jhiAlertService: JhiAlertService) {}
 
     ngOnInit() {}
 
-    search(keyword) {
+    search() {
         this.claimSearchService
             .query({
-                query: keyword
+                query: this.currentSearch
             })
             .subscribe(
                 (res: HttpResponse<IClaimSearch>) => {

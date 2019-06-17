@@ -76,9 +76,7 @@
                     <div class="mb-3"><img src={{rating.iconURL}} height="100"></div>
                     <button mat-raised-button color="primary"
                         id="field_iconURL" class="btn btn-primary jh-create-entity create-media"
-                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                            [queryParams]="{ media_type: 'feature'}"
-                            replaceUrl="true" type="button">
+                            (click)="choseMediaforFeature()" type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
                             Upload Media

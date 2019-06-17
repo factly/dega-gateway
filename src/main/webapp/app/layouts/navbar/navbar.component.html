@@ -23,7 +23,7 @@
                     <li *ngFor="let organisation of organisationOptions">
                         <a class="dropdown-item" [jhiActiveMenu]="organisation"
                            (click)="changeOrganisation(organisation);collapseNavbar();">
-                            <span *ngIf="organisation.id==currentUser.organizationCurrentId">
+                            <span *ngIf="organisation?.id==currentUser?.organizationCurrentId">
                                 <mat-icon>done</mat-icon>
                             </span>
 

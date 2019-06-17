@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { AUTHOR_ROLE, PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
+
+import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 
+import { CategoryService } from 'app/entities/core/category';
 import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
 import { FactcheckService } from './factcheck.service';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { AUTHOR_ROLE, PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
 import { ClaimService } from 'app/entities/factcheck/claim';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClaimantService } from 'app/entities/factcheck/claimant';
 import { RatingService } from 'app/entities/factcheck/rating';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
@@ -18,16 +21,14 @@ import { IRating } from 'app/shared/model/factcheck/rating.model';
 import { ITag } from 'app/shared/model/core/tag.model';
 import { TagService } from 'app/entities/core/tag';
 import { ICategory } from 'app/shared/model/core/category.model';
-import { CategoryService } from 'app/entities/core/category';
-import { MediaService } from '../../core/media/media.service';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
+
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
 
 import { MatDialog } from '@angular/material/dialog';
 import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
-
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -55,7 +56,6 @@ export class FactcheckUpdateComponent implements OnInit {
     showSave: boolean;
     showPublish: boolean;
     account: Account;
-    subscription: Subscription;
 
     factCheckEditFormGroup: FormGroup;
 
@@ -104,18 +104,11 @@ export class FactcheckUpdateComponent implements OnInit {
         private tagService: TagService,
         private categoryService: CategoryService,
         private degaUserService: DegaUserService,
-        private mediaService: MediaService,
         private route: Router,
         private principal: Principal,
         private dialog: MatDialog,
         private fb: FormBuilder
-    ) {
-        this.subscription = this.mediaService.getProductID().subscribe(message => {
-            if (message['type_of_data'] === 'feature') {
-                this.updateMediaForFeature(message['selected_url']);
-            }
-        });
-    }
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -371,6 +364,21 @@ export class FactcheckUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
+    choseMediaforFeature() {
+        const config = {
+            height: '90%',
+            width: '90vw',
+            maxWidth: '90vw'
+        };
+        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
+
+        dialogRef.afterClosed().subscribe(image_data => {
+            if (image_data) {
+                this.updateMediaForFeature(image_data['url']);
+            }
+        });
+    }
+
     updateMediaForFeature(url) {
         this.factCheckEditFormGroup.controls['featuredMedia'].setValue(url);
     }
@@ -482,6 +490,7 @@ export class FactcheckUpdateComponent implements OnInit {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
+
     searchDegaUsers() {
         this.degaUserService
             .search({

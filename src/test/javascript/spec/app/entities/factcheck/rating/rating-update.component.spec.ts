@@ -1,6 +1,7 @@
 /* tslint:disable max-line-length */
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpResponse } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material';
 import { Observable, of } from 'rxjs';
 
 import { GatewayTestModule } from '../../../../test.module';
@@ -16,7 +17,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GatewayTestModule],
+                imports: [GatewayTestModule, MatDialogModule],
                 declarations: [RatingUpdateComponent]
             })
                 .overrideTemplate(RatingUpdateComponent, '')

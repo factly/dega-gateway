@@ -19,8 +19,9 @@ import { FormatService } from 'app/entities/core/format';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
-import { MediaService } from '../media/media.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'jhi-post-update',
@@ -48,8 +49,6 @@ export class PostUpdateComponent implements OnInit {
     showPublish: boolean;
     account: Account;
     postEditFormGroup: FormGroup;
-
-    subscription;
 
     backend_compatible_author_list = [];
     all_author_options = [];
@@ -83,20 +82,14 @@ export class PostUpdateComponent implements OnInit {
         private tagService: TagService,
         private categoryService: CategoryService,
         private statusService: StatusService,
-        private mediaService: MediaService,
         private formatService: FormatService,
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
         private route: Router,
         private principal: Principal,
-        private fb: FormBuilder
-    ) {
-        this.subscription = this.mediaService.getProductID().subscribe(message => {
-            if (message['type_of_data'] === 'feature') {
-                this.updateMediaForFeature(message['selected_url']);
-            }
-        });
-    }
+        private fb: FormBuilder,
+        private dialog: MatDialog
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -210,6 +203,21 @@ export class PostUpdateComponent implements OnInit {
     updatePostContentFormData(data) {
         this.post.content = data['html'];
         this.postEditFormGroup.controls['content'].setValue(data['html']);
+    }
+
+    choseMediaforFeature() {
+        const config = {
+            height: '90%',
+            width: '90vw',
+            maxWidth: '90vw'
+        };
+        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
+
+        dialogRef.afterClosed().subscribe(image_data => {
+            if (image_data) {
+                this.updateMediaForFeature(image_data['url']);
+            }
+        });
     }
 
     updateMediaForFeature(url) {

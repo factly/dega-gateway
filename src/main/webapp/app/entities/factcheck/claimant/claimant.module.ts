@@ -1,7 +1,8 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -10,12 +11,12 @@ import { MatTableModule } from '@angular/material/table';
 import { GatewaySharedModule } from 'app/shared';
 import {
     ClaimantComponent,
-    ClaimantDetailComponent,
-    ClaimantUpdateComponent,
-    ClaimantDeletePopupComponent,
     ClaimantDeleteDialogComponent,
+    ClaimantDeletePopupComponent,
+    ClaimantDetailComponent,
+    claimantPopupRoute,
     claimantRoute,
-    claimantPopupRoute
+    ClaimantUpdateComponent
 } from './';
 
 const ENTITY_STATES = [...claimantRoute, ...claimantPopupRoute];
@@ -24,6 +25,7 @@ const ENTITY_STATES = [...claimantRoute, ...claimantPopupRoute];
     imports: [
         GatewaySharedModule,
         MatButtonModule,
+        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,

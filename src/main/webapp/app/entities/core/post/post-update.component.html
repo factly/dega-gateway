@@ -50,9 +50,7 @@
                 <div class="form-group">
                     <div class="full-width">
                         <button mat-raised-button type="button" class="full-width"
-                                replaceUrl="true"
-                                [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                                [queryParams]="{ media_type: 'feature'}">Upload Featured media
+                                (click)="choseMediaforFeature()">Upload Featured media
                             <mat-icon>cloud_upload</mat-icon>
                         </button>
                     </div>

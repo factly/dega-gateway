@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 import { RatingService } from './rating.service';
-import { MediaService } from '../../core/media/media.service';
 import { ADMIN_ROLE } from 'app/shared/constants/role.constants';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { JhiAlertService } from 'ng-jhipster';
-import { Principal, Account } from 'app/core';
-import { Subscription } from 'rxjs';
+import { Account, Principal } from 'app/core';
+
+import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
 
 @Component({
     selector: 'jhi-rating-update',
@@ -31,23 +32,15 @@ export class RatingUpdateComponent implements OnInit {
     showClientId: boolean;
     currentUser: IDegaUser;
     account: Account;
-    subscription: Subscription;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private ratingService: RatingService,
         private activatedRoute: ActivatedRoute,
         private degaUserService: DegaUserService,
-        private mediaService: MediaService,
         private principal: Principal,
-        private router: Router
-    ) {
-        this.subscription = this.mediaService.getProductID().subscribe(message => {
-            if (message['type_of_data'] === 'feature') {
-                this.updateMediaForFeature(message['selected_url']);
-            }
-        });
-    }
+        private dialog: MatDialog
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -95,6 +88,21 @@ export class RatingUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    choseMediaforFeature() {
+        const config = {
+            height: '90%',
+            width: '90vw',
+            maxWidth: '90vw'
+        };
+        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
+
+        dialogRef.afterClosed().subscribe(image_data => {
+            if (image_data) {
+                this.updateMediaForFeature(image_data['url']);
+            }
+        });
     }
 
     updateMediaForFeature(url) {

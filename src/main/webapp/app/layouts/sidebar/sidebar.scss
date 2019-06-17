@@ -29,6 +29,11 @@
                 }
             }
         }
+        .side-bar-minimizer-wrap {
+            span {
+                display: none;
+            }
+        }
     }
     nav {
         height: calc(100% - 50px);
@@ -97,6 +102,11 @@
         justify-content: flex-end;
         padding: 10px 10px;
         cursor: pointer;
+        align-items: center;
+        span {
+            color: white;
+            font-size: 12px;
+        }
         .side-bar-minimizer {
             position: relative;
             -ms-flex: 0 0 50px;
@@ -115,7 +125,7 @@
                 border: solid 2px white;
                 border-width: 2px 2px 0 0;
                 transform: rotate(225deg);
-                top: 7px;
+                top: -8px;
                 transition: 0.3s;
             }
             &.sticky:after {

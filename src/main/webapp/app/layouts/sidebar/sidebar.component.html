@@ -172,6 +172,7 @@
 		</ul>
 	</nav>
 	<div class="side-bar-minimizer-wrap" (click)="stickMenu()">
+        <span>{{version}}</span>
         <button class="side-bar-minimizer" [ngClass]="{'sticky': toggleSticky}"></button>
     </div>
 </div>

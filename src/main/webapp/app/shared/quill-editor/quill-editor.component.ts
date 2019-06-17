@@ -73,9 +73,10 @@ export class QuillEditorComponent {
     openFileUploadDialog(): void {
         this.cursorPosition = this.quillEditorRef.getSelection();
         const config = {
-            height: '90%',
-            width: '90vw',
-            maxWidth: '90vw'
+            height: '80%',
+            width: '80vw',
+            maxWidth: '80vw',
+            panelClass: ['header-dialogue']
         };
         const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
 

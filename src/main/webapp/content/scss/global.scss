@@ -89,7 +89,17 @@ Generic styles
 .mw-200 {
     min-width: 200px;
 }
-
+.mat-file-upload {
+    > input[type='file'] {
+        position: absolute;
+        top: 17px;
+        width: 148px;
+        opacity: 0;
+    }
+}
+.media-thumbnail {
+    margin: 7px;
+}
 @media (min-width: 768px) {
     .mw-md-100 {
         min-width: 100px;

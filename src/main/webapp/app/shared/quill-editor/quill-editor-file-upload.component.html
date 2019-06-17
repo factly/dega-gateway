@@ -1,37 +1,40 @@
-<div class="modal-header">
-    <h4 class="modal-title">Featured Media OR Upload</h4>
-    <input type="file" name="Brows" class="pad-left" (change)="uploadImageFromLocalSystem($event.target.files)" accept="image/*" #fileInput>
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-            (click)="clear()">&times;</button>
-</div>
-<div class="row pad">
-    <div class="col-sm-12">
-        <form name="searchForm" class="form-inline">
-            <div class="input-group w-100 mt-3">
-                <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreMedia.home.search' | translate }}">
-                <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                    <fa-icon [icon]="'search'"></fa-icon>
-                </button>
-                <button class="input-group-append btn btn-danger" (click)="clearSearch()" *ngIf="currentSearch">
-                    <fa-icon [icon]="'trash-alt'"></fa-icon>
-                </button>
-            </div>
-        </form>
+<div class="header-dialogue">
+    <div class="dialogue-header shadow-sm">
+        <h2 class="jhi-claim-heading">Featured Media <mat-icon class="float-right" data-dismiss="modal" (click)="clear()">close</mat-icon></h2>
     </div>
-</div>
-<div class="modal-body">
-    <div class="pad-left" *ngIf="media" class="col-sm-12 col-md-12 col-lg-12">
+    <div class="dialogue-body p-4">
         <div class="row">
-            <div *ngFor="let media of media" class="col-sm-3 col-md-1 col-lg-1">
-                <a (click)="selectImage(media.url)">
-                    <img src={{media.url}} alt="Image" width="100" height="100" class="img-bottom">
-                </a>
+            <div class="col-md-12">
+                <form name="searchForm" class="d-flex align-items-center justify-content-center">
+                    <mat-form-field class="col-5">
+                        <input matInput
+                            type="text" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreMedia.home.search' | translate }}">
+                    </mat-form-field>
+                    <button mat-raised-button mat-icon-button class="mr-2"
+                        (click)="search(currentSearch)">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <button mat-raised-button mat-icon-button color="warn" class="mr-2"
+                        (click)="clearSearch()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                    <div class="mat-file-upload">
+                        <button mat-raised-button color="primary">Upload Media <mat-icon>attach_file</mat-icon></button>
+                        <input type="file" name="Brows" class="pad-left" (change)="uploadImageFromLocalSystem($event.target.files)" accept="image/*" #fileInput>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div *ngIf="media">
+                <div class="row">
+                    <div class="media-thumbnail" *ngFor="let media of media" >
+                        <a (click)="selectImage(media.url)">
+                            <img src={{media.url}} alt="Image" height="100" class="img-bottom">
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
-        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-    </button>
 </div>

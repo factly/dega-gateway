@@ -32,14 +32,6 @@
                         Title is <strong>required</strong>
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="full-width margin-t-20">
-                    <input matInput
-                           formControlName="subTitle"
-                           placeholder="Subtitle of the Post">
-                    <mat-error>
-                        Sub Title is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
                 <mat-form-field class="full-width margin-t-30">
                     <textarea matInput
                               formControlName="excerpt"
@@ -52,6 +44,32 @@
                     <jhi-quill-editor [original_content]="factcheck.introduction"
                                       (updated_content)="updateIntroductionFormData($event)">
                     </jhi-quill-editor>
+                </div>
+                <div  class="full-width margin-t-30">
+                    <p *ngIf="factCheckEditFormGroup.value.claims.length"> Selected Claims </p>
+                    <div cdkDropList class="example-list col-md-12" (cdkDropListDropped)="reorderClaims($event)">
+                        <div class="mb-3 example-box" *ngFor="let claim_details of factCheckEditFormGroup.value.claims"
+                             cdkDrag>
+                            <mat-accordion>
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            <mat-icon class="mr-2">clear_all</mat-icon>
+                                            <b>{{claim_details.claim}}</b>
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <p [innerHTML]="claim_details.description">
+                                    </p>
+                                    <mat-action-row>
+                                        <button mat-button color="primary" type="button" (click)="openDialogPopUp(claim_details)">Edit
+                                        </button>
+                                        <button mat-button color="warn" type="button" (click)="removeClaimFromFactCheck(claim_details)">Delete
+                                        </button>
+                                    </mat-action-row>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </div>
                 </div>
                 <div class="quill-editor-wrapper">
                     <p class="editor-title">Summary</p>
@@ -317,31 +335,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div cdkDropList class="example-list col-md-12" (cdkDropListDropped)="reorderClaims($event)">
-                    <div class="mb-3 example-box" *ngFor="let claim_details of factCheckEditFormGroup.value.claims"
-                         cdkDrag>
-                        <mat-accordion>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        <mat-icon class="mr-2">clear_all</mat-icon>
-                                        <b>{{claim_details.claim}}</b>
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <p [innerHTML]="claim_details.description">
-                                </p>
-                                <mat-action-row>
-                                    <button mat-button color="primary" (click)="openDialogPopUp(claim_details)">Edit
-                                    </button>
-                                    <button mat-button color="warn" (click)="openDialogPopUp(claim_details)">Delete
-                                    </button>
-                                </mat-action-row>
-                            </mat-expansion-panel>
-                        </mat-accordion>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </form>

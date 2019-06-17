@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { VERSION } from 'app/app.constants';
 
 @Component({
     selector: 'jhi-sidebar',
@@ -10,7 +11,10 @@ export class SidebarComponent implements OnInit {
     change = new EventEmitter();
     toggleSticky;
     activeDropdown = 0;
-    constructor() {}
+    version: string;
+    constructor() {
+        this.version = VERSION ? 'v' + VERSION : '';
+    }
     ngOnInit() {}
     stickMenu() {
         this.toggleSticky = !this.toggleSticky;

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 import { ClaimantService } from './claimant.service';
-import { MediaService } from '../../core/media/media.service';
-import { Subscription } from 'rxjs';
+import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'jhi-claimant-update',
@@ -22,20 +22,8 @@ export class ClaimantUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
-    subscription: Subscription;
 
-    constructor(
-        private claimantService: ClaimantService,
-        private activatedRoute: ActivatedRoute,
-        private mediaService: MediaService,
-        private router: Router
-    ) {
-        this.subscription = this.mediaService.getProductID().subscribe(message => {
-            if (message['type_of_data'] === 'feature') {
-                this.updateMediaForFeature(message['selected_url']);
-            }
-        });
-    }
+    constructor(private claimantService: ClaimantService, private activatedRoute: ActivatedRoute, private dialog: MatDialog) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -72,6 +60,21 @@ export class ClaimantUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    choseMediaforFeature() {
+        const config = {
+            height: '90%',
+            width: '90vw',
+            maxWidth: '90vw'
+        };
+        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
+
+        dialogRef.afterClosed().subscribe(image_data => {
+            if (image_data) {
+                this.updateMediaForFeature(image_data['url']);
+            }
+        });
     }
 
     updateMediaForFeature(url) {

@@ -1,3 +1,4 @@
+@import '../../../content/scss/variables.scss';
 .app-body {
     margin-top: 63px;
     .side-bar {
@@ -5,7 +6,7 @@
         height: calc(100vh - 60px);
         width: 200px;
         z-index: 200;
-        background: #3a4248;
+        background: $primary;
         transition: 0.3s;
         overflow-x: hidden;
     }

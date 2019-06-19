@@ -2,18 +2,18 @@
     <div class="row post-edit-view">
         <div class="sub-header">
             <div class="button-wrap">
-                <button type="button" mat-button
+                <button type="button" mat-button mat-raised-button
                         (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button mat-button type="button"
+                <button mat-button mat-raised-button type="button"
                         (click)="saveOrPublish('Draft')"
                         [disabled]="isSaving"
                         *ngIf="showSave">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
                     jhiTranslate="entity.action.savedraft">Save Draft</span>
                 </button>
-                <button type="button" mat-button
+                <button type="button" mat-button mat-raised-button color="primary"
                         [disabled]="isSaving"
                         *ngIf="showPublish" (click)="saveOrPublish('Publish')">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
@@ -82,7 +82,7 @@
             <div class="col-4 edit-view-right-pannel">
                 <div class="form-group">
                     <div class="full-width">
-                        <button mat-raised-button type="button" class="full-width"
+                        <button mat-raised-button color="primary" type="button" class="full-width"
                                 (click)="choseMediaforFeature()">Upload Featured media
                             <mat-icon>cloud_upload</mat-icon>
                         </button>
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="full-width margin-t-20" *ngIf="factCheckEditFormGroup.value.featuredMedia">
-                        <button mat-raised-button type="button" class="full-width"
+                        <button mat-raised-button color="primary" type="button" class="full-width"
                                 (click)="deleteMediaForFeature()"> Delete featured media
                             <mat-icon>delete</mat-icon>
                         </button>
@@ -300,7 +300,7 @@
                                     <mat-icon>refresh</mat-icon>
                                 </button>
                                 <div class="mb-3" *ngFor="let claim_details of all_claim_options">
-                                    <button class="bg-white mr-2" mat-mini-fab (click)="addClaimToFactcheck(claim_details)">
+                                    <button class="mr-2" mat-icon-button mat-raised-button color="primary" (click)="addClaimToFactcheck(claim_details)">
                                         <mat-icon>add</mat-icon>
                                     </button>
                                     <span>{{claim_details.claim}}</span>

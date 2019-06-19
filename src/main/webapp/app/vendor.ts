@@ -7,6 +7,7 @@ import '../content/scss/vendor.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faUser,
+    faUsers,
     faSort,
     faSortUp,
     faSortDown,
@@ -44,6 +45,7 @@ import {
 
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faUser);
+library.add(faUsers);
 library.add(faSort);
 library.add(faSortUp);
 library.add(faSortDown);

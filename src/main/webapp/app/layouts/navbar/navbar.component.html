@@ -12,28 +12,6 @@
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
          [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
-            <li ngbDropdown class="nav-item dropdown pointer" *ngIf="organisationOptions && organisationOptions.length > 1">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle
-                   id="orgainisationnavBarDropdown">
-                    <span>
-                        <span>{{currentUser?.organizationCurrentName}}</span>
-                    </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li *ngFor="let organisation of organisationOptions">
-                        <a class="dropdown-item" [jhiActiveMenu]="organisation"
-                           (click)="changeOrganisation(organisation);collapseNavbar();">
-                            <span *ngIf="organisation?.id==currentUser?.organizationCurrentId">
-                                <mat-icon>done</mat-icon>
-                            </span>
-
-                            {{organisation.name}}
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-
             <li ngbDropdown class="nav-item dropdown pointer" *ngIf="languages && languages.length > 1">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
                    id="languagesnavBarDropdown">
@@ -46,6 +24,29 @@
                     <li *ngFor="let language of languages">
                         <a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);"
                            (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>
+                    </li>
+                </ul>
+            </li>
+            <li ngbDropdown class="nav-item dropdown pointer" *ngIf="organisationOptions && organisationOptions.length > 1">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
+                   id="orgainisationnavBarDropdown">
+                    <span>
+                        <fa-icon [icon]="'users'"></fa-icon>
+                        <span>{{currentUser?.organizationCurrentName}}</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li *ngFor="let organisation of organisationOptions">
+                        <a class="dropdown-item" [jhiActiveMenu]="organisation"
+                           (click)="changeOrganisation(organisation);collapseNavbar();">
+                            <span>
+                                <span>
+                                    <!--<mat-icon *ngIf="organisation?.id==currentUser?.organizationCurrentId">radio_button_checked</mat-icon>-->
+                                    <mat-icon class="font-sz-16">{{organisation?.id == currentUser?.organizationCurrentId ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
+                                </span>
+                                <span>{{organisation.name}}</span>
+                            </span>
+                        </a>
                     </li>
                 </ul>
             </li>

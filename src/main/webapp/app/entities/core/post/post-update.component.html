@@ -2,18 +2,18 @@
     <div class="row post-edit-view">
         <div class="sub-header">
             <div class="button-wrap">
-                <button type="button" mat-button
+                <button type="button" mat-button mat-raised-button
                         (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button mat-button type="button"
+                <button mat-button mat-raised-button type="button"
                         (click)="saveOrPublish('Draft')"
                         [disabled]="isSaving"
                         *ngIf="showSave">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
                     jhiTranslate="entity.action.savedraft">Save Draft</span>
                 </button>
-                <button type="button" mat-button
+                <button mat-button mat-raised-button color="primary"
                         [disabled]="isSaving"
                         *ngIf="showPublish" (click)="saveOrPublish('Publish')">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
@@ -49,7 +49,7 @@
             <div class="col-4 edit-view-right-pannel">
                 <div class="form-group">
                     <div class="full-width">
-                        <button mat-raised-button type="button" class="full-width"
+                        <button mat-button mat-raised-button color="primary" class="full-width"
                                 (click)="choseMediaforFeature()">Upload Featured media
                             <mat-icon>cloud_upload</mat-icon>
                         </button>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="full-width margin-t-20" *ngIf="postEditFormGroup.value.featuredMedia">
-                        <button mat-raised-button type="button" class="full-width"
+                        <button mat-button mat-raised-button color="primary" type="button" class="full-width"
                                 (click)="deleteMediaForFeature()"> Delete featured media
                             <mat-icon>delete</mat-icon>
                         </button>

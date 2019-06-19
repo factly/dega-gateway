@@ -1,3 +1,4 @@
+@import '../../../content/scss/variables.scss';
 .side-bar-wrap {
     height: 100%;
     &.sticky {
@@ -43,14 +44,14 @@
             li {
                 width: 200px;
                 list-style: none;
-                background: #3a4248;
+                background: $primary;
                 overflow: hidden;
                 a {
                     position: relative;
                     display: flex;
                     align-items: center;
                     color: #fff;
-                    background: #3a4248;
+                    background: $primary;
                     padding: 0.75rem 1rem;
                     font-weight: 100;
                     mat-icon {
@@ -61,7 +62,7 @@
                     }
                     &:hover {
                         text-decoration: none;
-                        background: #20a8d8;
+                        background: $secondary;
                     }
                 }
                 .nav-dropdown-items {

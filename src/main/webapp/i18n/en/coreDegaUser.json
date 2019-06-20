@@ -11,7 +11,7 @@
                 "question": "Are you sure you want to delete Dega User {{ id }}?"
             },
             "detail": {
-                "title": "Dega User"
+                "title": "User"
             },
             "firstName": "First Name",
             "lastName": "Last Name",

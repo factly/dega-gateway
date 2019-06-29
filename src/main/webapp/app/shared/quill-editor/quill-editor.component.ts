@@ -111,8 +111,10 @@ export class QuillEditorComponent {
     add_tweet() {
         this.cursorPosition = this.quillEditorRef.getSelection();
         const dialogRef = this.dialog.open(QuillEditorAddTweetComponent);
-        dialogRef.afterClosed().subscribe(tweet_id => {
-            this.quillEditorRef.insertEmbed(this.cursorPosition.index, 'tweet', tweet_id);
+        dialogRef.afterClosed().subscribe(data => {
+            if (data) {
+                this.quillEditorRef.insertEmbed(this.cursorPosition.index, 'tweet', data['tweet_id']);
+            }
         });
     }
 

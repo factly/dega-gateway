@@ -2,31 +2,22 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { IMedia } from 'app/shared/model/core/media.model';
 
-export interface DialogData {
-    animal: string;
-    name: string;
-}
-
 @Component({
     selector: 'jhi-quill-editor-add-tweet',
     templateUrl: './quill-editor-add-tweet.component.html'
 })
-export class QuillEditorAddTweetComponent implements OnInit {
-    media: IMedia[];
-    currentSearch: string;
-    links: any;
-    page: any;
-    url: string;
+export class QuillEditorAddTweetComponent {
+    tweet_link: string;
 
-    constructor(public dialogRef: MatDialogRef<QuillEditorAddTweetComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    constructor(public dialogRef: MatDialogRef<QuillEditorAddTweetComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
-    ngOnInit() {
-        this.currentSearch = '';
+    preview(): void {
+        (<any>window).twttr.widgets.load();
     }
 
-    selectImage(url): void {
+    selectTweet(url): void {
         const data = {};
-        data['tweet_id'] = url;
+        data['tweet_id'] = this.tweet_link.split('/')[5];
 
         this.dialogRef.close(data);
     }

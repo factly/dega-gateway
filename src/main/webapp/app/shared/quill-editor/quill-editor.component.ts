@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
 import * as Quill from 'quill';
+declare let twttr;
 
 const BlockEmbed = Quill.import('blots/block/embed');
 

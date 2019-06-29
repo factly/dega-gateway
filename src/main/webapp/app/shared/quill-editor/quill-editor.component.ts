@@ -25,11 +25,30 @@ class Video extends BlockEmbed {
     }
 }
 
+class TweetBlot extends BlockEmbed {
+    static create(id) {
+        const node = super.create();
+        node.dataset.id = id;
+        // Allow twitter library to modify our contents
+        twttr.widgets.createTweet(id, node);
+        return node;
+    }
+
+    static value(domNode) {
+        return domNode.dataset.id;
+    }
+}
+
+TweetBlot['blotName'] = 'tweet';
+TweetBlot['tagName'] = 'div';
+TweetBlot['className'] = 'tweet';
+
 Video['blotName'] = 'video';
 Video['className'] = 'custom-parent-container-for-embedded-data';
 Video['tagName'] = 'div';
 
 Quill.register('formats/video', Video);
+Quill.register('formats/twitter', TweetBlot);
 
 @Component({
     selector: 'jhi-quill-editor',
@@ -83,6 +102,12 @@ export class QuillEditorComponent {
         dialogRef.afterClosed().subscribe(image_data => {
             this.updateMediaForQuill(image_data['url']);
         });
+    }
+
+    add_tweet() {
+        this.cursorPosition = this.quillEditorRef.getSelection();
+        let id = '464454167226904576';
+        this.quillEditorRef.insertEmbed(this.cursorPosition.index, 'tweet', id);
     }
 
     updateMediaForQuill(url) {

@@ -26,8 +26,6 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
-
-import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
 import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
@@ -67,7 +65,7 @@ import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/conf
             multi: true
         }
     ],
-    entryComponents: [ConfirmationDialogComponent, QuillEditorFileUploadComponent],
+    entryComponents: [ConfirmationDialogComponent],
     bootstrap: [JhiMainComponent]
 })
 export class GatewayAppModule {

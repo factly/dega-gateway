@@ -2,8 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 
+import { QuillEditorAddTweetComponent } from 'app/shared/quill-editor/quill-editor-add-tweet.component';
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
+
 import * as Quill from 'quill';
+
 declare let twttr;
 
 const BlockEmbed = Quill.import('blots/block/embed');
@@ -107,8 +110,10 @@ export class QuillEditorComponent {
 
     add_tweet() {
         this.cursorPosition = this.quillEditorRef.getSelection();
-        let id = '464454167226904576';
-        this.quillEditorRef.insertEmbed(this.cursorPosition.index, 'tweet', id);
+        const dialogRef = this.dialog.open(QuillEditorAddTweetComponent);
+        dialogRef.afterClosed().subscribe(tweet_id => {
+            this.quillEditorRef.insertEmbed(this.cursorPosition.index, 'tweet', tweet_id);
+        });
     }
 
     updateMediaForQuill(url) {

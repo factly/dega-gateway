@@ -1,6 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { IMedia } from 'app/shared/model/core/media.model';
 
 @Component({
     selector: 'jhi-quill-editor-add-tweet',
@@ -15,7 +14,7 @@ export class QuillEditorAddTweetComponent {
         (<any>window).twttr.widgets.load();
     }
 
-    selectTweet(url): void {
+    selectTweet(): void {
         const data = {};
         data['tweet_id'] = this.tweet_link.split('/')[5];
 

@@ -32,12 +32,14 @@
                         Title is <strong>required</strong>
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="full-width margin-t-30">
-                    <textarea matInput
+                <mat-form-field class="full-width margin-t-30" hintLabel="Max 400 characters">
+                    <textarea matInput #input
                               formControlName="excerpt"
                               [cdkTextareaAutosize]="true"
-                              placeholder="Excerpt">
+                              placeholder="Excerpt"
+                              maxlength="400" >
                     </textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/400</mat-hint>
                 </mat-form-field>
 
                 <div class="quill-editor-wrapper">

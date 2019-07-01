@@ -34,10 +34,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <mat-form-field class="w-100">
-                            <textarea matInput placeholder="{{'gatewayApp.coreFormat.description' | translate}}"
-                                rows="5" type="text" name="description" id="field_description"
-                                      [(ngModel)]="format.description" ></textarea>
+                        <mat-form-field class="w-100" hintLabel="Max 400 characters">
+                            <textarea matInput #input
+                                      placeholder="{{'gatewayApp.coreFormat.description' | translate}}"
+                                      rows="5" type="text" name="description" id="field_description"
+                                      [(ngModel)]="format.description"
+                                      maxlength="400"></textarea>
+                            <mat-hint align="end">{{input.value?.length || 0}}/400</mat-hint>
                         </mat-form-field>
                     </div>
                     <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">

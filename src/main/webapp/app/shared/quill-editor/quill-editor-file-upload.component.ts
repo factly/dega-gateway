@@ -1,15 +1,9 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { HttpResponse, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { IMedia } from 'app/shared/model/core/media.model';
 import { MediaService } from 'app/entities/core/media/media.service';
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-
-export interface DialogData {
-    animal: string;
-    name: string;
-}
 
 @Component({
     selector: 'jhi-quill-editor-file-upload',
@@ -27,7 +21,7 @@ export class QuillEditorFileUploadComponent implements OnInit {
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private mediaService: MediaService,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData
+        @Inject(MAT_DIALOG_DATA) public data: any
     ) {}
 
     ngOnInit() {

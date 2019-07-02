@@ -5,6 +5,7 @@ import { MatDialogModule } from '@angular/material';
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill-v2';
 
+import { QuillEditorAddTweetComponent } from 'app/shared/quill-editor/quill-editor-add-tweet.component';
 import { QuillEditorComponent } from 'app/shared/quill-editor/quill-editor.component';
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
 import { MultipleCheckboxComponent } from 'app/shared/multiple-checkbox/multiple-checkbox.component';
@@ -33,6 +34,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         ConfirmationDialogComponent,
         HasAnyAuthorityDirective,
         MultipleCheckboxComponent,
+        QuillEditorAddTweetComponent,
         QuillEditorComponent,
         QuillEditorFileUploadComponent
     ],
@@ -42,6 +44,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
             useClass: NgbDateMomentAdapter
         }
     ],
+    entryComponents: [QuillEditorAddTweetComponent, QuillEditorFileUploadComponent],
     exports: [
         ConfirmationDialogComponent,
         GatewaySharedCommonModule,

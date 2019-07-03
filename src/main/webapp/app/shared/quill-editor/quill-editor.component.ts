@@ -2,8 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 
+import { QuillEditorAddTweetComponent } from 'app/shared/quill-editor/quill-editor-add-tweet.component';
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
+
 import * as Quill from 'quill';
+
+declare let twttr;
 
 const BlockEmbed = Quill.import('blots/block/embed');
 
@@ -25,11 +29,30 @@ class Video extends BlockEmbed {
     }
 }
 
+class TweetBlot extends BlockEmbed {
+    static create(id) {
+        const node = super.create();
+        node.dataset.id = id;
+        // Allow twitter library to modify our contents
+        twttr.widgets.createTweet(id, node);
+        return node;
+    }
+
+    static value(domNode) {
+        return domNode.dataset.id;
+    }
+}
+
+TweetBlot['blotName'] = 'tweet';
+TweetBlot['tagName'] = 'div';
+TweetBlot['className'] = 'tweet';
+
 Video['blotName'] = 'video';
 Video['className'] = 'custom-parent-container-for-embedded-data';
 Video['tagName'] = 'div';
 
 Quill.register('formats/video', Video);
+Quill.register('formats/twitter', TweetBlot);
 
 @Component({
     selector: 'jhi-quill-editor',
@@ -82,6 +105,16 @@ export class QuillEditorComponent {
 
         dialogRef.afterClosed().subscribe(image_data => {
             this.updateMediaForQuill(image_data['url']);
+        });
+    }
+
+    add_tweet() {
+        this.cursorPosition = this.quillEditorRef.getSelection();
+        const dialogRef = this.dialog.open(QuillEditorAddTweetComponent);
+        dialogRef.afterClosed().subscribe(data => {
+            if (data) {
+                this.quillEditorRef.insertEmbed(this.cursorPosition.index, 'tweet', data['tweet_id']);
+            }
         });
     }
 

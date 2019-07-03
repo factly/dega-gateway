@@ -33,7 +33,7 @@
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="full-width margin-t-30" hintLabel="Max 400 characters">
-                    <textarea matInput
+                    <textarea matInput #input
                               formControlName="excerpt"
                               [cdkTextareaAutosize]="true"
                               placeholder="Excerpt"

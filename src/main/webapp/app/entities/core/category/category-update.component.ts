@@ -81,8 +81,15 @@ export class CategoryUpdateComponent implements OnInit {
             return;
         }
         this.isSaving = true;
-        this.categoryFormGroup.value.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
-        this.categoryFormGroup.value.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        this.categoryFormGroup.value.createdDate =
+            this.categoryFormGroup.value.createdDate != null ? moment(this.categoryFormGroup.value.createdDate, DATE_TIME_FORMAT) : null;
+
+        if (this.categoryFormGroup.value.lastUpdatedDate != null) {
+            this.categoryFormGroup.value.lastUpdatedDate = moment(this.categoryFormGroup.value.lastUpdatedDate, DATE_TIME_FORMAT);
+        } else {
+            this.categoryFormGroup.value.lastUpdatedDate = null;
+        }
+
         if (this.category.id !== undefined) {
             this.subscribeToSaveResponse(this.categoryService.update(this.categoryFormGroup.value));
         } else {

@@ -40,6 +40,7 @@ export class FactcheckUpdateComponent implements OnInit {
     factcheck: IFactcheck;
     isSaving: boolean;
     tagListContainer = true;
+    categoryListContainer = true;
     claims: IClaim[];
     publishedDate: string;
     lastUpdatedDate: string;
@@ -96,6 +97,7 @@ export class FactcheckUpdateComponent implements OnInit {
 
     tag: ITag;
     tagFormGroup: FormGroup;
+    categoryFormGroup: FormGroup;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -132,6 +134,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.getAllClaims();
         this.getAllTags();
         this.createTagFormGroup();
+        this.createCategoryFormGroup();
 
         this.formGroup = this.formBuilder.group({
             claims: this.formBuilder.array([])
@@ -244,11 +247,15 @@ export class FactcheckUpdateComponent implements OnInit {
             this.tagFormGroup.value.lastUpdatedDate != null ? moment(this.tagFormGroup.value.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         const result = this.tagService.create(this.tagFormGroup.value);
         result.subscribe(
-            (res: HttpResponse<IFactcheck>) => {
+            (res: HttpResponse<ITag>) => {
                 this.tagListContainer = true;
                 this.getAllTags();
+                this.isSaving = false;
             },
-            (res: HttpErrorResponse) => this.onSaveError()
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                this.isSaving = false;
+            }
         );
     }
 
@@ -281,6 +288,47 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+
+    createCategoryFormGroup() {
+        this.categoryFormGroup = this.fb.group({
+            name: ['', Validators.required],
+            description: ['', Validators.required],
+            slug: [''],
+            parent: [''],
+            clientId: [''],
+            createdDate: [''],
+            lastUpdatedDate: ['']
+        });
+    }
+
+    saveCategory() {
+        if (this.categoryFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.categoryFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + 'is required');
+            return;
+        }
+        this.isSaving = true;
+        this.categoryFormGroup.value.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.categoryFormGroup.value.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        const result = this.categoryService.create(this.categoryFormGroup.value);
+        result.subscribe(
+            (res: HttpResponse<ICategory>) => {
+                this.categoryListContainer = true;
+                this.getAllCategories();
+            },
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                this.isSaving = false;
+            }
+        );
+        this.isSaving = false;
     }
 
     openDialogPopUp(claimData = null): void {

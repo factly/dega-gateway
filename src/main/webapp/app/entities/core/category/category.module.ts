@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import {
     CategoryComponent,
@@ -30,6 +31,7 @@ const ENTITY_STATES = [...categoryRoute, ...categoryPopupRoute];
         MatIconModule,
         MatInputModule,
         MatTableModule,
+        ReactiveFormsModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [

@@ -2,3 +2,7 @@
 input.ng-invalid:not(form) {
     border-left: 0px solid #42a948; /* green */
 }
+
+.input-buttons-wrap .mat-icon-button {
+    width: 27px;
+}

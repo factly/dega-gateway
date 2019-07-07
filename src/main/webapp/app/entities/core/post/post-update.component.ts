@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { AUTHOR_ROLE, PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
 import { JhiAlertService } from 'ng-jhipster';
@@ -49,6 +50,7 @@ export class PostUpdateComponent implements OnInit {
     showPublish: boolean;
     account: Account;
     postEditFormGroup: FormGroup;
+    tagListContainer = true;
 
     backend_compatible_author_list = [];
     all_author_options = [];
@@ -75,6 +77,8 @@ export class PostUpdateComponent implements OnInit {
     searchDegaUserKeyword = '';
     searchDegaUserTotalResult = 0;
     searchDegaUserCurrentPage = 0;
+
+    tagFormGroup: FormGroup;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -106,6 +110,7 @@ export class PostUpdateComponent implements OnInit {
         this.getAllDegaUsers();
         this.getAllCategories();
         this.getAllTags();
+        this.createTagFormGroup();
         this.statusService.query().subscribe(
             (res: HttpResponse<IStatus[]>) => {
                 this.statuses = res.body;
@@ -161,6 +166,44 @@ export class PostUpdateComponent implements OnInit {
                 this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_tag_list, 'name');
             },
             (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    createTagFormGroup() {
+        this.tagFormGroup = this.fb.group({
+            name: ['', Validators.required],
+            slug: [''],
+            description: ['', Validators.required],
+            clientId: [''],
+            createdDate: [''],
+            lastUpdatedDate: ['']
+        });
+    }
+
+    saveTag() {
+        if (this.tagFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.tagFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + ' is required');
+            return;
+        }
+        this.isSaving = true;
+        this.tagFormGroup.value.createdDate =
+            this.tagFormGroup.value.createdDate != null ? moment(this.tagFormGroup.value.createdDate, DATE_TIME_FORMAT) : null;
+        this.tagFormGroup.value.lastUpdatedDate =
+            this.tagFormGroup.value.lastUpdatedDate != null ? moment(this.tagFormGroup.value.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        const result = this.tagService.create(this.tagFormGroup.value);
+        result.subscribe(
+            (res: HttpResponse<IFactcheck>) => {
+                this.tagListContainer = true;
+                this.getAllTags();
+            },
+            (res: HttpErrorResponse) => this.onSaveError()
         );
     }
 

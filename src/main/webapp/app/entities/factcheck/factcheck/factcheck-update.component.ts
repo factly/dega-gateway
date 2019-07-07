@@ -5,6 +5,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
+import * as moment from 'moment';
 
 import { CategoryService } from 'app/entities/core/category';
 import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
@@ -38,7 +39,7 @@ import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
 export class FactcheckUpdateComponent implements OnInit {
     factcheck: IFactcheck;
     isSaving: boolean;
-
+    tagListContainer = true;
     claims: IClaim[];
     publishedDate: string;
     lastUpdatedDate: string;
@@ -93,6 +94,9 @@ export class FactcheckUpdateComponent implements OnInit {
     searchDegaUserTotalResult = 0;
     searchDegaUserCurrentPage = 0;
 
+    tag: ITag;
+    tagFormGroup: FormGroup;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private factcheckService: FactcheckService,
@@ -127,6 +131,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.getAllCategories();
         this.getAllClaims();
         this.getAllTags();
+        this.createTagFormGroup();
 
         this.formGroup = this.formBuilder.group({
             claims: this.formBuilder.array([])
@@ -206,6 +211,44 @@ export class FactcheckUpdateComponent implements OnInit {
                 this.all_tag_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_tag_list, 'name');
             },
             (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    createTagFormGroup() {
+        this.tagFormGroup = this.fb.group({
+            name: ['', Validators.required],
+            slug: [''],
+            description: ['', Validators.required],
+            clientId: [''],
+            createdDate: [''],
+            lastUpdatedDate: ['']
+        });
+    }
+
+    saveTag() {
+        if (this.tagFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.tagFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + ' is required');
+            return;
+        }
+        this.isSaving = true;
+        this.tagFormGroup.value.createdDate =
+            this.tagFormGroup.value.createdDate != null ? moment(this.tagFormGroup.value.createdDate, DATE_TIME_FORMAT) : null;
+        this.tagFormGroup.value.lastUpdatedDate =
+            this.tagFormGroup.value.lastUpdatedDate != null ? moment(this.tagFormGroup.value.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        const result = this.tagService.create(this.tagFormGroup.value);
+        result.subscribe(
+            (res: HttpResponse<IFactcheck>) => {
+                this.tagListContainer = true;
+                this.getAllTags();
+            },
+            (res: HttpErrorResponse) => this.onSaveError()
         );
     }
 

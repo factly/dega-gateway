@@ -77,42 +77,88 @@
                                         Tag
                                     </mat-panel-title>
                                 </mat-expansion-panel-header>
-                                <mat-form-field>
-                                    <input matInput
-                                           [(ngModel)]="searchTagKeyword" [ngModelOptions]="{standalone: true}">
-                                    <button mat-button *ngIf="searchTagKeyword" type="button"
-                                            matSuffix mat-icon-button aria-label="Clear"
-                                            (click)="searchTagKeyword='';getAllTags()">
-                                        <mat-icon>close</mat-icon>
+                                <div class="input-buttons-wrap" *ngIf="tagListContainer">
+                                    <mat-form-field>
+                                        <input matInput
+                                               [(ngModel)]="searchTagKeyword" [ngModelOptions]="{standalone: true}">
+                                        <button mat-button *ngIf="searchTagKeyword" type="button"
+                                                matSuffix mat-icon-button aria-label="Clear"
+                                                (click)="searchTagKeyword='';getAllTags()">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                    <button mat-icon-button type="button" (click)="searchTagCurrentPage=0;searchTags()">
+                                        <mat-icon>search</mat-icon>
                                     </button>
-                                </mat-form-field>
-                                <button mat-icon-button type="button" (click)="searchTagCurrentPage=0;searchTags()">
-                                    <mat-icon>search</mat-icon>
-                                </button>
-                                <button mat-icon-button type="button" (click)="getAllTags()">
-                                    <mat-icon>refresh</mat-icon>
-                                </button>
-                                <div>
-                                    <jhi-multiple-checkbox id="field_tag"
-                                                           [option_list]="all_tag_options"
-                                                           [selected_options]="selected_tag_options"
-                                                           (updated_selection)="update_tag_selection($event)">
-                                    </jhi-multiple-checkbox>
+                                    <button mat-icon-button type="button" (click)="getAllTags()">
+                                        <mat-icon>refresh</mat-icon>
+                                    </button>
+                                    <button mat-icon-button type="button"
+                                            (click)="tagListContainer =! tagListContainer">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    <div>
+                                        <jhi-multiple-checkbox id="field_tag"
+                                                               [option_list]="all_tag_options"
+                                                               [selected_options]="selected_tag_options"
+                                                               (updated_selection)="update_tag_selection($event)">
+                                        </jhi-multiple-checkbox>
+                                    </div>
+                                    <button type="button"
+                                            mat-icon-button
+                                            mat-raised-button
+                                            (click)="searchTagCurrentPage=searchTagCurrentPage-1;searchTags()"
+                                            *ngIf="searchTagCurrentPage>0">
+                                        <mat-icon>chevron_left</mat-icon>
+                                    </button>
+                                    <button type="button"
+                                            mat-icon-button
+                                            mat-raised-button
+                                            (click)="searchTagCurrentPage=searchTagCurrentPage+1;searchTags()"
+                                            *ngIf="searchTagTotalResult>((searchTagCurrentPage+1)*searchResultPerPage)">
+                                        <mat-icon>chevron_right</mat-icon>
+                                    </button>
                                 </div>
-                                <button type="button"
-                                        mat-icon-button
-                                        mat-raised-button
-                                        (click)="searchTagCurrentPage=searchTagCurrentPage-1;searchTags()"
-                                        *ngIf="searchTagCurrentPage>0">
-                                    <mat-icon>chevron_left</mat-icon>
-                                </button>
-                                <button type="button"
-                                        mat-icon-button
-                                        mat-raised-button
-                                        (click)="searchTagCurrentPage=searchTagCurrentPage+1;searchTags()"
-                                        *ngIf="searchTagTotalResult>((searchTagCurrentPage+1)*searchResultPerPage)">
-                                    <mat-icon>chevron_right</mat-icon>
-                                </button>
+                                <div *ngIf="!tagListContainer">
+                                    <form [formGroup]="tagFormGroup">
+                                        <div>
+                                            <mat-form-field class="full-width">
+                                                <input type="text" name="name" id="field_name"
+                                                       placeholder="Name"
+                                                       matInput
+                                                       formControlName="name" required/>
+                                                <mat-error>
+                                                    Name is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div>
+                                            <mat-form-field class="full-width" hintLabel="Max 400 characters">
+                                                    <textarea matInput type="text" #input
+                                                              id="field_description"
+                                                              formControlName="description"
+                                                              placeholder="Description"
+                                                              maxlength="400">
+                                                    </textarea>
+                                                <mat-hint align="end">{{input.value?.length || 0}}/400</mat-hint>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="mt-4">
+                                            <button type="button" mat-button mat-raised-button color="warn"
+                                                    id="cancel-save" class="btn btn-secondary"
+                                                    (click)="tagListContainer = true">
+                                                <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
+                                                jhiTranslate="entity.action.cancel">Cancel</span>
+                                            </button>
+                                            <button type="button" mat-button mat-raised-button
+                                                    (click)="saveTag()"
+                                                    id="save-entity" [disabled]="isSaving">
+                                                <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
+                                                jhiTranslate="entity.action.save">Save</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </mat-expansion-panel>
                         </mat-accordion>
                     </div>

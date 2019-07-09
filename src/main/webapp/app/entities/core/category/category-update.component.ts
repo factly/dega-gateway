@@ -40,8 +40,6 @@ export class CategoryUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ category }) => {
             this.category = category;
-            // this.createdDate = this.category.createdDate != null ? this.category.createdDate.format(DATE_TIME_FORMAT) : null;
-            // this.lastUpdatedDate = this.category.lastUpdatedDate != null ? this.category.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
         this.postService.query().subscribe(
             (res: HttpResponse<IPost[]>) => {

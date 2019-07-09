@@ -18,13 +18,14 @@
                     </mat-form-field>
                 </div>
                 <div class="form-group">
-                    <mat-form-field class="full-width">
-                        <textarea matInput type="text"
+                    <mat-form-field class="full-width" hintLabel="Max 400 characters">
+                        <textarea matInput type="text" #input
                                   id="field_description"
                                   formControlName="description"
-                                  placeholder="Description">
-
+                                  placeholder="Description"
+                                  maxlength="400">
                         </textarea>
+                        <mat-hint align="end">{{input.value?.length || 0}}/400</mat-hint>
                     </mat-form-field>
                 </div>
             </div>

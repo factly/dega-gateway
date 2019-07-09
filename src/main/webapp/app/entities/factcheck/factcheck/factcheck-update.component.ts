@@ -5,6 +5,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
+import * as moment from 'moment';
 
 import { CategoryService } from 'app/entities/core/category';
 import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
@@ -38,7 +39,8 @@ import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
 export class FactcheckUpdateComponent implements OnInit {
     factcheck: IFactcheck;
     isSaving: boolean;
-
+    tagListContainer = true;
+    categoryListContainer = true;
     claims: IClaim[];
     publishedDate: string;
     lastUpdatedDate: string;
@@ -93,6 +95,10 @@ export class FactcheckUpdateComponent implements OnInit {
     searchDegaUserTotalResult = 0;
     searchDegaUserCurrentPage = 0;
 
+    tag: ITag;
+    tagFormGroup: FormGroup;
+    categoryFormGroup: FormGroup;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private factcheckService: FactcheckService,
@@ -127,6 +133,8 @@ export class FactcheckUpdateComponent implements OnInit {
         this.getAllCategories();
         this.getAllClaims();
         this.getAllTags();
+        this.createTagFormGroup();
+        this.createCategoryFormGroup();
 
         this.formGroup = this.formBuilder.group({
             claims: this.formBuilder.array([])
@@ -209,6 +217,48 @@ export class FactcheckUpdateComponent implements OnInit {
         );
     }
 
+    createTagFormGroup() {
+        this.tagFormGroup = this.fb.group({
+            name: ['', Validators.required],
+            slug: [''],
+            description: ['', Validators.required],
+            clientId: [''],
+            createdDate: [''],
+            lastUpdatedDate: ['']
+        });
+    }
+
+    saveTag() {
+        if (this.tagFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.tagFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + ' is required');
+            return;
+        }
+        this.isSaving = true;
+        this.tagFormGroup.value.createdDate =
+            this.tagFormGroup.value.createdDate != null ? moment(this.tagFormGroup.value.createdDate, DATE_TIME_FORMAT) : null;
+        this.tagFormGroup.value.lastUpdatedDate =
+            this.tagFormGroup.value.lastUpdatedDate != null ? moment(this.tagFormGroup.value.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        const result = this.tagService.create(this.tagFormGroup.value);
+        result.subscribe(
+            (res: HttpResponse<ITag>) => {
+                this.tagListContainer = true;
+                this.getAllTags();
+                this.isSaving = false;
+            },
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                this.isSaving = false;
+            }
+        );
+    }
+
     getAllDegaUsers() {
         this.searchDegaUserKeyword = '';
         this.searchDegaUserTotalResult = 0;
@@ -238,6 +288,47 @@ export class FactcheckUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+
+    createCategoryFormGroup() {
+        this.categoryFormGroup = this.fb.group({
+            name: ['', Validators.required],
+            description: ['', Validators.required],
+            slug: [''],
+            parent: [''],
+            clientId: [''],
+            createdDate: [''],
+            lastUpdatedDate: ['']
+        });
+    }
+
+    saveCategory() {
+        if (this.categoryFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.categoryFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + 'is required');
+            return;
+        }
+        this.isSaving = true;
+        this.categoryFormGroup.value.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.categoryFormGroup.value.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        const result = this.categoryService.create(this.categoryFormGroup.value);
+        result.subscribe(
+            (res: HttpResponse<ICategory>) => {
+                this.categoryListContainer = true;
+                this.getAllCategories();
+            },
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                this.isSaving = false;
+            }
+        );
+        this.isSaving = false;
     }
 
     openDialogPopUp(claimData = null): void {

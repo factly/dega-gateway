@@ -49,25 +49,26 @@ export class NavbarComponent implements OnInit {
             this.languages = languages;
         });
         this.principal.identity().then(account => {
-            this.degaUserService.get_detail_using_email(account.email).subscribe(
-                (res: HttpResponse<IDegaUser>) => {
-                    this.currentUser = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+            if (account) {
+                this.degaUserService.get_detail_using_email(account.email).subscribe(
+                    (res: HttpResponse<IDegaUser>) => {
+                        this.currentUser = res.body;
+                        this.organizationService.query().subscribe(
+                            (resp: HttpResponse<IOrganization[]>) => {
+                                this.organisationOptions = resp.body;
+                            },
+                            (error_resp: HttpErrorResponse) => this.onError(error_resp.message)
+                        );
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
         });
 
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
-
-        this.organizationService.query().subscribe(
-            (res: HttpResponse<IOrganization[]>) => {
-                this.organisationOptions = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
     }
 
     changeOrganisation(selectedOrganisation: IOrganization) {
@@ -116,5 +117,6 @@ export class NavbarComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+        console.log(errorMessage);
     }
 }

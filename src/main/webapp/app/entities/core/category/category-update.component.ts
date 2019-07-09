@@ -10,6 +10,7 @@ import { ICategory } from 'app/shared/model/core/category.model';
 import { CategoryService } from './category.service';
 import { IPost } from 'app/shared/model/core/post.model';
 import { PostService } from 'app/entities/core/post';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-category-update',
@@ -26,10 +27,12 @@ export class CategoryUpdateComponent implements OnInit {
     slugExtention: number;
     tempSlug: string;
 
+    categoryFormGroup: FormGroup;
     constructor(
         private jhiAlertService: JhiAlertService,
         private categoryService: CategoryService,
         private postService: PostService,
+        private fb: FormBuilder,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -37,8 +40,6 @@ export class CategoryUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ category }) => {
             this.category = category;
-            this.createdDate = this.category.createdDate != null ? this.category.createdDate.format(DATE_TIME_FORMAT) : null;
-            this.lastUpdatedDate = this.category.lastUpdatedDate != null ? this.category.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
         });
         this.postService.query().subscribe(
             (res: HttpResponse<IPost[]>) => {
@@ -46,20 +47,52 @@ export class CategoryUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.createCategoryFormGroup();
     }
 
     previousState() {
         window.history.back();
     }
+    createCategoryFormGroup() {
+        this.categoryFormGroup = this.fb.group({
+            id: [this.category.id || ''],
+            name: [this.category.name || '', Validators.required],
+            description: [this.category.description || '', Validators.required],
+            slug: [this.category.slug || ''],
+            parent: [this.category.parent || ''],
+            clientId: [this.category.clientId || ''],
+            createdDate: [this.category.createdDate || ''],
+            lastUpdatedDate: [this.category.lastUpdatedDate || '']
+        });
+    }
 
     save() {
+        if (this.categoryFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.categoryFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + 'is required');
+            return;
+        }
         this.isSaving = true;
-        this.category.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
-        this.category.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
-        if (this.category.id !== undefined) {
-            this.subscribeToSaveResponse(this.categoryService.update(this.category));
+        this.categoryFormGroup.value.createdDate =
+            this.categoryFormGroup.value.createdDate != null ? moment(this.categoryFormGroup.value.createdDate, DATE_TIME_FORMAT) : null;
+
+        if (this.categoryFormGroup.value.lastUpdatedDate != null) {
+            this.categoryFormGroup.value.lastUpdatedDate = moment(this.categoryFormGroup.value.lastUpdatedDate, DATE_TIME_FORMAT);
         } else {
-            this.subscribeToSaveResponse(this.categoryService.create(this.category));
+            this.categoryFormGroup.value.lastUpdatedDate = null;
+        }
+
+        if (this.category.id !== undefined) {
+            this.subscribeToSaveResponse(this.categoryService.update(this.categoryFormGroup.value));
+        } else {
+            delete this.categoryFormGroup.value.id;
+            this.subscribeToSaveResponse(this.categoryService.create(this.categoryFormGroup.value));
         }
     }
 

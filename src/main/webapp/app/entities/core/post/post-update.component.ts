@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { AUTHOR_ROLE, PUBLISHER_ROLE } from 'app/shared/constants/role.constants';
 import { JhiAlertService } from 'ng-jhipster';
@@ -49,6 +50,8 @@ export class PostUpdateComponent implements OnInit {
     showPublish: boolean;
     account: Account;
     postEditFormGroup: FormGroup;
+    tagListContainer = true;
+    categoryListContainer = true;
 
     backend_compatible_author_list = [];
     all_author_options = [];
@@ -75,6 +78,9 @@ export class PostUpdateComponent implements OnInit {
     searchDegaUserKeyword = '';
     searchDegaUserTotalResult = 0;
     searchDegaUserCurrentPage = 0;
+
+    tagFormGroup: FormGroup;
+    categoryFormGroup: FormGroup;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -106,6 +112,8 @@ export class PostUpdateComponent implements OnInit {
         this.getAllDegaUsers();
         this.getAllCategories();
         this.getAllTags();
+        this.createTagFormGroup();
+        this.createCategoryFormGroup();
         this.statusService.query().subscribe(
             (res: HttpResponse<IStatus[]>) => {
                 this.statuses = res.body;
@@ -164,6 +172,48 @@ export class PostUpdateComponent implements OnInit {
         );
     }
 
+    createTagFormGroup() {
+        this.tagFormGroup = this.fb.group({
+            name: ['', Validators.required],
+            slug: [''],
+            description: ['', Validators.required],
+            clientId: [''],
+            createdDate: [''],
+            lastUpdatedDate: ['']
+        });
+    }
+
+    saveTag() {
+        if (this.tagFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.tagFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + ' is required');
+            return;
+        }
+        this.isSaving = true;
+        this.tagFormGroup.value.createdDate =
+            this.tagFormGroup.value.createdDate != null ? moment(this.tagFormGroup.value.createdDate, DATE_TIME_FORMAT) : null;
+        this.tagFormGroup.value.lastUpdatedDate =
+            this.tagFormGroup.value.lastUpdatedDate != null ? moment(this.tagFormGroup.value.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        const result = this.tagService.create(this.tagFormGroup.value);
+        result.subscribe(
+            (res: HttpResponse<ITag>) => {
+                this.tagListContainer = true;
+                this.getAllTags();
+                this.isSaving = false;
+            },
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                this.isSaving = false;
+            }
+        );
+    }
+
     getAllDegaUsers() {
         this.searchDegaUserKeyword = '';
         this.searchDegaUserTotalResult = 0;
@@ -197,6 +247,47 @@ export class PostUpdateComponent implements OnInit {
                 this.all_category_options = this.processOptionToDesireCheckboxFormat(this.backend_compatible_category_list, 'name');
             },
             (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    createCategoryFormGroup() {
+        this.categoryFormGroup = this.fb.group({
+            name: ['', Validators.required],
+            description: ['', Validators.required],
+            slug: [''],
+            parent: [''],
+            clientId: [''],
+            createdDate: [''],
+            lastUpdatedDate: ['']
+        });
+    }
+
+    saveCategory() {
+        if (this.categoryFormGroup.invalid) {
+            const invalid = [];
+            const controls = this.categoryFormGroup.controls;
+            for (const name in controls) {
+                if (controls[name].invalid) {
+                    invalid.push(name);
+                }
+            }
+            alert(invalid + 'is required');
+            return;
+        }
+        this.isSaving = true;
+        this.categoryFormGroup.value.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
+        this.categoryFormGroup.value.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
+        const result = this.categoryService.create(this.categoryFormGroup.value);
+        result.subscribe(
+            (res: HttpResponse<ICategory>) => {
+                this.categoryListContainer = true;
+                this.getAllCategories();
+                this.isSaving = false;
+            },
+            (res: HttpErrorResponse) => {
+                this.onSaveError();
+                this.isSaving = false;
+            }
         );
     }
 

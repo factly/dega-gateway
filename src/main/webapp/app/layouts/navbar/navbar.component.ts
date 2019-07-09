@@ -54,10 +54,10 @@ export class NavbarComponent implements OnInit {
                     (res: HttpResponse<IDegaUser>) => {
                         this.currentUser = res.body;
                         this.organizationService.query().subscribe(
-                            (res: HttpResponse<IOrganization[]>) => {
-                                this.organisationOptions = res.body;
+                            (resp: HttpResponse<IOrganization[]>) => {
+                                this.organisationOptions = resp.body;
                             },
-                            (res: HttpErrorResponse) => this.onError(res.message)
+                            (error_resp: HttpErrorResponse) => this.onError(error_resp.message)
                         );
                     },
                     (res: HttpErrorResponse) => this.onError(res.message)

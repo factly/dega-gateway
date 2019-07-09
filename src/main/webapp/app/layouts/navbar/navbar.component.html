@@ -41,7 +41,6 @@
                            (click)="changeOrganisation(organisation);collapseNavbar();">
                             <span>
                                 <span>
-                                    <!--<mat-icon *ngIf="organisation?.id==currentUser?.organizationCurrentId">radio_button_checked</mat-icon>-->
                                     <mat-icon class="font-sz-16">{{organisation?.id == currentUser?.organizationCurrentId ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
                                 </span>
                                 <span>{{organisation.name}}</span>

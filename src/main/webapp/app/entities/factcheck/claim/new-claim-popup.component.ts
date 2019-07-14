@@ -32,10 +32,6 @@ export class NewClaimPopupComponent implements OnInit {
     factchecks: IFactcheck[];
     createdDate: string;
     lastUpdatedDate: string;
-    slug: string;
-    slugExtention: number;
-    tempSlug: string;
-
     claimFormGroup: FormGroup;
 
     constructor(

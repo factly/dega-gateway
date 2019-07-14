@@ -42,12 +42,10 @@ export class FactcheckUpdateComponent implements OnInit {
     tagListContainer = true;
     categoryListContainer = true;
     claims: IClaim[];
+    public dateTimeNow: Date = new Date();
     publishedDate: string;
     lastUpdatedDate: string;
     createdDate: string;
-    slug: string;
-    slugExtention: number;
-    tempSlug: string;
     formGroup: FormGroup;
     claimants: IClaimant[];
     ratings: IRating[];
@@ -61,7 +59,6 @@ export class FactcheckUpdateComponent implements OnInit {
 
     factCheckEditFormGroup: FormGroup;
 
-    backend_compatible_claim_list = [];
     all_claim_options = [];
     selected_claim_options = [];
 
@@ -171,7 +168,7 @@ export class FactcheckUpdateComponent implements OnInit {
             featured: [this.factcheck.featured || false],
             sticky: [this.factcheck.sticky || false],
             updates: [this.factcheck.updates || ''],
-            slug: [this.factcheck.slug || ''],
+            slug: [this.factcheck.slug || 'place-holder-slug', Validators.required], // 'place-holder-slug' is done to make validation work.
             featuredMedia: [this.factcheck.featuredMedia || ''],
             subTitle: [this.factcheck.subTitle || ''],
             statusName: [this.factcheck.statusName || ''],
@@ -402,6 +399,7 @@ export class FactcheckUpdateComponent implements OnInit {
             this.subscribeToSaveResponse(this.factcheckService.update(this.factCheckEditFormGroup.value));
         } else {
             delete this.factCheckEditFormGroup.value.id;
+            this.factCheckEditFormGroup.value.slug = '';
             this.subscribeToSaveResponse(this.factcheckService.create(this.factCheckEditFormGroup.value));
         }
     }

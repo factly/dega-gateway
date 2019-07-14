@@ -90,13 +90,23 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <mat-form-field class="full-width">
                                     <input matInput
                                            formControlName="reviewTagLine"
                                            placeholder="Review Tag Line">
                                     <mat-error>
                                         reviewTagLine is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6" *ngIf="this.claimFormGroup.value.id">
+                                <mat-form-field class="full-width">
+                                    <input matInput
+                                           formControlName="slug"
+                                           placeholder="URL slug">
+                                    <mat-error>
+                                        Slug is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                             </div>

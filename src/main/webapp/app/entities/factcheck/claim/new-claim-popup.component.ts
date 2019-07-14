@@ -32,10 +32,6 @@ export class NewClaimPopupComponent implements OnInit {
     factchecks: IFactcheck[];
     createdDate: string;
     lastUpdatedDate: string;
-    slug: string;
-    slugExtention: number;
-    tempSlug: string;
-
     claimFormGroup: FormGroup;
 
     constructor(
@@ -91,7 +87,7 @@ export class NewClaimPopupComponent implements OnInit {
             review: [this.claim.review || '', Validators.required],
             reviewTagLine: [this.claim.reviewTagLine || ''],
             clientId: [this.claim.clientId || ''],
-            slug: [this.claim.slug || ''],
+            slug: [this.claim.slug || 'place-holder-slug', Validators.required], // 'place-holder-slug' is done to make validation work.
             createdDate: [this.claim.createdDate || ''],
             ratingId: [this.claim.ratingId || '', Validators.required],
             claimantId: [this.claim.claimantId || '', Validators.required]
@@ -115,7 +111,6 @@ export class NewClaimPopupComponent implements OnInit {
             return;
         }
         this.isSaving = true;
-        console.log(this.claimFormGroup.value.checkedDate);
         this.claimFormGroup.value.checkedDate =
             this.claimFormGroup.value.checkedDate != null ? moment(this.claimFormGroup.value.checkedDate, DATE_TIME_FORMAT) : null;
         this.claimFormGroup.value.claimDate =
@@ -129,6 +124,7 @@ export class NewClaimPopupComponent implements OnInit {
             this.subscribeToSaveResponse(this.claimService.update(this.claimFormGroup.value));
         } else {
             delete this.claimFormGroup.value.id;
+            this.claimFormGroup.value.slug = '';
             this.subscribeToSaveResponse(this.claimService.create(this.claimFormGroup.value));
         }
     }

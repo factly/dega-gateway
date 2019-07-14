@@ -143,7 +143,7 @@ export class PostUpdateComponent implements OnInit {
             featured: [this.post.featured || false],
             sticky: [this.post.sticky || false],
             updates: [this.post.updates || ''],
-            slug: [this.post.slug || ''],
+            slug: [this.post.slug || 'place-holder-slug', Validators.required], // 'place-holder-slug' is done to make validation work.
             featuredMedia: [this.post.featuredMedia || ''],
             subTitle: [this.post.subTitle || ''],
             formatId: [this.post.formatId || '', Validators.required],
@@ -341,6 +341,7 @@ export class PostUpdateComponent implements OnInit {
             this.subscribeToSaveResponse(this.postService.update(this.postEditFormGroup.value));
         } else {
             delete this.postEditFormGroup.value.id;
+            this.postEditFormGroup.value.slug = '';
             this.subscribeToSaveResponse(this.postService.create(this.postEditFormGroup.value));
         }
     }

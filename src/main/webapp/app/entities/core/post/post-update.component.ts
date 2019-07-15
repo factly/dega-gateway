@@ -203,6 +203,8 @@ export class PostUpdateComponent implements OnInit {
         const result = this.tagService.create(this.tagFormGroup.value);
         result.subscribe(
             (res: HttpResponse<ITag>) => {
+                const newlyAddedTag = this.processOptionToDesireCheckboxFormat([res.body], 'name')[0];
+                this.selected_tag_options = [newlyAddedTag, ...this.selected_tag_options];
                 this.tagListContainer = true;
                 this.getAllTags();
                 this.isSaving = false;
@@ -281,6 +283,8 @@ export class PostUpdateComponent implements OnInit {
         result.subscribe(
             (res: HttpResponse<ICategory>) => {
                 this.categoryListContainer = true;
+                const newlyAddedCategory = this.processOptionToDesireCheckboxFormat([res.body], 'name')[0];
+                this.selected_category_options = [newlyAddedCategory, ...this.selected_category_options];
                 this.getAllCategories();
                 this.isSaving = false;
             },

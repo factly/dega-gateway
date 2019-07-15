@@ -13,6 +13,7 @@ import { NgbDateMomentAdapter } from 'app/shared/util/datepicker-adapter';
 import { GatewaySharedCommonModule, GatewaySharedLibsModule, HasAnyAuthorityDirective } from 'app/shared/index';
 import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/confirmation-dialog.component';
 
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -25,6 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatCheckboxModule,
         MatButtonModule,
         MatDialogModule,
+        MatChipsModule,
         MatIconModule,
         MatInputModule,
         MatTooltipModule,

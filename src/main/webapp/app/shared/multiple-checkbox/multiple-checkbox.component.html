@@ -1,9 +1,20 @@
-<span *ngFor="let option_details of option_list">
-<mat-checkbox [checked]="is_selected(option_details.id)"
-              [value]="option_details.id"
-              (change)="checkbox_change_operation($event)"
+<div>
+    <div>
+        <mat-chip-list>
+            <mat-chip *ngFor="let option_details of selected_options"
+                      (removed)="removeSelected(option_details.id, option_details.display_text)">
+                {{option_details.display_text}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+    <span *ngFor="let option_details of option_list">
+        <mat-checkbox [checked]="is_selected(option_details.id)"
+                      [value]="option_details.id"
+                      (change)="checkbox_change_operation($event)"
               [labelPosition]="labelPosition">
-    {{option_details.display_text}}
-</mat-checkbox>
+            {{option_details.display_text}}
+        </mat-checkbox>
     <br>
-</span>
+    </span>
+</div>

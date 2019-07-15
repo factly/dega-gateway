@@ -246,6 +246,8 @@ export class FactcheckUpdateComponent implements OnInit {
         result.subscribe(
             (res: HttpResponse<ITag>) => {
                 this.tagListContainer = true;
+                const newlyAddedTag = this.processOptionToDesireCheckboxFormat([res.body], 'name')[0];
+                this.selected_tag_options = [newlyAddedTag, ...this.selected_tag_options];
                 this.getAllTags();
                 this.isSaving = false;
             },
@@ -318,6 +320,8 @@ export class FactcheckUpdateComponent implements OnInit {
         result.subscribe(
             (res: HttpResponse<ICategory>) => {
                 this.categoryListContainer = true;
+                const newlyAddedCategory = this.processOptionToDesireCheckboxFormat([res.body], 'name')[0];
+                this.selected_category_options = [newlyAddedCategory, ...this.selected_category_options];
                 this.getAllCategories();
             },
             (res: HttpErrorResponse) => {
@@ -343,6 +347,7 @@ export class FactcheckUpdateComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             // This is repeated code because of async issue on update.
+            this.addClaimToFactcheck(result);
             this.claimService
                 .query({
                     size: 10,
@@ -513,7 +518,6 @@ export class FactcheckUpdateComponent implements OnInit {
     }
 
     // Think about optimising this code block, move it to a service, Ends here
-
     update_tag_selection(val) {
         this.factCheckEditFormGroup.controls['tags'].setValue(this.processTagToBackendRequiredFormat(val));
     }

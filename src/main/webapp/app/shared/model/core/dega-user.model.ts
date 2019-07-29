@@ -5,6 +5,7 @@ import { IRoleMapping } from 'app/shared/model/core/role-mapping.model';
 
 export interface IDegaUser {
     id?: string;
+    keycloakId?: String;
     firstName?: string;
     lastName?: string;
     displayName?: string;
@@ -37,6 +38,7 @@ export interface IDegaUser {
 export class DegaUser implements IDegaUser {
     constructor(
         public id?: string,
+        public keycloakId?: string,
         public firstName?: string,
         public lastName?: string,
         public displayName?: string,

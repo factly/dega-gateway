@@ -27,6 +27,7 @@ describe('Service Tests', () => {
 
             elemDefault = new DegaUser(
                 'ID',
+                'ID',
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',

@@ -96,7 +96,8 @@
             }
         },
         "field": {
-            "id": "ID"
+            "id": "ID",
+            "keycloakid": "Keycloak ID"
         },
         "ribbon": {
             "dev": "Development"

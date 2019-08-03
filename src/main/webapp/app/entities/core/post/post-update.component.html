@@ -15,6 +15,7 @@
                 </button>
                 <button mat-button mat-raised-button color="primary"
                         [disabled]="isSaving"
+                        (click)="saveOrPublish('Publish')"
                         *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_EDITOR']">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
                     jhiTranslate="entity.action.publish">Publish</span>

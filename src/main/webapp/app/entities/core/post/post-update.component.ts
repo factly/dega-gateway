@@ -23,6 +23,8 @@ import { Account, Principal } from 'app/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
 import { MatDialog } from '@angular/material';
+import { IMedia } from 'app/shared/model/core/media.model';
+import { MediaService } from 'app/entities/core/media';
 
 @Component({
     selector: 'jhi-post-update',
@@ -40,6 +42,8 @@ export class PostUpdateComponent implements OnInit {
     statuses: IStatus[];
 
     formats: IFormat[];
+
+    selectedMedia: IMedia;
 
     degausers: IDegaUser[];
     currentUser: IDegaUser;
@@ -83,18 +87,22 @@ export class PostUpdateComponent implements OnInit {
     categoryFormGroup: FormGroup;
 
     constructor(
-        private jhiAlertService: JhiAlertService,
-        private postService: PostService,
-        private tagService: TagService,
-        private categoryService: CategoryService,
-        private statusService: StatusService,
-        private formatService: FormatService,
-        private degaUserService: DegaUserService,
+        // Angular built in
         private activatedRoute: ActivatedRoute,
-        private route: Router,
-        private principal: Principal,
+        private dialog: MatDialog,
         private fb: FormBuilder,
-        private dialog: MatDialog
+        private route: Router,
+        // Jhipster
+        private jhiAlertService: JhiAlertService,
+        private principal: Principal,
+        // Custom created
+        private categoryService: CategoryService,
+        private degaUserService: DegaUserService,
+        private formatService: FormatService,
+        private mediaService: MediaService,
+        private postService: PostService,
+        private statusService: StatusService,
+        private tagService: TagService
     ) {}
 
     ngOnInit() {
@@ -107,6 +115,9 @@ export class PostUpdateComponent implements OnInit {
             this.publishedDate = this.post.publishedDate != null ? this.post.publishedDate.format(DATE_TIME_FORMAT) : null;
             this.lastUpdatedDate = this.post.lastUpdatedDate != null ? this.post.lastUpdatedDate.format(DATE_TIME_FORMAT) : null;
             this.createdDate = this.post.createdDate != null ? this.post.createdDate.format(DATE_TIME_FORMAT) : null;
+            if (this.post.mediaId) {
+                this.getMediaDetails(this.post.mediaId);
+            }
         });
         this.createPostEditFormGroup();
         this.getAllDegaUsers();
@@ -144,17 +155,20 @@ export class PostUpdateComponent implements OnInit {
             sticky: [this.post.sticky || false],
             updates: [this.post.updates || ''],
             slug: [this.post.slug || 'place-holder-slug', Validators.required], // 'place-holder-slug' is done to make validation work.
-            featuredMedia: [this.post.featuredMedia || ''],
+            mediaId: [this.post.mediaId || ''],
             subTitle: [this.post.subTitle || ''],
             formatId: [this.post.formatId || '', Validators.required],
             statusId: [this.post.statusId || null],
             statusName: [this.post.statusName || ''],
             categories: [this.post.categories], // convert into this.fb.array
             tags: [this.post.tags], // convert into this.fb.array
-            degaUsers: [this.post.degaUsers || '', Validators.required], // convert into this.fb.array
-            clientId: [this.post.clientId || ''], // delete once backend is fixed
-            publishedDate: [this.post.publishedDate || null], // delete once backend is fixed
-            createdDate: [this.post.createdDate || null] // delete once backend is fixed
+            degaUsers: [this.post.degaUsers || '', Validators.required] // convert into this.fb.array
+        });
+    }
+
+    getMediaDetails(mediaId) {
+        this.mediaService.find(mediaId).subscribe((res: HttpResponse<IMedia>) => {
+            this.selectedMedia = res.body;
         });
     }
 
@@ -310,17 +324,20 @@ export class PostUpdateComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(image_data => {
             if (image_data) {
-                this.updateMediaForFeature(image_data['url']);
+                this.updateMediaForFeature(image_data);
             }
         });
     }
 
-    updateMediaForFeature(url) {
-        this.postEditFormGroup.controls['featuredMedia'].setValue(url);
+    updateMediaForFeature(selectedMediaObject: IMedia) {
+        console.log(selectedMediaObject);
+        this.selectedMedia = selectedMediaObject;
+        this.postEditFormGroup.controls['mediaId'].setValue(selectedMediaObject.id);
     }
 
     deleteMediaForFeature() {
-        this.postEditFormGroup.controls['featuredMedia'].setValue('');
+        this.selectedMedia = null;
+        this.postEditFormGroup.controls['mediaId'].setValue('');
     }
 
     previousState() {

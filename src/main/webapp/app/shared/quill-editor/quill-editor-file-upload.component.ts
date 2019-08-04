@@ -10,7 +10,7 @@ import { MediaService } from 'app/entities/core/media/media.service';
     templateUrl: './quill-editor-file-upload.component.html'
 })
 export class QuillEditorFileUploadComponent implements OnInit {
-    media: IMedia[];
+    media_list: IMedia[];
     currentSearch: string;
     links: any;
     page: any;
@@ -43,18 +43,15 @@ export class QuillEditorFileUploadComponent implements OnInit {
 
     private paginateMedia(data: IMedia[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));
-        this.media = data;
+        this.media_list = data;
     }
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    selectImage(url): void {
-        const data = {};
-        data['url'] = url;
-
-        this.dialogRef.close(data);
+    selectImage(selectedMediaData: IMedia): void {
+        this.dialogRef.close(selectedMediaData);
     }
 
     public uploadImageFromLocalSystem(files: FileList): void {

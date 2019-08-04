@@ -57,12 +57,12 @@
                             <mat-icon>cloud_upload</mat-icon>
                         </button>
                     </div>
-                    <div class="col-md-12 margin-t-20" *ngIf="postEditFormGroup.value.featuredMedia">
+                    <div class="col-md-12 margin-t-20" *ngIf="selectedMedia">
                         <div class="featured-img">
-                            <img [src]='postEditFormGroup.value.featuredMedia'>
+                            <img [src]='selectedMedia.sourceURL'>
                         </div>
                     </div>
-                    <div class="full-width margin-t-20" *ngIf="postEditFormGroup.value.featuredMedia">
+                    <div class="full-width margin-t-20" *ngIf="postEditFormGroup.value.mediaId">
                         <button mat-button mat-raised-button color="primary" type="button" class="full-width"
                                 (click)="deleteMediaForFeature()"> Delete featured media
                             <mat-icon>delete</mat-icon>

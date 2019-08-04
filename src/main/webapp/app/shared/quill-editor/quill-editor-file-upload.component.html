@@ -26,11 +26,11 @@
             </div>
         </div>
         <div class="modal-body">
-            <div *ngIf="media">
+            <div *ngIf="media_list">
                 <div class="row">
-                    <div class="media-thumbnail" *ngFor="let media of media" >
-                        <a (click)="selectImage(media.url)">
-                            <img src={{media.url}} alt="Image" height="100" class="img-bottom">
+                    <div class="media-thumbnail" *ngFor="let media of media_list" >
+                        <a (click)="selectImage(media)">
+                            <img src={{media.sourceURL}} alt="Image" height="100" class="img-bottom">
                         </a>
                     </div>
                 </div>

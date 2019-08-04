@@ -6,6 +6,7 @@ import { QuillEditorAddTweetComponent } from 'app/shared/quill-editor/quill-edit
 import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
 
 import * as Quill from 'quill';
+import { IMedia } from 'app/shared/model/core/media.model';
 
 declare let twttr;
 
@@ -104,7 +105,7 @@ export class QuillEditorComponent {
         const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
 
         dialogRef.afterClosed().subscribe(image_data => {
-            this.updateMediaForQuill(image_data['url']);
+            this.updateMediaForQuill(image_data);
         });
     }
 
@@ -118,8 +119,8 @@ export class QuillEditorComponent {
         });
     }
 
-    updateMediaForQuill(url) {
-        const img = '<img src="' + url + '" />';
+    updateMediaForQuill(selectedMediaData: IMedia) {
+        const img = '<img src="' + selectedMediaData.sourceURL + '" />';
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.cursorPosition.index, img);
     }
 

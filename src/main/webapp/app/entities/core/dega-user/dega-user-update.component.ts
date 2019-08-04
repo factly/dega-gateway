@@ -36,8 +36,6 @@ export class DegaUserUpdateComponent implements OnInit {
     rolemappings: IRoleMapping[];
     createdDate: string;
     slug: string;
-    slugExtention: number;
-    tempSlug: string;
     subscription: Subscription;
 
     constructor(

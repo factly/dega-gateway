@@ -20,6 +20,7 @@ export interface IDegaUser {
     slug?: string;
     enabled?: boolean;
     emailVerified?: boolean;
+    isSuperAdmin?: boolean;
     email?: string;
     createdDate?: Moment;
     roleName?: string;
@@ -53,6 +54,7 @@ export class DegaUser implements IDegaUser {
         public slug?: string,
         public enabled?: boolean,
         public emailVerified?: boolean,
+        public isSuperAdmin?: boolean,
         public email?: string,
         public createdDate?: Moment,
         public roleName?: string,
@@ -69,5 +71,6 @@ export class DegaUser implements IDegaUser {
     ) {
         this.enabled = this.enabled || false;
         this.emailVerified = this.emailVerified || false;
+        this.isSuperAdmin = this.isSuperAdmin || false;
     }
 }

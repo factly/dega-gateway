@@ -150,15 +150,9 @@
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="gatewayApp.coreDegaUser.roleMapping" for="field_roleMapping">Role Mapping</label>
-                    <select class="form-control" id="field_roleMapping" multiple name="roleMapping" [(ngModel)]="degaUser.roleMappings" required>
+                    <select class="form-control" id="field_roleMapping" multiple name="roleMapping" [(ngModel)]="degaUser.roleMappings">
                         <option [ngValue]="getSelected(degaUser.roleMappings, roleMappingOption)" *ngFor="let roleMappingOption of rolemappings; trackBy: trackRoleMappingById">{{roleMappingOption.name}}</option>
                     </select>
-                </div>
-                <div [hidden]="!(editForm.controls.roleMapping?.dirty && editForm.controls.roleMapping?.invalid)">
-                    <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.roleMapping?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
                 </div>
             </div>
             <div>

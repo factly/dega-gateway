@@ -35,7 +35,7 @@ export const claimRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.factcheckClaim.home.title'
         },
@@ -48,7 +48,7 @@ export const claimRoute: Routes = [
             claim: ClaimResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.factcheckClaim.home.title'
         },
         canActivate: [UserRouteAccessService]

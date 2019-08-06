@@ -39,7 +39,7 @@ export const mediaRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.coreMedia.home.title'
         },
@@ -52,7 +52,7 @@ export const mediaRoute: Routes = [
             media: MediaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.coreMedia.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -64,7 +64,7 @@ export const mediaRoute: Routes = [
             media: MediaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.coreMedia.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -76,7 +76,7 @@ export const mediaRoute: Routes = [
             media: MediaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.coreMedia.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -91,7 +91,7 @@ export const mediaPopupRoute: Routes = [
             media: MediaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR'],
             pageTitle: 'gatewayApp.coreMedia.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -104,7 +104,7 @@ export const mediaPopupRoute: Routes = [
             media: MediaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.coreMedia.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -118,7 +118,7 @@ export const mediaPopupRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.corePost.featuredMedia'
         },
         canActivate: [UserRouteAccessService],

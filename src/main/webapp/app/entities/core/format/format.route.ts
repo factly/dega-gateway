@@ -37,7 +37,7 @@ export const formatRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.coreFormat.home.title'
         },
@@ -50,7 +50,7 @@ export const formatRoute: Routes = [
             format: FormatResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.coreFormat.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const formatRoute: Routes = [
             format: FormatResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.coreFormat.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const formatRoute: Routes = [
             format: FormatResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.coreFormat.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const formatPopupRoute: Routes = [
             format: FormatResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.coreFormat.home.title'
         },
         canActivate: [UserRouteAccessService],

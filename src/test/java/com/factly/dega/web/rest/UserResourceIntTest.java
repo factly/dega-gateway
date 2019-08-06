@@ -185,7 +185,7 @@ public class UserResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$").isArray())
-            .andExpect(jsonPath("$").value(hasItems(AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN)));
+            .andExpect(jsonPath("$").value(hasItems(AuthoritiesConstants.USER, AuthoritiesConstants.SUPER_ADMIN)));
     }
 
     @Test
@@ -282,7 +282,7 @@ public class UserResourceIntTest {
         Authority authorityB = new Authority();
         assertThat(authorityA).isEqualTo(authorityB);
 
-        authorityB.setName(AuthoritiesConstants.ADMIN);
+        authorityB.setName(AuthoritiesConstants.SUPER_ADMIN);
         assertThat(authorityA).isNotEqualTo(authorityB);
 
         authorityA.setName(AuthoritiesConstants.USER);

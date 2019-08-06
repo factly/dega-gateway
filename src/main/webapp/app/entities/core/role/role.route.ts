@@ -37,7 +37,7 @@ export const roleRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.coreRole.home.title'
         },
@@ -50,7 +50,7 @@ export const roleRoute: Routes = [
             role: RoleResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.coreRole.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const roleRoute: Routes = [
             role: RoleResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.coreRole.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const roleRoute: Routes = [
             role: RoleResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.coreRole.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const rolePopupRoute: Routes = [
             role: RoleResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.coreRole.home.title'
         },
         canActivate: [UserRouteAccessService],

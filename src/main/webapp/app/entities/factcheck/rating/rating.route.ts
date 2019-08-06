@@ -37,7 +37,7 @@ export const ratingRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.factcheckRating.home.title'
         },
@@ -50,7 +50,7 @@ export const ratingRoute: Routes = [
             rating: RatingResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.factcheckRating.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const ratingRoute: Routes = [
             rating: RatingResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.factcheckRating.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const ratingRoute: Routes = [
             rating: RatingResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.factcheckRating.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -89,7 +89,7 @@ export const ratingPopupRoute: Routes = [
             rating: RatingResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             pageTitle: 'gatewayApp.factcheckRating.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -7,7 +7,7 @@ export const claimSearchRoute: Routes = [
         path: 'claim-search',
         component: ClaimSearchComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.factcheckClaim.home.title'
         },

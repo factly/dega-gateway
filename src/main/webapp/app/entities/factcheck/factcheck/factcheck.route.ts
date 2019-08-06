@@ -36,7 +36,7 @@ export const factcheckRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.factcheckFactcheck.home.title'
         },
@@ -49,7 +49,7 @@ export const factcheckRoute: Routes = [
             factcheck: FactcheckResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.factcheckFactcheck.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -61,7 +61,7 @@ export const factcheckRoute: Routes = [
             factcheck: FactcheckResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.factcheckFactcheck.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -73,7 +73,7 @@ export const factcheckRoute: Routes = [
             factcheck: FactcheckResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.factcheckFactcheck.home.title'
         },
         canActivate: [UserRouteAccessService]

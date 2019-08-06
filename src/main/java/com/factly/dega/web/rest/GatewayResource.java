@@ -38,7 +38,7 @@ public class GatewayResource {
      */
     @GetMapping("/routes")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
+    @Secured(AuthoritiesConstants.SUPER_ADMIN)
     public ResponseEntity<List<RouteVM>> activeRoutes() {
         List<Route> routes = routeLocator.getRoutes();
         List<RouteVM> routeVMs = new ArrayList<>();

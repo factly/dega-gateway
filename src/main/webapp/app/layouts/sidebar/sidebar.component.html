@@ -73,7 +73,7 @@
 							<span jhiTranslate="global.menu.entities.coreFormat">Format</span>
 						</a>
 					</li>
-                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">>
+                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
                         <a routerLink="media" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <mat-icon>perm_media</mat-icon>
                             <span jhiTranslate="global.menu.entities.coreMedia">Media</span>

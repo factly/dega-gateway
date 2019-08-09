@@ -90,4 +90,8 @@ export class OrganizationService {
     getOrganizationBySlug(slug: string): Observable<EntityResponseType> {
         return this.http.get<IOrganization>(`${this.resourceUrlForOrganizationBySlug}/${slug}`, { observe: 'response' });
     }
+
+    getOrganizationsByEmail(email: string): Observable<EntityArrayResponseType> {
+        return this.http.get<IOrganization[]>(`${this.resourceUrl}/dega-user/${email}`, { observe: 'response' });
+    }
 }

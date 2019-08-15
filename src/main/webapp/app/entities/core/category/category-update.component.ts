@@ -57,7 +57,7 @@ export class CategoryUpdateComponent implements OnInit {
         this.categoryFormGroup = this.fb.group({
             id: [this.category.id || ''],
             name: [this.category.name || '', Validators.required],
-            description: [this.category.description || '', Validators.required],
+            description: [this.category.description || ''],
             slug: [this.category.slug || ''],
             parent: [this.category.parent || ''],
             clientId: [this.category.clientId || ''],

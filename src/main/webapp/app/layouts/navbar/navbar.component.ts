@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
         });
         this.principal.identity().then(account => {
             if (account) {
-                this.organizationService.getOrganizationsByEmail(account.email).subscribe(
+                this.organizationService.getOrganizationsByKeycloakId(account.id).subscribe(
                     (res: HttpResponse<IOrganization[]>) => {
                         this.organisationOptions = res.body;
                     },

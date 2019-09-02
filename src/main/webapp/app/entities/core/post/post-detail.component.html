@@ -79,7 +79,7 @@
                         <tr>
                             <td><span jhiTranslate="gatewayApp.corePost.featuredMedia">Featured Media</span></td>
                             <td>
-                                <span><img src={{post.mediaDTO.url}} alt="" width="100" height="100"></span>
+                                <span *ngIf="post.mediaDTO" ><img src={{post.mediaDTO.url}} alt="" width="100" height="100"></span>
                             </td>
                         </tr>
                         <tr>

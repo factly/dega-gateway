@@ -144,7 +144,7 @@ export class PostUpdateComponent implements OnInit {
             sticky: [this.post.sticky || false],
             updates: [this.post.updates || ''],
             slug: [this.post.slug || 'place-holder-slug', Validators.required], // 'place-holder-slug' is done to make validation work.
-            featuredMedia: [this.post.featuredMedia || ''],
+            mediaDTO: [this.post.mediaDTO || null],
             subTitle: [this.post.subTitle || ''],
             formatId: [this.post.formatId || '', Validators.required],
             statusId: [this.post.statusId || null],
@@ -308,19 +308,19 @@ export class PostUpdateComponent implements OnInit {
         };
         const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
 
-        dialogRef.afterClosed().subscribe(image_data => {
-            if (image_data) {
-                this.updateMediaForFeature(image_data['url']);
+        dialogRef.afterClosed().subscribe(imageData => {
+            if (imageData) {
+                this.updateMediaForFeature(imageData);
             }
         });
     }
 
-    updateMediaForFeature(url) {
-        this.postEditFormGroup.controls['featuredMedia'].setValue(url);
+    updateMediaForFeature(imageData) {
+        this.postEditFormGroup.controls['mediaDTO'].setValue(imageData);
     }
 
     deleteMediaForFeature() {
-        this.postEditFormGroup.controls['featuredMedia'].setValue('');
+        this.postEditFormGroup.controls['mediaDTO'].setValue(null);
     }
 
     previousState() {

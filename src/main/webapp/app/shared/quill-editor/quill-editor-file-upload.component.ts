@@ -50,11 +50,8 @@ export class QuillEditorFileUploadComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    selectImage(url): void {
-        const data = {};
-        data['url'] = url;
-
-        this.dialogRef.close(data);
+    selectImage(imageData): void {
+        this.dialogRef.close(imageData);
     }
 
     public uploadImageFromLocalSystem(files: FileList): void {

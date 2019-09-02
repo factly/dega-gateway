@@ -10,8 +10,8 @@ import { IOrganization } from 'app/shared/model/core/organization.model';
 import { OrganizationService } from './organization.service';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 import { DegaUserService } from 'app/entities/core/dega-user';
-import { MediaService } from '../media/media.service';
-import { Subscription } from 'rxjs';
+import { QuillEditorFileUploadComponent } from 'app/shared';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'jhi-organization-update',
@@ -25,33 +25,14 @@ export class OrganizationUpdateComponent implements OnInit {
     createdDate: string;
     lastUpdatedDate: string;
     slug: string;
-    slugExtention: number;
-    tempSlug: string;
-    subscription: Subscription;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private organizationService: OrganizationService,
         private degaUserService: DegaUserService,
         private activatedRoute: ActivatedRoute,
-        private mediaService: MediaService,
-        private router: Router
-    ) {
-        this.subscription = this.mediaService.getProductID().subscribe(message => {
-            if (message['type_of_data'] === 'logoURL') {
-                this.updateMediaForLogoURL(message['selected_url']);
-            }
-            if (message['type_of_data'] === 'logoURLMobile') {
-                this.updateMediaForLogoURLMobile(message['selected_url']);
-            }
-            if (message['type_of_data'] === 'favIconURL') {
-                this.updateMediaForFavIconURL(message['selected_url']);
-            }
-            if (message['type_of_data'] === 'mobileIconURL') {
-                this.updateMediaForMobileIconURLMobile(message['selected_url']);
-            }
-        });
-    }
+        private dialog: MatDialog
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -118,26 +99,49 @@ export class OrganizationUpdateComponent implements OnInit {
 
     removeImage(imageUrl) {
         if (imageUrl === 'logoURL') {
-            this.organization.logoURL = '';
+            this.organization.mediaLogoDTO = null;
         } else if (imageUrl === 'logoURLMobile') {
-            this.organization.logoURLMobile = '';
+            this.organization.mediaMobileLogoDTO = null;
         } else if (imageUrl === 'favIconURL') {
-            this.organization.favIconURL = '';
+            this.organization.mediaFaviconDTO = null;
         } else {
-            this.organization.mobileIconURL = '';
+            this.organization.mediaMobileIconDTO = null;
         }
     }
 
-    updateMediaForLogoURL(url) {
-        this.organization.logoURL = url;
+    choseMedia(dataType) {
+        const config = {
+            height: '90%',
+            width: '90vw',
+            maxWidth: '90vw'
+        };
+        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
+
+        dialogRef.afterClosed().subscribe(imageData => {
+            if (imageData) {
+                if (dataType == 'logoURL') {
+                    this.updateMediaForLogoURL(imageData);
+                } else if (dataType == 'logoURLMobile') {
+                    this.updateMediaForLogoURLMobile(imageData);
+                } else if (dataType == 'favIconURL') {
+                    this.updateMediaForFavIconURL(imageData);
+                } else if (dataType == 'favicon') {
+                    this.updateMediaForMobileIconURLMobile(imageData);
+                }
+            }
+        });
     }
-    updateMediaForLogoURLMobile(url) {
-        this.organization.logoURLMobile = url;
+
+    updateMediaForLogoURL(imageData) {
+        this.organization.mediaLogoDTO = imageData;
     }
-    updateMediaForFavIconURL(url) {
-        this.organization.favIconURL = url;
+    updateMediaForLogoURLMobile(imageData) {
+        this.organization.mediaMobileLogoDTO = imageData;
     }
-    updateMediaForMobileIconURLMobile(url) {
-        this.organization.mobileIconURL = url;
+    updateMediaForFavIconURL(imageData) {
+        this.organization.mediaFaviconDTO = imageData;
+    }
+    updateMediaForMobileIconURLMobile(imageData) {
+        this.organization.mediaMobileIconDTO = imageData;
     }
 }

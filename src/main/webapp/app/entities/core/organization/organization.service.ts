@@ -90,4 +90,8 @@ export class OrganizationService {
     getOrganizationBySlug(slug: string): Observable<EntityResponseType> {
         return this.http.get<IOrganization>(`${this.resourceUrlForOrganizationBySlug}/${slug}`, { observe: 'response' });
     }
+
+    getOrganizationsByKeycloakId(clientId: string): Observable<EntityArrayResponseType> {
+        return this.http.get<IOrganization[]>(`${this.resourceUrl}?keycloakUserId=${clientId}`, { observe: 'response' });
+    }
 }

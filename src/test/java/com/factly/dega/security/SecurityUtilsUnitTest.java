@@ -58,7 +58,7 @@ public class SecurityUtilsUnitTest {
         SecurityContextHolder.setContext(securityContext);
 
         assertThat(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.USER)).isTrue();
-        assertThat(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)).isFalse();
+        assertThat(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.SUPER_ADMIN)).isFalse();
     }
 
 }

@@ -89,7 +89,7 @@ public class AccountResourceIntTest{
     public void testGetExistingAccount() throws Exception {
         Set<Authority> authorities = new HashSet<>();
         Authority authority = new Authority();
-        authority.setName(AuthoritiesConstants.ADMIN);
+        authority.setName(AuthoritiesConstants.SUPER_ADMIN);
         authorities.add(authority);
 
         User user = new User();
@@ -110,7 +110,7 @@ public class AccountResourceIntTest{
             .build();
 
         restUserMockMvc.perform(get("/api/account")
-            .with(user(user.getLogin()).roles("ADMIN"))
+            .with(user(user.getLogin()).roles("SUPER_ADMIN"))
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -120,7 +120,7 @@ public class AccountResourceIntTest{
             .andExpect(jsonPath("$.email").value("john.doe@jhipster.com"))
             .andExpect(jsonPath("$.imageUrl").value("http://placehold.it/50x50"))
             .andExpect(jsonPath("$.langKey").value("en"))
-            .andExpect(jsonPath("$.authorities").value(AuthoritiesConstants.ADMIN));
+            .andExpect(jsonPath("$.authorities").value(AuthoritiesConstants.SUPER_ADMIN));
     }
 
     @Test

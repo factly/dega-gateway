@@ -36,7 +36,7 @@ export const tagRoute: Routes = [
             pagingParams: JhiResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             defaultSort: 'createdDate,desc',
             pageTitle: 'gatewayApp.coreTag.home.title'
         },
@@ -49,7 +49,7 @@ export const tagRoute: Routes = [
             tag: TagResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.coreTag.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -61,7 +61,7 @@ export const tagRoute: Routes = [
             tag: TagResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.coreTag.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -73,7 +73,7 @@ export const tagRoute: Routes = [
             tag: TagResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
             pageTitle: 'gatewayApp.coreTag.home.title'
         },
         canActivate: [UserRouteAccessService]

@@ -50,12 +50,15 @@ export class NavbarComponent implements OnInit {
         });
         this.principal.identity().then(account => {
             if (account) {
-                this.organizationService.getOrganizationsByKeycloakId(account.id).subscribe(
-                    (res: HttpResponse<IOrganization[]>) => {
-                        this.organisationOptions = res.body;
-                    },
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
+                this.degaUserService.get_detail_using_email(account.email).subscribe((res: HttpResponse<IDegaUser>) => {
+                    this.currentUser = res.body;
+                    this.organizationService.getOrganizationsByKeycloakId(account.id).subscribe(
+                        (response: HttpResponse<IOrganization[]>) => {
+                            this.organisationOptions = response.body;
+                        },
+                        (response: HttpErrorResponse) => this.onError(response.message)
+                    );
+                });
             }
         });
 

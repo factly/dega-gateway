@@ -92,6 +92,6 @@ export class OrganizationService {
     }
 
     getOrganizationsByKeycloakId(clientId: string): Observable<EntityArrayResponseType> {
-        return this.http.get<IOrganization[]>(`${this.resourceUrl}?keycloakId=${clientId}`, { observe: 'response' });
+        return this.http.get<IOrganization[]>(`${this.resourceUrl}?keycloakUserId=${clientId}`, { observe: 'response' });
     }
 }

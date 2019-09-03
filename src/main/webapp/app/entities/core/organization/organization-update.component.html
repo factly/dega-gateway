@@ -48,86 +48,71 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.logoURL" for="field_logoURL">Logo URL</label>
-                    <!--<input type="text" class="form-control" name="logoURL" id="field_logoURL"
-                        [(ngModel)]="organization.logoURL" />-->
                     <button id="field_logoURL" class="btn btn-primary jh-create-entity create-media"
-                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                            [queryParams]="{ media_type: 'logoURL'}"
-                            replaceUrl="true" type="button">
+                            (click)="choseMedia('logoURL') "type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
                             Upload Media
                         </span>
                     </button>
-                    <img src={{organization.logoURL}} alt="" width="100" height="100">
-                    <button class="btn btn-danger" *ngIf="organization.logoURL" (click)="removeImage('logoURL')">
+
+                    <button class="btn btn-danger" *ngIf="organization.mediaLogoDTO" (click)="removeImage('logoURL')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="organization.logoURL">
+                    <div *ngIf="organization.mediaLogoDTO">
+                        <img src={{organization.mediaLogoDTO.url}} alt="" width="100" height="100">
                         <span [(ngModel)]="organization.logoURL" name="featuredMedia" ngDefaultControl></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.logoURLMobile" for="field_logoURLMobile">Logo URL Mobile</label>
-                    <!--<input type="text" class="form-control" name="logoURLMobile" id="field_logoURLMobile"
-                        [(ngModel)]="organization.logoURLMobile" />-->
                     <button id="field_logoURLMobile" class="btn btn-primary jh-create-entity create-media"
-                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                            [queryParams]="{ media_type: 'logoURLMobile'}"
-                            replaceUrl="true" type="button">
+                            (click)="choseMedia('logoURLMobile') "type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
                             Upload Media
                         </span>
                     </button>
-                    <img src={{organization.logoURLMobile}} alt="" width="100" height="100">
-                    <button class="btn btn-danger" *ngIf="organization.logoURLMobile" (click)="removeImage('logoURLMobile')">
+
+                    <button class="btn btn-danger" *ngIf="organization.mediaMobileLogoDTO" (click)="removeImage('logoURLMobile')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="organization.logoURLMobile">
-                        <span [(ngModel)]="organization.logoURLMobile" name="featuredMedia" ngDefaultControl></span>
+                    <div *ngIf="organization.mediaMobileLogoDTO">
+                        <img src={{organization.mediaMobileLogoDTO.url}} alt="" width="100" height="100">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.favIconURL" for="field_favIconURL">Fav Icon URL</label>
-                    <!--<input type="text" class="form-control" name="favIconURL" id="field_favIconURL"
-                        [(ngModel)]="organization.favIconURL" />-->
                     <button id="field_favIconURL" class="btn btn-primary jh-create-entity create-media"
-                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                            [queryParams]="{ media_type: 'favIconURL'}"
-                            replaceUrl="true" type="button">
+                            (click)="choseMedia('favIconURL') "type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
                             Upload Media
                         </span>
                     </button>
-                    <img src={{organization.favIconURL}} alt="" width="100" height="100">
-                    <button class="btn btn-danger" *ngIf="organization.favIconURL" (click)="removeImage('favIconURL')">
+
+                    <button class="btn btn-danger" *ngIf="organization.mediaFaviconDTO" (click)="removeImage('favIconURL')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="organization.favIconURL">
-                        <span [(ngModel)]="organization.favIconURL" name="featuredMedia" ngDefaultControl></span>
+                    <div *ngIf="organization.mediaFaviconDTO">
+                        <img src={{organization.mediaFaviconDTO.url}} alt="" width="100" height="100">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreOrganization.mobileIconURL" for="field_mobileIconURL">Mobile Icon URL</label>
-                    <!--<input type="text" class="form-control" name="mobileIconURL" id="field_mobileIconURL"
-                        [(ngModel)]="organization.mobileIconURL" />-->
                     <button id="field_mobileIconURL" class="btn btn-primary jh-create-entity create-media"
-                            [routerLink]="['/', { outlets: { popup: 'featured-media/upload'} }]"
-                            [queryParams]="{ media_type: 'mobileIconURL'}"
-                            replaceUrl="true" type="button">
+                            (click)="choseMedia('mobileIconURL') "type="button">
                         <fa-icon [icon]="'plus'"></fa-icon>
                         <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.uploadMediaLabel">
                             Upload Media
                         </span>
                     </button>
-                    <img src={{organization.mobileIconURL}} alt="" width="100" height="100">
-                    <button class="btn btn-danger" *ngIf="organization.mobileIconURL" (click)="removeImage('mobileIconURL')">
+
+                    <button class="btn btn-danger" *ngIf="organization.mediaMobileIconDTO" (click)="removeImage('mobileIconURL')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="organization.mobileIconURL">
-                        <span [(ngModel)]="organization.mobileIconURL" name="featuredMedia" ngDefaultControl></span>
+                    <div *ngIf="organization.mediaMobileIconDTO">
+                        <img src={{organization.mediaMobileIconDTO.url}} alt="" width="100" height="100">
                     </div>
                 </div>
                 <div class="form-group">

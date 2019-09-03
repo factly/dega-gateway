@@ -12,12 +12,11 @@ import { IRole } from 'app/shared/model/core/role.model';
 import { RoleService } from 'app/entities/core/role';
 import { IOrganization } from 'app/shared/model/core/organization.model';
 import { OrganizationService } from 'app/entities/core/organization';
-import { IPost } from 'app/shared/model/core/post.model';
-import { PostService } from 'app/entities/core/post';
-import { MediaService } from '../media/media.service';
 import { Subscription } from 'rxjs';
 import { IRoleMapping } from 'app/shared/model/core/role-mapping.model';
 import { RoleMappingService } from 'app/entities/core/role-mapping';
+import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-editor-file-upload.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'jhi-dega-user-update',
@@ -31,8 +30,6 @@ export class DegaUserUpdateComponent implements OnInit {
 
     organizations: IOrganization[];
 
-    posts: IPost[];
-
     rolemappings: IRoleMapping[];
     createdDate: string;
     slug: string;
@@ -43,18 +40,10 @@ export class DegaUserUpdateComponent implements OnInit {
         private degaUserService: DegaUserService,
         private roleService: RoleService,
         private organizationService: OrganizationService,
-        private postService: PostService,
         private roleMappingService: RoleMappingService,
         private activatedRoute: ActivatedRoute,
-        private mediaService: MediaService,
-        private router: Router
-    ) {
-        this.subscription = this.mediaService.getProductID().subscribe(message => {
-            if (message['type_of_data'] === 'feature') {
-                this.updateMediaForFeature(message['selected_url']);
-            }
-        });
-    }
+        private dialog: MatDialog
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -79,12 +68,6 @@ export class DegaUserUpdateComponent implements OnInit {
                 // assign current
                 const orgsCurrent = this.organizations.filter(o => o.id === this.degaUser.organizationCurrentId);
                 this.degaUser.organizationCurrent = orgsCurrent.shift();
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.postService.query().subscribe(
-            (res: HttpResponse<IPost[]>) => {
-                this.posts = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -127,15 +110,7 @@ export class DegaUserUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackRoleById(index: number, item: IRole) {
-        return item.id;
-    }
-
     trackOrganizationById(index: number, item: IOrganization) {
-        return item.id;
-    }
-
-    trackPostById(index: number, item: IPost) {
         return item.id;
     }
 
@@ -154,7 +129,21 @@ export class DegaUserUpdateComponent implements OnInit {
         return option;
     }
 
-    updateMediaForFeature(url) {
-        this.degaUser.profilePicture = url;
+    choseMediaforProfilePicture() {
+        const config = {
+            height: '90%',
+            width: '90vw',
+            maxWidth: '90vw'
+        };
+        const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
+
+        dialogRef.afterClosed().subscribe(imageData => {
+            if (imageData) {
+                this.updateMediaForProfilePicture(imageData);
+            }
+        });
+    }
+    updateMediaForProfilePicture(imageData) {
+        this.degaUser.mediaDTO = imageData;
     }
 }

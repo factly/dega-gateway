@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { ITag } from 'app/shared/model/core/tag.model';
 import { ICategory } from 'app/shared/model/core/category.model';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { IMedia } from 'app/shared/model/core/media.model';
 
 export interface IPost {
     id?: string;
@@ -16,7 +17,7 @@ export interface IPost {
     updates?: string;
     slug?: string;
     password?: string;
-    featuredMedia?: string;
+    mediaDTO?: IMedia;
     subTitle?: string;
     createdDate?: Moment;
     tags?: ITag[];
@@ -42,7 +43,7 @@ export class Post implements IPost {
         public updates?: string,
         public slug?: string,
         public password?: string,
-        public featuredMedia?: string,
+        public mediaDTO?: IMedia,
         public subTitle?: string,
         public createdDate?: Moment,
         public tags?: ITag[],

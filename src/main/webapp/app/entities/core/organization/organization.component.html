@@ -43,7 +43,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let organization of organizations ;trackBy: trackId">
-                <td><img src={{organization.logoURL}} alt="" width="100" height="100"></td>
+                <td><img *ngIf="organization.mediaLogoDTO" src={{organization.mediaLogoDTO.url}} alt="" width="100" height="100"></td>
                 <td>{{organization.name}}</td>
                 <td>{{organization.phone}}</td>
                 <td>{{organization.siteTitle}}</td>

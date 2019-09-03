@@ -79,7 +79,7 @@
                         <tr>
                             <td><span jhiTranslate="gatewayApp.corePost.featuredMedia">Featured Media</span></td>
                             <td>
-                                <span><img src={{post.featuredMedia}} alt="" width="100" height="100"></span>
+                                <span *ngIf="post.mediaDTO" ><img src={{post.mediaDTO.url}} alt="" width="100" height="100"></span>
                             </td>
                         </tr>
                         <tr>
@@ -94,12 +94,6 @@
                                 <span>{{post.createdDate | date:'medium'}}</span>
                             </td>
                         </tr>
-                        <!--<dt><span jhiTranslate="gatewayApp.corePost.tag">Tag</span></dt>-->
-                        <!--<dd>-->
-                        <!--<span *ngFor="let tag of post.tags; let last = last">-->
-                        <!--<a [routerLink]="['/tag', tag?.id, 'view' ]">{{tag.name}}</a>{{last ? '' : ', '}}-->
-                        <!--</span>-->
-                        <!--</dd>-->
                         <tr>
                             <td><span jhiTranslate="gatewayApp.corePost.category">Category</span></td>
                             <td>

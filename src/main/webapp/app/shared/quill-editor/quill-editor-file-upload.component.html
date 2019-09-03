@@ -29,7 +29,7 @@
             <div *ngIf="media">
                 <div class="row">
                     <div class="media-thumbnail" *ngFor="let media of media" >
-                        <a (click)="selectImage(media.url)">
+                        <a (click)="selectImage(media)">
                             <img src={{media.url}} alt="Image" height="100" class="img-bottom">
                         </a>
                     </div>

@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { IOrganization } from 'app/shared/model/core/organization.model';
 import { IPost } from 'app/shared/model/core/post.model';
 import { IRoleMapping } from 'app/shared/model/core/role-mapping.model';
+import { IMedia } from 'app/shared/model/core/media.model';
 
 export interface IDegaUser {
     id?: string;
@@ -34,6 +35,7 @@ export interface IDegaUser {
     organizationCurrent?: IOrganization;
     posts?: IPost[];
     roleMappings?: IRoleMapping[];
+    mediaDTO?: IMedia;
 }
 
 export class DegaUser implements IDegaUser {
@@ -67,7 +69,8 @@ export class DegaUser implements IDegaUser {
         public posts?: IPost[],
         public roleMappings?: IRoleMapping[],
         public organizationDefault?: IOrganization,
-        public organizationCurrent?: IOrganization
+        public organizationCurrent?: IOrganization,
+        public mediaDTO?: IMedia
     ) {
         this.enabled = this.enabled || false;
         this.emailVerified = this.emailVerified || false;

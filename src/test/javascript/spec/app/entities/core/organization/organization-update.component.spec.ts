@@ -7,6 +7,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { OrganizationUpdateComponent } from 'app/entities/core/organization/organization-update.component';
 import { OrganizationService } from 'app/entities/core/organization/organization.service';
 import { Organization } from 'app/shared/model/core/organization.model';
+import { MatDialogModule } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Organization Management Update Component', () => {
@@ -16,7 +17,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GatewayTestModule],
+                imports: [GatewayTestModule, MatDialogModule],
                 declarations: [OrganizationUpdateComponent]
             })
                 .overrideTemplate(OrganizationUpdateComponent, '')
@@ -28,39 +29,33 @@ describe('Component Tests', () => {
         });
 
         describe('save', () => {
-            it(
-                'Should call update service on save for existing entity',
-                fakeAsync(() => {
-                    // GIVEN
-                    const entity = new Organization('123');
-                    spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
-                    comp.organization = entity;
-                    // WHEN
-                    comp.save();
-                    tick(); // simulate async
+            it('Should call update service on save for existing entity', fakeAsync(() => {
+                // GIVEN
+                const entity = new Organization('123');
+                spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
+                comp.organization = entity;
+                // WHEN
+                comp.save();
+                tick(); // simulate async
 
-                    // THEN
-                    expect(service.update).toHaveBeenCalledWith(entity);
-                    expect(comp.isSaving).toEqual(false);
-                })
-            );
+                // THEN
+                expect(service.update).toHaveBeenCalledWith(entity);
+                expect(comp.isSaving).toEqual(false);
+            }));
 
-            it(
-                'Should call create service on save for new entity',
-                fakeAsync(() => {
-                    // GIVEN
-                    const entity = new Organization();
-                    spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
-                    comp.organization = entity;
-                    // WHEN
-                    comp.save();
-                    tick(); // simulate async
+            it('Should call create service on save for new entity', fakeAsync(() => {
+                // GIVEN
+                const entity = new Organization();
+                spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
+                comp.organization = entity;
+                // WHEN
+                comp.save();
+                tick(); // simulate async
 
-                    // THEN
-                    expect(service.create).toHaveBeenCalledWith(entity);
-                    expect(comp.isSaving).toEqual(false);
-                })
-            );
+                // THEN
+                expect(service.create).toHaveBeenCalledWith(entity);
+                expect(comp.isSaving).toEqual(false);
+            }));
         });
     });
 });

@@ -7,6 +7,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { DegaUserUpdateComponent } from 'app/entities/core/dega-user/dega-user-update.component';
 import { DegaUserService } from 'app/entities/core/dega-user/dega-user.service';
 import { DegaUser } from 'app/shared/model/core/dega-user.model';
+import { MatDialogModule } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('DegaUser Management Update Component', () => {
@@ -16,7 +17,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [GatewayTestModule],
+                imports: [GatewayTestModule, MatDialogModule],
                 declarations: [DegaUserUpdateComponent]
             })
                 .overrideTemplate(DegaUserUpdateComponent, '')

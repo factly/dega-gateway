@@ -119,13 +119,13 @@ export class OrganizationUpdateComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(imageData => {
             if (imageData) {
-                if (dataType == 'logoURL') {
+                if (dataType === 'logoURL') {
                     this.updateMediaForLogoURL(imageData);
-                } else if (dataType == 'logoURLMobile') {
+                } else if (dataType === 'logoURLMobile') {
                     this.updateMediaForLogoURLMobile(imageData);
-                } else if (dataType == 'favIconURL') {
+                } else if (dataType === 'favIconURL') {
                     this.updateMediaForFavIconURL(imageData);
-                } else if (dataType == 'favicon') {
+                } else if (dataType === 'favicon') {
                     this.updateMediaForMobileIconURLMobile(imageData);
                 }
             }

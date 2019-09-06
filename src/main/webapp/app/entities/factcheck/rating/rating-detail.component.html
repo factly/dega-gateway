@@ -23,9 +23,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><span jhiTranslate="gatewayApp.factcheckRating.iconURL">Icon URL</span></td>
+                            <td><span jhiTranslate="gatewayApp.factcheckRating.ratingIcon">Rating Icon</span></td>
                             <td>
-                                <span><img src={{rating.iconURL}} height="100"></span>
+                                <span><img *ngIf="rating.mediaDTO" src={{rating.mediaDTO.url}} height="100"></span>
                             </td>
                         </tr>
                         <tr>

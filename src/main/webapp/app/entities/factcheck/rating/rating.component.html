@@ -38,7 +38,7 @@
                         <fa-icon></fa-icon>
                     </th>
                     <td class="p-2 pl-4" mat-cell *matCellDef="let element">
-                        <!--<img class="mh-50" src="{{element.mediaDTO.url}}"/>-->
+                        <img *ngIf="element.mediaDTO" class="mh-50" src="{{element.mediaDTO.url}}"/>
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="name">

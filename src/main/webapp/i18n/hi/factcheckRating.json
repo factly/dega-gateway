@@ -22,7 +22,9 @@
             "createdDate": "Created Date",
             "lastUpdatedDate": "Last Updated Date",
             "description": "Description",
-            "claim": "Claim"
+            "claim": "Claim",
+            "uploadRatingIcon": "Upload Rating Icon",
+            "ratingIcon": "Rating Icon"
         }
     },
     "factcheckApp": {

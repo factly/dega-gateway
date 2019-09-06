@@ -15,14 +15,15 @@
             },
             "name": "Name",
             "numericValue": "Numeric Value",
-            "iconURL": "Icon",
             "isDefault": "Is Default",
             "clientId": "Client Id",
             "slug": "Slug",
             "createdDate": "Created Date",
             "lastUpdatedDate": "Last Updated Date",
             "description": "Description",
-            "claim": "Claim"
+            "claim": "Claim",
+            "uploadRatingIcon": "Upload Rating Icon",
+            "ratingIcon": "Rating Icon"
         }
     },
     "factcheckApp": {

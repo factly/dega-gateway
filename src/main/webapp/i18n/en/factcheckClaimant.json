@@ -16,12 +16,13 @@
             "name": "Name",
             "tagLine": "Tag Line",
             "description": "Description",
-            "imageURL": "Claimant",
             "clientId": "Client Id",
             "slug": "Slug",
             "createdDate": "Created Date",
             "lastUpdatedDate": "Last Updated Date",
-            "claim": "Claim"
+            "claim": "Claim",
+            "image": "Image",
+            "uploadImage": "Upload Image"
         }
     },
     "factcheckApp": {

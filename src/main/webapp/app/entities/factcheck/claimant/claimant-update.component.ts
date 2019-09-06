@@ -77,7 +77,7 @@ export class ClaimantUpdateComponent implements OnInit {
         });
     }
 
-    updateMediaForFeature(url) {
-        this.claimant.imageURL = url;
+    updateMediaForFeature(imageData) {
+        this.claimant.mediaDTO = imageData;
     }
 }

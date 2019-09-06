@@ -35,10 +35,8 @@
              [callback]="transition.bind(this)">
             <table mat-table [dataSource]="claimants" class="mat-elevation-z8 shadow-table full-width alternate-color box-shadow-2">
                 <ng-container matColumnDef="imageURL">
-                    <th jhiSortBy="imageURL" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaimant.imageURL">Image URL</span>
-                        <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
-                    <td class="p-2 pl-4" mat-cell *matCellDef="let element"><img class="mh-50" src="{{element.imageURL}}"></td>
+                    <th mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaimant.image">Image URL</span></th>
+                    <td class="p-2 pl-4" mat-cell *matCellDef="let element"><img *ngIf="element.mediaDTO" class="mh-50" src="{{element.mediaDTO.url}}"></td>
                 </ng-container>
                 <ng-container matColumnDef="name">
                     <th jhiSortBy="name" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaimant.name">Name</span>

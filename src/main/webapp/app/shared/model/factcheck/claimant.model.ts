@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
+import { IMedia } from 'app/shared/model/core/media.model';
 
 export interface IClaimant {
     id?: string;
@@ -12,6 +13,7 @@ export interface IClaimant {
     createdDate?: Moment;
     lastUpdatedDate?: Moment;
     claims?: IClaim[];
+    mediaDTO?: IMedia;
 }
 
 export class Claimant implements IClaimant {
@@ -25,6 +27,7 @@ export class Claimant implements IClaimant {
         public slug?: string,
         public createdDate?: Moment,
         public lastUpdatedDate?: Moment,
-        public claims?: IClaim[]
+        public claims?: IClaim[],
+        public mediaDTO?: IMedia
     ) {}
 }

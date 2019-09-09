@@ -17,6 +17,8 @@ export interface IMedia {
     slug?: string;
     clientId?: string;
     createdDate?: Moment;
+    relativeURL?: string;
+    sourceURL?: string;
 }
 
 export class Media implements IMedia {
@@ -36,6 +38,8 @@ export class Media implements IMedia {
         public lastUpdatedDate?: Moment,
         public slug?: string,
         public clientId?: string,
-        public createdDate?: Moment
+        public createdDate?: Moment,
+        public relativeURL?: string,
+        public sourceURL?: string
     ) {}
 }

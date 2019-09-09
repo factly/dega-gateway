@@ -92,12 +92,12 @@
                             <mat-icon>cloud_upload</mat-icon>
                         </button>
                     </div>
-                    <div class="col-md-12 margin-t-20" *ngIf="factCheckEditFormGroup.value.featuredMedia">
+                    <div class="col-md-12 margin-t-20" *ngIf="factCheckEditFormGroup.value.mediaDTO">
                         <div class="featured-img">
-                            <img [src]='factCheckEditFormGroup.value.featuredMedia'>
+                            <img [src]='factCheckEditFormGroup.value.mediaDTO.url'>
                         </div>
                     </div>
-                    <div class="full-width margin-t-20" *ngIf="factCheckEditFormGroup.value.featuredMedia">
+                    <div class="full-width margin-t-20" *ngIf="factCheckEditFormGroup.value.mediaDTO">
                         <button mat-raised-button color="primary" type="button" class="full-width"
                                 (click)="deleteMediaForFeature()"> Delete featured media
                             <mat-icon>delete</mat-icon>

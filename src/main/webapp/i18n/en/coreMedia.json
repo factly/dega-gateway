@@ -29,7 +29,8 @@
             "slug": "Slug",
             "clientId": "Client Id",
             "createdDate": "Created Date",
-            "thumbnail": "Thumbnail"
+            "thumbnail": "Thumbnail",
+            "ratingIcon": "Rating Icon"
         }
     },
     "coreApp": {

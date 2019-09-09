@@ -19,7 +19,7 @@
                 "factcheckRating": "Rating",
                 "factcheckClaim": "Claim",
                 "factcheckClaimant": "Claimant",
-                "factcheckFactcheck": "Factcheck",
+                "factcheckFactcheck": "Fact-check",
                 "coreRoleMapping": "Role Mapping",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
@@ -46,7 +46,11 @@
                 "database": "Database",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
-            "language": "Language"
+            "language": "Language",
+            "sidenav": {
+                "core": "Core",
+                "factchecking": "Fact-checking"
+            }
         },
         "form": {
             "username": "Username",

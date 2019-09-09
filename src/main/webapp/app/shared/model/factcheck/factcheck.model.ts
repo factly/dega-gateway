@@ -3,6 +3,7 @@ import { IClaim } from 'app/shared/model/factcheck/claim.model';
 import { ITag } from 'app/shared/model/core/tag.model';
 import { ICategory } from 'app/shared/model/core/category.model';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
+import { IMedia } from 'app/shared/model/core/media.model';
 
 export interface IFactcheck {
     id?: string;
@@ -18,7 +19,7 @@ export interface IFactcheck {
     updates?: string;
     slug?: string;
     password?: string;
-    featuredMedia?: string;
+    mediaDTO?: IMedia;
     subTitle?: string;
     createdDate?: Moment;
     claims?: IClaim[];
@@ -43,7 +44,7 @@ export class Factcheck implements IFactcheck {
         public updates?: string,
         public slug?: string,
         public password?: string,
-        public featuredMedia?: string,
+        public mediaDTO?: IMedia,
         public subTitle?: string,
         public createdDate?: Moment,
         public claims?: IClaim[],

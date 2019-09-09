@@ -169,7 +169,7 @@ export class FactcheckUpdateComponent implements OnInit {
             sticky: [this.factcheck.sticky || false],
             updates: [this.factcheck.updates || ''],
             slug: [this.factcheck.slug || 'place-holder-slug', Validators.required], // 'place-holder-slug' is done to make validation work.
-            featuredMedia: [this.factcheck.featuredMedia || ''],
+            mediaDTO: [this.factcheck.mediaDTO || null],
             subTitle: [this.factcheck.subTitle || ''],
             statusName: [this.factcheck.statusName || ''],
             claims: [this.factcheck.claims || []],
@@ -466,19 +466,19 @@ export class FactcheckUpdateComponent implements OnInit {
         };
         const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
 
-        dialogRef.afterClosed().subscribe(image_data => {
-            if (image_data) {
-                this.updateMediaForFeature(image_data['url']);
+        dialogRef.afterClosed().subscribe(imageData => {
+            if (imageData) {
+                this.updateMediaForFeature(imageData);
             }
         });
     }
 
-    updateMediaForFeature(url) {
-        this.factCheckEditFormGroup.controls['featuredMedia'].setValue(url);
+    updateMediaForFeature(imageData) {
+        this.factCheckEditFormGroup.controls['mediaDTO'].setValue(imageData);
     }
 
     deleteMediaForFeature() {
-        this.factCheckEditFormGroup.controls['featuredMedia'].setValue('');
+        this.factCheckEditFormGroup.controls['mediaDTO'].setValue(null);
     }
 
     // Think about optimising this code block, move it to a service, Starts here

@@ -9,13 +9,14 @@
                 <button mat-button mat-raised-button type="button"
                         (click)="saveOrPublish('Draft')"
                         [disabled]="isSaving"
-                        *ngIf="showSave">
+                        *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
                     jhiTranslate="entity.action.savedraft">Save Draft</span>
                 </button>
                 <button type="button" mat-button mat-raised-button color="primary"
                         [disabled]="isSaving"
-                        *ngIf="showPublish" (click)="saveOrPublish('Publish')">
+                        (click)="saveOrPublish('Publish')"
+                        *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR']">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span
                     jhiTranslate="entity.action.publish">Publish</span>
                 </button>
@@ -91,12 +92,12 @@
                             <mat-icon>cloud_upload</mat-icon>
                         </button>
                     </div>
-                    <div class="col-md-12 margin-t-20" *ngIf="factCheckEditFormGroup.value.featuredMedia">
+                    <div class="col-md-12 margin-t-20" *ngIf="factCheckEditFormGroup.value.mediaDTO">
                         <div class="featured-img">
-                            <img [src]='factCheckEditFormGroup.value.featuredMedia'>
+                            <img [src]='factCheckEditFormGroup.value.mediaDTO.url'>
                         </div>
                     </div>
-                    <div class="full-width margin-t-20" *ngIf="factCheckEditFormGroup.value.featuredMedia">
+                    <div class="full-width margin-t-20" *ngIf="factCheckEditFormGroup.value.mediaDTO">
                         <button mat-raised-button color="primary" type="button" class="full-width"
                                 (click)="deleteMediaForFeature()"> Delete featured media
                             <mat-icon>delete</mat-icon>

@@ -86,7 +86,7 @@
                         <tr>
                             <td><span jhiTranslate="gatewayApp.factcheckFactcheck.featuredMedia">Featured Media</span></td>
                             <td>
-                                <span><img src={{factcheck.featuredMedia}} alt="" width="100" height="100"></span>
+                                <span *ngIf="factcheck.mediaDTO" ><img src={{factcheck.mediaDTO.url}} alt="" width="100" height="100"></span>
                             </td>
                         </tr>
                         <tr>

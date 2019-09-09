@@ -105,8 +105,8 @@ export class RatingUpdateComponent implements OnInit {
         });
     }
 
-    updateMediaForFeature(url) {
-        this.rating.iconURL = url;
+    updateMediaForFeature(imageData) {
+        this.rating.mediaDTO = imageData;
     }
 
     private onError(errorMessage: string) {

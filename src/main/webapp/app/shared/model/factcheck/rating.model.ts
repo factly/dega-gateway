@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IClaim } from 'app/shared/model/factcheck/claim.model';
+import { IMedia } from 'app/shared/model/core/media.model';
 
 export interface IRating {
     id?: string;
@@ -13,6 +14,7 @@ export interface IRating {
     lastUpdatedDate?: Moment;
     description?: string;
     claims?: IClaim[];
+    mediaDTO?: IMedia;
 }
 
 export class Rating implements IRating {
@@ -27,7 +29,8 @@ export class Rating implements IRating {
         public createdDate?: Moment,
         public lastUpdatedDate?: Moment,
         public description?: string,
-        public claims?: IClaim[]
+        public claims?: IClaim[],
+        public mediaDTO?: IMedia
     ) {
         this.isDefault = this.isDefault || false;
     }

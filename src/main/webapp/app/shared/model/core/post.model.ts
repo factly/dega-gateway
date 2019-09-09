@@ -17,7 +17,7 @@ export interface IPost {
     updates?: string;
     slug?: string;
     password?: string;
-    mediaDTO?: IMedia;
+    media?: IMedia;
     subTitle?: string;
     createdDate?: Moment;
     tags?: ITag[];
@@ -43,7 +43,7 @@ export class Post implements IPost {
         public updates?: string,
         public slug?: string,
         public password?: string,
-        public mediaDTO?: IMedia,
+        public media?: IMedia,
         public subTitle?: string,
         public createdDate?: Moment,
         public tags?: ITag[],

@@ -13,7 +13,7 @@ export interface IClaimant {
     createdDate?: Moment;
     lastUpdatedDate?: Moment;
     claims?: IClaim[];
-    mediaDTO?: IMedia;
+    media?: IMedia;
 }
 
 export class Claimant implements IClaimant {
@@ -28,6 +28,6 @@ export class Claimant implements IClaimant {
         public createdDate?: Moment,
         public lastUpdatedDate?: Moment,
         public claims?: IClaim[],
-        public mediaDTO?: IMedia
+        public media?: IMedia
     ) {}
 }

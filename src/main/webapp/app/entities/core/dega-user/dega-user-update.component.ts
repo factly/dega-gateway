@@ -144,6 +144,6 @@ export class DegaUserUpdateComponent implements OnInit {
         });
     }
     updateMediaForProfilePicture(imageData) {
-        this.degaUser.mediaDTO = imageData;
+        this.degaUser.media = imageData;
     }
 }

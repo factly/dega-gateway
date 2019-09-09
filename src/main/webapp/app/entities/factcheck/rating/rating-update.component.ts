@@ -106,7 +106,7 @@ export class RatingUpdateComponent implements OnInit {
     }
 
     updateMediaForFeature(imageData) {
-        this.rating.mediaDTO = imageData;
+        this.rating.media = imageData;
     }
 
     private onError(errorMessage: string) {

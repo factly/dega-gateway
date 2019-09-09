@@ -144,7 +144,7 @@ export class PostUpdateComponent implements OnInit {
             sticky: [this.post.sticky || false],
             updates: [this.post.updates || ''],
             slug: [this.post.slug || 'place-holder-slug', Validators.required], // 'place-holder-slug' is done to make validation work.
-            mediaDTO: [this.post.mediaDTO || null],
+            media: [this.post.media || null],
             subTitle: [this.post.subTitle || ''],
             formatId: [this.post.formatId || '', Validators.required],
             statusId: [this.post.statusId || null],
@@ -316,11 +316,11 @@ export class PostUpdateComponent implements OnInit {
     }
 
     updateMediaForFeature(imageData) {
-        this.postEditFormGroup.controls['mediaDTO'].setValue(imageData);
+        this.postEditFormGroup.controls['media'].setValue(imageData);
     }
 
     deleteMediaForFeature() {
-        this.postEditFormGroup.controls['mediaDTO'].setValue(null);
+        this.postEditFormGroup.controls['media'].setValue(null);
     }
 
     previousState() {

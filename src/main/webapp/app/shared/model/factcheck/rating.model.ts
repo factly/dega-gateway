@@ -14,7 +14,7 @@ export interface IRating {
     lastUpdatedDate?: Moment;
     description?: string;
     claims?: IClaim[];
-    mediaDTO?: IMedia;
+    media?: IMedia;
 }
 
 export class Rating implements IRating {
@@ -30,7 +30,7 @@ export class Rating implements IRating {
         public lastUpdatedDate?: Moment,
         public description?: string,
         public claims?: IClaim[],
-        public mediaDTO?: IMedia
+        public media?: IMedia
     ) {
         this.isDefault = this.isDefault || false;
     }

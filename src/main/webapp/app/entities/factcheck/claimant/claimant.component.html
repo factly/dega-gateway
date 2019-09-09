@@ -36,7 +36,7 @@
             <table mat-table [dataSource]="claimants" class="mat-elevation-z8 shadow-table full-width alternate-color box-shadow-2">
                 <ng-container matColumnDef="imageURL">
                     <th mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaimant.image">Image URL</span></th>
-                    <td class="p-2 pl-4" mat-cell *matCellDef="let element"><img *ngIf="element.mediaDTO" class="mh-50" src="{{element.mediaDTO.url}}"></td>
+                    <td class="p-2 pl-4" mat-cell *matCellDef="let element"><img *ngIf="element.media" class="mh-50" src="{{element.media.sourceURL}}"></td>
                 </ng-container>
                 <ng-container matColumnDef="name">
                     <th jhiSortBy="name" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckClaimant.name">Name</span>

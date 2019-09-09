@@ -82,8 +82,8 @@
                             Upload Rating Icon
                         </span>
                     </button>
-                    <div *ngIf="rating.mediaDTO" class="margin-t-20">
-                        <img src={{rating.mediaDTO.url}} alt="" width="100" height="100">
+                    <div *ngIf="rating.media" class="margin-t-20">
+                        <img src={{rating.media.sourceURL}} alt="" width="100" height="100">
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">

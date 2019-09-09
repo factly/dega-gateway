@@ -31,7 +31,7 @@
         <div class="acttion-bar-wrap"></div>
         <div class="content-block-wrap">
             <div class="content-block" *ngFor="let factcheck of factchecks ;trackBy: trackId">
-                <div *ngIf="factcheck.mediaDTO" class="image-wrap" [style.backgroundImage]="'url('+ factcheck.mediaDTO.url +')'">
+                <div *ngIf="factcheck.media" class="image-wrap" [style.backgroundImage]="'url('+ factcheck.media.sourceURL +')'">
                 </div>
                 <div class="main-content">
                     <div><h2 [routerLink]="['/factcheck', factcheck.id, 'view' ]">{{factcheck.title}}</h2></div>

@@ -56,11 +56,11 @@
                         </span>
                     </button>
 
-                    <button class="btn btn-danger" *ngIf="organization.mediaLogoDTO" (click)="removeImage('logoURL')">
+                    <button class="btn btn-danger" *ngIf="organization.mediaLogo" (click)="removeImage('logoURL')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="organization.mediaLogoDTO">
-                        <img src={{organization.mediaLogoDTO.url}} alt="" width="100" height="100">
+                    <div *ngIf="organization.mediaLogo">
+                        <img src={{organization.mediaLogo.sourceURL}} alt="" width="100" height="100">
                         <span [(ngModel)]="organization.logoURL" name="featuredMedia" ngDefaultControl></span>
                     </div>
                 </div>
@@ -74,11 +74,11 @@
                         </span>
                     </button>
 
-                    <button class="btn btn-danger" *ngIf="organization.mediaMobileLogoDTO" (click)="removeImage('logoURLMobile')">
+                    <button class="btn btn-danger" *ngIf="organization.mediaMobileLogo" (click)="removeImage('logoURLMobile')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="organization.mediaMobileLogoDTO">
-                        <img src={{organization.mediaMobileLogoDTO.url}} alt="" width="100" height="100">
+                    <div *ngIf="organization.mediaMobileLogo">
+                        <img src={{organization.mediaMobileLogo.sourceURL}} alt="" width="100" height="100">
                     </div>
                 </div>
                 <div class="form-group">
@@ -91,11 +91,11 @@
                         </span>
                     </button>
 
-                    <button class="btn btn-danger" *ngIf="organization.mediaFaviconDTO" (click)="removeImage('favIconURL')">
+                    <button class="btn btn-danger" *ngIf="organization.mediaFavicon" (click)="removeImage('favIconURL')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="organization.mediaFaviconDTO">
-                        <img src={{organization.mediaFaviconDTO.url}} alt="" width="100" height="100">
+                    <div *ngIf="organization.mediaFavicon">
+                        <img src={{organization.mediaFavicon.sourceURL}} alt="" width="100" height="100">
                     </div>
                 </div>
                 <div class="form-group">
@@ -108,11 +108,11 @@
                         </span>
                     </button>
 
-                    <button class="btn btn-danger" *ngIf="organization.mediaMobileIconDTO" (click)="removeImage('mobileIconURL')">
+                    <button class="btn btn-danger" *ngIf="organization.mediaMobileIcon" (click)="removeImage('mobileIconURL')">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                    <div *ngIf="organization.mediaMobileIconDTO">
-                        <img src={{organization.mediaMobileIconDTO.url}} alt="" width="100" height="100">
+                    <div *ngIf="organization.mediaMobileIcon">
+                        <img src={{organization.mediaMobileIcon.sourceURL}} alt="" width="100" height="100">
                     </div>
                 </div>
                 <div class="form-group">

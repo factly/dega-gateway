@@ -169,7 +169,7 @@ export class FactcheckUpdateComponent implements OnInit {
             sticky: [this.factcheck.sticky || false],
             updates: [this.factcheck.updates || ''],
             slug: [this.factcheck.slug || 'place-holder-slug', Validators.required], // 'place-holder-slug' is done to make validation work.
-            mediaDTO: [this.factcheck.mediaDTO || null],
+            media: [this.factcheck.media || null],
             subTitle: [this.factcheck.subTitle || ''],
             statusName: [this.factcheck.statusName || ''],
             claims: [this.factcheck.claims || []],
@@ -474,11 +474,11 @@ export class FactcheckUpdateComponent implements OnInit {
     }
 
     updateMediaForFeature(imageData) {
-        this.factCheckEditFormGroup.controls['mediaDTO'].setValue(imageData);
+        this.factCheckEditFormGroup.controls['media'].setValue(imageData);
     }
 
     deleteMediaForFeature() {
-        this.factCheckEditFormGroup.controls['mediaDTO'].setValue(null);
+        this.factCheckEditFormGroup.controls['media'].setValue(null);
     }
 
     // Think about optimising this code block, move it to a service, Starts here

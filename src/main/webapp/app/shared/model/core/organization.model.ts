@@ -54,10 +54,10 @@ export interface IOrganization {
     degaUserDefaults?: IDegaUser[];
     degaUserCurrents?: IDegaUser[];
     roleMappings?: IRoleMapping[];
-    mediaFaviconDTO?: IMedia;
-    mediaLogoDTO?: IMedia;
-    mediaMobileIconDTO?: IMedia;
-    mediaMobileLogoDTO?: IMedia;
+    mediaFavicon?: IMedia;
+    mediaLogo?: IMedia;
+    mediaMobileIcon?: IMedia;
+    mediaMobileLogo?: IMedia;
 }
 
 export class Organization implements IOrganization {
@@ -112,10 +112,10 @@ export class Organization implements IOrganization {
         public degaUserDefaults?: IDegaUser[],
         public degaUserCurrents?: IDegaUser[],
         public roleMappings?: IRoleMapping[],
-        public mediaFaviconDTO?: IMedia,
-        public mediaLogoDTO?: IMedia,
-        public mediaMobileIconDTO?: IMedia,
-        public mediaMobileLogoDTO?: IMedia
+        public mediaFavicon?: IMedia,
+        public mediaLogo?: IMedia,
+        public mediaMobileIcon?: IMedia,
+        public mediaMobileLogo?: IMedia
     ) {
         this.enableFactchecking = this.enableFactchecking || false;
     }

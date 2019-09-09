@@ -99,13 +99,13 @@ export class OrganizationUpdateComponent implements OnInit {
 
     removeImage(imageUrl) {
         if (imageUrl === 'logoURL') {
-            this.organization.mediaLogoDTO = null;
+            this.organization.mediaLogo = null;
         } else if (imageUrl === 'logoURLMobile') {
-            this.organization.mediaMobileLogoDTO = null;
+            this.organization.mediaMobileLogo = null;
         } else if (imageUrl === 'favIconURL') {
-            this.organization.mediaFaviconDTO = null;
+            this.organization.mediaFavicon = null;
         } else {
-            this.organization.mediaMobileIconDTO = null;
+            this.organization.mediaMobileIcon = null;
         }
     }
 
@@ -133,15 +133,15 @@ export class OrganizationUpdateComponent implements OnInit {
     }
 
     updateMediaForLogoURL(imageData) {
-        this.organization.mediaLogoDTO = imageData;
+        this.organization.mediaLogo = imageData;
     }
     updateMediaForLogoURLMobile(imageData) {
-        this.organization.mediaMobileLogoDTO = imageData;
+        this.organization.mediaMobileLogo = imageData;
     }
     updateMediaForFavIconURL(imageData) {
-        this.organization.mediaFaviconDTO = imageData;
+        this.organization.mediaFavicon = imageData;
     }
     updateMediaForMobileIconURLMobile(imageData) {
-        this.organization.mediaMobileIconDTO = imageData;
+        this.organization.mediaMobileIcon = imageData;
     }
 }

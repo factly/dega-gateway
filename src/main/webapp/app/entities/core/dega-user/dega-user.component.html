@@ -43,7 +43,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let degaUser of degaUsers ;trackBy: trackId">
-                <td><img *ngIf="degaUser.mediaDTO" src={{degaUser.mediaDTO.url}} alt="" width="100" height="100"></td>
+                <td><img *ngIf="degaUser.media" src={{degaUser.media.sourceURL}} alt="" width="100" height="100"></td>
                 <td>{{degaUser.displayName}}</td>
                 <td>{{degaUser.enabled}}</td>
                 <td>{{degaUser.emailVerified}}</td>

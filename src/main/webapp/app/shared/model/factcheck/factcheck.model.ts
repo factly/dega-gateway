@@ -19,7 +19,7 @@ export interface IFactcheck {
     updates?: string;
     slug?: string;
     password?: string;
-    mediaDTO?: IMedia;
+    media?: IMedia;
     subTitle?: string;
     createdDate?: Moment;
     claims?: IClaim[];
@@ -44,7 +44,7 @@ export class Factcheck implements IFactcheck {
         public updates?: string,
         public slug?: string,
         public password?: string,
-        public mediaDTO?: IMedia,
+        public media?: IMedia,
         public subTitle?: string,
         public createdDate?: Moment,
         public claims?: IClaim[],

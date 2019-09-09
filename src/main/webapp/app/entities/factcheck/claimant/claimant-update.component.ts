@@ -78,6 +78,6 @@ export class ClaimantUpdateComponent implements OnInit {
     }
 
     updateMediaForFeature(imageData) {
-        this.claimant.mediaDTO = imageData;
+        this.claimant.media = imageData;
     }
 }

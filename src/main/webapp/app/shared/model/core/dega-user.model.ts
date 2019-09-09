@@ -35,7 +35,7 @@ export interface IDegaUser {
     organizationCurrent?: IOrganization;
     posts?: IPost[];
     roleMappings?: IRoleMapping[];
-    mediaDTO?: IMedia;
+    media?: IMedia;
 }
 
 export class DegaUser implements IDegaUser {
@@ -70,7 +70,7 @@ export class DegaUser implements IDegaUser {
         public roleMappings?: IRoleMapping[],
         public organizationDefault?: IOrganization,
         public organizationCurrent?: IOrganization,
-        public mediaDTO?: IMedia
+        public media?: IMedia
     ) {
         this.enabled = this.enabled || false;
         this.emailVerified = this.emailVerified || false;

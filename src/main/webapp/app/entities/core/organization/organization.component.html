@@ -29,7 +29,7 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="logoURL"><span jhiTranslate="gatewayApp.coreOrganization.logoURL">Logo URL</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th><span jhiTranslate="gatewayApp.coreOrganization.logoURL">Logo URL</span> </th>
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreOrganization.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="phone"><span jhiTranslate="gatewayApp.coreOrganization.phone">Phone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="siteTitle"><span jhiTranslate="gatewayApp.coreOrganization.siteTitle">Site Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -43,7 +43,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let organization of organizations ;trackBy: trackId">
-                <td><img *ngIf="organization.mediaLogoDTO" src={{organization.mediaLogoDTO.url}} alt="" width="100" height="100"></td>
+                <td><img *ngIf="organization.mediaLogo" src={{organization.mediaLogo.sourceURL}} alt="" width="100" height="100"></td>
                 <td>{{organization.name}}</td>
                 <td>{{organization.phone}}</td>
                 <td>{{organization.siteTitle}}</td>

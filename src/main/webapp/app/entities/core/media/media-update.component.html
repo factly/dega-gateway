@@ -31,27 +31,6 @@
                         </small>
                     </div>
                 </div>
-                <!--<div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreMedia.url" for="field_url">Url</label>
-                    <input type="text" class="form-control" name="url" id="field_url"
-                        [(ngModel)]="media.url" required/>
-                    <div [hidden]="!(editForm.controls.url?.dirty && editForm.controls.url?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.url?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreMedia.fileSize" for="field_fileSize">File Size</label>
-                    <input type="text" class="form-control" name="fileSize" id="field_fileSize"
-                        [(ngModel)]="media.fileSize" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreMedia.dimensions" for="field_dimensions">Dimensions</label>
-                    <input type="text" class="form-control" name="dimensions" id="field_dimensions"
-                        [(ngModel)]="media.dimensions" />
-                </div>-->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gatewayApp.coreMedia.title" for="field_title">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title"
@@ -100,63 +79,6 @@
                         </small>
                     </div>
                 </div>
-               <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreMedia.lastUpdatedDate" for="field_lastUpdatedDate">Last Updated Date</label>
-                    <div class="d-flex">
-                        <input id="field_lastUpdatedDate" type="datetime-local" class="form-control" name="lastUpdatedDate" [(ngModel)]="lastUpdatedDate"
-                        required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.lastUpdatedDate?.dirty && editForm.controls.lastUpdatedDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.lastUpdatedDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.lastUpdatedDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreMedia.slug" for="field_slug">Slug</label>
-                    <input type="text" class="form-control" name="slug" id="field_slug"
-                        [(ngModel)]="media.slug" required/>
-                    <div [hidden]="!(editForm.controls.slug?.dirty && editForm.controls.slug?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.slug?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreMedia.clientId" for="field_clientId">Client Id</label>
-                    <input type="text" class="form-control" name="clientId" id="field_clientId"
-                        [(ngModel)]="media.clientId" required/>
-                    <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreMedia.createdDate" for="field_createdDate">Created Date</label>
-                    <div class="d-flex">
-                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" [(ngModel)]="createdDate"
-                        required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.createdDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.createdDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>-->
-
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

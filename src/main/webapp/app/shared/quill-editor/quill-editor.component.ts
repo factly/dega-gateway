@@ -104,7 +104,7 @@ export class QuillEditorComponent {
         const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
 
         dialogRef.afterClosed().subscribe(image_data => {
-            this.updateMediaForQuill(image_data['url']);
+            this.updateMediaForQuill(image_data['sourceURL']);
         });
     }
 
@@ -118,8 +118,8 @@ export class QuillEditorComponent {
         });
     }
 
-    updateMediaForQuill(url) {
-        const img = '<img src="' + url + '" />';
+    updateMediaForQuill(sourceURL) {
+        const img = '<img src="' + sourceURL + '" />';
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(this.cursorPosition.index, img);
     }
 

@@ -98,9 +98,9 @@ export class RatingUpdateComponent implements OnInit {
         };
         const dialogRef = this.dialog.open(QuillEditorFileUploadComponent, config);
 
-        dialogRef.afterClosed().subscribe(image_data => {
-            if (image_data) {
-                this.updateMediaForFeature(image_data['url']);
+        dialogRef.afterClosed().subscribe(imageData => {
+            if (imageData) {
+                this.updateMediaForFeature(imageData);
             }
         });
     }

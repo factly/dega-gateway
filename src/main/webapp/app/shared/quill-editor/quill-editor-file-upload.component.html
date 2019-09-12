@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="media-thumbnail" *ngFor="let media of media" >
                         <a (click)="selectImage(media)">
-                            <img src={{media.sourceURL}} alt="Image" height="100" class="img-bottom">
+                            <img src="{{media.sourceURL}}?resize:fill:100:100/gravity:sm" alt="Image" height="100" class="img-bottom">
                         </a>
                     </div>
                 </div>

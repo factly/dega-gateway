@@ -1,0 +1,105 @@
+<div class="table-view-page p-2">
+    <div class="row mt-5">
+        <div class="col-md-5">
+            <h2 id="page-heading">
+                <span jhiTranslate="gatewayApp.factcheckRating.home.title">Ratings</span>
+            </h2>
+        </div>
+        <div class="col-md-7">
+            <form name="searchForm" class="d-flex align-content-center justify-content-end">
+                <mat-form-field>
+                    <input type="text" matInput
+                           [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch"
+                           placeholder="{{ 'gatewayApp.factcheckRating.home.search' | translate }}">
+                </mat-form-field>
+                <button mat-icon-button mat-raised-button class="mr-2" (click)="search(currentSearch)">
+                    <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+                <button mat-icon-button mat-raised-button color="warn" class="mr-3" (click)="clear()" *ngIf="currentSearch">
+                    <fa-icon [icon]="'trash-alt'"></fa-icon>
+                </button>
+                <div>
+                    <button mat-raised-button color="primary"
+                        id="jh-create-entity" [routerLink]="['/rating/new']">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckRating.home.createLabel">Create new Rating</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="table-responsive col-md-12" *ngIf="ratings" jhiSort [(predicate)]="predicate" [(ascending)]="reverse"
+             [callback]="transition.bind(this)">
+            <table mat-table  [dataSource]="ratings" class="mat-elevation-z8 shadow-table full-width alternate-color box-shadow-2">
+                <ng-container matColumnDef="iconURL">
+                    <th mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckRating.ratingIcon">Rating Icon</span>
+                        <fa-icon></fa-icon>
+                    </th>
+                    <td class="p-2 pl-4" mat-cell *matCellDef="let element">
+                        <img *ngIf="element.media" class="mh-50" src="{{element.media.sourceURL}}?resize:fill:100:100/gravity:sm"/>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th jhiSortBy="name" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckRating.name">Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="numericValue">
+                    <th jhiSortBy="numericValue" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckRating.numericValue">Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.numericValue}}</td>
+                </ng-container>
+                <ng-container matColumnDef="isDefault">
+                    <th jhiSortBy="isDefault" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckRating.isDefault">Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.isDefault}}</td>
+                </ng-container>
+                <ng-container matColumnDef="clientId">
+                    <th jhiSortBy="clientId" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckRating.clientId">Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.clientId}}</td>
+                </ng-container>
+                <ng-container matColumnDef="createdDate">
+                    <th jhiSortBy="createdDate" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.factcheckRating.createdDate">Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.createdDate | date:'medium'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="action-column"> Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="action-button-container">
+                            <div [routerLink]="['/rating', element.id, 'view' ]">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                            </div>
+                            <div [routerLink]="['/rating', element.id, 'edit']">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            </div>
+                            <div [routerLink]="['/', { outlets: { popup: 'rating/'+ element.id + '/delete'} }]"
+                                 replaceUrl="true"
+                                 queryParamsHandling="merge">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="ratings && ratings.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

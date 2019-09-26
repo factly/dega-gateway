@@ -12,6 +12,7 @@ import { GatewaySharedModule } from 'app/shared';
 import { GatewayCoreModule } from 'app/core';
 import { GatewayAppRoutingModule } from './app-routing.module';
 import { GatewayHomeModule } from './home/home.module';
+import { GatewayPrivacyPolicyModule } from './privacy-policy/privacy-policy.module';
 import { GatewayEntityModule } from './entities/entity.module';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -35,6 +36,7 @@ import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/conf
         GatewaySharedModule,
         GatewayCoreModule,
         GatewayHomeModule,
+        GatewayPrivacyPolicyModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         GatewayEntityModule,
         MatIconModule

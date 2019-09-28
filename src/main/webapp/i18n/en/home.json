@@ -1,19 +1,19 @@
 {
     "home": {
         "title": "Welcome, Factchecker!",
-        "subtitle": "Dega is an open source project that enables fact-checking organizations, pop-up news rooms around the world to build their own fact-checking portal without much technical expertise. The project is intended to aid & propagate hyperlocal 'Fact Checking', while conforming to the best practices of Fact Checking process.",
+        "subtitle": "Dega is an open source publishing platform that integrates all the best practices of the ‘fact-checking’ ecosystem as mandated by the International Fact Checking Network (IFCN) Code of principles. It enables you to seamlessly publish fact-check stories like any other. The ‘Claim Review’ schema is integrated into the platform. Dega comes with a one-click docker installation for organizations to build their own fact-checking portal without much technical expertise.",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         },
-        "question": "If you have any question on Dega:",
+        "question": "<h3>Features of Dega </h3> Dega is packed with all the features required for a quality fact-checking portal. <ul>\n<li>Administration portal to compose &amp; publish Fact Checks, Verification articles (debunking fake news), manage user roles, application metrics etc.</li>\n<li>Enforcement of a predefined work flow based on the principles laid down in the IFCN code of principles for all fact check articles.</li>\n<li>Mandates fact-checking stories to have at least one source. All the sources will be listed in addition to the story.</li>\n<li>Publishers can create their own rating system for fact-checks.</li>\n<li>Mobile first UI with a first class support for structured data and SEO.</li>\n<li>All the features are exposed as REST API for organizations that would like to build their own UI or integrate Dega with their existing interface.</li>\n<li>Google's Fact Check explorer is integrated</li>\n</ul>",
         "link": {
-            "homepage": "Dega homepage",
+            "homepage": "Administration portal to compose & publish Fact Checks, Verification articles (debunking fake news), manage user roles, application metrics etc.",
             "stackoverflow": "Dega on Stack Overflow",
             "bugtracker": "Dega bug tracker",
             "chat": "Dega public chat room",
             "follow": "follow @factlydotin on Twitter"
         },
-        "like": "If you like Dega, don't forget to give us a star on",
+        "like": "If you like Dega, don't forget to give us a star on Github!",
         "github": "GitHub"
     }
 }

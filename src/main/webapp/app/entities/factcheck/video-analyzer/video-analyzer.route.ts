@@ -32,9 +32,6 @@ export const videoAnalyzerRoute: Routes = [
     {
         path: 'video-analyzer',
         component: VideoAnalyzerComponent,
-        resolve: {
-            pagingParams: JhiResolvePagingParams
-        },
         data: {
             authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
             defaultSort: 'createdDate,desc',

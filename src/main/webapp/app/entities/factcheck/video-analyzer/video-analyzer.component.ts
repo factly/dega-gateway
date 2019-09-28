@@ -1,17 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { VideoAnalyzerService } from './video-analyzer.service';
+import { IVideoAnalyzer } from 'app/shared/model/factcheck/video-analyzer.model';
 
 @Component({
-    selector: 'jhi-rating',
+    selector: 'jhi-video-analyzer',
     templateUrl: './video-analyzer.component.html'
 })
 export class VideoAnalyzerComponent implements OnInit, OnDestroy {
@@ -33,7 +34,7 @@ export class VideoAnalyzerComponent implements OnInit, OnDestroy {
     displayedColumns = ['iconURL', 'name', 'numericValue', 'isDefault', 'clientId', 'createdDate', 'actions'];
 
     constructor(
-        private ratingService: VideoAnalyzerService,
+        private videoAnalyzerService: VideoAnalyzerService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -42,54 +43,39 @@ export class VideoAnalyzerComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
-            this.previousPage = data.pagingParams.page;
-            this.reverse = data.pagingParams.ascending;
-            this.predicate = data.pagingParams.predicate;
-        });
-        this.currentSearch =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
-                ? this.activatedRoute.snapshot.params['search']
-                : '';
     }
 
     loadAll() {
-        if (this.currentSearch) {
-            this.ratingService
-                .search({
-                    page: this.page - 1,
-                    query: this.currentSearch,
-                    size: this.itemsPerPage,
-                    sort: this.sort()
-                })
-                .subscribe(
-                    (res: HttpResponse<IRating[]>) => this.paginateRatings(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-            return;
-        }
-        this.ratingService
+        this.videoAnalyzerService
             .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
+                page: (this.page || 0) - 1,
+                size: this.itemsPerPage
             })
             .subscribe(
-                (res: HttpResponse<IRating[]>) => this.paginateRatings(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<IVideoAnalyzer[]>) => {
+                    console.log(res.body);
+                    // this.paginateRatings(res.body, res.headers);
+                },
+                (res: HttpErrorResponse) => {
+                    alert('ero');
+                    this.onError(res.message);
+                }
             );
     }
 
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
+    ngOnInit() {
+        this.loadAll();
+        this.principal.identity().then(account => {
+            this.currentAccount = account;
+        });
+    }
+
+    ngOnDestroy() {
+        // this.eventManager.destroy(this.eventSubscriber);
     }
 
     transition() {
-        this.router.navigate(['/rating'], {
+        this.router.navigate(['/video-analyzer'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -98,64 +84,6 @@ export class VideoAnalyzerComponent implements OnInit, OnDestroy {
             }
         });
         this.loadAll();
-    }
-
-    clear() {
-        this.page = 0;
-        this.currentSearch = '';
-        this.router.navigate([
-            '/rating',
-            {
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
-
-    search(query) {
-        if (!query) {
-            return this.clear();
-        }
-        this.page = 0;
-        this.currentSearch = query;
-        this.router.navigate([
-            '/rating',
-            {
-                search: this.currentSearch,
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
-
-    ngOnInit() {
-        this.loadAll();
-        this.principal.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInRatings();
-    }
-
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
-
-    trackId(index: number, item: IRating) {
-        return item.id;
-    }
-
-    registerChangeInRatings() {
-        this.eventSubscriber = this.eventManager.subscribe('ratingListModification', response => this.loadAll());
-    }
-
-    sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'createdDate') {
-            result.push('createdDate');
-        }
-        return result;
     }
 
     private paginateRatings(data: IRating[], headers: HttpHeaders) {

@@ -2,64 +2,55 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
 
-import { SERVER_API_URL } from 'app/app.constants';
+import { VIDEO_ANALYZER_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IRating } from 'app/shared/model/factcheck/rating.model';
+import { IVideoAnalyzer } from 'app/shared/model/factcheck/video-analyzer.model';
 
-type EntityResponseType = HttpResponse<IRating>;
-type EntityArrayResponseType = HttpResponse<IRating[]>;
+type EntityResponseType = HttpResponse<IVideoAnalyzer>;
+type EntityArrayResponseType = HttpResponse<IVideoAnalyzer[]>;
 
 @Injectable({ providedIn: 'root' })
 export class VideoAnalyzerService {
-    public resourceUrl = SERVER_API_URL + 'factcheck/api/ratings';
-    public resourceSearchUrl = SERVER_API_URL + 'factcheck/api/_search/ratings';
-    public resourceUrlForRatingBySlug = SERVER_API_URL + 'factcheck/api/ratingbyslug';
+    public resourceUrlForVideo = VIDEO_ANALYZER_URL + 'videos/';
+    public resourceUrlForVideoAnalysis = VIDEO_ANALYZER_URL + 'video_analysis/';
 
     constructor(private http: HttpClient) {}
 
-    create(rating: IRating): Observable<EntityResponseType> {
-        const copy = this.convertDateFromClient(rating);
+    create(videoAnalyzer: IVideoAnalyzer): Observable<EntityResponseType> {
+        const copy = this.convertDateFromClient(videoAnalyzer);
         return this.http
-            .post<IRating>(this.resourceUrl, copy, { observe: 'response' })
+            .post<IVideoAnalyzer>(this.resourceUrlForVideo, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
-    update(rating: IRating): Observable<EntityResponseType> {
-        const copy = this.convertDateFromClient(rating);
+    update(videoAnalyzer: IVideoAnalyzer): Observable<EntityResponseType> {
+        const copy = this.convertDateFromClient(videoAnalyzer);
         return this.http
-            .put<IRating>(this.resourceUrl, copy, { observe: 'response' })
-            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
-    }
-
-    find(id: string): Observable<EntityResponseType> {
-        return this.http
-            .get<IRating>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+            .put<IVideoAnalyzer>(this.resourceUrlForVideo, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http
-            .get<IRating[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .get<IVideoAnalyzer[]>(this.resourceUrlForVideo, { params: options, observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    find(id: string): Observable<EntityResponseType> {
+        return this.http
+            .get<IVideoAnalyzer>(`${this.resourceUrlForVideo}/${id}`, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     delete(id: string): Observable<HttpResponse<any>> {
-        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+        return this.http.delete<any>(`${this.resourceUrlForVideo}/${id}`, { observe: 'response' });
     }
 
-    search(req?: any): Observable<EntityArrayResponseType> {
-        const options = createRequestOption(req);
-        return this.http
-            .get<IRating[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
-            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
-    }
-
-    protected convertDateFromClient(rating: IRating): IRating {
-        const copy: IRating = Object.assign({}, rating, {
+    protected convertDateFromClient(rating: IVideoAnalyzer): IVideoAnalyzer {
+        const copy: IVideoAnalyzer = Object.assign({}, rating, {
             createdDate: rating.createdDate != null && rating.createdDate.isValid() ? rating.createdDate.toJSON() : null,
             lastUpdatedDate: rating.lastUpdatedDate != null && rating.lastUpdatedDate.isValid() ? rating.lastUpdatedDate.toJSON() : null
         });
@@ -76,15 +67,11 @@ export class VideoAnalyzerService {
 
     protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
         if (res.body) {
-            res.body.forEach((rating: IRating) => {
+            res.body.forEach((rating: IVideoAnalyzer) => {
                 rating.createdDate = rating.createdDate != null ? moment(rating.createdDate) : null;
                 rating.lastUpdatedDate = rating.lastUpdatedDate != null ? moment(rating.lastUpdatedDate) : null;
             });
         }
         return res;
-    }
-
-    getRatingBySlug(slug: string): Observable<EntityResponseType> {
-        return this.http.get<IRating>(`${this.resourceUrlForRatingBySlug}/${slug}`, { observe: 'response' });
     }
 }

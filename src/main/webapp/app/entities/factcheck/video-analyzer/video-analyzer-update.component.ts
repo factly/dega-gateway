@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IRating } from 'app/shared/model/factcheck/rating.model';
-import { RatingService } from './rating.service';
+import { VideoAnalyzerService } from './video-analyzer.service';
 import { ADMIN_ROLE } from 'app/shared/constants/role.constants';
 import { DegaUserService } from 'app/entities/core/dega-user';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
@@ -18,7 +18,7 @@ import { QuillEditorFileUploadComponent } from 'app/shared/quill-editor/quill-ed
 
 @Component({
     selector: 'jhi-rating-update',
-    templateUrl: './rating-update.component.html'
+    templateUrl: './video-analyzer-update.component.html'
 })
 export class VideoAnalyzerUpdateComponent implements OnInit {
     rating: IRating;
@@ -27,15 +27,13 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
     createdDate: string;
     lastUpdatedDate: string;
     slug: string;
-    slugExtention: number;
-    tempSlug: string;
     showClientId: boolean;
     currentUser: IDegaUser;
     account: Account;
 
     constructor(
         private jhiAlertService: JhiAlertService,
-        private ratingService: RatingService,
+        private ratingService: VideoAnalyzerService,
         private activatedRoute: ActivatedRoute,
         private degaUserService: DegaUserService,
         private principal: Principal,

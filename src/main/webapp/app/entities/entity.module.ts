@@ -18,6 +18,7 @@ import { GatewayRoleMappingModule as CoreRoleMappingModule } from './core/role-m
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 import { GatewaySharedModule } from 'app/shared/shared.module';
+import { VideoAnalyzerModule } from './factcheck/video-analyzer/video-analyzer.module';
 
 @NgModule({
     // prettier-ignore
@@ -37,6 +38,7 @@ import { GatewaySharedModule } from 'app/shared/shared.module';
         FactcheckClaimSearchModule,
         FactcheckFactcheckModule,
         CoreRoleMappingModule,
+        VideoAnalyzerModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
 
         GatewaySharedModule

@@ -5,7 +5,7 @@ import { IRating } from 'app/shared/model/factcheck/rating.model';
 
 @Component({
     selector: 'jhi-rating-detail',
-    templateUrl: './rating-detail.component.html'
+    templateUrl: './video-analyzer-detail.component.html'
 })
 export class VideoAnalyzerDetailComponent implements OnInit {
     rating: IRating;

@@ -26,6 +26,13 @@
                         </a>
                     </li>
                     <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+                        <a routerLink="video-analyzer" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                            <mat-icon>pageview</mat-icon>
+                            <span>Video Analyzer</span>
+                        </a>
+                    </li>
+
+                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
                         <a routerLink="claim" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <mat-icon>record_voice_over</mat-icon>
                             <span jhiTranslate="global.menu.entities.factcheckClaim">Claim</span>

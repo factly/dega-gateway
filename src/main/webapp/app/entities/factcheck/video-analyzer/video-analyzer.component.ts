@@ -8,11 +8,11 @@ import { IRating } from 'app/shared/model/factcheck/rating.model';
 import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { VideoAnalyzerService } from './rating.service';
+import { VideoAnalyzerService } from './video-analyzer.service';
 
 @Component({
     selector: 'jhi-rating',
-    templateUrl: './rating.component.html'
+    templateUrl: './video-analyzer.component.html'
 })
 export class VideoAnalyzerComponent implements OnInit, OnDestroy {
     currentAccount: any;

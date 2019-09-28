@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { GatewaySharedModule } from 'app/shared';
 import {
     MatButtonModule,
@@ -31,6 +31,7 @@ const ENTITY_STATES = [...videoAnalyzerRoute];
         MatTableModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
-    declarations: [VideoAnalyzerComponent, VideoAnalyzerDetailComponent, VideoAnalyzerUpdateComponent]
+    declarations: [VideoAnalyzerComponent, VideoAnalyzerDetailComponent, VideoAnalyzerUpdateComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VideoAnalyzerModule {}

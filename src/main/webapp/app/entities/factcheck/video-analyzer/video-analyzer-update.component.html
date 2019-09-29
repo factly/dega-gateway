@@ -1,73 +1,86 @@
-<div class="create-view-page p-2">
-    <div class="row shadow">
-        <div class="col-md-12">
-            <h2 id="jhi-rating-heading" jhiTranslate="gatewayApp.factcheckRating.home.createOrEditLabel">Create or edit a Rating</h2>
-        </div>
-        <div class="col-12 mt-5">
-            <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-                <div>
-                    <jhi-alert-error></jhi-alert-error>
-                    <div class="form-group">
-                        <mat-form-field class="w-100">
-                            <input matInput placeholder="{{ 'gatewayApp.factcheckRating.name' | translate }}"
-                                type="text" name="name" id="field_name"
-                                   [(ngModel)]="rating.name" required/>
-                        </mat-form-field>
-                        <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                                This field is required.
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <mat-form-field class="w-100">
-                            <input  matInput placeholder="{{ 'gatewayApp.factcheckRating.numericValue' | translate }}"
-                                type="number" name="numericValue" id="field_numericValue"
-                                   [(ngModel)]="rating.numericValue" required min="1" jhiMin="1"/>
-                        </mat-form-field>
-                        <div [hidden]="!(editForm.controls.numericValue?.dirty && editForm.controls.numericValue?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.numericValue?.errors?.required" jhiTranslate="entity.validation.required">
-                                This field is required.
-                            </small>
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.numericValue?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
-                                This field should be at least 1.
-                            </small>
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.numericValue?.errors?.number" jhiTranslate="entity.validation.number">
-                                This field should be a number.
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <span class="text-danger" [hidden]="rating.description">*</span>
-                        <mat-form-field class="w-100" hintLabel="Max 400 characters">
-                            <textarea matInput #input placeholder="{{ 'gatewayApp.factcheckRating.description' | translate }}"
-                                rows="5" type="text" name="description" id="field_description"
-                                      [(ngModel)]="rating.description" maxlength="400" required ></textarea>
-                            <mat-hint align="end">{{input.value?.length || 0}}/400</mat-hint>
-                        </mat-form-field>
-                        <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
-                                This field is required.
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button mat-raised-button color="warn" class="mr-3"
-                        type="button" id="cancel-save" (click)="previousState()">
-                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                    </button>
-                    <button mat-raised-button
-                        type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving">
-                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                    </button>
-                </div>
-            </form>
-        </div>
+<div class="header-dialogue">
+    <div class="dialogue-header shadow-sm">
+        <h2 id="jhi-claim-heading">
+            Create or edit a Claim
+        </h2>
     </div>
+    <div class="dialogue-body p-4">
+        <form [formGroup]="videoFormGroup">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="mt-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="full-width">
+                                    <textarea class="title-input"
+                                              matInput
+                                              formControlName="title"
+                                              placeholder="Title">
+                                    </textarea>
+                                    <mat-error>
+                                        Claim is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="quill-editor-wrapper">
+                                    <label>Desciption</label>
+                                    <jhi-quill-editor [original_content]="videoData?.description"
+                                                      (updated_content)="updateReviewFormData($event)">
+                                    </jhi-quill-editor>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="full-width">
+                                    <input matInput
+                                           formControlName="link"
+                                           placeholder="Link of the video which is being analyzed">
+                                    <mat-error>
+                                        Link is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="full-width">
+                                    <mat-select placeholder="Status" formControlName="status_id">
+                                        <mat-option [value]="statusOption.id"
+                                                    *ngFor="let statusOption of statuses | orderBy:'name';">
+                                            {{statusOption.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="justify-content-end d-flex">
+                        <button mat-raised-button color="warn"
+                                type="button" id="cancel-save" (click)="previousState()">
+                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button mat-raised-button
+                                type="button" (click)="saveVideoData()" id="save-entity" [disabled]="isSaving"
+                                class="btn btn-primary ml-3">
+                            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngFor="let analysis of videoAnalysisData">
+    <div>{{analysis.reality_description}}</div>
+
 </div>

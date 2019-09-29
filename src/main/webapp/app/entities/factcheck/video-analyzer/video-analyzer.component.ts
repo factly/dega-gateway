@@ -5,18 +5,16 @@ import { Subscription } from 'rxjs';
 import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { IRating } from 'app/shared/model/factcheck/rating.model';
-import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { VideoAnalyzerService } from './video-analyzer.service';
-import { IVideoAnalyzer } from 'app/shared/model/factcheck/video-analyzer.model';
+import { IVideo } from 'app/shared/model/factcheck/video-analyzer.model';
 
 @Component({
     selector: 'jhi-video-analyzer',
     templateUrl: './video-analyzer.component.html'
 })
 export class VideoAnalyzerComponent implements OnInit, OnDestroy {
-    currentAccount: any;
     ratings: IRating[];
     error: any;
     success: any;
@@ -37,7 +35,6 @@ export class VideoAnalyzerComponent implements OnInit, OnDestroy {
         private videoAnalyzerService: VideoAnalyzerService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
-        private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager
@@ -52,7 +49,7 @@ export class VideoAnalyzerComponent implements OnInit, OnDestroy {
                 size: this.itemsPerPage
             })
             .subscribe(
-                (res: HttpResponse<IVideoAnalyzer[]>) => {
+                (res: HttpResponse<IVideo[]>) => {
                     console.log(res.body);
                     // this.paginateRatings(res.body, res.headers);
                 },
@@ -65,9 +62,6 @@ export class VideoAnalyzerComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loadAll();
-        this.principal.identity().then(account => {
-            this.currentAccount = account;
-        });
     }
 
     ngOnDestroy() {

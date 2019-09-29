@@ -10,6 +10,13 @@
     </div>
     <jhi-alert></jhi-alert>
     <div class="row">
+        <div>
+            <button mat-raised-button color="primary"
+                    id="jh-create-entity" [routerLink]="['/video-analyzer/new']">
+                <fa-icon [icon]="'plus'"></fa-icon>
+                <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckVideoAnalyzer.home.createLabel">Create new Video Analysis</span>
+            </button>
+        </div>
 
     </div>
     <div *ngIf="ratings && ratings.length">

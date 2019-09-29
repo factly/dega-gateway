@@ -41,19 +41,6 @@
                             </small>
                         </div>
                     </div>
-                    <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
-                        <mat-form-field class="w-100">
-                            <input  matInput placeholder="{{ 'gatewayApp.factcheckRating.clientId' | translate }}"
-                                type="text" name="clientId" id="field_clientId"
-                                   [(ngModel)]="rating.clientId" required/>
-                        </mat-form-field>
-                        <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                                This field is required.
-                            </small>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <span class="text-danger" [hidden]="rating.description">*</span>
                         <mat-form-field class="w-100" hintLabel="Max 400 characters">
@@ -68,22 +55,6 @@
                                 This field is required.
                             </small>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
-                    <mat-checkbox id="field_isDefault" name="isDefault" [(ngModel)]="rating.isDefault">{{'gatewayApp.factcheckRating.isDefault' | translate }}</mat-checkbox>
-                </div>
-                <div class="form-group">
-                    <button mat-raised-button color="primary"
-                        id="field_iconURL" class="btn btn-primary jh-create-entity create-media"
-                            (click)="choseMediaforFeature()" type="button">
-                        <fa-icon [icon]="'plus'"></fa-icon>
-                        <span class="hidden-sm-down"  jhiTranslate="gatewayApp.factcheckRating.uploadRatingIcon">
-                            Upload Rating Icon
-                        </span>
-                    </button>
-                    <div *ngIf="rating.media" class="margin-t-20">
-                        <img src={{rating.media.sourceURL}} alt="" width="100" height="100">
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">

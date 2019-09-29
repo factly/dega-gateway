@@ -3,12 +3,12 @@
         "factcheckVideoAnalyzer": {
             "home": {
                 "title": "Video Analyzer",
-                "createLabel": "Create a new Rating",
-                "createOrEditLabel": "Create or edit a Rating",
-                "search": "Search for Rating"
+                "createLabel": "Create a new Video Analysis",
+                "createOrEditLabel": "Create or edit a Video Analysis",
+                "search": "Search for Video Analysis"
             },
             "delete": {
-                "question": "Are you sure you want to delete Rating {{ id }}?"
+                "question": "Are you sure you want to delete Video Analysis {{ id }}?"
             },
             "detail": {
                 "title": "Video Analyzer"

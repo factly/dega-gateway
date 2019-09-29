@@ -42,23 +42,7 @@ export class VideoAnalyzerComponent implements OnInit, OnDestroy {
         this.itemsPerPage = ITEMS_PER_PAGE;
     }
 
-    loadAll() {
-        this.videoAnalyzerService
-            .query({
-                page: (this.page || 0) - 1,
-                size: this.itemsPerPage
-            })
-            .subscribe(
-                (res: HttpResponse<IVideo[]>) => {
-                    console.log(res.body);
-                    // this.paginateRatings(res.body, res.headers);
-                },
-                (res: HttpErrorResponse) => {
-                    alert('ero');
-                    this.onError(res.message);
-                }
-            );
-    }
+    loadAll() {}
 
     ngOnInit() {
         this.loadAll();

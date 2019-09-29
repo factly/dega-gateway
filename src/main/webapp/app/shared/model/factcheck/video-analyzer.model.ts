@@ -15,7 +15,7 @@ export interface IVideo {
 }
 
 export interface IVideoAnalysis {
-    id?: string;
+    _id?: string;
     shown_title?: string;
     client_id?: string;
     slug?: string;
@@ -45,7 +45,7 @@ export class Video implements IVideo {
 
 export class VideoAnalysis implements IVideoAnalysis {
     constructor(
-        public id?: string,
+        public _id?: string,
         public clientId?: string,
         public slug?: string,
         public createdDate?: Moment,

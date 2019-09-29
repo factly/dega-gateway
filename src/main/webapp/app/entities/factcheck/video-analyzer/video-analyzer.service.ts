@@ -11,6 +11,9 @@ import { IVideo, IVideoAnalysis, Video, VideoAnalysis } from 'app/shared/model/f
 type EntityResponseType = HttpResponse<IVideo>;
 type EntityArrayResponseType = HttpResponse<IVideo[]>;
 
+type VideoAnalysisEntityResponseType = HttpResponse<IVideoAnalysis>;
+type VideoAnalysisEntityArrayResponseType = HttpResponse<IVideoAnalysis[]>;
+
 @Injectable({ providedIn: 'root' })
 export class VideoAnalyzerService {
     public resourceUrlForVideo = VIDEO_ANALYZER_URL + 'videos/';
@@ -30,13 +33,6 @@ export class VideoAnalyzerService {
         return this.http
             .put<IVideo>(this.resourceUrlForVideo, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
-    }
-
-    queryVideo(req?: any): Observable<EntityArrayResponseType> {
-        const options = createRequestOption(req);
-        return this.http
-            .get<IVideo[]>(this.resourceUrlForVideo, { params: options, observe: 'response' })
-            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
     findVideo(id: string): Observable<EntityResponseType> {
@@ -61,17 +57,10 @@ export class VideoAnalyzerService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
-    queryVideoAnalysis(req?: any): Observable<EntityArrayResponseType> {
-        const options = createRequestOption(req);
-        return this.http
-            .get<IVideo[]>(this.resourceUrlForVideoAnalysis, { params: options, observe: 'response' })
-            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
-    }
-
-    findVideoAnalysis(id: string): Observable<EntityArrayResponseType> {
+    findVideoAnalysis(id: string): Observable<VideoAnalysisEntityArrayResponseType> {
         return this.http
             .get<IVideoAnalysis[]>(`${this.resourceUrlForVideoAnalysis}?videoId=${id}`, { observe: 'response' })
-            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+            .pipe(map((res: VideoAnalysisEntityArrayResponseType) => this.convertDateArrayVideoAnalysisFromServer(res)));
     }
 
     deleteVideoAnalysis(id: string): Observable<HttpResponse<any>> {
@@ -97,6 +86,16 @@ export class VideoAnalyzerService {
     protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
         if (res.body) {
             res.body.forEach((video: IVideo) => {
+                video.createdDate = video.createdDate != null ? moment(video.createdDate) : null;
+                video.lastUpdatedDate = video.lastUpdatedDate != null ? moment(video.lastUpdatedDate) : null;
+            });
+        }
+        return res;
+    }
+
+    protected convertDateArrayVideoAnalysisFromServer(res: VideoAnalysisEntityArrayResponseType): VideoAnalysisEntityArrayResponseType {
+        if (res.body) {
+            res.body.forEach((video: IVideoAnalysis) => {
                 video.createdDate = video.createdDate != null ? moment(video.createdDate) : null;
                 video.lastUpdatedDate = video.lastUpdatedDate != null ? moment(video.lastUpdatedDate) : null;
             });

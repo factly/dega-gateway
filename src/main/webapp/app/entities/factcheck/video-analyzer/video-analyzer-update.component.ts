@@ -12,6 +12,7 @@ import { IVideo, IVideoAnalysis } from 'app/shared/model/factcheck/video-analyze
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StatusService } from 'app/entities/core/status';
 import { IStatus } from 'app/shared/model/core/status.model';
+import { ICategory } from 'app/shared/model/core/category.model';
 
 @Component({
     selector: 'jhi-rating-update',
@@ -37,12 +38,18 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ videoData }) => {
-            this.videoData = videoData;
-            this.videoAnalyzerService.findVideoAnalysis(this.videoData['_id']).subscribe(data => {
-                this.videoAnalysisData = data;
-            });
-        });
+        this.activatedRoute.data.subscribe(
+            ({ videoData }) => {
+                this.videoData = videoData;
+                this.videoAnalyzerService.findVideoAnalysis(this.videoData['_id']).subscribe(
+                    (res: HttpResponse<ICategory[]>) => {
+                        this.videoAnalysisData = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
 
         this.createFormGroups();
         this.statusService.query().subscribe(

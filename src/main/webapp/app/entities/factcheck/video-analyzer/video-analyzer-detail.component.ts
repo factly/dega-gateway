@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 
 @Component({
-    selector: 'jhi-rating-detail',
+    selector: 'jhi-video-analyzer-detail',
     templateUrl: './video-analyzer-detail.component.html'
 })
 export class VideoAnalyzerDetailComponent implements OnInit {

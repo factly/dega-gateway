@@ -12,10 +12,9 @@ import { IVideo, IVideoAnalysis } from 'app/shared/model/factcheck/video-analyze
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StatusService } from 'app/entities/core/status';
 import { IStatus } from 'app/shared/model/core/status.model';
-import { ICategory } from 'app/shared/model/core/category.model';
 
 @Component({
-    selector: 'jhi-rating-update',
+    selector: 'jhi-video-analyzer-update',
     templateUrl: './video-analyzer-update.component.html'
 })
 export class VideoAnalyzerUpdateComponent implements OnInit {
@@ -41,12 +40,14 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(
             ({ videoData }) => {
                 this.videoData = videoData;
-                this.videoAnalyzerService.findVideoAnalysis(this.videoData['_id']).subscribe(
-                    (res: HttpResponse<ICategory[]>) => {
-                        this.videoAnalysisData = res.body;
-                    },
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
+                if (this.videoData._id) {
+                    this.videoAnalyzerService.findVideoAnalysis(this.videoData['_id']).subscribe(
+                        (res: HttpResponse<IVideoAnalysis[]>) => {
+                            this.videoAnalysisData = res.body;
+                        },
+                        (res: HttpErrorResponse) => this.onError(res.message)
+                    );
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -55,7 +56,6 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
         this.statusService.query().subscribe(
             (res: HttpResponse<IStatus[]>) => {
                 this.statuses = res.body;
-                console.log(res.body);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -63,11 +63,12 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
 
     createFormGroups() {
         this.videoFormGroup = this.fb.group({
-            id: [this.videoData.id || ''],
+            _id: [this.videoData._id || ''],
             title: [this.videoData.title || '', Validators.required],
             description: [this.videoData.description || '', Validators.required],
             link: [this.videoData.link || '', Validators.required],
-            status_id: [this.videoData.status.id || '', Validators.required]
+            slug: [this.videoData.slug || '', Validators.required],
+            status_id: [this.videoData.status || '', Validators.required]
         });
     }
 
@@ -77,18 +78,30 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
 
     saveVideoData() {
         this.isSaving = true;
-        if (this.videoFormGroup.value.id !== undefined) {
+        if (this.videoFormGroup.value._id) {
             this.subscribeToSaveResponse(this.videoAnalyzerService.updateVideo(this.videoFormGroup.value));
         } else {
+            this.videoFormGroup.controls['slug'].setValue(this.transformToSlug(this.videoFormGroup.value.title));
             this.subscribeToSaveResponse(this.videoAnalyzerService.createVideo(this.videoFormGroup.value));
         }
+    }
+
+    transformToSlug(input: string): string {
+        return input
+            .toString()
+            .toLowerCase()
+            .replace(/\s+/g, '-') // Replace spaces with -
+            .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+            .replace(/\-\-+/g, '-') // Replace multiple - with single -
+            .replace(/^-+/, '') // Trim - from start of text
+            .replace(/-+$/, ''); // Trim - from end of text
     }
 
     saveVideoAnalysisData() {
         this.isSaving = true;
         if (this.videoAnalysisFormGroup.value.id !== undefined) {
             this.subscribeToSaveResponse(
-                this.videoAnalyzerService.updateVideoAnalysis(this.videoData.id, this.videoAnalysisFormGroup.value)
+                this.videoAnalyzerService.updateVideoAnalysis(this.videoData._id, this.videoAnalysisFormGroup.value)
             );
         } else {
             this.subscribeToSaveResponse(this.videoAnalyzerService.createVideoAnalysis(this.videoAnalysisFormGroup.value));

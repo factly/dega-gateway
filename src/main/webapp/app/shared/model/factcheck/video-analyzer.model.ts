@@ -3,7 +3,7 @@ import { IStatus, Status } from 'app/shared/model/core/status.model';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 
 export interface IVideo {
-    id?: string;
+    _id?: string;
     title?: string;
     clientId?: string;
     slug?: string;
@@ -32,8 +32,9 @@ export interface IVideoAnalysis {
 
 export class Video implements IVideo {
     constructor(
-        public id?: string,
+        public _id?: string,
         public clientId?: string,
+        public title?: string,
         public slug?: string,
         public createdDate?: Moment,
         public lastUpdatedDate?: Moment,

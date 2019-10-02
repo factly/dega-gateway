@@ -54,7 +54,7 @@
                                 <mat-form-field class="full-width">
                                     <mat-select placeholder="Status" formControlName="status_id">
                                         <mat-option [value]="statusOption.id"
-                                                    *ngFor="let statusOption of statuses | orderBy:'name';">
+                                                    *ngFor="let statusOption of statuses;">
                                             {{statusOption.name}}
                                         </mat-option>
                                     </mat-select>
@@ -66,13 +66,19 @@
                     <div class="justify-content-end d-flex">
                         <button mat-raised-button color="warn"
                                 type="button" id="cancel-save" (click)="previousState()">
-                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
+                            jhiTranslate="entity.action.cancel">Cancel</span>
                         </button>
                         <button mat-raised-button
                                 type="button" (click)="saveVideoData()" id="save-entity" [disabled]="isSaving"
                                 class="btn btn-primary ml-3">
                             <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                         </button>
+                        <button mat-raised-button color="warn"
+                                type="button" (click)="toggleVideoForm()">
+                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Disable</span>
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -80,7 +86,117 @@
     </div>
 </div>
 
-<div *ngFor="let analysis of videoAnalysisData">
-    <div>{{analysis.reality_description}}</div>
+<div class="row">
+    <div class="col-6">
+        <button (click)="createVideoAnalysisForm(null)">New analysis</button>
+        <div *ngFor="let analysis of videoAnalysisData">
+            <div>Shown Title:{{analysis.shown_title}}</div>
+            <div>Shown Description:{{analysis.shown_description}}</div>
+            <div>Reality Title:{{analysis.reality_title}}</div>
+            <div>Reality Description:{{analysis.reality_description}}</div>
+            <div>End time(sec):{{analysis.end_time_in_sec}}</div>
+            <div>
+                Rating:
+                <span *ngFor="let ratingOption of ratings;">
+                    <span *ngIf="ratingOption.id==analysis.rating['$id']">
+                        {{ratingOption.name}}
+                    </span>
+                </span>
+            </div>
 
+            <button (click)="createVideoAnalysisForm(analysis)">Edit</button>
+
+        </div>
+    </div>
+
+    <div *ngIf="showAnalysisForm" class="col-6">
+        <form [formGroup]="videoAnalysisFormGroup">
+            <mat-form-field class="full-width">
+            <textarea class="title-input"
+                      matInput
+                      formControlName="shown_title"
+                      placeholder="shown_title">
+            </textarea>
+                <mat-error>
+                    shown_title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+            <textarea class="title-input"
+                      matInput
+                      formControlName="shown_description"
+                      placeholder="shown_description">
+            </textarea>
+                <mat-error>
+                    shown_description is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <input matInput
+                       formControlName="link"
+                       placeholder="Link of the video which is being analyzed">
+                <mat-error>
+                    Link is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+            <textarea class="title-input"
+                      matInput
+                      formControlName="reality_title"
+                      placeholder="reality_title">
+            </textarea>
+                <mat-error>
+                    reality_title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+            <textarea class="title-input"
+                      matInput
+                      formControlName="reality_description"
+                      placeholder="reality_description">
+            </textarea>
+                <mat-error>
+                    reality_description is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                                    <textarea class="title-input"
+                                              matInput
+                                              formControlName="reality_source"
+                                              placeholder="reality_source">
+                                    </textarea>
+                <mat-error>
+                    reality_source is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field class="full-width">
+                        <mat-select placeholder="Ratings" formControlName="rating_id">
+                            <mat-option [value]="ratingOption.id"
+                                        *ngFor="let ratingOption of ratings;">
+                                {{ratingOption.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-form-field class="full-width">
+                <input matInput
+                       formControlName="end_time_in_sec"
+                       placeholder="end_time_in_sec of the video which is being analyzed">
+                <mat-error>
+                    end_time_in_sec is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="justify-content-end d-flex">
+                <button mat-raised-button
+                        type="button" (click)="saveVideoAnalysisData()"
+                        class="btn btn-primary ml-3">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

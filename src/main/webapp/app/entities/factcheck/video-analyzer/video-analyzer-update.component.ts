@@ -3,15 +3,16 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { IRating } from 'app/shared/model/factcheck/rating.model';
+import { IRating, Rating } from 'app/shared/model/factcheck/rating.model';
 import { VideoAnalyzerService } from './video-analyzer.service';
 
 import { JhiAlertService } from 'ng-jhipster';
 
-import { IVideo, IVideoAnalysis } from 'app/shared/model/factcheck/video-analyzer.model';
+import { IVideo, IVideoAnalysis, VideoAnalysis } from 'app/shared/model/factcheck/video-analyzer.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StatusService } from 'app/entities/core/status';
 import { IStatus } from 'app/shared/model/core/status.model';
+import { RatingService } from 'app/entities/factcheck/rating';
 
 @Component({
     selector: 'jhi-video-analyzer-update',
@@ -21,8 +22,10 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
     videoData: IVideo;
     videoAnalysisData: IVideoAnalysis[];
     statuses: IStatus[];
+    ratings: IRating[];
 
     isSaving: boolean;
+    showAnalysisForm: boolean = false;
 
     videoFormGroup: FormGroup;
     videoAnalysisFormGroup: FormGroup;
@@ -30,6 +33,7 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
     constructor(
         private jhiAlertService: JhiAlertService,
         private statusService: StatusService,
+        private ratingService: RatingService,
         private videoAnalyzerService: VideoAnalyzerService,
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder
@@ -44,6 +48,8 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
                     this.videoAnalyzerService.findVideoAnalysis(this.videoData['_id']).subscribe(
                         (res: HttpResponse<IVideoAnalysis[]>) => {
                             this.videoAnalysisData = res.body;
+                            this.toggleVideoForm();
+                            this.sortVideoAnalysis();
                         },
                         (res: HttpErrorResponse) => this.onError(res.message)
                     );
@@ -59,6 +65,20 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.ratingService.query().subscribe(
+            (res: HttpResponse<IRating[]>) => {
+                this.ratings = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    toggleVideoForm() {
+        if (this.videoFormGroup.disabled) {
+            this.videoFormGroup.enable();
+        } else {
+            this.videoFormGroup.disable();
+        }
     }
 
     createFormGroups() {
@@ -70,6 +90,30 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
             slug: [this.videoData.slug || '', Validators.required],
             status_id: [this.videoData.status || '', Validators.required]
         });
+    }
+
+    createVideoAnalysisForm(savedVideoAnalysisData: IVideoAnalysis) {
+        if (!savedVideoAnalysisData) {
+            savedVideoAnalysisData = new VideoAnalysis();
+            savedVideoAnalysisData.rating = new Rating();
+        }
+
+        this.videoAnalysisFormGroup = this.fb.group({
+            _id: [savedVideoAnalysisData._id || ''],
+            shown_title: [savedVideoAnalysisData.shown_title || '', Validators.required],
+            shown_description: [savedVideoAnalysisData.shown_description || '', Validators.required],
+            link: [savedVideoAnalysisData.link || '', Validators.required],
+            reality_title: [savedVideoAnalysisData.reality_title || '', Validators.required],
+            reality_description: [savedVideoAnalysisData.reality_description || '', Validators.required],
+            reality_source: [savedVideoAnalysisData.reality_source || '', Validators.required],
+            rating_id: [savedVideoAnalysisData.rating.id || '', Validators.required],
+            end_time_in_sec: [savedVideoAnalysisData.end_time_in_sec || 0, Validators.required],
+            video_id: [this.videoData._id]
+        });
+        if (savedVideoAnalysisData._id) {
+            this.videoAnalysisFormGroup.controls['rating_id'].setValue(savedVideoAnalysisData.rating['$id']);
+        }
+        this.showAnalysisForm = true;
     }
 
     previousState() {
@@ -99,12 +143,16 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
 
     saveVideoAnalysisData() {
         this.isSaving = true;
-        if (this.videoAnalysisFormGroup.value.id !== undefined) {
-            this.subscribeToSaveResponse(
-                this.videoAnalyzerService.updateVideoAnalysis(this.videoData._id, this.videoAnalysisFormGroup.value)
+        if (this.videoAnalysisFormGroup.value._id) {
+            this.subscribeToSaveVideoAnalysisResponse(
+                this.videoAnalyzerService.updateVideoAnalysis(this.videoAnalysisFormGroup.value._id, this.videoAnalysisFormGroup.value),
+                'update'
             );
         } else {
-            this.subscribeToSaveResponse(this.videoAnalyzerService.createVideoAnalysis(this.videoAnalysisFormGroup.value));
+            this.subscribeToSaveVideoAnalysisResponse(
+                this.videoAnalyzerService.createVideoAnalysis(this.videoAnalysisFormGroup.value),
+                'create'
+            );
         }
     }
 
@@ -112,9 +160,42 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
         result.subscribe((res: HttpResponse<IRating>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
+    private subscribeToSaveVideoAnalysisResponse(result: Observable<HttpResponse<IVideoAnalysis>>, typeOfOperation: string) {
+        result.subscribe(
+            (res: HttpResponse<IRating>) => this.onSaveSuccessVideoAnalysis(res, typeOfOperation),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
+    }
+
+    private onSaveSuccessVideoAnalysis(res, typeOfOperation) {
+        if (typeOfOperation == 'update') {
+            this.videoAnalysisData = this.videoAnalysisData.filter(item => item._id !== res.body['data']['value']['_id']);
+            this.videoAnalysisData.push(res.body['data']['value']);
+        } else {
+            this.videoAnalysisData = this.videoAnalysisData.concat(res.body['data']['ops']);
+        }
+
+        this.sortVideoAnalysis();
+        this.showAnalysisForm = false;
+    }
+
+    private sortVideoAnalysis() {
+        this.videoAnalysisData = this.videoAnalysisData.sort((obj1, obj2) => {
+            if (obj1.end_time_in_sec > obj2.end_time_in_sec) {
+                return 1;
+            }
+
+            if (obj1.end_time_in_sec < obj2.end_time_in_sec) {
+                return -1;
+            }
+
+            return 0;
+        });
+    }
+
     private onSaveSuccess() {
         this.isSaving = false;
-        this.previousState();
+        // this.previousState();
     }
 
     private onSaveError() {

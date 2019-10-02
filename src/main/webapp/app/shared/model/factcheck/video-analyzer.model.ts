@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import { IStatus, Status } from 'app/shared/model/core/status.model';
-import { IRating } from 'app/shared/model/factcheck/rating.model';
+import { IRating, Rating } from 'app/shared/model/factcheck/rating.model';
 
 export interface IVideo {
     _id?: string;
@@ -18,7 +18,6 @@ export interface IVideoAnalysis {
     _id?: string;
     shown_title?: string;
     client_id?: string;
-    slug?: string;
     createdDate?: Moment;
     lastUpdatedDate?: Moment;
     shown_description?: string;

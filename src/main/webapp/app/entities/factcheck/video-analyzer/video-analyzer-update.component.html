@@ -79,14 +79,16 @@
                             <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                         </button>
                     </div>
-                    <button mat-raised-button color="success"
-                            type="button" (click)="toggleVideoForm()">
-                        <span>Edit</span>
-                    </button>
-                    <button mat-raised-button color="warn"
-                            type="button" (click)="previousState()">
-                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Go to main menu</span>
-                    </button>
+                    <div class="justify-content-end d-flex" *ngIf="!videoFormGroup.enabled">
+                        <button mat-raised-button color="success"
+                                type="button" (click)="toggleVideoForm()">
+                            <span>Edit</span>
+                        </button>
+                        <button mat-raised-button color="warn"
+                                type="button" (click)="previousState()">
+                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Go to main menu</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -112,7 +114,10 @@
             </div>
 
             <button (click)="createVideoAnalysisForm(analysis)">Edit</button>
-
+            <button mat-raised-button color="warn"
+                    type="button" (click)="deleteVideoAnalysisData(analysis)">
+                <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Delete analysis</span>
+            </button>
         </div>
     </div>
 

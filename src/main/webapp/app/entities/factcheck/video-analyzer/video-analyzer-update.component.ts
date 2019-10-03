@@ -20,7 +20,7 @@ import { RatingService } from 'app/entities/factcheck/rating';
 })
 export class VideoAnalyzerUpdateComponent implements OnInit {
     videoData: IVideo;
-    videoAnalysisData: IVideoAnalysis[];
+    videoAnalysisData: IVideoAnalysis[] = [];
     statuses: IStatus[];
     ratings: IRating[];
 
@@ -126,10 +126,10 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
     saveVideoData() {
         this.isSaving = true;
         if (this.videoFormGroup.value._id) {
-            this.subscribeToSaveResponse(this.videoAnalyzerService.updateVideo(this.videoData._id, this.videoFormGroup.value));
+            this.subscribeToSaveResponse(this.videoAnalyzerService.updateVideo(this.videoData._id, this.videoFormGroup.value), 'update');
         } else {
             this.videoFormGroup.controls['slug'].setValue(this.transformToSlug(this.videoFormGroup.value.title));
-            this.subscribeToSaveResponse(this.videoAnalyzerService.createVideo(this.videoFormGroup.value));
+            this.subscribeToSaveResponse(this.videoAnalyzerService.createVideo(this.videoFormGroup.value), 'create');
         }
     }
 
@@ -159,8 +159,18 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IVideo>>) {
-        result.subscribe((res: HttpResponse<IRating>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    deleteVideoAnalysisData(videoAnalyzedData: IVideoAnalysis) {
+        this.createVideoAnalysisForm(videoAnalyzedData);
+        if (confirm("Are you sure to delete '" + videoAnalyzedData.reality_title + "' analysis?")) {
+            this.subscribeToSaveVideoAnalysisResponse(this.videoAnalyzerService.deleteVideoAnalysis(videoAnalyzedData._id), 'delete');
+        }
+    }
+
+    private subscribeToSaveResponse(result: Observable<HttpResponse<IVideo>>, typeOfOperation: string) {
+        result.subscribe(
+            (res: HttpResponse<IRating>) => this.onSaveSuccess(res, typeOfOperation),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
     }
 
     private subscribeToSaveVideoAnalysisResponse(result: Observable<HttpResponse<IVideoAnalysis>>, typeOfOperation: string) {
@@ -174,8 +184,14 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
         if (typeOfOperation == 'update') {
             this.videoAnalysisData = this.videoAnalysisData.filter(item => item._id !== res.body['data']['value']['_id']);
             this.videoAnalysisData.push(res.body['data']['value']);
-        } else {
+        } else if (typeOfOperation == 'create') {
             this.videoAnalysisData = this.videoAnalysisData.concat(res.body['data']['ops']);
+        } else if (typeOfOperation == 'delete') {
+            if (res.body['data']['deletedCount'] === 1) {
+                this.videoAnalysisData = this.videoAnalysisData.filter(item => item._id !== this.videoAnalysisFormGroup.value._id);
+            } else {
+                this.onError('Couldnot delete');
+            }
         }
 
         this.sortVideoAnalysis();
@@ -196,10 +212,14 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
         });
     }
 
-    private onSaveSuccess() {
+    private onSaveSuccess(res, typeOfOperation) {
         this.isSaving = false;
+        if (typeOfOperation == 'update') {
+            this.videoData = res.body['data']['value'];
+        } else {
+            this.videoData = res.body['data']['ops'][0];
+        }
         this.videoFormGroup.disable();
-        // this.previousState();
     }
 
     private onSaveError() {

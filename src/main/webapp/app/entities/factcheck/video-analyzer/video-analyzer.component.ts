@@ -4,8 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
-import { IRating } from 'app/shared/model/factcheck/rating.model';
-
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { VideoAnalyzerService } from './video-analyzer.service';
 import { IVideo } from 'app/shared/model/factcheck/video-analyzer.model';
@@ -15,7 +13,6 @@ import { IVideo } from 'app/shared/model/factcheck/video-analyzer.model';
     templateUrl: './video-analyzer.component.html'
 })
 export class VideoAnalyzerComponent implements OnInit, OnDestroy {
-    ratings: IRating[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -30,19 +27,26 @@ export class VideoAnalyzerComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     displayedColumns = ['iconURL', 'name', 'numericValue', 'isDefault', 'clientId', 'createdDate', 'actions'];
+    videoData: IVideo[];
 
     constructor(
         private videoAnalyzerService: VideoAnalyzerService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private eventManager: JhiEventManager
+        private router: Router
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
     }
 
-    loadAll() {}
+    loadAll() {
+        this.videoAnalyzerService.query().subscribe(
+            (res: HttpResponse<IVideo[]>) => {
+                this.videoData = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
 
     ngOnInit() {
         this.loadAll();
@@ -62,13 +66,6 @@ export class VideoAnalyzerComponent implements OnInit, OnDestroy {
             }
         });
         this.loadAll();
-    }
-
-    private paginateRatings(data: IRating[], headers: HttpHeaders) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-        this.queryCount = this.totalItems;
-        this.ratings = data;
     }
 
     private onError(errorMessage: string) {

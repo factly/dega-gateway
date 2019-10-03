@@ -1,7 +1,7 @@
 <div class="header-dialogue">
     <div class="dialogue-header shadow-sm">
         <h2 id="jhi-claim-heading">
-            Create or edit a Claim
+            Create or edit a Video Analysis
         </h2>
     </div>
     <div class="dialogue-body p-4">
@@ -18,14 +18,14 @@
                                               placeholder="Title">
                                     </textarea>
                                     <mat-error>
-                                        Claim is <strong>required</strong>
+                                        Title is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
 
 
-                        <div class="row mb-4">
+                        <div class="row mb-4" *ngIf="videoFormGroup.enabled">
                             <div class="col-md-12">
                                 <div class="quill-editor-wrapper">
                                     <label>Desciption</label>
@@ -34,6 +34,10 @@
                                     </jhi-quill-editor>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row" *ngIf="!videoFormGroup.enabled">
+                            <h6 >Description</h6>
+                            <div [innerHTML]="videoData.description"></div>
                         </div>
 
                         <div class="row">
@@ -63,7 +67,7 @@
                         </div>
 
                     </div>
-                    <div class="justify-content-end d-flex">
+                    <div class="justify-content-end d-flex" *ngIf="videoFormGroup.enabled">
                         <button mat-raised-button color="warn"
                                 type="button" id="cancel-save" (click)="previousState()">
                             <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
@@ -74,12 +78,15 @@
                                 class="btn btn-primary ml-3">
                             <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                         </button>
-                        <button mat-raised-button color="warn"
-                                type="button" (click)="toggleVideoForm()">
-                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Disable</span>
-                        </button>
-
                     </div>
+                    <button mat-raised-button color="success"
+                            type="button" (click)="toggleVideoForm()">
+                        <span>Edit</span>
+                    </button>
+                    <button mat-raised-button color="warn"
+                            type="button" (click)="previousState()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Go to main menu</span>
+                    </button>
                 </div>
             </div>
         </form>

@@ -19,11 +19,9 @@
         </div>
 
     </div>
-    <div *ngIf="ratings && ratings.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-        </div>
+    <div *ngFor="let video of videoData">
+        <div>{{video.title}} </div>
+        <div>{{video.description}}</div>
+        <button [routerLink]="['/video-analyzer/'+video._id+'/edit']">Edit</button>
     </div>
 </div>

@@ -90,6 +90,9 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
             slug: [this.videoData.slug || '', Validators.required],
             status_id: [this.videoData.status || '', Validators.required]
         });
+        if (this.videoData._id) {
+            this.videoFormGroup.controls['status_id'].setValue(this.videoData.status['$id']);
+        }
     }
 
     createVideoAnalysisForm(savedVideoAnalysisData: IVideoAnalysis) {
@@ -123,7 +126,7 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
     saveVideoData() {
         this.isSaving = true;
         if (this.videoFormGroup.value._id) {
-            this.subscribeToSaveResponse(this.videoAnalyzerService.updateVideo(this.videoFormGroup.value));
+            this.subscribeToSaveResponse(this.videoAnalyzerService.updateVideo(this.videoData._id, this.videoFormGroup.value));
         } else {
             this.videoFormGroup.controls['slug'].setValue(this.transformToSlug(this.videoFormGroup.value.title));
             this.subscribeToSaveResponse(this.videoAnalyzerService.createVideo(this.videoFormGroup.value));
@@ -195,6 +198,7 @@ export class VideoAnalyzerUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
+        this.videoFormGroup.disable();
         // this.previousState();
     }
 

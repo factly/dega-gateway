@@ -7,6 +7,7 @@ import { filter, map } from 'rxjs/operators';
 import { VIDEO_ANALYZER_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IVideo, IVideoAnalysis, Video, VideoAnalysis } from 'app/shared/model/factcheck/video-analyzer.model';
+import { IFactcheck } from 'app/shared/model/factcheck/factcheck.model';
 
 type EntityResponseType = HttpResponse<IVideo>;
 type EntityArrayResponseType = HttpResponse<IVideo[]>;
@@ -28,11 +29,17 @@ export class VideoAnalyzerService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
-    updateVideo(videoAnalyzer: IVideo): Observable<EntityResponseType> {
+    updateVideo(id: string, videoAnalyzer: IVideo): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(videoAnalyzer);
         return this.http
-            .put<IVideo>(this.resourceUrlForVideo, copy, { observe: 'response' })
+            .put<IVideo>(`${this.resourceUrlForVideo}/${id}`, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    query(): Observable<EntityArrayResponseType> {
+        return this.http
+            .get<IVideo[]>(this.resourceUrlForVideo, { observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
     findVideo(id: string): Observable<EntityResponseType> {

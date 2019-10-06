@@ -184,8 +184,19 @@
             </li>
 		</ul>
 	</nav>
-	<div class="side-bar-minimizer-wrap" (click)="stickMenu()">
-        <span>{{version}}</span>
-        <button class="side-bar-minimizer" [ngClass]="{'sticky': toggleSticky}"></button>
+    <div class="side-bar-minimizer-wrap">
+        <a routerLink="/privacy-policy">
+            <span>
+                <span jhiTranslate="global.menu.privacy.policy">Privacy Policy</span><br><br><br><br>
+            </span>
+        </a>
+        <div (click)="stickMenu()">
+            <span>{{version}}</span>
+            <button class="side-bar-minimizer" [ngClass]="{'sticky': toggleSticky}"></button>
+        </div>
     </div>
+	<!--<div class="side-bar-minimizer-wrap" ">-->
+        <!--<span>{{version}}</span>-->
+        <!--<button class="side-bar-minimizer" [ngClass]="{'sticky': toggleSticky}"></button>-->
+    <!--</div>-->
 </div>

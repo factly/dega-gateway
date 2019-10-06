@@ -22,7 +22,6 @@ export class TagService {
 
     create(tag: ITag): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(tag);
-        console.log(copy);
         return this.http
             .post<ITag>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -30,7 +29,6 @@ export class TagService {
 
     update(tag: ITag): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(tag);
-        console.log(copy);
         return this.http
             .put<ITag>(this.resourceUrl, copy, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));

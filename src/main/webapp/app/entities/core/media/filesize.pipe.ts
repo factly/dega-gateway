@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FileSizePipe implements PipeTransform {
     private units: string[] = ['bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
 
-    transform(bytes: number = 0, precision: number = 2): string {
+    transform(bytes = 0, precision = 2): string {
         let result: string;
         if (isNaN(parseFloat(String(bytes))) || !isFinite(bytes)) {
             result = '?';

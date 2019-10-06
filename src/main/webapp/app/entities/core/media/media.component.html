@@ -45,7 +45,7 @@
                 <td><img src="{{media.sourceURL}}?resize:fill:100:100/gravity:sm" alt="Image" width="100" height="100"></td>
                 <td>{{media.title}}</td>
                 <td>{{media.type}}</td>
-                <td>{{media.fileSize}}</td>
+                <td>{{media.fileSize | degafilesize}}</td>
                 <td>{{media.uploadedBy}}</td>
                 <td>{{media.createdDate | date:'medium'}}</td>
                 <td class="text-right">

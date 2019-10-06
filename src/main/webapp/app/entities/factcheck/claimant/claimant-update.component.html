@@ -47,6 +47,14 @@
                                 Upload Image
                             </span>
                         </button>
+                        <button *ngIf="claimant.media != null" mat-raised-button color="warn"
+                            id="field_iconURL" class="btn btn-primary jh-create-entity create-media"
+                                (click)="deleteMediaForFeature()" type="button">
+                            <fa-icon [icon]="'trash-alt'"></fa-icon>
+                            <span class="hidden-sm-down" >
+                                Remove
+                            </span>
+                        </button>
                         <div *ngIf="claimant.media" class="margin-t-20">
                             <img src={{claimant.media.sourceURL}} alt="" width="100" height="100">
                         </div>

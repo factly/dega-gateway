@@ -55,17 +55,25 @@ export class QuillEditorFileUploadComponent implements OnInit {
     }
 
     public uploadImageFromLocalSystem(files: FileList): void {
+        console.log('ok');
         if (files && files.length > 0) {
+            console.log('hello');
             const file: File = files.item(0);
+            console.log('hello1');
             const extension = ['image/jpg', 'image/jpeg', 'image/png', 'image/tiff', 'image/ico', 'image/webp', 'image/gif'];
             if (extension.indexOf(file.type) > -1) {
+                console.log('hello2');
                 this.mediaService.uploadImage(file).subscribe(
                     (res: HttpResponse<IMedia>) => {
+                        console.log('hello3');
                         this.loadAll();
+                        console.log('hello4');
                     },
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
+                console.log('hello6');
             } else {
+                console.log('hello5');
                 alert('File not Supported');
             }
         }

@@ -146,4 +146,8 @@ export class DegaUserUpdateComponent implements OnInit {
     updateMediaForProfilePicture(imageData) {
         this.degaUser.media = imageData;
     }
+
+    deleteMediaForFeature() {
+        this.degaUser.media = null;
+    }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Pipe, PipeTransform } from '@angular/core';
 import { IMedia } from 'app/shared/model/core/media.model';
 
 @Component({

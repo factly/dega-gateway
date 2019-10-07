@@ -316,7 +316,7 @@ export class PostUpdateComponent implements OnInit {
         this.postEditFormGroup.controls['media'].setValue(imageData);
     }
 
-    deleteMediaForFeature() {
+    deleteMediaForPostUpdate() {
         this.postEditFormGroup.controls['media'].setValue(null);
     }
 

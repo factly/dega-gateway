@@ -474,7 +474,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.factCheckEditFormGroup.controls['media'].setValue(imageData);
     }
 
-    deleteMediaForFeature() {
+    deleteMediaForFactcheck() {
         this.factCheckEditFormGroup.controls['media'].setValue(null);
     }
 

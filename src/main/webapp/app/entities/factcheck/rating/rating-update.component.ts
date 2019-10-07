@@ -117,7 +117,7 @@ export class RatingUpdateComponent implements OnInit {
         return ADMIN_ROLE.includes(degausersRole);
     }
 
-    deleteMediaForFeature() {
+    deleteMediaForRating() {
         this.rating.media = null;
     }
 }

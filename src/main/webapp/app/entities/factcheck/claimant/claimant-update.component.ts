@@ -81,7 +81,7 @@ export class ClaimantUpdateComponent implements OnInit {
         this.claimant.media = imageData;
     }
 
-    deleteMediaForFeature() {
+    deleteMediaForClaimant() {
         this.claimant.media = null;
     }
 }

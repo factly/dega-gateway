@@ -40,7 +40,6 @@ describe('Post e2e test', () => {
         await postComponentsPage.clickOnCreateButton();
         await promise.all([
             postUpdatePage.setTitleInput('title'),
-            postUpdatePage.setClientIdInput('clientId'),
             postUpdatePage.setContentInput('content'),
             postUpdatePage.setExcerptInput('excerpt'),
             postUpdatePage.setPublishedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
@@ -58,7 +57,6 @@ describe('Post e2e test', () => {
             // postUpdatePage.degaUserSelectLastOption(),
         ]);
         expect(await postUpdatePage.getTitleInput()).to.eq('title');
-        expect(await postUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await postUpdatePage.getContentInput()).to.eq('content');
         expect(await postUpdatePage.getExcerptInput()).to.eq('excerpt');
         expect(await postUpdatePage.getPublishedDateInput()).to.contain('2001-01-01T02:30');

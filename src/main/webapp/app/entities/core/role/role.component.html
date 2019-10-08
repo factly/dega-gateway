@@ -38,12 +38,6 @@
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.name}}</td>
                 </ng-container>
-                <ng-container matColumnDef="clientId">
-                    <th jhiSortBy="clientId" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.coreRole.clientId">Client Id</span>
-                        <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
-                    <td mat-cell *matCellDef="let element"> {{element.clientId}}</td>
-                </ng-container>
                 <ng-container matColumnDef="isDefault">
                     <th jhiSortBy="isDefault" mat-header-cell *matHeaderCellDef><span jhiTranslate="gatewayApp.coreRole.isDefault">Is Default</span>
                         <fa-icon [icon]="'sort'"></fa-icon>

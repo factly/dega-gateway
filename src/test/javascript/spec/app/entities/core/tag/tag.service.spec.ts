@@ -76,7 +76,6 @@ describe('Service Tests', () => {
                         name: 'BBBBBB',
                         slug: 'BBBBBB',
                         description: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT)
                     },
@@ -104,7 +103,6 @@ describe('Service Tests', () => {
                         name: 'BBBBBB',
                         slug: 'BBBBBB',
                         description: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT)
                     },

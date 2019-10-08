@@ -67,6 +67,7 @@ export class StatusUpdateComponent implements OnInit {
         this.status.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         this.status.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.status.id !== undefined) {
+            delete this.status['clientId']; // Need to find a better way to do this
             this.subscribeToSaveResponse(this.statusService.update(this.status));
         } else {
             this.subscribeToSaveResponse(this.statusService.create(this.status));

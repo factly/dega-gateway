@@ -125,7 +125,7 @@ export class OrganizationUpdateComponent implements OnInit {
                     this.updateMediaForLogoURLMobile(imageData);
                 } else if (dataType === 'favIconURL') {
                     this.updateMediaForFavIconURL(imageData);
-                } else if (dataType === 'favicon') {
+                } else if (dataType === 'mobileIconURL') {
                     this.updateMediaForMobileIconURLMobile(imageData);
                 }
             }

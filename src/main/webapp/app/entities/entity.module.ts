@@ -15,6 +15,7 @@ import { GatewayClaimantModule as FactcheckClaimantModule } from './factcheck/cl
 import { GatewayClaimSearchModule as FactcheckClaimSearchModule } from './factcheck/claim-search/claim-search.module';
 import { GatewayFactcheckModule as FactcheckFactcheckModule } from './factcheck/factcheck/factcheck.module';
 import { GatewayRoleMappingModule as CoreRoleMappingModule } from './core/role-mapping/role-mapping.module';
+
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 import { GatewaySharedModule } from 'app/shared/shared.module';

@@ -35,7 +35,6 @@ describe('Component Tests', () => {
             comp.categoryFormGroup.controls['description'].setValue('testing content');
             comp.categoryFormGroup.controls['slug'].setValue('testing excerpt');
             comp.categoryFormGroup.controls['parent'].setValue('testing updates');
-            comp.categoryFormGroup.controls['clientId'].setValue('testing slug');
             if (!valid) {
                 comp.categoryFormGroup.controls['title'].setValue('');
             }

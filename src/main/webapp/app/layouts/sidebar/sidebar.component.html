@@ -9,7 +9,7 @@
 					</span>
 				</a>
 			</li>
-            <li class="nested-menu" [ngClass]="{'open': activeDropdown == 1}">
+            <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']" class="nested-menu" [ngClass]="{'open': activeDropdown == 1}">
                 <a href="javascript:void(0);" (click)="toggleDropdown(1)">
 					<span>
                         <fa-icon [icon]="'th-list'"></fa-icon>
@@ -19,31 +19,31 @@
                     </span>
                 </a>
                 <ul class="nav-dropdown-items">
-                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+                    <li >
                         <a routerLink="claim-search" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <mat-icon>pageview</mat-icon>
                             <span>Claim Search</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+                    <li >
                         <a routerLink="claim" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <mat-icon>record_voice_over</mat-icon>
                             <span jhiTranslate="global.menu.entities.factcheckClaim">Claim</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+                    <li >
                         <a routerLink="claimant" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <mat-icon>perm_identity</mat-icon>
                             <span jhiTranslate="global.menu.entities.factcheckClaimant">Claimant</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+                    <li >
                         <a routerLink="factcheck" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
                             <mat-icon>beenhere</mat-icon>
                             <span jhiTranslate="global.menu.entities.factcheckFactcheck">Factcheck</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+                    <li >
                         <a routerLink="rating" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <mat-icon>thumbs_up_down</mat-icon>
                             <span jhiTranslate="global.menu.entities.factcheckRating">Rating</span>
@@ -51,7 +51,7 @@
                     </li>
                 </ul>
             </li>
-			<li class="nested-menu" [ngClass]="{'open': activeDropdown == 2}">
+			<li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']" class="nested-menu" [ngClass]="{'open': activeDropdown == 2}">
 				<a href="javascript:void(0);" (click)="toggleDropdown(2)">
 					<span>
                         <fa-icon [icon]="'th-list'"></fa-icon>
@@ -61,19 +61,19 @@
                     </span>
 				</a>
 				<ul class="nav-dropdown-items">
-					<li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+					<li >
 						<a routerLink="post" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
 							<mat-icon>assignment</mat-icon>
 							<span jhiTranslate="global.menu.entities.corePost">Post</span>
 						</a>
 					</li>
-					<li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+					<li >
 						<a routerLink="category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
 							<mat-icon>category</mat-icon>
 							<span jhiTranslate="global.menu.entities.coreCategory">Category</span>
 						</a>
 					</li>
-                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+                    <li >
                         <a routerLink="tag" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <mat-icon>style</mat-icon>
                             <span jhiTranslate="global.menu.entities.coreTag">Tag</span>
@@ -85,7 +85,7 @@
 							<span jhiTranslate="global.menu.entities.coreFormat">Format</span>
 						</a>
 					</li>
-                    <li *jhiHasAnyAuthority="['ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ADMINISTRATOR','ROLE_EDITOR','ROLE_AUTHOR']">
+                    <li >
                         <a routerLink="media" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <mat-icon>perm_media</mat-icon>
                             <span jhiTranslate="global.menu.entities.coreMedia">Media</span>

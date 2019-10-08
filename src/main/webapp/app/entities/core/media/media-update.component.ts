@@ -41,6 +41,7 @@ export class MediaUpdateComponent implements OnInit {
         this.media.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         this.media.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         if (this.media.id !== undefined) {
+            delete this.media['clientId']; // Need to find a better way to do this
             this.subscribeToSaveResponse(this.mediaService.update(this.media));
         } else {
             this.subscribeToSaveResponse(this.mediaService.create(this.media));

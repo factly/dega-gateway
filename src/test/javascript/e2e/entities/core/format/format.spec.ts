@@ -40,7 +40,6 @@ describe('Format e2e test', () => {
         await formatComponentsPage.clickOnCreateButton();
         await promise.all([
             formatUpdatePage.setNameInput('name'),
-            formatUpdatePage.setClientIdInput('clientId'),
             formatUpdatePage.setDescriptionInput('description'),
             formatUpdatePage.setSlugInput('slug'),
             formatUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
@@ -55,7 +54,6 @@ describe('Format e2e test', () => {
             await formatUpdatePage.getIsDefaultInput().click();
             expect(await formatUpdatePage.getIsDefaultInput().isSelected()).to.be.true;
         }
-        expect(await formatUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await formatUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await formatUpdatePage.getSlugInput()).to.eq('slug');
         expect(await formatUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');

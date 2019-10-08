@@ -59,6 +59,7 @@ export class OrganizationUpdateComponent implements OnInit {
         this.organization.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         this.organization.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.organization.id !== undefined) {
+            delete this.organization['clientId']; // Need to find a better way to do this
             this.subscribeToSaveResponse(this.organizationService.update(this.organization));
         } else {
             this.subscribeToSaveResponse(this.organizationService.create(this.organization));

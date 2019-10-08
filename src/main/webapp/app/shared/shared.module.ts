@@ -12,6 +12,7 @@ import { MultipleCheckboxComponent } from 'app/shared/multiple-checkbox/multiple
 import { NgbDateMomentAdapter } from 'app/shared/util/datepicker-adapter';
 import { GatewaySharedCommonModule, GatewaySharedLibsModule, HasAnyAuthorityDirective } from 'app/shared/index';
 import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/confirmation-dialog.component';
+import { FileSizePipe } from 'app/shared/filesize/filesize.pipe';
 
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,7 +39,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MultipleCheckboxComponent,
         QuillEditorAddTweetComponent,
         QuillEditorComponent,
-        QuillEditorFileUploadComponent
+        QuillEditorFileUploadComponent,
+        FileSizePipe
     ],
     providers: [
         {
@@ -52,7 +54,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         GatewaySharedCommonModule,
         HasAnyAuthorityDirective,
         MultipleCheckboxComponent,
-        QuillEditorComponent
+        QuillEditorComponent,
+        FileSizePipe
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

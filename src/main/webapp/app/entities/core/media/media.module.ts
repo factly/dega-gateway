@@ -13,7 +13,6 @@ import {
 } from './';
 import { MediaUploadPopupComponent } from './media-upload-dialog.component';
 import { MediaUploadDialogComponent } from './media-upload-dialog.component';
-import { FileSizePipe } from './filesize.pipe';
 
 const ENTITY_STATES = [...mediaRoute, ...mediaPopupRoute];
 
@@ -26,8 +25,7 @@ const ENTITY_STATES = [...mediaRoute, ...mediaPopupRoute];
         MediaDeleteDialogComponent,
         MediaDeletePopupComponent,
         MediaUploadDialogComponent,
-        MediaUploadPopupComponent,
-        FileSizePipe
+        MediaUploadPopupComponent
     ],
     entryComponents: [
         MediaComponent,

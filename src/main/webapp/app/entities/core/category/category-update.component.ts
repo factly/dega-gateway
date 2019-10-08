@@ -60,7 +60,6 @@ export class CategoryUpdateComponent implements OnInit {
             description: [this.category.description || ''],
             slug: [this.category.slug || ''],
             parent: [this.category.parent || ''],
-            clientId: [this.category.clientId || ''],
             createdDate: [this.category.createdDate || ''],
             lastUpdatedDate: [this.category.lastUpdatedDate || '']
         });

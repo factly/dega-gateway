@@ -86,7 +86,6 @@ export class NewClaimPopupComponent implements OnInit {
             reviewSources: [this.claim.reviewSources || '', Validators.required],
             review: [this.claim.review || '', Validators.required],
             reviewTagLine: [this.claim.reviewTagLine || ''],
-            clientId: [this.claim.clientId || ''],
             slug: [this.claim.slug || 'place-holder-slug', Validators.required], // 'place-holder-slug' is done to make validation work.
             createdDate: [this.claim.createdDate || ''],
             ratingId: [this.claim.ratingId || '', Validators.required],

@@ -19,7 +19,7 @@
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
                     <div class="mat-file-upload">
-                        <button mat-raised-button color="primary">Upload Media <mat-icon>attach_file</mat-icon></button>
+                        <button mat-raised-button color="primary" (click)="fileInput.click()">Upload Media <mat-icon>attach_file</mat-icon></button>
                         <input type="file" name="Brows" class="pad-left" (change)="uploadImageFromLocalSystem($event.target.files)" accept="image/*" #fileInput>
                     </div>
                 </form>

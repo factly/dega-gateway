@@ -116,4 +116,8 @@ export class RatingUpdateComponent implements OnInit {
     showClientIdField(degausersRole: String): boolean {
         return ADMIN_ROLE.includes(degausersRole);
     }
+
+    deleteMediaForRating() {
+        this.rating.media = null;
+    }
 }

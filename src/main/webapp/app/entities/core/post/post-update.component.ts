@@ -152,7 +152,6 @@ export class PostUpdateComponent implements OnInit {
             categories: [this.post.categories], // convert into this.fb.array
             tags: [this.post.tags], // convert into this.fb.array
             degaUsers: [this.post.degaUsers || '', Validators.required], // convert into this.fb.array
-            clientId: [this.post.clientId || ''], // delete once backend is fixed
             publishedDate: [this.post.publishedDate || null], // delete once backend is fixed
             createdDate: [this.post.createdDate || null] // delete once backend is fixed
         });
@@ -177,7 +176,6 @@ export class PostUpdateComponent implements OnInit {
             name: ['', Validators.required],
             slug: [''],
             description: ['', Validators.required],
-            clientId: [''],
             createdDate: [''],
             lastUpdatedDate: ['']
         });
@@ -258,7 +256,6 @@ export class PostUpdateComponent implements OnInit {
             description: ['', Validators.required],
             slug: [''],
             parent: [''],
-            clientId: [''],
             createdDate: [''],
             lastUpdatedDate: ['']
         });
@@ -319,7 +316,7 @@ export class PostUpdateComponent implements OnInit {
         this.postEditFormGroup.controls['media'].setValue(imageData);
     }
 
-    deleteMediaForFeature() {
+    deleteMediaForPostUpdate() {
         this.postEditFormGroup.controls['media'].setValue(null);
     }
 

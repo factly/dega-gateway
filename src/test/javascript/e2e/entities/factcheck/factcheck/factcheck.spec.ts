@@ -40,7 +40,6 @@ describe('Factcheck e2e test', () => {
         await factcheckComponentsPage.clickOnCreateButton();
         await promise.all([
             factcheckUpdatePage.setTitleInput('title'),
-            factcheckUpdatePage.setClientIdInput('clientId'),
             factcheckUpdatePage.setIntroductionInput('introduction'),
             factcheckUpdatePage.setSummaryInput('summary'),
             factcheckUpdatePage.setExcerptInput('excerpt'),
@@ -55,7 +54,6 @@ describe('Factcheck e2e test', () => {
             // factcheckUpdatePage.claimSelectLastOption(),
         ]);
         expect(await factcheckUpdatePage.getTitleInput()).to.eq('title');
-        expect(await factcheckUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await factcheckUpdatePage.getIntroductionInput()).to.eq('introduction');
         expect(await factcheckUpdatePage.getSummaryInput()).to.eq('summary');
         expect(await factcheckUpdatePage.getExcerptInput()).to.eq('excerpt');

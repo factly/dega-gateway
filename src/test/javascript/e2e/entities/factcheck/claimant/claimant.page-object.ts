@@ -30,7 +30,6 @@ export class ClaimantUpdatePage {
     tagLineInput = element(by.id('field_tagLine'));
     descriptionInput = element(by.id('field_description'));
     imageURLInput = element(by.id('field_imageURL'));
-    clientIdInput = element(by.id('field_clientId'));
     slugInput = element(by.id('field_slug'));
     createdDateInput = element(by.id('field_createdDate'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
@@ -69,14 +68,6 @@ export class ClaimantUpdatePage {
 
     async getImageURLInput() {
         return this.imageURLInput.getAttribute('value');
-    }
-
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     async setSlugInput(slug) {

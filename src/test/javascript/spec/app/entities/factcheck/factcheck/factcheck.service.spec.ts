@@ -94,7 +94,6 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         title: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         introduction: 'BBBBBB',
                         summary: 'BBBBBB',
                         excerpt: 'BBBBBB',
@@ -132,7 +131,6 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         title: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         introduction: 'BBBBBB',
                         summary: 'BBBBBB',
                         excerpt: 'BBBBBB',

@@ -27,7 +27,6 @@ export class FactcheckUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     titleInput = element(by.id('field_title'));
-    clientIdInput = element(by.id('field_clientId'));
     introductionInput = element(by.id('field_introduction'));
     summaryInput = element(by.id('field_summary'));
     excerptInput = element(by.id('field_excerpt'));
@@ -53,14 +52,6 @@ export class FactcheckUpdatePage {
 
     async getTitleInput() {
         return this.titleInput.getAttribute('value');
-    }
-
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     async setIntroductionInput(introduction) {

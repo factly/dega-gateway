@@ -43,7 +43,6 @@ describe('Claimant e2e test', () => {
             claimantUpdatePage.setTagLineInput('tagLine'),
             claimantUpdatePage.setDescriptionInput('description'),
             claimantUpdatePage.setImageURLInput('imageURL'),
-            claimantUpdatePage.setClientIdInput('clientId'),
             claimantUpdatePage.setSlugInput('slug'),
             claimantUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             claimantUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
@@ -52,7 +51,6 @@ describe('Claimant e2e test', () => {
         expect(await claimantUpdatePage.getTagLineInput()).to.eq('tagLine');
         expect(await claimantUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await claimantUpdatePage.getImageURLInput()).to.eq('imageURL');
-        expect(await claimantUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await claimantUpdatePage.getSlugInput()).to.eq('slug');
         expect(await claimantUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         expect(await claimantUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');

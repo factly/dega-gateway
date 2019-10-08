@@ -1,5 +1,6 @@
 os:
   - linux
+dist: trusty
 services:
   - docker
 language: node_js
@@ -19,7 +20,6 @@ env:
     - SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
     - SPRING_JPA_SHOW_SQL=false
 before_install:
-  - . ./jdk_switcher.sh
   - jdk_switcher use oraclejdk8
   - java -version
   - sudo /etc/init.d/mysql stop

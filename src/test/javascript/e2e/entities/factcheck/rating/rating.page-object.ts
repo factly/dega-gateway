@@ -30,7 +30,6 @@ export class RatingUpdatePage {
     numericValueInput = element(by.id('field_numericValue'));
     iconURLInput = element(by.id('field_iconURL'));
     isDefaultInput = element(by.id('field_isDefault'));
-    clientIdInput = element(by.id('field_clientId'));
     slugInput = element(by.id('field_slug'));
     createdDateInput = element(by.id('field_createdDate'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
@@ -66,13 +65,6 @@ export class RatingUpdatePage {
 
     getIsDefaultInput() {
         return this.isDefaultInput;
-    }
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     async setSlugInput(slug) {

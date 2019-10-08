@@ -29,7 +29,6 @@ export class RatingUpdateComponent implements OnInit {
     slug: string;
     slugExtention: number;
     tempSlug: string;
-    showClientId: boolean;
     currentUser: IDegaUser;
     account: Account;
 
@@ -56,7 +55,6 @@ export class RatingUpdateComponent implements OnInit {
             (res: HttpResponse<IDegaUser[]>) => {
                 this.degausers = res.body;
                 this.currentUser = this.degausers.filter(u => u.email === this.account.email).shift();
-                this.showClientId = this.showClientIdField(this.currentUser.roleName);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -71,6 +69,7 @@ export class RatingUpdateComponent implements OnInit {
         this.rating.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         this.rating.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.rating.id !== undefined) {
+            delete this.rating['clientId']; // Need to find a better way to do this
             this.subscribeToSaveResponse(this.ratingService.update(this.rating));
         } else {
             this.subscribeToSaveResponse(this.ratingService.create(this.rating));
@@ -111,10 +110,6 @@ export class RatingUpdateComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    showClientIdField(degausersRole: String): boolean {
-        return ADMIN_ROLE.includes(degausersRole);
     }
 
     deleteMediaForRating() {

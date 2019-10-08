@@ -42,7 +42,6 @@ describe('Rating e2e test', () => {
             ratingUpdatePage.setNameInput('name'),
             ratingUpdatePage.setNumericValueInput('5'),
             ratingUpdatePage.setIconURLInput('iconURL'),
-            ratingUpdatePage.setClientIdInput('clientId'),
             ratingUpdatePage.setSlugInput('slug'),
             ratingUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             ratingUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
@@ -59,7 +58,6 @@ describe('Rating e2e test', () => {
             await ratingUpdatePage.getIsDefaultInput().click();
             expect(await ratingUpdatePage.getIsDefaultInput().isSelected()).to.be.true;
         }
-        expect(await ratingUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await ratingUpdatePage.getSlugInput()).to.eq('slug');
         expect(await ratingUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         expect(await ratingUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');

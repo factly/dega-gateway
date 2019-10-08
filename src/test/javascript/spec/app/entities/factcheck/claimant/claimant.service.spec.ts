@@ -77,7 +77,6 @@ describe('Service Tests', () => {
                         tagLine: 'BBBBBB',
                         description: 'BBBBBB',
                         imageURL: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         slug: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT)
@@ -107,7 +106,6 @@ describe('Service Tests', () => {
                         tagLine: 'BBBBBB',
                         description: 'BBBBBB',
                         imageURL: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         slug: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT)

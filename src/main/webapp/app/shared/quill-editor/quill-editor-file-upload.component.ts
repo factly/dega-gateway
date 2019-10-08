@@ -17,7 +17,7 @@ export class QuillEditorFileUploadComponent implements OnInit {
     page: any;
     url: string;
     previousSelectedImage = { selected: null };
-    currentSelectedImage = {};
+    currentSelectedImage: any = {};
 
     constructor(
         public dialogRef: MatDialogRef<QuillEditorFileUploadComponent>,

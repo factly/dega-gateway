@@ -39,7 +39,6 @@ export class MediaUpdatePage {
     publishedDateInput = element(by.id('field_publishedDate'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
     slugInput = element(by.id('field_slug'));
-    clientIdInput = element(by.id('field_clientId'));
     createdDateInput = element(by.id('field_createdDate'));
 
     async getPageTitle() {
@@ -148,14 +147,6 @@ export class MediaUpdatePage {
 
     async getSlugInput() {
         return this.slugInput.getAttribute('value');
-    }
-
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     async setCreatedDateInput(createdDate) {

@@ -29,7 +29,6 @@ export class TagUpdatePage {
     nameInput = element(by.id('field_name'));
     slugInput = element(by.id('field_slug'));
     descriptionInput = element(by.id('field_description'));
-    clientIdInput = element(by.id('field_clientId'));
     createdDateInput = element(by.id('field_createdDate'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
 
@@ -59,14 +58,6 @@ export class TagUpdatePage {
 
     async getDescriptionInput() {
         return this.descriptionInput.getAttribute('value');
-    }
-
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     async setCreatedDateInput(createdDate) {

@@ -43,7 +43,6 @@ describe('Category e2e test', () => {
             categoryUpdatePage.setDescriptionInput('description'),
             categoryUpdatePage.setSlugInput('slug'),
             categoryUpdatePage.setParentInput('parent'),
-            categoryUpdatePage.setClientIdInput('clientId'),
             categoryUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             categoryUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
@@ -51,7 +50,6 @@ describe('Category e2e test', () => {
         expect(await categoryUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await categoryUpdatePage.getSlugInput()).to.eq('slug');
         expect(await categoryUpdatePage.getParentInput()).to.eq('parent');
-        expect(await categoryUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await categoryUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         expect(await categoryUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');
         await categoryUpdatePage.save();

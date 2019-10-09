@@ -28,7 +28,6 @@ export class FormatUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
     isDefaultInput = element(by.id('field_isDefault'));
-    clientIdInput = element(by.id('field_clientId'));
     descriptionInput = element(by.id('field_description'));
     slugInput = element(by.id('field_slug'));
     createdDateInput = element(by.id('field_createdDate'));
@@ -48,13 +47,6 @@ export class FormatUpdatePage {
 
     getIsDefaultInput() {
         return this.isDefaultInput;
-    }
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     async setDescriptionInput(description) {

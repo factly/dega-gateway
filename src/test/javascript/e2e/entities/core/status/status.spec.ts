@@ -40,13 +40,11 @@ describe('Status e2e test', () => {
         await statusComponentsPage.clickOnCreateButton();
         await promise.all([
             statusUpdatePage.setNameInput('name'),
-            statusUpdatePage.setClientIdInput('clientId'),
             statusUpdatePage.setSlugInput('slug'),
             statusUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             statusUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await statusUpdatePage.getNameInput()).to.eq('name');
-        expect(await statusUpdatePage.getClientIdInput()).to.eq('clientId');
         const selectedIsDefault = statusUpdatePage.getIsDefaultInput();
         if (await selectedIsDefault.isSelected()) {
             await statusUpdatePage.getIsDefaultInput().click();

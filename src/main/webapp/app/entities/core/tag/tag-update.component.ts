@@ -41,7 +41,6 @@ export class TagUpdateComponent implements OnInit {
             name: [this.tag.name || '', Validators.required],
             slug: [this.tag.slug || ''],
             description: [this.tag.description || ''],
-            clientId: [this.tag.clientId || ''],
             createdDate: [this.tag.createdDate || ''],
             lastUpdatedDate: [this.tag.lastUpdatedDate || '']
         });

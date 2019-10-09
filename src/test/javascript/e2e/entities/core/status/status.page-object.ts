@@ -27,7 +27,6 @@ export class StatusUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
-    clientIdInput = element(by.id('field_clientId'));
     isDefaultInput = element(by.id('field_isDefault'));
     slugInput = element(by.id('field_slug'));
     createdDateInput = element(by.id('field_createdDate'));
@@ -43,14 +42,6 @@ export class StatusUpdatePage {
 
     async getNameInput() {
         return this.nameInput.getAttribute('value');
-    }
-
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     getIsDefaultInput() {

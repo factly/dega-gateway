@@ -93,7 +93,6 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         title: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         content: 'BBBBBB',
                         excerpt: 'BBBBBB',
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
@@ -130,7 +129,6 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         title: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         content: 'BBBBBB',
                         excerpt: 'BBBBBB',
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),

@@ -20,19 +20,6 @@
                             </small>
                         </div>
                     </div>
-                    <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
-                        <mat-form-field class="w-100">
-                            <input matInput placeholder="{{'gatewayApp.coreFormat.clientId' | translate}}"
-                                type="text" name="clientId" id="field_clientId"
-                                   [(ngModel)]="format.clientId" required/>
-                        </mat-form-field>
-                        <div [hidden]="!(editForm.controls.clientId?.dirty && editForm.controls.clientId?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!editForm.controls.clientId?.errors?.required" jhiTranslate="entity.validation.required">
-                                This field is required.
-                            </small>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <mat-form-field class="w-100" hintLabel="Max 400 characters">
                             <textarea matInput #input

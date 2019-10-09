@@ -74,7 +74,6 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         isDefault: true,
                         slug: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),
@@ -102,7 +101,6 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         isDefault: true,
                         slug: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),

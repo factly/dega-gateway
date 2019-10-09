@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { IMedia } from 'app/shared/model/core/media.model';
 
 @Component({

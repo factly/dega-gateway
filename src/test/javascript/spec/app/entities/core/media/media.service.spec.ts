@@ -106,7 +106,6 @@ describe('Service Tests', () => {
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
                         slug: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault
@@ -144,7 +143,6 @@ describe('Service Tests', () => {
                         publishedDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT),
                         slug: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT)
                     },
                     elemDefault

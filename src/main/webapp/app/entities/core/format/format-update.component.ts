@@ -67,6 +67,7 @@ export class FormatUpdateComponent implements OnInit {
         this.format.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         this.format.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.format.id !== undefined) {
+            delete this.format['clientId']; // Need to find a better way to do this
             this.subscribeToSaveResponse(this.formatService.update(this.format));
         } else {
             this.subscribeToSaveResponse(this.formatService.create(this.format));

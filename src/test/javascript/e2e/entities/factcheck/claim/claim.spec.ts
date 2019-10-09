@@ -47,7 +47,6 @@ describe('Claim e2e test', () => {
             claimUpdatePage.setReviewSourcesInput('reviewSources'),
             claimUpdatePage.setReviewInput('review'),
             claimUpdatePage.setReviewTagLineInput('reviewTagLine'),
-            claimUpdatePage.setClientIdInput('clientId'),
             claimUpdatePage.setSlugInput('slug'),
             claimUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             claimUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
@@ -62,7 +61,6 @@ describe('Claim e2e test', () => {
         expect(await claimUpdatePage.getReviewSourcesInput()).to.eq('reviewSources');
         expect(await claimUpdatePage.getReviewInput()).to.eq('review');
         expect(await claimUpdatePage.getReviewTagLineInput()).to.eq('reviewTagLine');
-        expect(await claimUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await claimUpdatePage.getSlugInput()).to.eq('slug');
         expect(await claimUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');
         expect(await claimUpdatePage.getLastUpdatedDateInput()).to.contain('2001-01-01T02:30');

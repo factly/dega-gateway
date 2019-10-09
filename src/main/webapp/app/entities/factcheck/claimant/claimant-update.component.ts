@@ -43,6 +43,7 @@ export class ClaimantUpdateComponent implements OnInit {
         this.claimant.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         this.claimant.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.claimant.id !== undefined) {
+            delete this.claimant['clientId']; // Need to find a better way to do this
             this.subscribeToSaveResponse(this.claimantService.update(this.claimant));
         } else {
             this.subscribeToSaveResponse(this.claimantService.create(this.claimant));
@@ -79,5 +80,9 @@ export class ClaimantUpdateComponent implements OnInit {
 
     updateMediaForFeature(imageData) {
         this.claimant.media = imageData;
+    }
+
+    deleteMediaForClaimant() {
+        this.claimant.media = null;
     }
 }

@@ -19,8 +19,9 @@
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.coreMedia.fileSize">File Size</span></dt>
                 <dd>
-                    <span>{{media.fileSize}}</span>
+                    <span>{{media.fileSize | degafilesize}}</span>
                 </dd>
+                
                 <dt><span jhiTranslate="gatewayApp.coreMedia.dimensions">Dimensions</span></dt>
                 <dd>
                     <span>{{media.dimensions}}</span>
@@ -56,10 +57,6 @@
                 <dt><span jhiTranslate="gatewayApp.coreMedia.slug">Slug</span></dt>
                 <dd>
                     <span>{{media.slug}}</span>
-                </dd>
-                <dt><span jhiTranslate="gatewayApp.coreMedia.clientId">Client Id</span></dt>
-                <dd>
-                    <span>{{media.clientId}}</span>
                 </dd>
                 <dt><span jhiTranslate="gatewayApp.coreMedia.createdDate">Created Date</span></dt>
                 <dd>

@@ -101,7 +101,6 @@ describe('Service Tests', () => {
                         reviewSources: 'BBBBBB',
                         review: 'BBBBBB',
                         reviewTagLine: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         slug: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT)
@@ -137,7 +136,6 @@ describe('Service Tests', () => {
                         reviewSources: 'BBBBBB',
                         review: 'BBBBBB',
                         reviewTagLine: 'BBBBBB',
-                        clientId: 'BBBBBB',
                         slug: 'BBBBBB',
                         createdDate: currentDate.format(DATE_TIME_FORMAT),
                         lastUpdatedDate: currentDate.format(DATE_TIME_FORMAT)

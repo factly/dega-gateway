@@ -67,6 +67,7 @@ export class RoleUpdateComponent implements OnInit {
         this.role.createdDate = this.createdDate != null ? moment(this.createdDate, DATE_TIME_FORMAT) : null;
         this.role.lastUpdatedDate = this.lastUpdatedDate != null ? moment(this.lastUpdatedDate, DATE_TIME_FORMAT) : null;
         if (this.role.id !== undefined) {
+            delete this.role['clientId']; // Need to find a better way to do this
             this.subscribeToSaveResponse(this.roleService.update(this.role));
         } else {
             this.subscribeToSaveResponse(this.roleService.create(this.role));

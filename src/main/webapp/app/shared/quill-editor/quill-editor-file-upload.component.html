@@ -2,7 +2,7 @@
     <div class="dialogue-header shadow-sm">
         <h2 class="jhi-claim-heading">Featured Media <mat-icon class="float-right" data-dismiss="modal" (click)="clear()">close</mat-icon></h2>
     </div>
-    <div class="dialogue-body p-4">
+    <div class="dialogue-body p-4" style="float:left; width: 80%">
         <div class="row">
             <div class="col-md-12">
                 <form name="searchForm" class="d-flex align-items-center justify-content-center">
@@ -19,22 +19,40 @@
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
                     <div class="mat-file-upload">
-                        <button mat-raised-button color="primary">Upload Media <mat-icon>attach_file</mat-icon></button>
+                        <button mat-raised-button color="primary" (click)="fileInput.click()">Upload Media <mat-icon>attach_file</mat-icon></button>
                         <input type="file" name="Brows" class="pad-left" (change)="uploadImageFromLocalSystem($event.target.files)" accept="image/*" #fileInput>
                     </div>
                 </form>
             </div>
         </div>
         <div class="modal-body">
-            <div *ngIf="media">
+            <div *ngIf="media" >
                 <div class="row">
                     <div class="media-thumbnail" *ngFor="let media of media" >
-                        <a (click)="selectImage(media)">
-                            <img src="{{media.sourceURL}}?resize:fill:100:100/gravity:sm" alt="Image" height="100" class="img-bottom">
+                        <a (click)="imageDetail(media)">
+                            <img src="{{media.sourceURL}}?resize:fill:100:100/gravity:sm" [ngClass]="{ 'selected-media-border': media.selected}" alt="Image" height="100" class="img-bottom">
                         </a>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div style="float:right;max-width:20%" class="dialogue-body p-4">
+        <div><h4><strong>Details:</strong></h4></div>
+            <br>
+            <br>
+            <div *ngIf="currentSelectedImage &&  currentSelectedImage['id']">
+            <div><strong>Title:</strong> {{currentSelectedImage.title}} </div>
+            <div><strong>File Size:</strong> {{currentSelectedImage.fileSize | degafilesize}} </div>
+            <div><strong>Caption:</strong> {{currentSelectedImage.caption}} </div>
+            <div><strong>Description:</strong> {{currentSelectedImage.description}} </div>
+            <div><strong>Slug:</strong> {{currentSelectedImage.slug}} </div>
+            <div><strong>Uploaded By:</strong> {{currentSelectedImage.uploadedBy}} </div>
+            <div><strong>Created Date:</strong> {{currentSelectedImage.createdDate | date: 'd/M/y'}} </div>
+            <div><strong>Published Date:</strong> {{currentSelectedImage.publishedDate | date: 'd/M/y'}} </div>
+        </div>
+        <div *ngIf="currentSelectedImage && !currentSelectedImage['id']">
+            No Image Selected
         </div>
     </div>
 </div>

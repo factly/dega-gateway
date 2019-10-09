@@ -380,14 +380,6 @@ export class OrganizationUpdatePage {
         return this.timeZoneInput.getAttribute('value');
     }
 
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
-    }
-
     async setSlugInput(slug) {
         await this.slugInput.sendKeys(slug);
     }

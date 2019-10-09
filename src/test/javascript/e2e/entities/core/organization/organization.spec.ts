@@ -77,7 +77,6 @@ describe('Organization e2e test', () => {
             organizationUpdatePage.setMailchimpAPIKeyInput('mailchimpAPIKey'),
             organizationUpdatePage.setSiteLanguageInput('siteLanguage'),
             organizationUpdatePage.setTimeZoneInput('timeZone'),
-            organizationUpdatePage.setClientIdInput('clientId'),
             organizationUpdatePage.setSlugInput('slug'),
             organizationUpdatePage.setEmailInput('email'),
             organizationUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
@@ -122,7 +121,6 @@ describe('Organization e2e test', () => {
         expect(await organizationUpdatePage.getMailchimpAPIKeyInput()).to.eq('mailchimpAPIKey');
         expect(await organizationUpdatePage.getSiteLanguageInput()).to.eq('siteLanguage');
         expect(await organizationUpdatePage.getTimeZoneInput()).to.eq('timeZone');
-        expect(await organizationUpdatePage.getClientIdInput()).to.eq('clientId');
         expect(await organizationUpdatePage.getSlugInput()).to.eq('slug');
         expect(await organizationUpdatePage.getEmailInput()).to.eq('email');
         expect(await organizationUpdatePage.getCreatedDateInput()).to.contain('2001-01-01T02:30');

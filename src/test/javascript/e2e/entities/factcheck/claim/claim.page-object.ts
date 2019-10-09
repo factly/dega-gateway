@@ -34,7 +34,6 @@ export class ClaimUpdatePage {
     reviewSourcesInput = element(by.id('field_reviewSources'));
     reviewInput = element(by.id('field_review'));
     reviewTagLineInput = element(by.id('field_reviewTagLine'));
-    clientIdInput = element(by.id('field_clientId'));
     slugInput = element(by.id('field_slug'));
     createdDateInput = element(by.id('field_createdDate'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
@@ -107,14 +106,6 @@ export class ClaimUpdatePage {
 
     async getReviewTagLineInput() {
         return this.reviewTagLineInput.getAttribute('value');
-    }
-
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     async setSlugInput(slug) {

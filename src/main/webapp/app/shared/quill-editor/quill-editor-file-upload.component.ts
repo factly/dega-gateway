@@ -7,7 +7,8 @@ import { MediaService } from 'app/entities/core/media/media.service';
 
 @Component({
     selector: 'jhi-quill-editor-file-upload',
-    templateUrl: './quill-editor-file-upload.component.html'
+    templateUrl: './quill-editor-file-upload.component.html',
+    styleUrls: ['quill-editor-file-upload.component.css']
 })
 export class QuillEditorFileUploadComponent implements OnInit {
     media: IMedia[];
@@ -15,6 +16,8 @@ export class QuillEditorFileUploadComponent implements OnInit {
     links: any;
     page: any;
     url: string;
+    previousSelectedImage = { selected: null };
+    currentSelectedImage: any = {};
 
     constructor(
         public dialogRef: MatDialogRef<QuillEditorFileUploadComponent>,
@@ -50,6 +53,18 @@ export class QuillEditorFileUploadComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
+    imageDetail(imageData): void {
+        this.currentSelectedImage = imageData;
+        if (imageData.selected != null) {
+            this.selectImage(imageData);
+            imageData.selected = null;
+            this.previousSelectedImage.selected = null;
+        } else {
+            this.previousSelectedImage.selected = null;
+            imageData.selected = true;
+            this.previousSelectedImage = imageData;
+        }
+    }
     selectImage(imageData): void {
         this.dialogRef.close(imageData);
     }

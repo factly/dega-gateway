@@ -27,7 +27,6 @@ export class PostUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     titleInput = element(by.id('field_title'));
-    clientIdInput = element(by.id('field_clientId'));
     contentInput = element(by.id('field_content'));
     excerptInput = element(by.id('field_excerpt'));
     publishedDateInput = element(by.id('field_publishedDate'));
@@ -56,14 +55,6 @@ export class PostUpdatePage {
 
     async getTitleInput() {
         return this.titleInput.getAttribute('value');
-    }
-
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     async setContentInput(content) {

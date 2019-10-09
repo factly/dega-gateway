@@ -40,13 +40,11 @@ describe('Role e2e test', () => {
         await roleComponentsPage.clickOnCreateButton();
         await promise.all([
             roleUpdatePage.setNameInput('name'),
-            roleUpdatePage.setClientIdInput('clientId'),
             roleUpdatePage.setSlugInput('slug'),
             roleUpdatePage.setCreatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             roleUpdatePage.setLastUpdatedDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
         ]);
         expect(await roleUpdatePage.getNameInput()).to.eq('name');
-        expect(await roleUpdatePage.getClientIdInput()).to.eq('clientId');
         const selectedIsDefault = roleUpdatePage.getIsDefaultInput();
         if (await selectedIsDefault.isSelected()) {
             await roleUpdatePage.getIsDefaultInput().click();

@@ -30,7 +30,6 @@ export class CategoryUpdatePage {
     descriptionInput = element(by.id('field_description'));
     slugInput = element(by.id('field_slug'));
     parentInput = element(by.id('field_parent'));
-    clientIdInput = element(by.id('field_clientId'));
     createdDateInput = element(by.id('field_createdDate'));
     lastUpdatedDateInput = element(by.id('field_lastUpdatedDate'));
 
@@ -68,14 +67,6 @@ export class CategoryUpdatePage {
 
     async getParentInput() {
         return this.parentInput.getAttribute('value');
-    }
-
-    async setClientIdInput(clientId) {
-        await this.clientIdInput.sendKeys(clientId);
-    }
-
-    async getClientIdInput() {
-        return this.clientIdInput.getAttribute('value');
     }
 
     async setCreatedDateInput(createdDate) {

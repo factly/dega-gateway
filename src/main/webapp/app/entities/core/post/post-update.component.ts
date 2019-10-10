@@ -297,7 +297,7 @@ export class PostUpdateComponent implements OnInit {
         this.postEditFormGroup.controls['content'].setValue(data['html']);
     }
 
-    choseMediaforFeature() {
+    chooseMediaforFeature() {
         const config = {
             height: '90%',
             width: '90vw',

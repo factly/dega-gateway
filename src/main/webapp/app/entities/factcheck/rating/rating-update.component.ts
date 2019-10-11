@@ -89,7 +89,7 @@ export class RatingUpdateComponent implements OnInit {
         this.isSaving = false;
     }
 
-    choseMediaforFeature() {
+    chooseMediaforFeature() {
         const config = {
             height: '90%',
             width: '90vw',

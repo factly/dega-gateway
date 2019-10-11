@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
     languages: any[];
     swaggerEnabled: boolean;
     version: string;
-    organisationOptions: IOrganization[];
+    organizationOptions: IOrganization[];
     currentUser: IDegaUser;
 
     constructor(
@@ -54,7 +54,7 @@ export class NavbarComponent implements OnInit {
                     this.currentUser = res.body;
                     this.organizationService.getOrganizationsByKeycloakId(account.id).subscribe(
                         (response: HttpResponse<IOrganization[]>) => {
-                            this.organisationOptions = response.body;
+                            this.organizationOptions = response.body;
                         },
                         (response: HttpErrorResponse) => this.onError(response.message)
                     );
@@ -68,8 +68,8 @@ export class NavbarComponent implements OnInit {
         });
     }
 
-    changeOrganisation(selectedOrganisation: IOrganization) {
-        this.currentUser.organizationCurrentId = selectedOrganisation.id;
+    changeOrganization(selectedOrganization: IOrganization) {
+        this.currentUser.organizationCurrentId = selectedOrganization.id;
         this.subscribeToSaveResponse(this.degaUserService.update(this.currentUser));
     }
 

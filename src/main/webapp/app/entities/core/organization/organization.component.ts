@@ -30,6 +30,7 @@ export class OrganizationComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['name', 'phone', 'siteTitle', 'siteLanguage', 'clientId', 'slug', 'email', 'createdDate', 'actions'];
 
     constructor(
         private organizationService: OrganizationService,

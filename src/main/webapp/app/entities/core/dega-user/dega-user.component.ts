@@ -30,7 +30,17 @@ export class DegaUserComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-
+    displayedColumns = [
+        'profilePicture',
+        'enabled',
+        'emailVerified',
+        'email',
+        'createdDate',
+        'roleName',
+        'organizationDefaultName',
+        'organizationCurrentName',
+        'actions'
+    ];
     constructor(
         private degaUserService: DegaUserService,
         private parseLinks: JhiParseLinks,

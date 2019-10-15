@@ -1,89 +1,202 @@
-<div>
-    <h2 id="page-heading">
-        <span jhiTranslate="gatewayApp.coreRoleMapping.home.title">Role Mappings</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-role-mapping" [routerLink]="['/role-mapping/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreRoleMapping.home.createLabel">
-            Create new Role Mapping
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreRoleMapping.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
-                    </button>
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+<div class="table-view-page p-2">
+    <div class="row mt-5">
+        <div class="col-md-5">
+            <h2 id="page-heading">
+                <span jhiTranslate="gatewayApp.coreRoleMapping.home.title">Role Mapping</span>
+            </h2>
+        </div>
+        <div class="col-md-7">
+            <form
+                name="searchForm"
+                class="d-flex align-content-center justify-content-end"
+            >
+                <mat-form-field>
+                    <input
+                        type="text"
+                        matInput
+                        [(ngModel)]="currentSearch"
+                        id="currentSearch"
+                        name="currentSearch"
+                        placeholder="{{ 'gatewayApp.coreRoleMapping.home.search' | translate }}"
+                    >
+                </mat-form-field>
+                <button
+                    mat-icon-button
+                    mat-raised-button
+                    class="mr-2"
+                    (click)="search(currentSearch)"
+                >
+                    <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+                <button
+                    mat-icon-button
+                    mat-raised-button
+                    color="warn"
+                    class="mr-3"
+                    (click)="clear()"
+                    *ngIf="currentSearch"
+                >
+                    <fa-icon [icon]="'trash-alt'"></fa-icon>
+                </button>
+                <div>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        id="jh-create-entity"
+                        [routerLink]="['/role-mapping/new']"
+                    >
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                        <span
+                            class="hidden-sm-down"
+                            jhiTranslate="gatewayApp.coreRoleMapping.home.createLabel"
+                        >
+                            Create new Role Mapping
+                        </span>
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    <br/>
-    <div class="table-responsive" *ngIf="roleMappings">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="name"><span jhiTranslate="gatewayApp.coreRoleMapping.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="organizationName"><span jhiTranslate="gatewayApp.coreRoleMapping.organization">Organization</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="roleName"><span jhiTranslate="gatewayApp.coreRoleMapping.role">Role</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let roleMapping of roleMappings ;trackBy: trackId">
-                <td><a [routerLink]="['/role-mapping', roleMapping.id, 'view' ]">{{roleMapping.id}}</a></td>
-                <td>{{roleMapping.name}}</td>
-                <td>
-                    <div *ngIf="roleMapping.organizationId">
-                        <a [routerLink]="['../organization', roleMapping.organizationId , 'view' ]" >{{roleMapping.organizationName}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="roleMapping.roleId">
-                        <a [routerLink]="['../role', roleMapping.roleId , 'view' ]" >{{roleMapping.roleName}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/role-mapping', roleMapping.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/role-mapping', roleMapping.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'role-mapping/'+ roleMapping.id + '/delete'} }]"
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div
+            class="table-responsive col-md-12"
+            *ngIf="roleMappings"
+            jhiSort
+            [(predicate)]="predicate"
+            [(ascending)]="reverse"
+            [callback]="transition.bind(this)"
+        >
+            <table
+                mat-table
+                [dataSource]="roleMappings"
+                class="mat-elevation-z8 shadow-table full-width alternate-color box-shadow-2"
+            >
+                <ng-container matColumnDef="id">
+                    <th
+                        jhiSortBy="id"
+                        mat-header-cell
+                        *matHeaderCellDef
+                    >
+                        <span>ID</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let element"
+                    >
+                        {{element.id}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th
+                        jhiSortBy="name"
+                        mat-header-cell
+                        *matHeaderCellDef
+                    >
+                        <span jhiTranslate="gatewayApp.coreRoleMapping.name">Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let element"
+                    >
+                        {{element.name}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="organization">
+                    <th
+                        jhiSortBy="organization"
+                        mat-header-cell
+                        *matHeaderCellDef
+                    >
+                        <span jhiTranslate="gatewayApp.coreRoleMapping.organization">Organization</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let element"
+                    >
+                        {{element.organizationName}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="role">
+                    <th
+                        jhiSortBy="role"
+                        mat-header-cell
+                        *matHeaderCellDef
+                    >
+                        <span jhiTranslate="gatewayApp.coreRoleMapping.role">Role</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let element"
+                    >
+                        {{element.roleName}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        class="action-column"
+                    >
+                        Actions
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let element"
+                    >
+                        <div class="action-button-container">
+                            <div [routerLink]="['/role-mapping', element.id, 'view' ]">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                            </div>
+                            <div [routerLink]="['/role-mapping', element.id, 'edit']">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            </div>
+                            <div
+                                [routerLink]="['/', { outlets: { popup: 'role-mapping/'+ element.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                            >
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+                <tbody>
+                    <tr
+                        mat-header-row
+                        *matHeaderRowDef="displayedColumns"
+                    ></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns;"
+                    ></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div *ngIf="roleMappings && roleMappings.length">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count
+                [page]="page"
+                [total]="queryCount"
+                [maxSize]="5"
+                [itemsPerPage]="itemsPerPage"
+            ></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination
+                [collectionSize]="totalItems"
+                [(page)]="page"
+                [pageSize]="itemsPerPage"
+                [maxSize]="5"
+                [rotate]="true"
+                [boundaryLinks]="true"
+                (pageChange)="loadPage(page)"
+            ></ngb-pagination>
         </div>
     </div>
 </div>

@@ -30,6 +30,7 @@ export class RoleMappingComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    displayedColumns = ['id', 'name', 'organization', 'role', 'actions'];
 
     constructor(
         private roleMappingService: RoleMappingService,

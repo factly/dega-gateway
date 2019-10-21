@@ -27,7 +27,7 @@
                     </li>
                 </ul>
             </li>
-            <li ngbDropdown class="nav-item dropdown pointer" *ngIf="organisationOptions && organisationOptions.length > 0">
+            <li ngbDropdown class="nav-item dropdown pointer" *ngIf="organizationOptions && organizationOptions.length > 0">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
                    id="orgainisationnavBarDropdown">
                     <span>
@@ -36,14 +36,14 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li *ngFor="let organisation of organisationOptions">
-                        <a class="dropdown-item" [jhiActiveMenu]="organisation"
-                           (click)="changeOrganisation(organisation);collapseNavbar();">
+                    <li *ngFor="let organization of organizationOptions">
+                        <a class="dropdown-item" [jhiActiveMenu]="organization"
+                           (click)="changeOrganization(organization);collapseNavbar();">
                             <span>
                                 <span>
-                                    <mat-icon class="font-sz-16">{{organisation?.id == currentUser?.organizationCurrentId ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
+                                    <mat-icon class="font-sz-16">{{organization?.id == currentUser?.organizationCurrentId ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>
                                 </span>
-                                <span>{{organisation.name}}</span>
+                                <span>{{organization.name}}</span>
                             </span>
                         </a>
                     </li>

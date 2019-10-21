@@ -455,7 +455,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    choseMediaforFeature() {
+    chooseMediaforFeature() {
         const config = {
             height: '90%',
             width: '90vw',

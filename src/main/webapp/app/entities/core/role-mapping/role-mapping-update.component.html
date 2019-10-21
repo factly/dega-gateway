@@ -1,61 +1,148 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-role-mapping-heading" jhiTranslate="gatewayApp.coreRoleMapping.home.createOrEditLabel">Create or edit a Role Mapping</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!roleMapping.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="roleMapping.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreRoleMapping.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="roleMapping.name" required/>
-                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+<div class="create-view-page p-2">
+    <div class="row shadow">
+        <div class="col-md-12">
+            <h2
+                id="jhi-role-heading"
+                jhiTranslate="gatewayApp.coreRoleMapping.home.createOrEditLabel"
+            >
+                Create or edit a Role Mapping
+            </h2>
+        </div>
+        <div class="col-md-12 mt-5">
+            <form
+                name="editForm"
+                role="form"
+                novalidate
+                (ngSubmit)="save()"
+                #editForm="ngForm"
+            >
+                <div>
+                    <jhi-alert-error></jhi-alert-error>
+                    <div class="form-group">
+                        <mat-form-field class="w-100">
+                            <input
+                                type="text"
+                                matInput
+                                placeholder="{{ 'gatewayApp.coreRoleMapping.name' | translate }}"
+                                name="name"
+                                id="field_name"
+                                [(ngModel)]="roleMapping.name"
+                                required
+                            >
+                        </mat-form-field>
+                        <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                            <small
+                                class="form-text text-danger"
+                                [hidden]="!editForm.controls.name?.errors?.required"
+                                jhiTranslate="entity.validation.required"
+                            >
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label
+                            class="form-control-label"
+                            jhiTranslate="gatewayApp.coreRoleMapping.organization"
+                            for="field_organization"
+                        >
+                            Organization
+                        </label>
+                        <select
+                            class="form-control"
+                            id="field_organization"
+                            name="organization"
+                            [(ngModel)]="roleMapping.organizationId"
+                            required
+                        >
+                            <option
+                                *ngIf="!editForm.value.organization"
+                                [ngValue]="null"
+                                selected
+                            ></option>
+                            <option
+                                [ngValue]="organizationOption.id"
+                                *ngFor="let organizationOption of organizations; trackBy: trackOrganizationById"
+                            >
+                                {{organizationOption.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div [hidden]="!(editForm.controls.organization?.dirty && editForm.controls.organization?.invalid)">
+                        <small
+                            class="form-text text-danger"
+                            [hidden]="!editForm.controls.organization?.errors?.required"
+                            jhiTranslate="entity.validation.required"
+                        >
+                            This field is required.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label
+                            class="form-control-label"
+                            jhiTranslate="gatewayApp.coreRoleMapping.role"
+                            for="field_role"
+                        >
+                            Role
+                        </label>
+                        <select
+                            class="form-control"
+                            id="field_role"
+                            name="role"
+                            [(ngModel)]="roleMapping.roleId"
+                            required
+                        >
+                            <option
+                                *ngIf="!editForm.value.role"
+                                [ngValue]="null"
+                                selected
+                            ></option>
+                            <option
+                                [ngValue]="roleOption.id"
+                                *ngFor="let roleOption of roles; trackBy: trackRoleById"
+                            >
+                                {{roleOption.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div [hidden]="!(editForm.controls.role?.dirty && editForm.controls.role?.invalid)">
+                        <small
+                            class="form-text text-danger"
+                            [hidden]="!editForm.controls.role?.errors?.required"
+                            jhiTranslate="entity.validation.required"
+                        >
+                            This field is required.
                         </small>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreRoleMapping.organization" for="field_organization">Organization</label>
-                    <select class="form-control" id="field_organization" name="organization" [(ngModel)]="roleMapping.organizationId"  required>
-                        <option *ngIf="!editForm.value.organization" [ngValue]="null" selected></option>
-                        <option [ngValue]="organizationOption.id" *ngFor="let organizationOption of organizations; trackBy: trackOrganizationById">{{organizationOption.name}}</option>
-                    </select>
+                <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-end">
+                        <button
+                            mat-raised-button
+                            color="warn"
+                            class="mr-3"
+                            type="button"
+                            id="cancel-save"
+                            (click)="previousState()"
+                        >
+                            <fa-icon [icon]="'ban'"></fa-icon>
+                            &nbsp;
+                            <span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button
+                            mat-raised-button
+                            type="submit"
+                            id="save-entity"
+                            [disabled]="editForm.form.invalid || isSaving"
+                        >
+                            <fa-icon [icon]="'save'"></fa-icon>
+                            &nbsp;
+                            <span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
                 </div>
-                <div [hidden]="!(editForm.controls.organization?.dirty && editForm.controls.organization?.invalid)">
-                    <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.organization?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gatewayApp.coreRoleMapping.role" for="field_role">Role</label>
-                    <select class="form-control" id="field_role" name="role" [(ngModel)]="roleMapping.roleId"  required>
-                        <option *ngIf="!editForm.value.role" [ngValue]="null" selected></option>
-                        <option [ngValue]="roleOption.id" *ngFor="let roleOption of roles; trackBy: trackRoleById">{{roleOption.name}}</option>
-                    </select>
-                </div>
-                <div [hidden]="!(editForm.controls.role?.dirty && editForm.controls.role?.invalid)">
-                    <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.role?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>

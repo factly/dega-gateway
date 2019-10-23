@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { DegaUserComponent } from 'app/entities/core/dega-user/dega-user.component';
 import { DegaUserService } from 'app/entities/core/dega-user/dega-user.service';
 import { DegaUser } from 'app/shared/model/core/dega-user.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('DegaUser Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(DegaUserComponent, '')

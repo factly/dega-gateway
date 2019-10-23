@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { RoleComponent } from 'app/entities/core/role/role.component';
 import { RoleService } from 'app/entities/core/role/role.service';
 import { Role } from 'app/shared/model/core/role.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Role Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(RoleComponent, '')

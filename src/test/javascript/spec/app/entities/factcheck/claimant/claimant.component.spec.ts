@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { ClaimantComponent } from 'app/entities/factcheck/claimant/claimant.component';
 import { ClaimantService } from 'app/entities/factcheck/claimant/claimant.service';
 import { Claimant } from 'app/shared/model/factcheck/claimant.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Claimant Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(ClaimantComponent, '')

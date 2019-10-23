@@ -66,10 +66,11 @@
                             <div [routerLink]="['/claimant', element.id, 'edit']">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             </div>
-                            <div [routerLink]="['/', { outlets: { popup: 'claim/'+ element.id + '/delete'} }]"
-                                 replaceUrl="true"
-                                 queryParamsHandling="merge">
-                                <fa-icon [icon]="'times'"></fa-icon>
+                            <div>
+                                <span (click)="openDialogPopUp(element)">
+                                    <fa-icon [icon]="'times'">
+                                    </fa-icon>
+                                </span>
                             </div>
                         </div>
                     </td>

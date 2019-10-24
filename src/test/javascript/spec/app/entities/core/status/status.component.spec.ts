@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { StatusComponent } from 'app/entities/core/status/status.component';
 import { StatusService } from 'app/entities/core/status/status.service';
 import { Status } from 'app/shared/model/core/status.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Status Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(StatusComponent, '')

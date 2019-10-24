@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { CategoryComponent } from 'app/entities/core/category/category.component';
 import { CategoryService } from 'app/entities/core/category/category.service';
 import { Category } from 'app/shared/model/core/category.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Category Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(CategoryComponent, '')

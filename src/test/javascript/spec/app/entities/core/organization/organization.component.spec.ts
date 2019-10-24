@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { OrganizationComponent } from 'app/entities/core/organization/organization.component';
 import { OrganizationService } from 'app/entities/core/organization/organization.service';
 import { Organization } from 'app/shared/model/core/organization.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Organization Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(OrganizationComponent, '')

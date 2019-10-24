@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { FormatComponent } from 'app/entities/core/format/format.component';
 import { FormatService } from 'app/entities/core/format/format.service';
 import { Format } from 'app/shared/model/core/format.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Format Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(FormatComponent, '')

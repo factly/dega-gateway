@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { MediaComponent } from 'app/entities/core/media/media.component';
 import { MediaService } from 'app/entities/core/media/media.service';
 import { Media } from 'app/shared/model/core/media.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Media Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(MediaComponent, '')

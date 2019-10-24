@@ -9,6 +9,8 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { DegaUserService } from './dega-user.service';
+import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'jhi-dega-user',
@@ -48,7 +50,8 @@ export class DegaUserComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private dialog: MatDialog
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -61,6 +64,24 @@ export class DegaUserComponent implements OnInit, OnDestroy {
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
+    }
+
+    openDialogPopUp(degaUserDetails): void {
+        const title = degaUserDetails.name;
+        const config = {
+            data: {
+                message: `You are going to delete Dega User with the title "${title}" ?`
+            }
+        };
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, config);
+
+        dialogRef.afterClosed().subscribe(selectedOption => {
+            if (selectedOption.accept) {
+                this.degaUserService.delete(degaUserDetails.id).subscribe(response => {
+                    this.loadAll();
+                });
+            }
+        });
     }
 
     loadAll() {

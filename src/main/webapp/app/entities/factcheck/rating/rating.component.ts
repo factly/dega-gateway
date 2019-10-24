@@ -9,6 +9,8 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { RatingService } from './rating.service';
+import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'jhi-rating',
@@ -39,7 +41,8 @@ export class RatingComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private dialog: MatDialog
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -52,6 +55,24 @@ export class RatingComponent implements OnInit, OnDestroy {
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
+    }
+
+    openDialogPopUp(ratingDetails): void {
+        const title = ratingDetails.name;
+        const config = {
+            data: {
+                message: `You are going to delete rating with the title "${title}" ?`
+            }
+        };
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, config);
+
+        dialogRef.afterClosed().subscribe(selectedOption => {
+            if (selectedOption.accept) {
+                this.ratingService.delete(ratingDetails.id).subscribe(response => {
+                    this.loadAll();
+                });
+            }
+        });
     }
 
     loadAll() {

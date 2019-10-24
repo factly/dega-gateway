@@ -8,6 +8,7 @@ import { GatewayTestModule } from '../../../../test.module';
 import { RatingComponent } from 'app/entities/factcheck/rating/rating.component';
 import { RatingService } from 'app/entities/factcheck/rating/rating.service';
 import { Rating } from 'app/shared/model/factcheck/rating.model';
+import { MatDialog } from '@angular/material';
 
 describe('Component Tests', () => {
     describe('Rating Management Component', () => {
@@ -34,7 +35,8 @@ describe('Component Tests', () => {
                                     })
                             }
                         }
-                    }
+                    },
+                    { provide: MatDialog, useValue: {} }
                 ]
             })
                 .overrideTemplate(RatingComponent, '')

@@ -9,6 +9,8 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { FormatService } from './format.service';
+import { MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
     selector: 'jhi-format',
@@ -39,7 +41,8 @@ export class FormatComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private dialog: MatDialog
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -167,5 +170,23 @@ export class FormatComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    openDialogPopUp(formatDetails): void {
+        const title = formatDetails.name;
+        const config = {
+            data: {
+                message: `You are going to delete format with the title "${title}" ?`
+            }
+        };
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, config);
+
+        dialogRef.afterClosed().subscribe(selectedOption => {
+            if (selectedOption.accept) {
+                this.formatService.delete(formatDetails.id).subscribe(response => {
+                    this.loadAll();
+                });
+            }
+        });
     }
 }

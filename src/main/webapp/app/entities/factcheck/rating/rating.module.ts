@@ -10,17 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 
 import { GatewaySharedModule } from 'app/shared';
-import {
-    RatingComponent,
-    RatingDetailComponent,
-    RatingUpdateComponent,
-    RatingDeletePopupComponent,
-    RatingDeleteDialogComponent,
-    ratingRoute,
-    ratingPopupRoute
-} from './';
+import { RatingComponent, RatingDetailComponent, RatingUpdateComponent, ratingRoute } from './';
 
-const ENTITY_STATES = [...ratingRoute, ...ratingPopupRoute];
+const ENTITY_STATES = [...ratingRoute];
 
 @NgModule({
     imports: [
@@ -34,8 +26,8 @@ const ENTITY_STATES = [...ratingRoute, ...ratingPopupRoute];
         MatTableModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
-    declarations: [RatingComponent, RatingDetailComponent, RatingUpdateComponent, RatingDeleteDialogComponent, RatingDeletePopupComponent],
-    entryComponents: [RatingComponent, RatingUpdateComponent, RatingDeleteDialogComponent, RatingDeletePopupComponent],
+    declarations: [RatingComponent, RatingDetailComponent, RatingUpdateComponent],
+    entryComponents: [RatingComponent, RatingUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayRatingModule {}

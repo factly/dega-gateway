@@ -10,7 +10,6 @@ import { RatingService } from './rating.service';
 import { RatingComponent } from './rating.component';
 import { RatingDetailComponent } from './rating-detail.component';
 import { RatingUpdateComponent } from './rating-update.component';
-import { RatingDeletePopupComponent } from './rating-delete-dialog.component';
 import { IRating } from 'app/shared/model/factcheck/rating.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const ratingRoute: Routes = [
             pageTitle: 'gatewayApp.factcheckRating.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const ratingPopupRoute: Routes = [
-    {
-        path: 'rating/:id/delete',
-        component: RatingDeletePopupComponent,
-        resolve: {
-            rating: RatingResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
-            pageTitle: 'gatewayApp.factcheckRating.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

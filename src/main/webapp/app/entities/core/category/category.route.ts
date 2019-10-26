@@ -10,7 +10,6 @@ import { CategoryService } from './category.service';
 import { CategoryComponent } from './category.component';
 import { CategoryDetailComponent } from './category-detail.component';
 import { CategoryUpdateComponent } from './category-update.component';
-import { CategoryDeletePopupComponent } from './category-delete-dialog.component';
 import { ICategory } from 'app/shared/model/core/category.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const categoryRoute: Routes = [
             pageTitle: 'gatewayApp.coreCategory.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const categoryPopupRoute: Routes = [
-    {
-        path: 'category/:id/delete',
-        component: CategoryDeletePopupComponent,
-        resolve: {
-            category: CategoryResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gatewayApp.coreCategory.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

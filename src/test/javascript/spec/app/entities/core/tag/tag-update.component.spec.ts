@@ -1,7 +1,7 @@
 /* tslint:disable max-line-length */
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { GatewayTestModule } from '../../../../test.module';
@@ -63,8 +63,26 @@ describe('Component Tests', () => {
                 tick(); // simulate async
 
                 // THEN
+                expect(comp.tagFormGroup.value).toEqual(entity);
                 expect(service.create).toHaveBeenCalledWith(comp.tagFormGroup.value);
-                expect(comp.isSaving).toEqual(false);
+                expect(comp.isSaving).toBeFalsy();
+            }));
+
+            it('Should should give alert error on save function', fakeAsync(() => {
+                // GIVEN
+                comp.tag = new Tag();
+                comp.createTagFormGroup();
+                spyOn(window, 'alert').and.returnValue(null);
+                // WHEN
+                createTagFormGroup();
+                // Marking name field as invalid
+                comp.tagFormGroup.controls['name'].setValue('');
+                comp.save();
+                tick(); // simulate async
+
+                // THEN
+                expect(alert).toHaveBeenCalledWith('name is required');
+                expect(comp.isSaving).toBeFalsy();
             }));
         });
     });

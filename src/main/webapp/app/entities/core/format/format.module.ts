@@ -10,17 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 
-import {
-    FormatComponent,
-    FormatDetailComponent,
-    FormatUpdateComponent,
-    FormatDeletePopupComponent,
-    FormatDeleteDialogComponent,
-    formatRoute,
-    formatPopupRoute
-} from './';
+import { FormatComponent, FormatDetailComponent, FormatUpdateComponent, formatRoute } from './';
 
-const ENTITY_STATES = [...formatRoute, ...formatPopupRoute];
+const ENTITY_STATES = [...formatRoute];
 
 @NgModule({
     imports: [
@@ -33,8 +25,8 @@ const ENTITY_STATES = [...formatRoute, ...formatPopupRoute];
         MatTableModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
-    declarations: [FormatComponent, FormatDetailComponent, FormatUpdateComponent, FormatDeleteDialogComponent, FormatDeletePopupComponent],
-    entryComponents: [FormatComponent, FormatUpdateComponent, FormatDeleteDialogComponent, FormatDeletePopupComponent],
+    declarations: [FormatComponent, FormatDetailComponent, FormatUpdateComponent],
+    entryComponents: [FormatComponent, FormatUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayFormatModule {}

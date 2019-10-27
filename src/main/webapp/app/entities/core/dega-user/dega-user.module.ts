@@ -9,17 +9,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import {
-    DegaUserComponent,
-    DegaUserDetailComponent,
-    DegaUserUpdateComponent,
-    DegaUserDeletePopupComponent,
-    DegaUserDeleteDialogComponent,
-    degaUserRoute,
-    degaUserPopupRoute
-} from './';
+import { DegaUserComponent, DegaUserDetailComponent, DegaUserUpdateComponent, degaUserRoute } from './';
 
-const ENTITY_STATES = [...degaUserRoute, ...degaUserPopupRoute];
+const ENTITY_STATES = [...degaUserRoute];
 
 @NgModule({
     imports: [
@@ -32,14 +24,8 @@ const ENTITY_STATES = [...degaUserRoute, ...degaUserPopupRoute];
         MatTableModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
-    declarations: [
-        DegaUserComponent,
-        DegaUserDetailComponent,
-        DegaUserUpdateComponent,
-        DegaUserDeleteDialogComponent,
-        DegaUserDeletePopupComponent
-    ],
-    entryComponents: [DegaUserComponent, DegaUserUpdateComponent, DegaUserDeleteDialogComponent, DegaUserDeletePopupComponent],
+    declarations: [DegaUserComponent, DegaUserDetailComponent, DegaUserUpdateComponent],
+    entryComponents: [DegaUserComponent, DegaUserUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayDegaUserModule {}

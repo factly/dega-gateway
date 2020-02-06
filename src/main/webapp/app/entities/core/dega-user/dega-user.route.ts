@@ -10,7 +10,6 @@ import { DegaUserService } from './dega-user.service';
 import { DegaUserComponent } from './dega-user.component';
 import { DegaUserDetailComponent } from './dega-user-detail.component';
 import { DegaUserUpdateComponent } from './dega-user-update.component';
-import { DegaUserDeletePopupComponent } from './dega-user-delete-dialog.component';
 import { IDegaUser } from 'app/shared/model/core/dega-user.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const degaUserRoute: Routes = [
             pageTitle: 'gatewayApp.coreDegaUser.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const degaUserPopupRoute: Routes = [
-    {
-        path: 'dega-user/:id/delete',
-        component: DegaUserDeletePopupComponent,
-        resolve: {
-            degaUser: DegaUserResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
-            pageTitle: 'gatewayApp.coreDegaUser.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

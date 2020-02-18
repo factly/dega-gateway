@@ -10,7 +10,6 @@ import { RoleService } from './role.service';
 import { RoleComponent } from './role.component';
 import { RoleDetailComponent } from './role-detail.component';
 import { RoleUpdateComponent } from './role-update.component';
-import { RoleDeletePopupComponent } from './role-delete-dialog.component';
 import { IRole } from 'app/shared/model/core/role.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const roleRoute: Routes = [
             pageTitle: 'gatewayApp.coreRole.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const rolePopupRoute: Routes = [
-    {
-        path: 'role/:id/delete',
-        component: RoleDeletePopupComponent,
-        resolve: {
-            role: RoleResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
-            pageTitle: 'gatewayApp.coreRole.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

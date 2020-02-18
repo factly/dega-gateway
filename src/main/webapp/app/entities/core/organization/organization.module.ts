@@ -10,17 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 
-import {
-    OrganizationComponent,
-    OrganizationDetailComponent,
-    OrganizationUpdateComponent,
-    OrganizationDeletePopupComponent,
-    OrganizationDeleteDialogComponent,
-    organizationRoute,
-    organizationPopupRoute
-} from './';
+import { OrganizationComponent, OrganizationDetailComponent, OrganizationUpdateComponent, organizationRoute } from './';
 
-const ENTITY_STATES = [...organizationRoute, ...organizationPopupRoute];
+const ENTITY_STATES = [...organizationRoute];
 
 @NgModule({
     imports: [
@@ -33,19 +25,8 @@ const ENTITY_STATES = [...organizationRoute, ...organizationPopupRoute];
         MatTableModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
-    declarations: [
-        OrganizationComponent,
-        OrganizationDetailComponent,
-        OrganizationUpdateComponent,
-        OrganizationDeleteDialogComponent,
-        OrganizationDeletePopupComponent
-    ],
-    entryComponents: [
-        OrganizationComponent,
-        OrganizationUpdateComponent,
-        OrganizationDeleteDialogComponent,
-        OrganizationDeletePopupComponent
-    ],
+    declarations: [OrganizationComponent, OrganizationDetailComponent, OrganizationUpdateComponent],
+    entryComponents: [OrganizationComponent, OrganizationUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayOrganizationModule {}

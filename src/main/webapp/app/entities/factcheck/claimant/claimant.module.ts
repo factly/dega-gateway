@@ -9,17 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 
 import { GatewaySharedModule } from 'app/shared';
-import {
-    ClaimantComponent,
-    ClaimantDeleteDialogComponent,
-    ClaimantDeletePopupComponent,
-    ClaimantDetailComponent,
-    claimantPopupRoute,
-    claimantRoute,
-    ClaimantUpdateComponent
-} from './';
+import { ClaimantComponent, ClaimantDetailComponent, claimantRoute, ClaimantUpdateComponent } from './';
 
-const ENTITY_STATES = [...claimantRoute, ...claimantPopupRoute];
+const ENTITY_STATES = [...claimantRoute];
 
 @NgModule({
     imports: [
@@ -32,14 +24,8 @@ const ENTITY_STATES = [...claimantRoute, ...claimantPopupRoute];
         MatTableModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
-    declarations: [
-        ClaimantComponent,
-        ClaimantDetailComponent,
-        ClaimantUpdateComponent,
-        ClaimantDeleteDialogComponent,
-        ClaimantDeletePopupComponent
-    ],
-    entryComponents: [ClaimantComponent, ClaimantUpdateComponent, ClaimantDeleteDialogComponent, ClaimantDeletePopupComponent],
+    declarations: [ClaimantComponent, ClaimantDetailComponent, ClaimantUpdateComponent],
+    entryComponents: [ClaimantComponent, ClaimantUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayClaimantModule {}

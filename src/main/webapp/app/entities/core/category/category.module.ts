@@ -10,17 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import {
-    CategoryComponent,
-    CategoryDetailComponent,
-    CategoryUpdateComponent,
-    CategoryDeletePopupComponent,
-    CategoryDeleteDialogComponent,
-    categoryRoute,
-    categoryPopupRoute
-} from './';
+import { CategoryComponent, CategoryDetailComponent, CategoryUpdateComponent, categoryRoute } from './';
 
-const ENTITY_STATES = [...categoryRoute, ...categoryPopupRoute];
+const ENTITY_STATES = [...categoryRoute];
 
 @NgModule({
     imports: [
@@ -34,14 +26,8 @@ const ENTITY_STATES = [...categoryRoute, ...categoryPopupRoute];
         ReactiveFormsModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
-    declarations: [
-        CategoryComponent,
-        CategoryDetailComponent,
-        CategoryUpdateComponent,
-        CategoryDeleteDialogComponent,
-        CategoryDeletePopupComponent
-    ],
-    entryComponents: [CategoryComponent, CategoryUpdateComponent, CategoryDeleteDialogComponent, CategoryDeletePopupComponent],
+    declarations: [CategoryComponent, CategoryDetailComponent, CategoryUpdateComponent],
+    entryComponents: [CategoryComponent, CategoryUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayCategoryModule {}

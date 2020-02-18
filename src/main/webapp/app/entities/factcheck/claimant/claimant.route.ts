@@ -10,7 +10,6 @@ import { ClaimantService } from './claimant.service';
 import { ClaimantComponent } from './claimant.component';
 import { ClaimantDetailComponent } from './claimant-detail.component';
 import { ClaimantUpdateComponent } from './claimant-update.component';
-import { ClaimantDeletePopupComponent } from './claimant-delete-dialog.component';
 import { IClaimant } from 'app/shared/model/factcheck/claimant.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const claimantRoute: Routes = [
             pageTitle: 'gatewayApp.factcheckClaimant.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const claimantPopupRoute: Routes = [
-    {
-        path: 'claimant/:id/delete',
-        component: ClaimantDeletePopupComponent,
-        resolve: {
-            claimant: ClaimantResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR'],
-            pageTitle: 'gatewayApp.factcheckClaimant.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

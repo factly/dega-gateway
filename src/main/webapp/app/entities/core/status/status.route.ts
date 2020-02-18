@@ -10,7 +10,6 @@ import { StatusService } from './status.service';
 import { StatusComponent } from './status.component';
 import { StatusDetailComponent } from './status-detail.component';
 import { StatusUpdateComponent } from './status-update.component';
-import { StatusDeletePopupComponent } from './status-delete-dialog.component';
 import { IStatus } from 'app/shared/model/core/status.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const statusRoute: Routes = [
             pageTitle: 'gatewayApp.coreStatus.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const statusPopupRoute: Routes = [
-    {
-        path: 'status/:id/delete',
-        component: StatusDeletePopupComponent,
-        resolve: {
-            status: StatusResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
-            pageTitle: 'gatewayApp.coreStatus.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

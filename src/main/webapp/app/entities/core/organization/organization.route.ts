@@ -10,7 +10,6 @@ import { OrganizationService } from './organization.service';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationDetailComponent } from './organization-detail.component';
 import { OrganizationUpdateComponent } from './organization-update.component';
-import { OrganizationDeletePopupComponent } from './organization-delete-dialog.component';
 import { IOrganization } from 'app/shared/model/core/organization.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const organizationRoute: Routes = [
             pageTitle: 'gatewayApp.coreOrganization.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const organizationPopupRoute: Routes = [
-    {
-        path: 'organization/:id/delete',
-        component: OrganizationDeletePopupComponent,
-        resolve: {
-            organization: OrganizationResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
-            pageTitle: 'gatewayApp.coreOrganization.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

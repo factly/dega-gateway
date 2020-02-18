@@ -10,7 +10,6 @@ import { MediaService } from './media.service';
 import { MediaComponent } from './media.component';
 import { MediaDetailComponent } from './media-detail.component';
 import { MediaUpdateComponent } from './media-update.component';
-import { MediaDeletePopupComponent } from './media-delete-dialog.component';
 import { MediaUploadPopupComponent } from './media-upload-dialog.component';
 import { IMedia } from 'app/shared/model/core/media.model';
 import { FeaturedMediaUploadPopupComponent } from './featured-media/featured-media-upload-dialog.component';
@@ -84,19 +83,6 @@ export const mediaRoute: Routes = [
 ];
 
 export const mediaPopupRoute: Routes = [
-    {
-        path: 'media/:id/delete',
-        component: MediaDeletePopupComponent,
-        resolve: {
-            media: MediaResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR'],
-            pageTitle: 'gatewayApp.coreMedia.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    },
     {
         path: 'media/upload',
         component: MediaUploadPopupComponent,

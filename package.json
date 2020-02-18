@@ -31,7 +31,7 @@
     "ngx-infinite-scroll": "6.0.1",
     "ngx-quill-v2": "0.0.1",
     "ngx-webstorage": "2.0.1",
-    "quill": "^2.0.0-dev.3",
+    "quill": "arghyaiitb/quill#develop",
     "reflect-metadata": "0.1.12",
     "rxjs": "6.3.3",
     "sockjs-client": "1.1.4",

@@ -175,7 +175,7 @@ export class PostUpdateComponent implements OnInit {
         this.tagFormGroup = this.fb.group({
             name: ['', Validators.required],
             slug: [''],
-            description: ['', Validators.required],
+            description: [''],
             createdDate: [''],
             lastUpdatedDate: ['']
         });
@@ -253,7 +253,7 @@ export class PostUpdateComponent implements OnInit {
     createCategoryFormGroup() {
         this.categoryFormGroup = this.fb.group({
             name: ['', Validators.required],
-            description: ['', Validators.required],
+            description: [''],
             slug: [''],
             parent: [''],
             createdDate: [''],
@@ -270,7 +270,7 @@ export class PostUpdateComponent implements OnInit {
                     invalid.push(name);
                 }
             }
-            alert(invalid + 'is required');
+            alert(invalid + ' is required');
             return;
         }
         this.isSaving = true;
@@ -330,7 +330,11 @@ export class PostUpdateComponent implements OnInit {
             const controls = this.postEditFormGroup.controls;
             for (const name in controls) {
                 if (controls[name].invalid) {
-                    invalid.push(name);
+                    if (name === 'degaUsers') {
+                        invalid.push('author');
+                    } else {
+                        invalid.push(name);
+                    }
                 }
             }
             alert(invalid + ' is required');

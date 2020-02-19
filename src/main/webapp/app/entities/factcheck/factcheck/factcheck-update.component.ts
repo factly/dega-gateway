@@ -29,7 +29,7 @@ import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
 
 import { MatDialog } from '@angular/material/dialog';
-import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
+import { NewClaimPopupComponent } from 'app/entities/factcheck/claim/new-claim-popup.component';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -172,7 +172,7 @@ export class FactcheckUpdateComponent implements OnInit {
             media: [this.factcheck.media || null],
             subTitle: [this.factcheck.subTitle || ''],
             statusName: [this.factcheck.statusName || ''],
-            claims: [this.factcheck.claims || []],
+            claims: [this.factcheck.claims || [], Validators.required],
             categories: [this.factcheck.categories], // convert into this.fb.array
             tags: [this.factcheck.tags], // convert into this.fb.array
             degaUsers: [this.factcheck.degaUsers || '', Validators.required], // convert into this.fb.array

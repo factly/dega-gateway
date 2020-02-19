@@ -10,7 +10,6 @@ import { FormatService } from './format.service';
 import { FormatComponent } from './format.component';
 import { FormatDetailComponent } from './format-detail.component';
 import { FormatUpdateComponent } from './format-update.component';
-import { FormatDeletePopupComponent } from './format-delete-dialog.component';
 import { IFormat } from 'app/shared/model/core/format.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const formatRoute: Routes = [
             pageTitle: 'gatewayApp.coreFormat.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const formatPopupRoute: Routes = [
-    {
-        path: 'format/:id/delete',
-        component: FormatDeletePopupComponent,
-        resolve: {
-            format: FormatResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
-            pageTitle: 'gatewayApp.coreFormat.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

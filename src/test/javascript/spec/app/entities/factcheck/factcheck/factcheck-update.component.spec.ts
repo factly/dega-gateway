@@ -38,6 +38,7 @@ describe('Component Tests', () => {
             comp.factCheckEditFormGroup.controls['excerpt'].setValue('testing excerpt');
             comp.factCheckEditFormGroup.controls['summary'].setValue('testing updates');
             comp.factCheckEditFormGroup.controls['degaUsers'].setValue([{ id: '123' }]);
+            comp.factCheckEditFormGroup.controls['claims'].setValue([{ id: '123' }]);
         }
 
         describe('Publish', () => {

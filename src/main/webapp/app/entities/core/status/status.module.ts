@@ -9,17 +9,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import {
-    StatusComponent,
-    StatusDetailComponent,
-    StatusUpdateComponent,
-    StatusDeletePopupComponent,
-    StatusDeleteDialogComponent,
-    statusRoute,
-    statusPopupRoute
-} from './';
+import { StatusComponent, StatusDetailComponent, StatusUpdateComponent, statusRoute } from './';
 
-const ENTITY_STATES = [...statusRoute, ...statusPopupRoute];
+const ENTITY_STATES = [...statusRoute];
 
 @NgModule({
     imports: [
@@ -32,8 +24,8 @@ const ENTITY_STATES = [...statusRoute, ...statusPopupRoute];
         MatTableModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
-    declarations: [StatusComponent, StatusDetailComponent, StatusUpdateComponent, StatusDeleteDialogComponent, StatusDeletePopupComponent],
-    entryComponents: [StatusComponent, StatusUpdateComponent, StatusDeleteDialogComponent, StatusDeletePopupComponent],
+    declarations: [StatusComponent, StatusDetailComponent, StatusUpdateComponent],
+    entryComponents: [StatusComponent, StatusUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayStatusModule {}

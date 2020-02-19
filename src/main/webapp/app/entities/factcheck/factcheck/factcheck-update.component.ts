@@ -29,7 +29,7 @@ import { DegaUserService } from 'app/entities/core/dega-user';
 import { Account, Principal } from 'app/core';
 
 import { MatDialog } from '@angular/material/dialog';
-import { NewClaimPopupComponent } from '../claim/new-claim-popup.component';
+import { NewClaimPopupComponent } from 'app/entities/factcheck/claim/new-claim-popup.component';
 
 @Component({
     selector: 'jhi-factcheck-update',
@@ -172,7 +172,7 @@ export class FactcheckUpdateComponent implements OnInit {
             media: [this.factcheck.media || null],
             subTitle: [this.factcheck.subTitle || ''],
             statusName: [this.factcheck.statusName || ''],
-            claims: [this.factcheck.claims || []],
+            claims: [this.factcheck.claims || [], Validators.required],
             categories: [this.factcheck.categories], // convert into this.fb.array
             tags: [this.factcheck.tags], // convert into this.fb.array
             degaUsers: [this.factcheck.degaUsers || '', Validators.required], // convert into this.fb.array
@@ -217,7 +217,7 @@ export class FactcheckUpdateComponent implements OnInit {
         this.tagFormGroup = this.fb.group({
             name: ['', Validators.required],
             slug: [''],
-            description: ['', Validators.required],
+            description: [''],
             createdDate: [''],
             lastUpdatedDate: ['']
         });
@@ -290,7 +290,7 @@ export class FactcheckUpdateComponent implements OnInit {
     createCategoryFormGroup() {
         this.categoryFormGroup = this.fb.group({
             name: ['', Validators.required],
-            description: ['', Validators.required],
+            description: [''],
             slug: [''],
             parent: [''],
             createdDate: [''],
@@ -307,7 +307,7 @@ export class FactcheckUpdateComponent implements OnInit {
                     invalid.push(name);
                 }
             }
-            alert(invalid + 'is required');
+            alert(invalid + ' is required');
             return;
         }
         this.isSaving = true;
@@ -389,7 +389,11 @@ export class FactcheckUpdateComponent implements OnInit {
             const controls = this.factCheckEditFormGroup.controls;
             for (const name in controls) {
                 if (controls[name].invalid) {
-                    invalid.push(name);
+                    if (name === 'degaUsers') {
+                        invalid.push('author');
+                    } else {
+                        invalid.push(name);
+                    }
                 }
             }
             alert(invalid + ' is required');

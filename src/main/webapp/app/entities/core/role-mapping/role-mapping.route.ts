@@ -10,7 +10,6 @@ import { RoleMappingService } from './role-mapping.service';
 import { RoleMappingComponent } from './role-mapping.component';
 import { RoleMappingDetailComponent } from './role-mapping-detail.component';
 import { RoleMappingUpdateComponent } from './role-mapping-update.component';
-import { RoleMappingDeletePopupComponent } from './role-mapping-delete-dialog.component';
 import { IRoleMapping } from 'app/shared/model/core/role-mapping.model';
 
 @Injectable({ providedIn: 'root' })
@@ -78,21 +77,5 @@ export const roleMappingRoute: Routes = [
             pageTitle: 'gatewayApp.coreRoleMapping.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }
-];
-
-export const roleMappingPopupRoute: Routes = [
-    {
-        path: 'role-mapping/:id/delete',
-        component: RoleMappingDeletePopupComponent,
-        resolve: {
-            roleMapping: RoleMappingResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'],
-            pageTitle: 'gatewayApp.coreRoleMapping.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
     }
 ];

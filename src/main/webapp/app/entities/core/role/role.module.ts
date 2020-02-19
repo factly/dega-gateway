@@ -10,17 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 
-import {
-    RoleComponent,
-    RoleDetailComponent,
-    RoleUpdateComponent,
-    RoleDeletePopupComponent,
-    RoleDeleteDialogComponent,
-    roleRoute,
-    rolePopupRoute
-} from './';
+import { RoleComponent, RoleDetailComponent, RoleUpdateComponent, roleRoute } from './';
 
-const ENTITY_STATES = [...roleRoute, ...rolePopupRoute];
+const ENTITY_STATES = [...roleRoute];
 
 @NgModule({
     imports: [
@@ -33,8 +25,8 @@ const ENTITY_STATES = [...roleRoute, ...rolePopupRoute];
         MatTableModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
-    declarations: [RoleComponent, RoleDetailComponent, RoleUpdateComponent, RoleDeleteDialogComponent, RoleDeletePopupComponent],
-    entryComponents: [RoleComponent, RoleUpdateComponent, RoleDeleteDialogComponent, RoleDeletePopupComponent],
+    declarations: [RoleComponent, RoleDetailComponent, RoleUpdateComponent],
+    entryComponents: [RoleComponent, RoleUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayRoleModule {}

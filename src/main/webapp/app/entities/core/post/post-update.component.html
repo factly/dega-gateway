@@ -95,7 +95,7 @@
                                         <mat-icon>refresh</mat-icon>
                                     </button>
                                     <button mat-icon-button type="button"
-                                            (click)="tagListContainer =! tagListContainer">
+                                            (click)="tagListContainer =! tagListContainer; createTagFormGroup()">
                                         <mat-icon>add</mat-icon>
                                     </button>
                                     <div>
@@ -188,7 +188,7 @@
                                         <mat-icon>refresh</mat-icon>
                                     </button>
                                     <button mat-icon-button type="button"
-                                            (click)="categoryListContainer =! categoryListContainer">
+                                            (click)="categoryListContainer =! categoryListContainer; createCategoryFormGroup()">
                                         <mat-icon>add</mat-icon>
                                     </button>
                                     <div>

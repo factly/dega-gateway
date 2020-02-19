@@ -389,7 +389,11 @@ export class FactcheckUpdateComponent implements OnInit {
             const controls = this.factCheckEditFormGroup.controls;
             for (const name in controls) {
                 if (controls[name].invalid) {
-                    invalid.push(name);
+                    if (name === 'degaUsers') {
+                        invalid.push('author');
+                    } else {
+                        invalid.push(name);
+                    }
                 }
             }
             alert(invalid + ' is required');

@@ -77,6 +77,27 @@ export class PostComponent implements OnInit, OnDestroy {
         });
     }
 
+    openCopyDialogPopUp(postDetails): void {
+        const post_title = postDetails.title;
+        const config = {
+            panelClass: ['header-dialogue'],
+            data: {
+                message: `You are going to copy the post with the title "${post_title}" ?`
+            }
+        };
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, config);
+
+        dialogRef.afterClosed().subscribe(selectedOption => {
+            if (selectedOption.accept) {
+                delete postDetails['id'];
+                postDetails['title'] = 'copy of ' + postDetails['title'];
+                this.postService.create(postDetails).subscribe(response => {
+                    this.loadAll();
+                });
+            }
+        });
+    }
+
     loadAll() {
         if (this.currentSearch) {
             this.postService

@@ -60,6 +60,15 @@
                                 </span>
                             </div>
                             <div>
+                                <span matTooltip="Create a copy of Factcheck"
+                                      (click)="openCopyDialogPopUp(factcheck)"
+                                      [matTooltipPosition]="'above'">
+                                    <fa-icon [icon]="'copy'">
+                                    </fa-icon>
+                                </span>
+                            </div>
+
+                            <div>
                                 <span matTooltip="Edit Factcheck"
                                       [matTooltipPosition]="'above'">
                                     <fa-icon [icon]="'pencil-alt'"

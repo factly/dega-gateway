@@ -74,6 +74,27 @@ export class FactcheckComponent implements OnInit, OnDestroy {
         });
     }
 
+    openCopyDialogPopUp(factcheckDetails): void {
+        const factcheck_title = factcheckDetails.title;
+        const config = {
+            panelClass: ['header-dialogue'],
+            data: {
+                message: `You are going to copy the factcheck with the title "${factcheck_title}" ?`
+            }
+        };
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, config);
+
+        dialogRef.afterClosed().subscribe(selectedOption => {
+            if (selectedOption.accept) {
+                delete factcheckDetails['id'];
+                factcheckDetails['title'] = 'copy of ' + factcheckDetails['title'];
+                this.factcheckService.create(factcheckDetails).subscribe(response => {
+                    this.loadAll();
+                });
+            }
+        });
+    }
+
     loadAll() {
         if (this.currentSearch) {
             this.factcheckService

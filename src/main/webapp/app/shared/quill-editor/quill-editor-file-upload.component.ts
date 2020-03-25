@@ -14,7 +14,8 @@ export class QuillEditorFileUploadComponent implements OnInit {
     media: IMedia[];
     currentSearch: string;
     links: any;
-    page: any;
+    page: any = 0;
+    pageSize = 30;
     url: string;
     previousSelectedImage = { selected: null };
     currentSelectedImage: any = {};
@@ -35,7 +36,7 @@ export class QuillEditorFileUploadComponent implements OnInit {
     loadAll() {
         this.mediaService
             .query({
-                size: 100,
+                size: this.pageSize,
                 sort: ['createdDate,desc']
             })
             .subscribe(
@@ -100,13 +101,67 @@ export class QuillEditorFileUploadComponent implements OnInit {
         this.mediaService
             .search({
                 query: this.currentSearch,
-                page: this.page - 1,
-                size: -1
+                page: this.page,
+                size: this.pageSize
             })
             .subscribe(
                 (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+    }
+
+    nextPage() {
+        this.page += 1;
+        if (this.currentSearch) {
+            this.mediaService
+                .search({
+                    query: this.currentSearch,
+                    page: this.page,
+                    size: this.pageSize
+                })
+                .subscribe(
+                    (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else {
+            this.mediaService
+                .query({
+                    size: this.pageSize,
+                    page: this.page,
+                    sort: ['createdDate,desc']
+                })
+                .subscribe(
+                    (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+    }
+
+    previousPage() {
+        this.page -= 1;
+        if (this.currentSearch) {
+            this.mediaService
+                .search({
+                    query: this.currentSearch,
+                    page: this.page,
+                    size: this.pageSize
+                })
+                .subscribe(
+                    (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else {
+            this.mediaService
+                .query({
+                    size: this.pageSize,
+                    page: this.page,
+                    sort: ['createdDate,desc']
+                })
+                .subscribe(
+                    (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 
     clear() {

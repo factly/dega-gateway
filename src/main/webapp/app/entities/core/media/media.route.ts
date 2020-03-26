@@ -55,18 +55,6 @@ export const mediaRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'media/new',
-        component: MediaUpdateComponent,
-        resolve: {
-            media: MediaResolve
-        },
-        data: {
-            authorities: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_ADMINISTRATOR', 'ROLE_EDITOR', 'ROLE_AUTHOR'],
-            pageTitle: 'gatewayApp.coreMedia.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
         path: 'media/:id/edit',
         component: MediaUpdateComponent,
         resolve: {

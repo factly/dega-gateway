@@ -56,7 +56,7 @@
         </button>
 
     </div>
-    <div style="float:right;max-width:20%" class="dialogue-body p-4">
+    <div style="float:right;max-width:20%" class="dialogue-body p-4" *ngIf="currentSelectedImage['id']">
         <div><h4><strong>Details:</strong></h4></div>
         <br>
         <br>
@@ -69,6 +69,13 @@
             <div><strong>Uploaded By:</strong> {{currentSelectedImage.uploadedBy}} </div>
             <div><strong>Created Date:</strong> {{currentSelectedImage.createdDate | date: 'd/M/y'}} </div>
             <div><strong>Published Date:</strong> {{currentSelectedImage.publishedDate | date: 'd/M/y'}} </div>
+            <button mat-raised-button color="primary" [routerLink]="[currentSelectedImage['id'], 'view']">
+                View
+            </button>
+            <button mat-raised-button color="primary" [routerLink]="[currentSelectedImage['id'], 'edit']">
+                Edit
+            </button>
+
         </div>
         <div *ngIf="currentSelectedImage && !currentSelectedImage['id']">
             No Image Selected

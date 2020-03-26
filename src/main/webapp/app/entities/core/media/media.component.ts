@@ -96,6 +96,8 @@ export class MediaComponent implements OnInit {
             if (extension.indexOf(file.type) > -1) {
                 this.mediaService.uploadImage(file).subscribe(
                     (res: HttpResponse<IMedia>) => {
+                        console.log(res);
+                        this.router.navigate(['media', res.body['id'], 'edit']);
                         this.loadAll();
                     },
                     (res: HttpErrorResponse) => this.onError(res.message)

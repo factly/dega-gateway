@@ -1,24 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IMedia } from 'app/shared/model/core/media.model';
 import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { MediaService } from './media.service';
-import { ConfirmationDialogComponent } from 'app/shared/confirmation-dialog/confirmation-dialog.component';
-import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'jhi-media',
     templateUrl: './media.component.html'
 })
-export class MediaComponent implements OnInit, OnDestroy {
+export class MediaComponent implements OnInit {
     currentAccount: any;
-    media: IMedia[];
+    media: IMedia[] = [];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -28,10 +26,14 @@ export class MediaComponent implements OnInit, OnDestroy {
     totalItems: any;
     queryCount: any;
     itemsPerPage: any;
-    page: any;
+    page = 0;
     predicate: any;
-    previousPage: any;
     reverse: any;
+
+    pageSize = 30;
+    url: string;
+    previousSelectedImage = { selected: null };
+    currentSelectedImage: any = {};
 
     constructor(
         private mediaService: MediaService,
@@ -39,116 +41,13 @@ export class MediaComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private eventManager: JhiEventManager,
-        private dialog: MatDialog
+        private router: Router
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
-            this.previousPage = data.pagingParams.page;
-            this.reverse = data.pagingParams.ascending;
-            this.predicate = data.pagingParams.predicate;
-        });
         this.currentSearch =
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
-    }
-
-    openDialogPopUp(mediaDetails): void {
-        console.log(mediaDetails);
-        const title = mediaDetails.title;
-        const config = {
-            data: {
-                message: `You are going to delete Media with the title "${title}" ?`
-            }
-        };
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, config);
-
-        dialogRef.afterClosed().subscribe(selectedOption => {
-            if (selectedOption.accept) {
-                this.mediaService.delete(mediaDetails.id).subscribe(response => {
-                    this.loadAll();
-                });
-            }
-        });
-    }
-
-    loadAll() {
-        if (this.currentSearch) {
-            this.mediaService
-                .search({
-                    page: this.page - 1,
-                    query: this.currentSearch,
-                    size: this.itemsPerPage,
-                    sort: this.sort()
-                })
-                .subscribe(
-                    (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-            return;
-        }
-        this.mediaService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-    }
-
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-
-    transition() {
-        this.router.navigate(['/media'], {
-            queryParams: {
-                page: this.page,
-                size: this.itemsPerPage,
-                search: this.currentSearch,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
-        this.loadAll();
-    }
-
-    clear() {
-        this.page = 0;
-        this.currentSearch = '';
-        this.router.navigate([
-            '/media',
-            {
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
-
-    search(query) {
-        if (!query) {
-            return this.clear();
-        }
-        this.page = 0;
-        this.currentSearch = query;
-        this.router.navigate([
-            '/media',
-            {
-                search: this.currentSearch,
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
     }
 
     ngOnInit() {
@@ -156,37 +55,131 @@ export class MediaComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        this.registerChangeInMedia();
-    }
-
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
-
-    trackId(index: number, item: IMedia) {
-        return item.id;
-    }
-
-    registerChangeInMedia() {
-        this.eventSubscriber = this.eventManager.subscribe('mediaListModification', response => this.loadAll());
-    }
-
-    sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'createdDate') {
-            result.push('createdDate');
-        }
-        return result;
-    }
-
-    private paginateMedia(data: IMedia[], headers: HttpHeaders) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-        this.queryCount = this.totalItems;
-        this.media = data;
     }
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    loadAll() {
+        this.mediaService
+            .query({
+                size: this.pageSize,
+                sort: ['createdDate,desc']
+            })
+            .subscribe(
+                (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    private paginateMedia(data: IMedia[], headers: HttpHeaders) {
+        this.links = this.parseLinks.parse(headers.get('link'));
+        this.media = data;
+    }
+
+    imageDetail(imageData): void {
+        this.currentSelectedImage = imageData;
+        if (imageData.selected != null) {
+            imageData.selected = null;
+            this.previousSelectedImage.selected = null;
+        } else {
+            this.previousSelectedImage.selected = null;
+            imageData.selected = true;
+            this.previousSelectedImage = imageData;
+        }
+    }
+
+    public uploadImageFromLocalSystem(files: FileList): void {
+        if (files && files.length > 0) {
+            const file: File = files.item(0);
+            const extension = ['image/jpg', 'image/jpeg', 'image/png', 'image/tiff', 'image/ico', 'image/webp', 'image/gif'];
+            if (extension.indexOf(file.type) > -1) {
+                this.mediaService.uploadImage(file).subscribe(
+                    (res: HttpResponse<IMedia>) => {
+                        this.loadAll();
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            } else {
+                alert('File not Supported');
+            }
+        }
+    }
+
+    clearSearch() {
+        this.currentSearch = '';
+        this.loadAll();
+    }
+
+    search(query) {
+        if (!query) {
+            return;
+        }
+        this.page = 0;
+        this.currentSearch = query;
+        this.mediaService
+            .search({
+                query: this.currentSearch,
+                page: this.page,
+                size: this.pageSize
+            })
+            .subscribe(
+                (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    nextPage() {
+        this.page += 1;
+        if (this.currentSearch) {
+            this.mediaService
+                .search({
+                    query: this.currentSearch,
+                    page: this.page,
+                    size: this.pageSize
+                })
+                .subscribe(
+                    (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else {
+            this.mediaService
+                .query({
+                    size: this.pageSize,
+                    page: this.page,
+                    sort: ['createdDate,desc']
+                })
+                .subscribe(
+                    (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
+    }
+
+    previousPage() {
+        this.page -= 1;
+        if (this.currentSearch) {
+            this.mediaService
+                .search({
+                    query: this.currentSearch,
+                    page: this.page,
+                    size: this.pageSize
+                })
+                .subscribe(
+                    (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else {
+            this.mediaService
+                .query({
+                    size: this.pageSize,
+                    page: this.page,
+                    sort: ['createdDate,desc']
+                })
+                .subscribe(
+                    (res: HttpResponse<IMedia[]>) => this.paginateMedia(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 }

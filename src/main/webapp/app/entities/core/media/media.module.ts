@@ -2,16 +2,23 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { GatewaySharedModule } from 'app/shared';
-import { MediaComponent, MediaDetailComponent, MediaUpdateComponent, mediaRoute, mediaPopupRoute } from './';
-import { MediaUploadPopupComponent } from './media-upload-dialog.component';
-import { MediaUploadDialogComponent } from './media-upload-dialog.component';
+import { MediaComponent, MediaDetailComponent, MediaUpdateComponent, mediaRoute } from './';
+import { MatButtonModule, MatChipsModule, MatIconModule, MatInputModule, MatTooltipModule } from '@angular/material';
 
-const ENTITY_STATES = [...mediaRoute, ...mediaPopupRoute];
+const ENTITY_STATES = [...mediaRoute];
 
 @NgModule({
-    imports: [GatewaySharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [MediaComponent, MediaDetailComponent, MediaUpdateComponent, MediaUploadDialogComponent, MediaUploadPopupComponent],
-    entryComponents: [MediaComponent, MediaUpdateComponent, MediaUploadDialogComponent, MediaUploadPopupComponent],
+    imports: [
+        GatewaySharedModule,
+        RouterModule.forChild(ENTITY_STATES),
+        MatButtonModule,
+        MatChipsModule,
+        MatIconModule,
+        MatInputModule,
+        MatTooltipModule
+    ],
+    declarations: [MediaComponent, MediaDetailComponent, MediaUpdateComponent],
+    entryComponents: [MediaComponent, MediaUpdateComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GatewayMediaModule {}

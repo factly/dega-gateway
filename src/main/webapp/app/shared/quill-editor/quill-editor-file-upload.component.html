@@ -1,6 +1,8 @@
 <div class="header-dialogue">
     <div class="dialogue-header shadow-sm">
-        <h2 class="jhi-claim-heading">Featured Media <mat-icon class="float-right" data-dismiss="modal" (click)="clear()">close</mat-icon></h2>
+        <h2 class="jhi-claim-heading">Featured Media
+            <mat-icon class="float-right" data-dismiss="modal" (click)="clear()">close</mat-icon>
+        </h2>
     </div>
     <div class="dialogue-body p-4" style="float:left; width: 80%">
         <div class="row">
@@ -8,40 +10,62 @@
                 <form name="searchForm" class="d-flex align-items-center justify-content-center">
                     <mat-form-field class="col-5">
                         <input matInput
-                            type="text" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreMedia.home.search' | translate }}">
+                               type="text"
+                               [(ngModel)]="currentSearch"
+                               id="currentSearch"
+                               name="currentSearch"
+                               placeholder="{{ 'gatewayApp.coreMedia.home.search' | translate }}">
                     </mat-form-field>
                     <button mat-raised-button mat-icon-button class="mr-2"
-                        (click)="search(currentSearch)">
+                            (click)="search(currentSearch)">
                         <mat-icon>search</mat-icon>
                     </button>
                     <button mat-raised-button mat-icon-button color="warn" class="mr-2"
-                        (click)="clearSearch()" *ngIf="currentSearch">
+                            (click)="clearSearch()" *ngIf="currentSearch">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
                     <div class="mat-file-upload">
-                        <button mat-raised-button color="primary" (click)="fileInput.click()">Upload Media <mat-icon>attach_file</mat-icon></button>
-                        <input type="file" name="Brows" class="pad-left" (change)="uploadImageFromLocalSystem($event.target.files)" accept="image/*" #fileInput>
+                        <button mat-raised-button color="primary"
+                                (click)="fileInput.click()">
+                            Upload Media
+                            <mat-icon>attach_file</mat-icon>
+                        </button>
+                        <input type="file" name="Brows"
+                               class="pad-left"
+                               (change)="uploadImageFromLocalSystem($event.target.files)"
+                               accept="image/*" #fileInput>
                     </div>
                 </form>
             </div>
         </div>
         <div class="modal-body">
-            <div *ngIf="media" >
+            <div *ngIf="media">
                 <div class="row">
-                    <div class="media-thumbnail" *ngFor="let media of media" >
+                    <div class="media-thumbnail" *ngFor="let media of media">
                         <a (click)="imageDetail(media)">
-                            <img src="{{media.sourceURL}}?resize:fill:100:100/gravity:sm" [ngClass]="{ 'selected-media-border': media.selected}" alt="Image" height="100" class="img-bottom">
+                            <img src="{{media.sourceURL}}?resize:fill:100:100/gravity:sm"
+                                 [ngClass]="{ 'selected-media-border': media.selected}"
+                                 alt="Image" height="100" class="img-bottom">
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        <button mat-raised-button color="primary"
+                (click)="previousPage()" *ngIf="page>0">
+            Previous
+        </button>
+        <button mat-raised-button color="primary"
+                (click)="nextPage()" *ngIf="media.length>0">
+            Next
+        </button>
+
     </div>
     <div style="float:right;max-width:20%" class="dialogue-body p-4">
         <div><h4><strong>Details:</strong></h4></div>
-            <br>
-            <br>
-            <div *ngIf="currentSelectedImage &&  currentSelectedImage['id']">
+        <br>
+        <br>
+        <div *ngIf="currentSelectedImage &&  currentSelectedImage['id']">
             <div><strong>Title:</strong> {{currentSelectedImage.title}} </div>
             <div><strong>File Size:</strong> {{currentSelectedImage.fileSize | degafilesize}} </div>
             <div><strong>Caption:</strong> {{currentSelectedImage.caption}} </div>

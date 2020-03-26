@@ -1,86 +1,84 @@
-<div>
-    <h2 id="page-heading">
-        <span jhiTranslate="gatewayApp.coreMedia.home.title">Media</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-media"
-                [routerLink]="['/', { outlets: { popup: 'media/upload'} }]"
-                replaceUrl="true">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="gatewayApp.coreMedia.home.createLabel">
-            Create new Media
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gatewayApp.coreMedia.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
+<div class="header-dialogue">
+    <div class="dialogue-body p-4" style="float:left; width: 80%">
+        <div class="row">
+            <div class="col-md-12">
+                <form name="searchForm" class="d-flex align-items-center justify-content-center">
+                    <mat-form-field class="col-5">
+                        <input matInput
+                               type="text"
+                               [(ngModel)]="currentSearch"
+                               id="currentSearch"
+                               name="currentSearch"
+                               placeholder="{{ 'gatewayApp.coreMedia.home.search'| translate}}">
+                    </mat-form-field>
+                    <button mat-raised-button mat-icon-button class="mr-2"
+                            (click)="search(currentSearch)">
+                        <mat-icon>search</mat-icon>
                     </button>
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                    <button mat-raised-button mat-icon-button color="warn" class="mr-2"
+                            (click)="clearSearch()" *ngIf="currentSearch">
                         <fa-icon [icon]="'trash-alt'"></fa-icon>
                     </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive" *ngIf="media">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="thumbnail"><span jhiTranslate="gatewayApp.coreMedia.thumbnail">Thumbnail</span></th>
-            <th jhiSortBy="title"><span jhiTranslate="gatewayApp.coreMedia.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="type"><span jhiTranslate="gatewayApp.coreMedia.type">Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="fileSize"><span jhiTranslate="gatewayApp.coreMedia.fileSize">File Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="uploadedBy"><span jhiTranslate="gatewayApp.coreMedia.uploadedBy">Uploaded By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="createdDate"><span jhiTranslate="gatewayApp.coreMedia.createdDate">Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let media of media ;trackBy: trackId">
-                <td><img src="{{media.sourceURL}}?resize:fill:100:100/gravity:sm" alt="Image" width="100" height="100"></td>
-                <td>{{media.title}}</td>
-                <td>{{media.type}}</td>
-                <td>{{media.fileSize | degafilesize}}</td>
-                <td>{{media.uploadedBy}}</td>
-                <td>{{media.createdDate | date:'medium'}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/media', media.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                    <div class="mat-file-upload">
+                        <button mat-raised-button color="primary"
+                                (click)="fileInput.click()">
+                            Upload Media
+                            <mat-icon>attach_file</mat-icon>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/media', media.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit" (click)="openDialogPopUp(media)"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                        <input type="file" name="Brows"
+                               class="pad-left"
+                               (change)="uploadImageFromLocalSystem($event.target.files)"
+                               accept="image/*" #fileInput>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div *ngIf="media && media.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </form>
+            </div>
         </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        <div class="modal-body">
+            <div *ngIf="media">
+                <div class="row">
+                    <div class="media-thumbnail" *ngFor="let media of media">
+                        <a (click)="imageDetail(media)">
+                            <img src="{{media.sourceURL}}?resize:fill:100:100/gravity:sm"
+                                 [ngClass]="{ 'selected-media-border': media.selected}"
+                                 alt="Image" height="100" class="img-bottom">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button mat-raised-button color="primary"
+                (click)="previousPage()" *ngIf="page>0">
+            Previous
+        </button>
+        <button mat-raised-button color="primary"
+                (click)="nextPage()" *ngIf="media.length>0">
+            Next
+        </button>
+
+    </div>
+    <div style="float:right;max-width:20%" class="dialogue-body p-4" *ngIf="currentSelectedImage['id']">
+        <div><h4><strong>Details:</strong></h4></div>
+        <br>
+        <br>
+        <div *ngIf="currentSelectedImage &&  currentSelectedImage['id']">
+            <div><strong>Title:</strong> {{currentSelectedImage.title}} </div>
+            <div><strong>File Size:</strong> {{currentSelectedImage.fileSize | degafilesize}} </div>
+            <div><strong>Caption:</strong> {{currentSelectedImage.caption}} </div>
+            <div><strong>Description:</strong> {{currentSelectedImage.description}} </div>
+            <div><strong>Slug:</strong> {{currentSelectedImage.slug}} </div>
+            <div><strong>Uploaded By:</strong> {{currentSelectedImage.uploadedBy}} </div>
+            <div><strong>Created Date:</strong> {{currentSelectedImage.createdDate | date: 'd/M/y'}} </div>
+            <div><strong>Published Date:</strong> {{currentSelectedImage.publishedDate | date: 'd/M/y'}} </div>
+            <button mat-raised-button color="primary" [routerLink]="[currentSelectedImage['id'], 'view']">
+                View
+            </button>
+            <button mat-raised-button color="primary" [routerLink]="[currentSelectedImage['id'], 'edit']">
+                Edit
+            </button>
+
+        </div>
+        <div *ngIf="currentSelectedImage && !currentSelectedImage['id']">
+            No Image Selected
         </div>
     </div>
 </div>

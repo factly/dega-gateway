@@ -24,11 +24,11 @@
   },
   "husky": {
     "hooks": {
-        "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "src/**/*.{json,ts,css,scss}": [
+    "src/**/*.{json,js,css,scss}": [
       "prettier --write",
       "git add"
     ]
@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
-    "husky": "^4.2.5"
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.0"
   }
 }

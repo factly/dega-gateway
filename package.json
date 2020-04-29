@@ -22,6 +22,11 @@
   "engines": {
     "node": ">=8.9.0"
   },
+  "husky": {
+    "hooks": {
+        "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "src/**/*.{json,ts,css,scss}": [
       "prettier --write",
@@ -45,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "husky": "^4.2.5"
   }
 }

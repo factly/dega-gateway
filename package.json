@@ -28,8 +28,8 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --single-quote --write"
+    "*.{js,jsx,html,css}": [
+      "prettier --write"
     ]
   },
   "scripts": {
